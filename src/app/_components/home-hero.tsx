@@ -39,14 +39,16 @@ export function HomeHero(): React.JSX.Element {
 
         <div className="home-hero-robot-wrap">
           <div className="home-hero-robot-crop">
-            <Image
-              src="/figma-home/30.png"
-              alt="Neetrino AI robot"
-              fill
-              priority
-              sizes="629px"
-              className="home-hero-robot"
-            />
+            <div className="home-hero-robot-motion">
+              <Image
+                src="/figma-home/30.png"
+                alt="Neetrino AI robot"
+                fill
+                priority
+                sizes="629px"
+                className="home-hero-robot"
+              />
+            </div>
           </div>
         </div>
 

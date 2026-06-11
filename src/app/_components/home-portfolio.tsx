@@ -24,11 +24,11 @@ function PortfolioCard({
   left,
 }: PortfolioCardProps): React.JSX.Element {
   const cardStyle = {
-    top: `${top}px`,
-    left: `${left}px`,
-    width: `${width}px`,
-    height: `${height}px`,
-    borderRadius: `${radius}px`,
+    top: `calc(${top}px * var(--home-ui-scale))`,
+    left: `calc(${left}px * var(--home-ui-scale))`,
+    width: `calc(${width}px * var(--home-ui-scale))`,
+    height: `calc(${height}px * var(--home-ui-scale))`,
+    borderRadius: `calc(${radius}px * var(--home-ui-scale))`,
   };
 
   return (
