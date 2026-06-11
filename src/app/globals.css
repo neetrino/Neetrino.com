@@ -780,11 +780,19 @@ html {
 .home-portfolio-bg {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   pointer-events: none;
+  background: var(--home-bg);
 }
 
 .home-portfolio-bg-image {
-  object-fit: cover;
+  width: 131.32% !important;
+  height: 202.37% !important;
+  max-width: none !important;
+  inset: auto !important;
+  top: -50.95% !important;
+  left: -15.66% !important;
+  object-fit: fill;
 }
 
 .home-portfolio-stage {
