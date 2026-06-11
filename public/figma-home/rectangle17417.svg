@@ -1,0 +1,18 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 1756 1044.52" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Rectangle 17417" opacity="0.57" filter="url(#filter0_f_0_721)" style="mix-blend-mode:screen">
+<path d="M225 282.206C225 239.793 270.317 212.774 307.629 232.942L696.494 443.137C704.673 447.558 713.825 449.873 723.123 449.873H1020.92C1030.02 449.873 1038.98 447.655 1047.03 443.411L1448.89 231.567C1486.18 211.908 1531 238.948 1531 281.105V763.423C1531 804.623 1488.01 831.718 1450.84 813.942L1046.23 620.443C1038.69 616.835 1030.43 614.963 1022.07 614.963H721.947C713.4 614.963 704.966 616.919 697.292 620.682L305.656 812.728C268.448 830.973 225 803.888 225 762.448V282.206Z" fill="url(#paint0_radial_0_721)"/>
+<path d="M1443.99 222.279C1488.27 198.933 1541.5 231.044 1541.5 281.105V763.422C1541.5 812.348 1490.45 844.523 1446.31 823.415L1041.7 629.915C1035.57 626.984 1028.87 625.462 1022.07 625.462H721.947C715.003 625.462 708.15 627.052 701.915 630.11L310.278 822.156C266.094 843.822 214.5 811.658 214.5 762.448V282.206C214.5 231.841 268.314 199.756 312.621 223.706L701.486 433.9C708.132 437.492 715.568 439.372 723.122 439.373H1020.92C1028.31 439.372 1035.59 437.571 1042.14 434.123L1443.99 222.279Z" stroke="var(--stroke-0, #2E2BFF)" stroke-width="21"/>
+</g>
+<defs>
+<filter id="filter0_f_0_721" x="0" y="7.62939e-06" width="1756" height="1044.52" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="102" result="effect1_foregroundBlur_0_721"/>
+</filter>
+<radialGradient id="paint0_radial_0_721" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(878 520.279) rotate(90) scale(332 653)">
+<stop offset="0.394231" stop-color="#3D8BFF"/>
+<stop offset="0.653846" stop-color="#2C80FF"/>
+<stop offset="1" stop-color="#0051FF"/>
+</radialGradient>
+</defs>
+</svg>

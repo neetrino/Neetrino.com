@@ -1,0 +1,211 @@
+export type ServiceCard = {
+  title: string;
+  subtitle: string;
+  image: string;
+  imageClassName?: string;
+  tone: 'light' | 'orange' | 'dark' | 'blue' | 'ice';
+};
+
+export type ProjectCard = {
+  title: string;
+  image: string;
+  imageClassName?: string;
+  width: number;
+  height: number;
+  radius: number;
+  top: number;
+  left: number;
+};
+
+export type StatCard = {
+  value: string;
+  label: string;
+  tone: 'orange' | 'light' | 'purple';
+};
+
+export const navItems = ['Home', 'Services', 'Portfolio', 'About', 'Blog', 'Contact'] as const;
+
+export const heroStats: StatCard[] = [
+  { value: '8+', label: 'Years of experience', tone: 'orange' },
+  { value: '97%', label: 'Satisfied clients', tone: 'light' },
+  { value: '450+', label: 'Creations', tone: 'purple' },
+];
+
+export const services: ServiceCard[] = [
+  {
+    title: 'WEBSITE',
+    subtitle: 'Custom Development',
+    image: '',
+    tone: 'light',
+  },
+  {
+    title: 'MOBILE APP',
+    subtitle: 'App Development',
+    image: '',
+    tone: 'orange',
+  },
+  {
+    title: 'SAAS PLATFORMS',
+    subtitle: 'Cloud Solutions',
+    image: '/figma-home/cloud-infrastructure.png',
+    imageClassName: 'home-service-image-saas',
+    tone: 'dark',
+  },
+  {
+    title: 'CRM SYSTEMS',
+    subtitle: 'Process Automation',
+    image: '/figma-home/sports00065.png',
+    imageClassName: 'home-service-image-crm',
+    tone: 'blue',
+  },
+  {
+    title: 'AI INTEGRATIONS',
+    subtitle: 'AI Automation',
+    image: '/figma-home/2761.png',
+    imageClassName: 'home-service-image-ai',
+    tone: 'ice',
+  },
+];
+
+export const portfolioTopRow: ProjectCard[] = [
+  {
+    title: 'Meeting Assistant',
+    image: '/figma-home/stanislav-hristov3.jpg',
+    width: 505,
+    height: 378,
+    radius: 43,
+    top: 228,
+    left: -102,
+  },
+  {
+    title: 'Borbor Landing',
+    image: '/figma-home/ui-design21.jpg',
+    imageClassName: 'home-project-image-borbor',
+    width: 505,
+    height: 378,
+    radius: 45,
+    top: 228,
+    left: 411,
+  },
+  {
+    title: 'Visual Hierarchy',
+    image: '/figma-home/2661.jpg',
+    imageClassName: 'home-project-image-visual',
+    width: 592,
+    height: 383,
+    radius: 35,
+    top: 222,
+    left: 933,
+  },
+];
+
+export const portfolioBottomRow: ProjectCard[] = [
+  {
+    title: 'AI Listing',
+    image: '/figma-home/klever-klever-io-instagram-photos-and-videos3.jpg',
+    width: 379,
+    height: 378,
+    radius: 32,
+    top: 651,
+    left: -52,
+  },
+  {
+    title: 'Meeting Assistant',
+    image: '/figma-home/stanislav-hristov3.jpg',
+    width: 505,
+    height: 378,
+    radius: 43,
+    top: 651,
+    left: 338,
+  },
+  {
+    title: 'Borbor Landing',
+    image: '/figma-home/ui-design21.jpg',
+    imageClassName: 'home-project-image-borbor',
+    width: 505,
+    height: 378,
+    radius: 45,
+    top: 651,
+    left: 854,
+  },
+  {
+    title: 'Visual Hierarchy',
+    image: '/figma-home/2661.jpg',
+    imageClassName: 'home-project-image-visual',
+    width: 592,
+    height: 383,
+    radius: 35,
+    top: 646,
+    left: 1370,
+  },
+];
+
+export const partnerLogos = [
+  { src: '/figma-home/vector3.svg', width: 136, height: 79 },
+  { src: '/figma-home/vector2.svg', width: 175, height: 53 },
+  { src: '/figma-home/layer1.svg', width: 78, height: 73 },
+  { src: '/figma-home/layer3.svg', width: 157, height: 71 },
+  { src: '/figma-home/layer5.svg', width: 67, height: 96 },
+  { src: '/figma-home/vector3.svg', width: 136, height: 79 },
+  { src: '/figma-home/vector2.svg', width: 175, height: 53 },
+  { src: '/figma-home/layer1.svg', width: 78, height: 73 },
+  { src: '/figma-home/layer3.svg', width: 157, height: 71 },
+  { src: '/figma-home/layer6.svg', width: 86, height: 125 },
+] as const;
+
+export const footerLinks = {
+  Company: ['About', 'Team', 'Contact us', 'Portfolio', 'Services', 'Blog'],
+  Services: ['Website', 'Mobile App', 'CRM Systems', 'SAAS Platforms', 'AI integration', 'All'],
+} as const;
+
+export const aboutParagraphs = [
+  {
+    parts: [
+      { text: 'Over the past 8 years, ', bold: false },
+      { text: 'Neetrino IT', bold: true },
+      { text: ' has developed more than ', bold: false },
+      { text: '400 online resources', bold: 'extrabold' as const },
+      {
+        text: ', ranging from simple websites to large-scale internet portals and e-commerce platforms',
+        bold: false,
+      },
+    ],
+  },
+  {
+    parts: [
+      {
+        text: 'We specialize in website development, AI and bot solutions, CRM system integration, mobile app development, as well as SEO and SMM optimization—',
+        bold: false,
+      },
+      {
+        text: 'delivering a comprehensive digital presence for your business.',
+        bold: 'extrabold' as const,
+      },
+    ],
+  },
+] as const;
+
+export const contactInfo = {
+  address: '108/10 Andranik Zoravar St.',
+  email: 'info@neetrino.com',
+  phone: '+374 44 343 000',
+  hours: 'Working Hours\nMon. - Fri. 10AM - 7PM',
+} as const;
+
+export const footerSocialIcons = [
+  { src: '/figma-home/social-media-icon-square-facebook.svg', alt: 'Facebook', width: 11, height: 19 },
+  { src: '/figma-home/social-media-icon-square-instagram.svg', alt: 'Instagram', width: 19, height: 19 },
+  { src: '/figma-home/group73.svg', alt: 'LinkedIn', width: 19, height: 18 },
+  { src: '/figma-home/group.svg', alt: 'Behance', width: 24, height: 15 },
+  { src: '/figma-home/group74.svg', alt: 'YouTube', width: 21, height: 15 },
+  { src: '/figma-home/vector7.svg', alt: 'Twitter', width: 20, height: 20 },
+  { src: '/figma-home/vector8.svg', alt: 'Dribbble', width: 19, height: 20 },
+] as const;
+
+export const showcaseDevices = [
+  { src: '/figma-home/iphone14-pro1.png', alt: 'Borbor Aqua mobile', className: 'home-showcase-phone' },
+  { src: '/figma-home/photo202604241449461.jpg', alt: 'Borbor Aqua mobile screen', className: 'home-showcase-phone-screen' },
+  { src: '/figma-home/space-gray1.png', alt: 'Borbor Aqua tablet', className: 'home-showcase-tablet' },
+  { src: '/figma-home/screenshot20260424-at1447391.png', alt: 'Borbor Aqua laptop screen', className: 'home-showcase-laptop-screen' },
+  { src: '/figma-home/apple-imac27201911.png', alt: 'Borbor Aqua desktop', className: 'home-showcase-imac' },
+] as const;
