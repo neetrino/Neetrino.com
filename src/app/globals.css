@@ -9,7 +9,7 @@
   --home-blue: #6a92ff;
   --home-muted: rgba(255, 255, 255, 0.72);
   --home-ui-scale: 1;
-  --home-page-zoom: 1.45;
+  --home-design-width: 1440;
   --home-container: 1340px;
   --home-radius-lg: calc(28px * var(--home-ui-scale));
   --home-radius-xl: calc(40px * var(--home-ui-scale));
@@ -50,6 +50,9 @@
   --home-service-light: #e8e8f4;
   --home-service-ice: #a2b8ee;
   --home-service-dark: #292929;
+  --home-portfolio-card-gap: 12px;
+  --home-portfolio-row-gap: 45px;
+  --home-portfolio-scroll-duration: 45s;
 }
 
 @theme inline {
@@ -86,25 +89,34 @@ html {
   overflow-x: hidden;
   background: var(--home-bg);
   color: #fff;
-  zoom: var(--home-page-zoom);
 }
 
-@supports not (zoom: 1) {
-  .home-page {
-    transform: scale(var(--home-page-zoom));
-    transform-origin: top center;
-    width: calc(100% / var(--home-page-zoom));
-    margin-inline: auto;
-  }
+.neetrino-canvas-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--home-bg);
+}
+
+.neetrino-canvas-inner {
+  position: relative;
+  width: 1440px;
+  overflow: hidden;
+  transform-origin: 0 0;
+  background: var(--home-bg);
+}
+
+.neetrino-canvas-wrap--hero {
+  position: relative;
 }
 
 .home-page-glow {
   position: absolute;
-  top: 633px;
+  top: calc(633px * var(--home-ui-scale));
+  bottom: 0;
   left: 50%;
   z-index: 0;
   width: 1722px;
-  height: 4462px;
   overflow: hidden;
   pointer-events: none;
   mix-blend-mode: overlay;
@@ -443,10 +455,20 @@ html {
 
 .home-hero-stage {
   position: relative;
-  z-index: 1;
   width: min(100%, 1440px);
   min-height: var(--home-hero-height);
   margin-inline: auto;
+}
+
+.home-hero-stage-robot {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  z-index: 0;
+  min-height: 0;
+  height: 0;
+  margin-inline: auto;
+  pointer-events: none;
 }
 
 .home-hero-bg-philipp {
@@ -485,6 +507,7 @@ html {
   position: absolute;
   top: var(--home-hero-panel-top);
   inset-inline: 0;
+  z-index: 2;
   width: 100%;
   height: var(--home-hero-panel-height);
   overflow: hidden;
@@ -535,7 +558,7 @@ html {
   position: absolute;
   top: calc(45px * var(--home-ui-scale));
   left: 50%;
-  z-index: 2;
+  z-index: 0;
   width: var(--home-hero-robot-width);
   height: var(--home-hero-robot-height);
   transform: translateX(-50%);
@@ -916,15 +939,59 @@ html {
   object-fit: fill;
 }
 
-.home-portfolio-stage {
-  position: relative;
+.home-portfolio-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--home-portfolio-row-gap) * var(--home-ui-scale));
   width: 100%;
-  min-height: calc(1050px * var(--home-ui-scale));
-  overflow: visible;
+  overflow: hidden;
+}
+
+.home-portfolio-row {
+  overflow: hidden;
+  width: 100%;
+}
+
+.home-portfolio-track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: calc(var(--home-portfolio-card-gap) * var(--home-ui-scale));
+  width: max-content;
+  will-change: transform;
+}
+
+.home-portfolio-row--left .home-portfolio-track {
+  animation: home-portfolio-scroll-left var(--home-portfolio-scroll-duration) linear infinite;
+}
+
+.home-portfolio-row--right .home-portfolio-track {
+  animation: home-portfolio-scroll-right var(--home-portfolio-scroll-duration) linear infinite;
+}
+
+@keyframes home-portfolio-scroll-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes home-portfolio-scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 .home-project-card {
-  position: absolute;
+  position: relative;
+  flex: 0 0 auto;
   overflow: hidden;
   background: #222;
 }
@@ -949,10 +1016,7 @@ html {
 }
 
 .home-about-stage {
-  display: grid;
-  grid-template-columns: calc(563px * var(--home-ui-scale)) 1fr;
-  gap: calc(48px * var(--home-ui-scale));
-  align-items: start;
+  max-width: calc(563px * var(--home-ui-scale));
 }
 
 .home-about-text {
@@ -979,153 +1043,6 @@ html {
 
 .home-about-copy .home-btn-explore-wrap {
   margin-top: calc(32px * var(--home-ui-scale));
-}
-
-.home-about-visual {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: calc(-34px * var(--home-ui-scale));
-}
-
-.home-about-image {
-  width: calc(685px * var(--home-ui-scale));
-  max-width: 100%;
-  height: auto;
-  mix-blend-mode: exclusion;
-}
-
-.home-showcase {
-  padding-block: 0 calc(96px * var(--home-ui-scale));
-}
-
-.home-showcase-bg {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: min(100%, 1437px);
-  height: calc(664px * var(--home-ui-scale));
-  pointer-events: none;
-  transform: translateX(-50%);
-}
-
-.home-showcase-bg-image {
-  width: 131.32% !important;
-  height: 158.41% !important;
-  max-width: none !important;
-  inset: auto !important;
-  top: -28.94% !important;
-  left: -15.66% !important;
-  object-fit: fill;
-}
-
-.home-showcase-stage {
-  position: relative;
-  min-height: calc(905px * var(--home-ui-scale));
-  padding-block: calc(48px * var(--home-ui-scale));
-}
-
-.home-showcase-ring {
-  position: absolute;
-  top: calc(303px * var(--home-ui-scale));
-  left: 50%;
-  width: calc(872px * var(--home-ui-scale));
-  height: calc(409px * var(--home-ui-scale));
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
-.home-showcase-ring-image {
-  object-fit: contain;
-}
-
-.home-showcase-devices {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  min-height: calc(905px * var(--home-ui-scale));
-}
-
-.home-showcase-devices > div {
-  position: absolute;
-}
-
-.home-showcase-devices img {
-  object-fit: contain;
-}
-
-.home-showcase-phone {
-  left: calc(279px * var(--home-ui-scale));
-  top: calc(285px * var(--home-ui-scale));
-  width: calc(124px * var(--home-ui-scale));
-  height: calc(252px * var(--home-ui-scale));
-}
-
-.home-showcase-phone-screen {
-  left: calc(285px * var(--home-ui-scale));
-  top: calc(289px * var(--home-ui-scale));
-  width: calc(112px * var(--home-ui-scale));
-  height: calc(243px * var(--home-ui-scale));
-  border-radius: calc(15px * var(--home-ui-scale));
-  overflow: hidden;
-}
-
-.home-showcase-phone-screen img {
-  object-fit: cover;
-}
-
-.home-showcase-tablet {
-  left: calc(641px * var(--home-ui-scale));
-  top: calc(64px * var(--home-ui-scale));
-  width: calc(332px * var(--home-ui-scale));
-  height: calc(239px * var(--home-ui-scale));
-  transform: rotate(90deg);
-}
-
-.home-showcase-laptop-screen {
-  left: calc(654px * var(--home-ui-scale));
-  top: calc(77px * var(--home-ui-scale));
-  width: calc(305px * var(--home-ui-scale));
-  height: calc(213px * var(--home-ui-scale));
-  border-radius: calc(8px * var(--home-ui-scale));
-  overflow: hidden;
-}
-
-.home-showcase-laptop-screen img {
-  object-fit: cover;
-}
-
-.home-showcase-imac {
-  right: calc(185px * var(--home-ui-scale));
-  top: calc(269px * var(--home-ui-scale));
-  width: calc(326px * var(--home-ui-scale));
-  height: calc(270px * var(--home-ui-scale));
-}
-
-.home-showcase-nav {
-  position: absolute;
-  left: 50%;
-  bottom: calc(24px * var(--home-ui-scale));
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  gap: calc(16px * var(--home-ui-scale));
-  transform: translateX(-50%);
-}
-
-.home-arrow-btn {
-  display: grid;
-  width: calc(68px * var(--home-ui-scale));
-  height: calc(52px * var(--home-ui-scale));
-  place-items: center;
-  border: 0;
-  border-radius: var(--home-radius-xl);
-  background: #fff;
-  color: #252525;
-  cursor: pointer;
-}
-
-.home-arrow-btn-next img {
-  transform: rotate(180deg);
 }
 
 .home-partners {
@@ -1158,7 +1075,7 @@ html {
 .home-footer {
   position: relative;
   padding-top: calc(116px * var(--home-ui-scale));
-  padding-bottom: calc(48px * var(--home-ui-scale));
+  padding-bottom: calc(24px * var(--home-ui-scale));
   overflow: hidden;
 }
 
@@ -1321,10 +1238,6 @@ html {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .home-about-stage {
-    grid-template-columns: 1fr;
-  }
-
   .home-footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 48px;
@@ -1332,6 +1245,10 @@ html {
 }
 
 @media (max-width: 900px) {
+  .neetrino-canvas-inner {
+    width: 100%;
+  }
+
   .home-header {
     top: 16px;
     width: calc(100% - 32px);
@@ -1341,9 +1258,16 @@ html {
     display: none;
   }
 
-  .home-hero-stage {
+  .home-hero-stage:not(.home-hero-stage-robot) {
     min-height: auto;
     padding: 120px 20px 48px;
+  }
+
+  .home-hero-stage-robot {
+    position: relative;
+    height: auto;
+    inset: auto;
+    z-index: auto;
   }
 
   .home-hero-bg-philipp,
@@ -1417,38 +1341,32 @@ html {
     min-height: calc(420px * var(--home-ui-scale));
   }
 
-  .home-portfolio-stage {
-    min-height: auto;
-    display: grid;
+  .home-portfolio-carousel {
     gap: 16px;
+  }
+
+  .home-portfolio-row {
+    overflow: visible;
+  }
+
+  .home-portfolio-track {
+    flex-direction: column;
+    width: 100%;
+    animation: none;
+  }
+
+  .home-portfolio-row--left .home-project-card:nth-child(n + 4) {
+    display: none;
+  }
+
+  .home-portfolio-row--right .home-project-card:nth-child(n + 5) {
+    display: none;
   }
 
   .home-project-card {
     position: relative;
-    top: auto !important;
-    left: auto !important;
     width: 100% !important;
     height: calc(280px * var(--home-ui-scale)) !important;
-  }
-
-  .home-showcase-devices > div {
-    position: relative;
-    inset: auto;
-    transform: none;
-    width: min(100%, 320px);
-    height: auto;
-    margin-inline: auto;
-    margin-bottom: 16px;
-  }
-
-  .home-showcase-devices {
-    display: grid;
-    gap: 16px;
-    min-height: auto;
-  }
-
-  .home-showcase-ring {
-    display: none;
   }
 
   .home-partners-track {
@@ -1473,5 +1391,9 @@ html {
   .home-btn,
   .home-header-nav a {
     transition: none;
+  }
+
+  .home-portfolio-track {
+    animation: none;
   }
 }

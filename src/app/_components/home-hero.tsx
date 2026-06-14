@@ -30,19 +30,13 @@ export function HomeHero(): React.JSX.Element {
         />
       </div>
 
-      <HomeHeroBottomPanel />
-
-      <div className="home-hero-stage">
-        <p className="home-hero-brand" aria-hidden>
-          NEETRINO
-        </p>
-
+      <div className="home-hero-stage home-hero-stage-robot" aria-hidden>
         <div className="home-hero-robot-wrap">
           <div className="home-hero-robot-crop">
             <div className="home-hero-robot-motion">
               <Image
                 src="/figma-home/30.png"
-                alt="Neetrino AI robot"
+                alt=""
                 fill
                 priority
                 sizes="629px"
@@ -51,6 +45,14 @@ export function HomeHero(): React.JSX.Element {
             </div>
           </div>
         </div>
+      </div>
+
+      <HomeHeroBottomPanel />
+
+      <div className="home-hero-stage">
+        <p className="home-hero-brand" aria-hidden>
+          NEETRINO
+        </p>
 
         <p className="home-hero-tagline">
           <span>We build </span>

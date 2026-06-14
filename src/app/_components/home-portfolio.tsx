@@ -1,16 +1,14 @@
 import Image from 'next/image';
 import { portfolioBottomRow, portfolioTopRow } from './home-data';
+import type { ProjectCard } from './home-data';
 import { ExploreButton, HomeContainer, SectionHeading } from './home-ui';
 
-type PortfolioCardProps = {
-  title: string;
-  image: string;
-  imageClassName?: string;
-  width: number;
-  height: number;
-  radius: number;
-  top: number;
-  left: number;
+type PortfolioCardProps = ProjectCard;
+
+type PortfolioCarouselRowProps = {
+  projects: ProjectCard[];
+  direction: 'left' | 'right';
+  rowKey: string;
 };
 
 function PortfolioCard({
@@ -20,12 +18,8 @@ function PortfolioCard({
   width,
   height,
   radius,
-  top,
-  left,
 }: PortfolioCardProps): React.JSX.Element {
   const cardStyle = {
-    top: `calc(${top}px * var(--home-ui-scale))`,
-    left: `calc(${left}px * var(--home-ui-scale))`,
     width: `calc(${width}px * var(--home-ui-scale))`,
     height: `calc(${height}px * var(--home-ui-scale))`,
     borderRadius: `calc(${radius}px * var(--home-ui-scale))`,
@@ -44,6 +38,27 @@ function PortfolioCard({
   );
 }
 
+function PortfolioCarouselRow({
+  projects,
+  direction,
+  rowKey,
+}: PortfolioCarouselRowProps): React.JSX.Element {
+  const loopedProjects = [...projects, ...projects];
+
+  return (
+    <div className={`home-portfolio-row home-portfolio-row--${direction}`}>
+      <div className="home-portfolio-track">
+        {loopedProjects.map((project, index) => (
+          <PortfolioCard
+            key={`${rowKey}-${project.title}-${index}`}
+            {...project}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function HomePortfolio(): React.JSX.Element {
   return (
     <section id="portfolio" className="home-section home-portfolio">
@@ -58,14 +73,12 @@ export function HomePortfolio(): React.JSX.Element {
       </div>
       <HomeContainer>
         <SectionHeading eyebrow="PORTFOLIO" title="OUR" highlight=" PROJECTS" />
-        <div className="home-portfolio-stage">
-          {portfolioTopRow.map((project) => (
-            <PortfolioCard key={`top-${project.title}-${project.left}`} {...project} />
-          ))}
-          {portfolioBottomRow.map((project) => (
-            <PortfolioCard key={`bottom-${project.title}-${project.left}`} {...project} />
-          ))}
-        </div>
+      </HomeContainer>
+      <div className="home-portfolio-carousel">
+        <PortfolioCarouselRow projects={portfolioTopRow} direction="left" rowKey="top" />
+        <PortfolioCarouselRow projects={portfolioBottomRow} direction="right" rowKey="bottom" />
+      </div>
+      <HomeContainer>
         <div className="home-section-cta">
           <ExploreButton href="#about" label="Explore" />
         </div>

@@ -13,8 +13,6 @@ export type ProjectCard = {
   width: number;
   height: number;
   radius: number;
-  top: number;
-  left: number;
 };
 
 export type StatCard = {
@@ -74,8 +72,6 @@ export const portfolioTopRow: ProjectCard[] = [
     width: 505,
     height: 378,
     radius: 43,
-    top: 228,
-    left: -102,
   },
   {
     title: 'Borbor Landing',
@@ -84,8 +80,6 @@ export const portfolioTopRow: ProjectCard[] = [
     width: 505,
     height: 378,
     radius: 45,
-    top: 228,
-    left: 411,
   },
   {
     title: 'Visual Hierarchy',
@@ -94,8 +88,6 @@ export const portfolioTopRow: ProjectCard[] = [
     width: 592,
     height: 383,
     radius: 35,
-    top: 222,
-    left: 933,
   },
 ];
 
@@ -106,8 +98,6 @@ export const portfolioBottomRow: ProjectCard[] = [
     width: 379,
     height: 378,
     radius: 32,
-    top: 651,
-    left: -52,
   },
   {
     title: 'Meeting Assistant',
@@ -115,8 +105,6 @@ export const portfolioBottomRow: ProjectCard[] = [
     width: 505,
     height: 378,
     radius: 43,
-    top: 651,
-    left: 338,
   },
   {
     title: 'Borbor Landing',
@@ -125,8 +113,6 @@ export const portfolioBottomRow: ProjectCard[] = [
     width: 505,
     height: 378,
     radius: 45,
-    top: 651,
-    left: 854,
   },
   {
     title: 'Visual Hierarchy',
@@ -135,8 +121,6 @@ export const portfolioBottomRow: ProjectCard[] = [
     width: 592,
     height: 383,
     radius: 35,
-    top: 646,
-    left: 1370,
   },
 ];
 
@@ -200,12 +184,4 @@ export const footerSocialIcons = [
   { src: '/figma-home/group74.svg', alt: 'YouTube', width: 21, height: 15 },
   { src: '/figma-home/vector7.svg', alt: 'Twitter', width: 20, height: 20 },
   { src: '/figma-home/vector8.svg', alt: 'Dribbble', width: 19, height: 20 },
-] as const;
-
-export const showcaseDevices = [
-  { src: '/figma-home/iphone14-pro1.png', alt: 'Borbor Aqua mobile', className: 'home-showcase-phone' },
-  { src: '/figma-home/photo202604241449461.jpg', alt: 'Borbor Aqua mobile screen', className: 'home-showcase-phone-screen' },
-  { src: '/figma-home/space-gray1.png', alt: 'Borbor Aqua tablet', className: 'home-showcase-tablet' },
-  { src: '/figma-home/screenshot20260424-at1447391.png', alt: 'Borbor Aqua laptop screen', className: 'home-showcase-laptop-screen' },
-  { src: '/figma-home/apple-imac27201911.png', alt: 'Borbor Aqua desktop', className: 'home-showcase-imac' },
 ] as const;
