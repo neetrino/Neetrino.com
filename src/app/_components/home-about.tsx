@@ -1,4 +1,5 @@
 import { aboutParagraphs } from './home-data';
+import { HomeAboutVisual } from './home-about-visual';
 import { ExploreButton, HomeContainer } from './home-ui';
 
 export function HomeAbout(): React.JSX.Element {
@@ -40,6 +41,7 @@ export function HomeAbout(): React.JSX.Element {
             </div>
             <ExploreButton href="#contact" label="Explore" />
           </div>
+          <HomeAboutVisual />
         </div>
       </HomeContainer>
     </section>

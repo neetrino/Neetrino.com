@@ -24,7 +24,6 @@ export function HomeHero(): React.JSX.Element {
           src="/figma-home/erica-anderson1.png"
           alt=""
           fill
-          priority
           sizes="824px"
           className="home-hero-bg-glow-image"
         />

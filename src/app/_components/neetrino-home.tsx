@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { CanvasScaler } from './canvas-scaler';
 import { HomeAbout } from './home-about';
 import { HomeFooter } from './home-footer';
@@ -12,15 +11,7 @@ export function NeetrinoHome(): React.JSX.Element {
   return (
     <main className="home-page">
       <CanvasScaler wrapClassName="neetrino-canvas-wrap--hero">
-        <div className="home-page-glow" aria-hidden>
-          <Image
-            src="/figma-home/vector1.svg"
-            alt=""
-            fill
-            sizes="100vw"
-            className="home-page-glow-image"
-          />
-        </div>
+        <div className="home-page-glow" aria-hidden />
         <h1 className="sr-only">Neetrino IT Company</h1>
         <HomeHeader />
         <HomeHero />
