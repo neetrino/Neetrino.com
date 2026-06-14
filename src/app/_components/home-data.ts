@@ -45,21 +45,21 @@ export const services: ServiceCard[] = [
   {
     title: 'SAAS PLATFORMS',
     subtitle: 'Cloud Solutions',
-    image: '/figma-home/cloud-infrastructure.png',
+    image: '/figma-home/cloud-infrastructure.webp',
     imageClassName: 'home-service-image-saas',
     tone: 'dark',
   },
   {
     title: 'CRM SYSTEMS',
     subtitle: 'Process Automation',
-    image: '/figma-home/sports00065.png',
+    image: '/figma-home/sports00065.webp',
     imageClassName: 'home-service-image-crm',
     tone: 'blue',
   },
   {
     title: 'AI INTEGRATIONS',
     subtitle: 'AI Automation',
-    image: '/figma-home/2761.png',
+    image: '/figma-home/2761.webp',
     imageClassName: 'home-service-image-ai',
     tone: 'ice',
   },
@@ -68,14 +68,14 @@ export const services: ServiceCard[] = [
 export const portfolioTopRow: ProjectCard[] = [
   {
     title: 'Meeting Assistant',
-    image: '/figma-home/stanislav-hristov3.jpg',
+    image: '/figma-home/stanislav-hristov3.webp',
     width: 505,
     height: 378,
     radius: 43,
   },
   {
     title: 'Borbor Landing',
-    image: '/figma-home/ui-design21.jpg',
+    image: '/figma-home/ui-design21.webp',
     imageClassName: 'home-project-image-borbor',
     width: 505,
     height: 378,
@@ -83,7 +83,7 @@ export const portfolioTopRow: ProjectCard[] = [
   },
   {
     title: 'Visual Hierarchy',
-    image: '/figma-home/2661.jpg',
+    image: '/figma-home/2661.webp',
     imageClassName: 'home-project-image-visual',
     width: 592,
     height: 383,
@@ -94,21 +94,21 @@ export const portfolioTopRow: ProjectCard[] = [
 export const portfolioBottomRow: ProjectCard[] = [
   {
     title: 'AI Listing',
-    image: '/figma-home/klever-klever-io-instagram-photos-and-videos3.jpg',
+    image: '/figma-home/klever-klever-io-instagram-photos-and-videos3.webp',
     width: 379,
     height: 378,
     radius: 32,
   },
   {
     title: 'Meeting Assistant',
-    image: '/figma-home/stanislav-hristov3.jpg',
+    image: '/figma-home/stanislav-hristov3.webp',
     width: 505,
     height: 378,
     radius: 43,
   },
   {
     title: 'Borbor Landing',
-    image: '/figma-home/ui-design21.jpg',
+    image: '/figma-home/ui-design21.webp',
     imageClassName: 'home-project-image-borbor',
     width: 505,
     height: 378,
@@ -116,7 +116,7 @@ export const portfolioBottomRow: ProjectCard[] = [
   },
   {
     title: 'Visual Hierarchy',
-    image: '/figma-home/2661.jpg',
+    image: '/figma-home/2661.webp',
     imageClassName: 'home-project-image-visual',
     width: 592,
     height: 383,

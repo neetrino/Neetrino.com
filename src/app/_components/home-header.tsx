@@ -7,7 +7,7 @@ export function HomeHeader(): React.JSX.Element {
       <div className="home-header-inner">
         <a href="#home" className="home-header-logo">
           <Image
-            src="/figma-home/neetrino-it-comapny2-png1.png"
+            src="/figma-home/neetrino-logo.svg"
             alt="Neetrino"
             width={130}
             height={37}
