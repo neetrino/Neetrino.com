@@ -1,8 +1,6 @@
 export type ServiceCard = {
   title: string;
   subtitle: string;
-  image: string;
-  imageClassName?: string;
   tone: 'light' | 'orange' | 'dark' | 'blue' | 'ice';
 };
 
@@ -33,37 +31,45 @@ export const services: ServiceCard[] = [
   {
     title: 'WEBSITE',
     subtitle: 'Custom Development',
-    image: '',
     tone: 'light',
   },
   {
     title: 'MOBILE APP',
     subtitle: 'App Development',
-    image: '',
     tone: 'orange',
   },
   {
     title: 'SAAS PLATFORMS',
     subtitle: 'Cloud Solutions',
-    image: '/figma-home/cloud-infrastructure.webp',
-    imageClassName: 'home-service-image-saas',
     tone: 'dark',
   },
   {
     title: 'CRM SYSTEMS',
     subtitle: 'Process Automation',
-    image: '/figma-home/sports00065.webp',
-    imageClassName: 'home-service-image-crm',
     tone: 'blue',
   },
   {
     title: 'AI INTEGRATIONS',
     subtitle: 'AI Automation',
-    image: '/figma-home/2761.webp',
-    imageClassName: 'home-service-image-ai',
     tone: 'ice',
   },
 ];
+
+export const serviceIllustrations = [
+  { src: '/figma-home/5391.webp', className: 'home-services-deco-laptop' },
+  { src: '/figma-home/mobile-app.webp', className: 'home-services-deco-phone' },
+  { src: '/figma-home/cloud-infrastructure.webp', className: 'home-services-deco-saas' },
+  {
+    src: '/figma-home/sports00065.webp',
+    className: 'home-services-deco-crm',
+    unoptimized: true,
+  },
+  {
+    src: '/figma-home/2761.webp',
+    className: 'home-services-deco-ai',
+    unoptimized: true,
+  },
+] as const;
 
 export const portfolioTopRow: ProjectCard[] = [
   {
@@ -127,14 +133,8 @@ export const portfolioBottomRow: ProjectCard[] = [
 export const partnerLogos = [
   { src: '/figma-home/vector3.svg', width: 136, height: 79 },
   { src: '/figma-home/vector2.svg', width: 175, height: 53 },
-  { src: '/figma-home/layer1.svg', width: 78, height: 73 },
-  { src: '/figma-home/layer3.svg', width: 157, height: 71 },
-  { src: '/figma-home/layer5.svg', width: 67, height: 96 },
   { src: '/figma-home/vector3.svg', width: 136, height: 79 },
   { src: '/figma-home/vector2.svg', width: 175, height: 53 },
-  { src: '/figma-home/layer1.svg', width: 78, height: 73 },
-  { src: '/figma-home/layer3.svg', width: 157, height: 71 },
-  { src: '/figma-home/layer6.svg', width: 86, height: 125 },
 ] as const;
 
 export const footerLinks = {

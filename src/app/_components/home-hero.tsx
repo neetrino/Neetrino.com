@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
+import { HOME_IMAGE_QUALITY } from './home-constants';
 import { heroStats } from './home-data';
 
 import { HomeHeroBottomPanel } from './home-hero-bottom-panel';
-
 import { HomeHeroTechAtmosphere } from './home-hero-tech-atmosphere';
 
 import { HeroStatToneClass } from './home-ui';
@@ -18,7 +18,7 @@ export function HomeHero(): React.JSX.Element {
 
   return (
 
-    <section id="home" className="home-hero">
+    <section className="home-hero" aria-label="Hero">
 
       <div className="home-hero-bg-shell" aria-hidden>
 
@@ -39,6 +39,8 @@ export function HomeHero(): React.JSX.Element {
                 priority
 
                 sizes="1722px"
+
+                quality={HOME_IMAGE_QUALITY}
 
                 className="home-hero-bg-mesh-image"
 
@@ -68,6 +70,8 @@ export function HomeHero(): React.JSX.Element {
 
               sizes="1440px"
 
+              quality={HOME_IMAGE_QUALITY}
+
               className="home-hero-bg-philipp-image"
 
             />
@@ -76,66 +80,40 @@ export function HomeHero(): React.JSX.Element {
 
         </div>
 
+        <div className="home-hero-brand-layer" aria-hidden>
+          <Image
+            src="/figma-home/neetrino-hero-brand.svg"
+            alt=""
+            width={1197}
+            height={234}
+            priority
+            className="home-hero-brand"
+          />
+        </div>
 
+        <div className="home-hero-stage-robot" aria-hidden>
+          <div className="home-hero-robot-wrap">
+            <div className="home-hero-robot-crop">
+              <div className="home-hero-robot-motion">
+                <Image
+                  src="/figma-home/30.webp"
+                  alt=""
+                  fill
+                  priority
+                  sizes="629px"
+                  quality={HOME_IMAGE_QUALITY}
+                  className="home-hero-robot"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <HomeHeroBottomPanel />
 
         <HomeHeroTechAtmosphere />
 
         <div className="home-hero-lower-matte-band" />
-
-      </div>
-
-
-
-      <div className="home-hero-brand-layer" aria-hidden>
-        <p className="home-hero-brand">NEETRINO</p>
-      </div>
-
-      <div className="home-hero-stage home-hero-stage-robot" aria-hidden>
-
-        <div className="home-hero-robot-wrap">
-
-          <div className="home-hero-robot-crop">
-
-            <div className="home-hero-robot-motion">
-
-              <Image
-
-                src="/figma-home/30.webp"
-
-                alt=""
-
-                fill
-
-                priority
-
-                sizes="629px"
-
-                className="home-hero-robot"
-
-              />
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <HomeHeroBottomPanel />
-
-      <div className="home-hero-hand-layer" aria-hidden>
-        <div className="home-hero-hand">
-          <Image
-            src="/figma-home/28-a.webp"
-            alt=""
-            fill
-            sizes="450px"
-            className="home-hero-hand-image"
-          />
-        </div>
       </div>
 
       <div className="home-hero-stage">
@@ -218,6 +196,22 @@ export function HomeHero(): React.JSX.Element {
 
         </a>
 
+      </div>
+
+      <div className="home-hero-hand-layer" aria-hidden>
+        <div className="home-hero-hand">
+          <div className="home-hero-hand-motion">
+            <Image
+              src="/figma-home/28-a.webp"
+              alt=""
+              fill
+              priority
+              sizes="880px"
+              quality={HOME_IMAGE_QUALITY}
+              className="home-hero-hand-image"
+            />
+          </div>
+        </div>
       </div>
 
     </section>

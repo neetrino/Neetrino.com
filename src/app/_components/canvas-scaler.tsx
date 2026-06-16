@@ -14,6 +14,19 @@ type CanvasScalerProps = {
   innerClassName?: string;
 };
 
+function measureContentHeight(inner: HTMLElement, canvasHeight?: number): number {
+  if (canvasHeight !== undefined) {
+    return canvasHeight;
+  }
+
+  const footer = inner.querySelector(':scope > footer');
+  if (footer instanceof HTMLElement) {
+    return footer.offsetTop + footer.offsetHeight;
+  }
+
+  return inner.offsetHeight;
+}
+
 function bindPendingImageLoads(container: HTMLElement, onUpdate: () => void): () => void {
   const bindImages = (): void => {
     container.querySelectorAll('img').forEach((img) => {
@@ -72,18 +85,21 @@ export function CanvasScaler({
       return;
     }
 
+    const scaleHost = wrap.parentElement ?? wrap;
+
     const isDesktop = window.innerWidth >= HOME_DESKTOP_MIN_WIDTH;
     if (!isDesktop) {
       if (lastAppliedRef.current.scale !== 0 || lastAppliedRef.current.height !== 0) {
         inner.style.transform = '';
         wrap.style.height = '';
+        scaleHost.style.removeProperty('--home-canvas-scale');
         lastAppliedRef.current = { scale: 0, height: 0 };
       }
       return;
     }
 
     const scale = wrap.offsetWidth / canvasWidth;
-    const contentHeight = canvasHeight ?? inner.offsetHeight;
+    const contentHeight = measureContentHeight(inner, canvasHeight);
     const scaledHeight = contentHeight * scale;
 
     if (
@@ -95,6 +111,7 @@ export function CanvasScaler({
 
     inner.style.transform = `scale(${scale})`;
     wrap.style.height = `${scaledHeight}px`;
+    scaleHost.style.setProperty('--home-canvas-scale', String(scale));
     lastAppliedRef.current = { scale, height: scaledHeight };
   }, [canvasHeight, canvasWidth]);
 
@@ -116,6 +133,7 @@ export function CanvasScaler({
 
     const resizeObserver = new ResizeObserver(scheduleUpdate);
     resizeObserver.observe(wrap);
+    resizeObserver.observe(inner);
 
     const unbindImages = bindPendingImageLoads(inner, scheduleUpdate);
     window.addEventListener('resize', scheduleUpdate);
