@@ -120,6 +120,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
+  /* Allows browser to begin scrolling immediately without waiting for
+     horizontal/pinch gesture disambiguation on touch and trackpad. */
+  touch-action: pan-y;
 }
 
 html {
@@ -1223,7 +1226,8 @@ html {
     translate3d(var(--home-hero-hand-point-shift-x-rest), var(--home-hero-hand-point-shift-y-rest), 0);
 }
 
-.home-page-scale-root[data-hero-motion='running'] .home-hero-hand-motion {
+.home-page-scale-root[data-hero-motion='running'] .home-hero-hand-motion,
+.home-page-scale-root[data-hero-motion='running'] .home-hero-robot-motion {
   will-change: transform;
 }
 
@@ -1515,32 +1519,34 @@ html {
 }
 
 .home-portfolio-row--left .home-portfolio-track {
+  will-change: transform;
   animation: home-portfolio-scroll-left var(--home-portfolio-scroll-duration) linear infinite;
   animation-play-state: var(--home-portfolio-play-state);
 }
 
 .home-portfolio-row--right .home-portfolio-track {
+  will-change: transform;
   animation: home-portfolio-scroll-right var(--home-portfolio-scroll-duration) linear infinite;
   animation-play-state: var(--home-portfolio-play-state);
 }
 
 @keyframes home-portfolio-scroll-left {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @keyframes home-portfolio-scroll-right {
   from {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 
   to {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
