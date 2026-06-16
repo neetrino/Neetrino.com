@@ -39,13 +39,7 @@ imgRectangle17411 /figma-home/rectangle17411.svg image/svg+xml 1683
 imgRectangle17414 /figma-home/rectangle17414.svg image/svg+xml 2013
 imgRectangle17415 /figma-home/rectangle17415.svg image/svg+xml 2013
 imgVector2 /figma-home/vector2.svg image/svg+xml 10935
-imgLayer1 /figma-home/layer1.svg image/svg+xml 21250
-imgLayer2 /figma-home/layer2.svg image/svg+xml 21232
-imgLayer3 /figma-home/layer3.svg image/svg+xml 22747
-imgLayer4 /figma-home/layer4.svg image/svg+xml 22718
 imgVector3 /figma-home/vector3.svg image/svg+xml 65396
-imgLayer5 /figma-home/layer5.svg image/svg+xml 9003
-imgLayer6 /figma-home/layer6.svg image/svg+xml 9006
 imgEllipse3459 /figma-home/ellipse3459.svg image/svg+xml 1264
 imgFooterBottom /figma-home/footer-bottom.svg image/svg+xml 287
 imgLine135 /figma-home/line135.svg image/svg+xml 262

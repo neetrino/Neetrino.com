@@ -72,11 +72,14 @@ export function CanvasScaler({
       return;
     }
 
+    const scaleHost = wrap.parentElement ?? wrap;
+
     const isDesktop = window.innerWidth >= HOME_DESKTOP_MIN_WIDTH;
     if (!isDesktop) {
       if (lastAppliedRef.current.scale !== 0 || lastAppliedRef.current.height !== 0) {
         inner.style.transform = '';
         wrap.style.height = '';
+        scaleHost.style.removeProperty('--home-canvas-scale');
         lastAppliedRef.current = { scale: 0, height: 0 };
       }
       return;
@@ -95,6 +98,7 @@ export function CanvasScaler({
 
     inner.style.transform = `scale(${scale})`;
     wrap.style.height = `${scaledHeight}px`;
+    scaleHost.style.setProperty('--home-canvas-scale', String(scale));
     lastAppliedRef.current = { scale, height: scaledHeight };
   }, [canvasHeight, canvasWidth]);
 

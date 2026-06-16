@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { heroStats } from './home-data';
 
 import { HomeHeroBottomPanel } from './home-hero-bottom-panel';
-
 import { HomeHeroTechAtmosphere } from './home-hero-tech-atmosphere';
 
 import { HeroStatToneClass } from './home-ui';
@@ -18,7 +17,7 @@ export function HomeHero(): React.JSX.Element {
 
   return (
 
-    <section id="home" className="home-hero">
+    <section className="home-hero" aria-label="Hero">
 
       <div className="home-hero-bg-shell" aria-hidden>
 
@@ -78,6 +77,8 @@ export function HomeHero(): React.JSX.Element {
 
 
 
+        <HomeHeroBottomPanel />
+
         <HomeHeroTechAtmosphere />
 
         <div className="home-hero-lower-matte-band" />
@@ -123,20 +124,6 @@ export function HomeHero(): React.JSX.Element {
       </div>
 
 
-
-      <HomeHeroBottomPanel />
-
-      <div className="home-hero-hand-layer" aria-hidden>
-        <div className="home-hero-hand">
-          <Image
-            src="/figma-home/28-a.webp"
-            alt=""
-            fill
-            sizes="450px"
-            className="home-hero-hand-image"
-          />
-        </div>
-      </div>
 
       <div className="home-hero-stage">
 
@@ -218,6 +205,21 @@ export function HomeHero(): React.JSX.Element {
 
         </a>
 
+      </div>
+
+      <div className="home-hero-hand-layer" aria-hidden>
+        <div className="home-hero-hand">
+          <div className="home-hero-hand-motion">
+            <Image
+              src="/figma-home/28-a.webp"
+              alt=""
+              fill
+              priority
+              sizes="880px"
+              className="home-hero-hand-image"
+            />
+          </div>
+        </div>
       </div>
 
     </section>

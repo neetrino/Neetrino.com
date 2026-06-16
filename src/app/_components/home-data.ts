@@ -127,14 +127,8 @@ export const portfolioBottomRow: ProjectCard[] = [
 export const partnerLogos = [
   { src: '/figma-home/vector3.svg', width: 136, height: 79 },
   { src: '/figma-home/vector2.svg', width: 175, height: 53 },
-  { src: '/figma-home/layer1.svg', width: 78, height: 73 },
-  { src: '/figma-home/layer3.svg', width: 157, height: 71 },
-  { src: '/figma-home/layer5.svg', width: 67, height: 96 },
   { src: '/figma-home/vector3.svg', width: 136, height: 79 },
   { src: '/figma-home/vector2.svg', width: 175, height: 53 },
-  { src: '/figma-home/layer1.svg', width: 78, height: 73 },
-  { src: '/figma-home/layer3.svg', width: 157, height: 71 },
-  { src: '/figma-home/layer6.svg', width: 86, height: 125 },
 ] as const;
 
 export const footerLinks = {
