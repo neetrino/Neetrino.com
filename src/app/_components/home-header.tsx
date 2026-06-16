@@ -5,7 +5,7 @@ export function HomeHeader(): React.JSX.Element {
   return (
     <header className="home-header">
       <div className="home-header-inner">
-        <a href="#home" className="home-header-logo">
+        <a href="/" className="home-header-logo">
           <Image
             src="/figma-home/neetrino-logo.svg"
             alt="Neetrino"
@@ -16,12 +16,12 @@ export function HomeHeader(): React.JSX.Element {
         </a>
         <nav className="home-header-nav" aria-label="Main navigation">
           {navItems.map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`}>
-              {item}
+            <a key={item.label} href={item.href}>
+              {item.label}
             </a>
           ))}
         </nav>
-        <a href="#contact" className="home-header-quote">
+        <a href="/#contact" className="home-header-quote">
           Get a Quote
         </a>
         <button type="button" className="home-header-language" aria-label="Change language">

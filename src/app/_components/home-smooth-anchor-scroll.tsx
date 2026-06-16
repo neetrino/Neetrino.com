@@ -2,27 +2,39 @@
 
 import { useEffect } from 'react';
 
+function resolveHash(href: string): string | null {
+  if (href.startsWith('#')) {
+    return href;
+  }
+
+  if (href.startsWith('/#') && window.location.pathname === '/') {
+    return href.slice(1);
+  }
+
+  return null;
+}
+
 /** Smooth scroll for in-page anchor links only; wheel/trackpad scroll stays instant. */
 export function HomeSmoothAnchorScroll(): null {
   useEffect(() => {
-    const home = document.getElementById('home');
-    if (!home) {
-      return;
-    }
-
     const onClick = (event: MouseEvent): void => {
       const target = event.target;
       if (!(target instanceof Element)) {
         return;
       }
 
-      const link = target.closest('a[href^="#"]');
+      const link = target.closest('a[href^="#"], a[href^="/#"]');
       if (!(link instanceof HTMLAnchorElement)) {
         return;
       }
 
-      const hash = link.getAttribute('href');
-      if (!hash || hash === '#') {
+      const href = link.getAttribute('href');
+      if (!href || href === '#' || href === '/#') {
+        return;
+      }
+
+      const hash = resolveHash(href);
+      if (!hash) {
         return;
       }
 
@@ -35,8 +47,8 @@ export function HomeSmoothAnchorScroll(): null {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
-    home.addEventListener('click', onClick);
-    return () => home.removeEventListener('click', onClick);
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
   }, []);
 
   return null;

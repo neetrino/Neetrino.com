@@ -74,6 +74,21 @@ export function HeroStatToneClass(tone: keyof typeof heroStatToneClasses): strin
   return heroStatToneClasses[tone];
 }
 
+const footerLinkHrefs: Record<string, string> = {
+  About: '/#about',
+  Team: '/#about',
+  'Contact us': '/#contact',
+  Portfolio: '/#portfolio',
+  Services: '/services',
+  Blog: '/#blog',
+  Website: '/services',
+  'Mobile App': '/services',
+  'CRM Systems': '/services',
+  'SAAS Platforms': '/services',
+  'AI integration': '/services',
+  All: '/services',
+};
+
 type FooterLinkColumnProps = {
   title: string;
   links: readonly string[];
@@ -86,7 +101,7 @@ export function FooterLinkColumn({ title, links }: FooterLinkColumnProps): React
       <ul className="home-footer-links">
         {links.map((link) => (
           <li key={link}>
-            <a href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}>{link}</a>
+            <a href={footerLinkHrefs[link] ?? '/'}>{link}</a>
           </li>
         ))}
       </ul>

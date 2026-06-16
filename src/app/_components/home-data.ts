@@ -19,7 +19,19 @@ export type StatCard = {
   tone: 'orange' | 'light' | 'purple';
 };
 
-export const navItems = ['Home', 'Services', 'Portfolio', 'About', 'Blog', 'Contact'] as const;
+export type NavItem = {
+  label: string;
+  href: string;
+};
+
+export const navItems: NavItem[] = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Portfolio', href: '/#portfolio' },
+  { label: 'About', href: '/#about' },
+  { label: 'Blog', href: '/#blog' },
+  { label: 'Contact', href: '/#contact' },
+];
 
 export const heroStats: StatCard[] = [
   { value: '8+', label: 'Years of experience', tone: 'orange' },
