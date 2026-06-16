@@ -14,15 +14,6 @@ export function HomeFooter(): React.JSX.Element {
           className="home-footer-bg-shape"
         />
       </div>
-      <div className="home-footer-robot" aria-hidden>
-        <Image
-          src="/figma-home/10.png"
-          alt=""
-          fill
-          sizes="633px"
-          className="home-footer-robot-image"
-        />
-      </div>
       <HomeContainer>
         <div className="home-footer-grid">
           <FooterLinkColumn title="Company" links={footerLinks.Company} />

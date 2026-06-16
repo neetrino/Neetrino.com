@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { aboutParagraphs } from './home-data';
+import { HomeAboutVisual } from './home-about-visual';
 import { ExploreButton, HomeContainer } from './home-ui';
 
 export function HomeAbout(): React.JSX.Element {
@@ -41,15 +41,7 @@ export function HomeAbout(): React.JSX.Element {
             </div>
             <ExploreButton href="#contact" label="Explore" />
           </div>
-          <div className="home-about-visual">
-            <Image
-              src="/figma-home/1.png"
-              alt="Neetrino creative technology visual"
-              width={685}
-              height={641}
-              className="home-about-image"
-            />
-          </div>
+          <HomeAboutVisual />
         </div>
       </HomeContainer>
     </section>

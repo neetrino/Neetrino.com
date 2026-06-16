@@ -13,8 +13,6 @@ export type ProjectCard = {
   width: number;
   height: number;
   radius: number;
-  top: number;
-  left: number;
 };
 
 export type StatCard = {
@@ -47,21 +45,21 @@ export const services: ServiceCard[] = [
   {
     title: 'SAAS PLATFORMS',
     subtitle: 'Cloud Solutions',
-    image: '/figma-home/cloud-infrastructure.png',
+    image: '/figma-home/cloud-infrastructure.webp',
     imageClassName: 'home-service-image-saas',
     tone: 'dark',
   },
   {
     title: 'CRM SYSTEMS',
     subtitle: 'Process Automation',
-    image: '/figma-home/sports00065.png',
+    image: '/figma-home/sports00065.webp',
     imageClassName: 'home-service-image-crm',
     tone: 'blue',
   },
   {
     title: 'AI INTEGRATIONS',
     subtitle: 'AI Automation',
-    image: '/figma-home/2761.png',
+    image: '/figma-home/2761.webp',
     imageClassName: 'home-service-image-ai',
     tone: 'ice',
   },
@@ -70,73 +68,59 @@ export const services: ServiceCard[] = [
 export const portfolioTopRow: ProjectCard[] = [
   {
     title: 'Meeting Assistant',
-    image: '/figma-home/stanislav-hristov3.jpg',
+    image: '/figma-home/stanislav-hristov3.webp',
     width: 505,
     height: 378,
     radius: 43,
-    top: 228,
-    left: -102,
   },
   {
     title: 'Borbor Landing',
-    image: '/figma-home/ui-design21.jpg',
+    image: '/figma-home/ui-design21.webp',
     imageClassName: 'home-project-image-borbor',
     width: 505,
     height: 378,
     radius: 45,
-    top: 228,
-    left: 411,
   },
   {
     title: 'Visual Hierarchy',
-    image: '/figma-home/2661.jpg',
+    image: '/figma-home/2661.webp',
     imageClassName: 'home-project-image-visual',
     width: 592,
     height: 383,
     radius: 35,
-    top: 222,
-    left: 933,
   },
 ];
 
 export const portfolioBottomRow: ProjectCard[] = [
   {
     title: 'AI Listing',
-    image: '/figma-home/klever-klever-io-instagram-photos-and-videos3.jpg',
+    image: '/figma-home/klever-klever-io-instagram-photos-and-videos3.webp',
     width: 379,
     height: 378,
     radius: 32,
-    top: 651,
-    left: -52,
   },
   {
     title: 'Meeting Assistant',
-    image: '/figma-home/stanislav-hristov3.jpg',
+    image: '/figma-home/stanislav-hristov3.webp',
     width: 505,
     height: 378,
     radius: 43,
-    top: 651,
-    left: 338,
   },
   {
     title: 'Borbor Landing',
-    image: '/figma-home/ui-design21.jpg',
+    image: '/figma-home/ui-design21.webp',
     imageClassName: 'home-project-image-borbor',
     width: 505,
     height: 378,
     radius: 45,
-    top: 651,
-    left: 854,
   },
   {
     title: 'Visual Hierarchy',
-    image: '/figma-home/2661.jpg',
+    image: '/figma-home/2661.webp',
     imageClassName: 'home-project-image-visual',
     width: 592,
     height: 383,
     radius: 35,
-    top: 646,
-    left: 1370,
   },
 ];
 
@@ -200,12 +184,4 @@ export const footerSocialIcons = [
   { src: '/figma-home/group74.svg', alt: 'YouTube', width: 21, height: 15 },
   { src: '/figma-home/vector7.svg', alt: 'Twitter', width: 20, height: 20 },
   { src: '/figma-home/vector8.svg', alt: 'Dribbble', width: 19, height: 20 },
-] as const;
-
-export const showcaseDevices = [
-  { src: '/figma-home/iphone14-pro1.png', alt: 'Borbor Aqua mobile', className: 'home-showcase-phone' },
-  { src: '/figma-home/photo202604241449461.jpg', alt: 'Borbor Aqua mobile screen', className: 'home-showcase-phone-screen' },
-  { src: '/figma-home/space-gray1.png', alt: 'Borbor Aqua tablet', className: 'home-showcase-tablet' },
-  { src: '/figma-home/screenshot20260424-at1447391.png', alt: 'Borbor Aqua laptop screen', className: 'home-showcase-laptop-screen' },
-  { src: '/figma-home/apple-imac27201911.png', alt: 'Borbor Aqua desktop', className: 'home-showcase-imac' },
 ] as const;

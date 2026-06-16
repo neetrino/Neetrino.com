@@ -18,10 +18,10 @@ export function HomeServices(): React.JSX.Element {
         <SectionHeading eyebrow="SERVICES" title="WHAT WE" highlight="DO" />
         <div className="home-services-stage">
           <div className="home-services-deco home-services-deco-laptop" aria-hidden>
-            <Image src="/figma-home/5391.png" alt="" fill sizes="251px" />
+            <Image src="/figma-home/5391.webp" alt="" fill sizes="251px" />
           </div>
           <div className="home-services-deco home-services-deco-phone" aria-hidden>
-            <Image src="/figma-home/2.png" alt="" fill sizes="260px" />
+            <Image src="/figma-home/2.webp" alt="" fill sizes="260px" />
           </div>
         <div className="home-services-grid">
           {services.map((service) => (
