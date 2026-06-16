@@ -1,8 +1,6 @@
 export type ServiceCard = {
   title: string;
   subtitle: string;
-  image: string;
-  imageClassName?: string;
   tone: 'light' | 'orange' | 'dark' | 'blue' | 'ice';
 };
 
@@ -33,37 +31,37 @@ export const services: ServiceCard[] = [
   {
     title: 'WEBSITE',
     subtitle: 'Custom Development',
-    image: '',
     tone: 'light',
   },
   {
     title: 'MOBILE APP',
     subtitle: 'App Development',
-    image: '',
     tone: 'orange',
   },
   {
     title: 'SAAS PLATFORMS',
     subtitle: 'Cloud Solutions',
-    image: '/figma-home/cloud-infrastructure.webp',
-    imageClassName: 'home-service-image-saas',
     tone: 'dark',
   },
   {
     title: 'CRM SYSTEMS',
     subtitle: 'Process Automation',
-    image: '/figma-home/sports00065.webp',
-    imageClassName: 'home-service-image-crm',
     tone: 'blue',
   },
   {
     title: 'AI INTEGRATIONS',
     subtitle: 'AI Automation',
-    image: '/figma-home/2761.webp',
-    imageClassName: 'home-service-image-ai',
     tone: 'ice',
   },
 ];
+
+export const serviceIllustrations = [
+  { src: '/figma-home/5391.webp', className: 'home-services-deco-laptop' },
+  { src: '/figma-home/mobile-app.png', className: 'home-services-deco-phone' },
+  { src: '/figma-home/cloud-infrastructure.webp', className: 'home-services-deco-saas' },
+  { src: '/figma-home/sports00065.png', className: 'home-services-deco-crm' },
+  { src: '/figma-home/2761.png', className: 'home-services-deco-ai' },
+] as const;
 
 export const portfolioTopRow: ProjectCard[] = [
   {

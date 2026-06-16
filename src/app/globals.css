@@ -52,7 +52,7 @@
   --home-hero-hand-right: calc(112px * var(--home-ui-scale));
   --home-hero-hand-width: calc(880px * var(--home-ui-scale));
   --home-hero-hand-height: calc(700px * var(--home-ui-scale));
-  --home-hero-hand-point-duration: 3.4s;
+  --home-hero-hand-point-duration: 4.2s;
   --home-hero-hand-point-origin-x: 88%;
   --home-hero-hand-point-origin-y: 72%;
   --home-hero-hand-point-rotate-rest: 16deg;
@@ -1180,7 +1180,14 @@ html {
   position: absolute;
   inset: 0;
   transform-origin: var(--home-hero-hand-point-origin-x) var(--home-hero-hand-point-origin-y);
-  animation: home-hero-hand-point var(--home-hero-hand-point-duration) ease-in-out infinite alternate;
+  animation: home-hero-hand-point var(--home-hero-hand-point-duration) linear infinite;
+  animation-timing-function:
+    linear,
+    cubic-bezier(0.22, 1, 0.36, 1),
+    linear,
+    cubic-bezier(0.45, 0, 0.55, 1),
+    linear,
+    linear;
   animation-play-state: var(--home-hero-play-state);
   backface-visibility: hidden;
   contain: layout style paint;
@@ -1194,14 +1201,21 @@ html {
 
 @keyframes home-hero-hand-point {
   0%,
-  100% {
+  32% {
     transform: scaleY(-1) rotate(180deg) rotate(var(--home-hero-hand-point-rotate-rest))
       translate3d(var(--home-hero-hand-point-shift-x-rest), var(--home-hero-hand-point-shift-y-rest), 0);
   }
 
-  50% {
+  46%,
+  58% {
     transform: scaleY(-1) rotate(180deg) rotate(var(--home-hero-hand-point-rotate-aim))
       translate3d(var(--home-hero-hand-point-shift-x-aim), var(--home-hero-hand-point-shift-y-aim), 0);
+  }
+
+  72%,
+  100% {
+    transform: scaleY(-1) rotate(180deg) rotate(var(--home-hero-hand-point-rotate-rest))
+      translate3d(var(--home-hero-hand-point-shift-x-rest), var(--home-hero-hand-point-shift-y-rest), 0);
   }
 }
 
@@ -1256,9 +1270,15 @@ html {
   position: relative;
 }
 
+.home-services-illustrations {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
 .home-services-deco {
   position: absolute;
-  z-index: 2;
   pointer-events: none;
 }
 
@@ -1267,11 +1287,17 @@ html {
   left: calc(4px * var(--home-ui-scale));
   width: calc(251px * var(--home-ui-scale));
   height: calc(268px * var(--home-ui-scale));
+  overflow: hidden;
 }
 
 .home-services-deco-laptop img {
+  width: 142.38% !important;
+  height: 100% !important;
+  max-width: none !important;
+  inset: auto !important;
+  top: 0 !important;
+  left: -23.95% !important;
   object-fit: cover;
-  object-position: left center;
 }
 
 .home-services-deco-phone {
@@ -1283,6 +1309,49 @@ html {
 
 .home-services-deco-phone img {
   object-fit: cover;
+  object-position: center;
+}
+
+.home-services-deco-saas {
+  top: calc(181px * var(--home-ui-scale));
+  left: calc(572px * var(--home-ui-scale));
+  width: calc(195px * var(--home-ui-scale));
+  height: calc(190px * var(--home-ui-scale));
+  overflow: hidden;
+}
+
+.home-services-deco-saas img {
+  width: 137.44% !important;
+  height: 140.91% !important;
+  max-width: none !important;
+  inset: auto !important;
+  top: -16.67% !important;
+  left: -17.24% !important;
+  object-fit: cover;
+}
+
+.home-services-deco-crm {
+  top: calc(163px * var(--home-ui-scale));
+  left: calc(835px * var(--home-ui-scale));
+  width: calc(211px * var(--home-ui-scale));
+  height: calc(209px * var(--home-ui-scale));
+}
+
+.home-services-deco-crm img {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.home-services-deco-ai {
+  top: calc(161px * var(--home-ui-scale));
+  left: calc(1098px * var(--home-ui-scale));
+  width: calc(221px * var(--home-ui-scale));
+  height: calc(231px * var(--home-ui-scale));
+}
+
+.home-services-deco-ai img {
+  object-fit: contain;
+  object-position: center bottom;
 }
 
 .home-services-grid {
@@ -1350,40 +1419,8 @@ html {
   color: #0f0f0f;
 }
 
-.home-service-image {
-  position: relative;
-  min-height: calc(180px * var(--home-ui-scale));
-  margin-block: calc(12px * var(--home-ui-scale));
-}
-
-.home-service-image img {
-  object-fit: contain;
-}
-
-.home-service-image-website img {
-  object-fit: cover;
-  object-position: left center;
-  transform: scale(1.1);
-}
-
-.home-service-image-mobile img {
-  object-fit: cover;
-}
-
-.home-service-image-saas img {
-  object-fit: cover;
-  object-position: center bottom;
-  transform: scale(1.2);
-}
-
-.home-service-image-crm img {
-  object-fit: contain;
-  object-position: center bottom;
-}
-
-.home-service-image-ai img {
-  object-fit: contain;
-  object-position: center bottom;
+.home-service-spacer {
+  min-height: 0;
 }
 
 .home-portfolio {
