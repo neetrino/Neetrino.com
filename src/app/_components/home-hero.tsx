@@ -75,52 +75,39 @@ export function HomeHero(): React.JSX.Element {
 
         </div>
 
-
+        <div className="home-hero-stage home-hero-stage-robot" aria-hidden>
+          <div className="home-hero-robot-wrap">
+            <div className="home-hero-robot-crop">
+              <div className="home-hero-robot-motion">
+                <Image
+                  src="/figma-home/30.webp"
+                  alt=""
+                  fill
+                  priority
+                  sizes="629px"
+                  className="home-hero-robot"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
 
         <HomeHeroBottomPanel />
 
         <HomeHeroTechAtmosphere />
 
         <div className="home-hero-lower-matte-band" />
-
       </div>
-
-
 
       <div className="home-hero-brand-layer" aria-hidden>
-        <p className="home-hero-brand">NEETRINO</p>
-      </div>
-
-      <div className="home-hero-stage home-hero-stage-robot" aria-hidden>
-
-        <div className="home-hero-robot-wrap">
-
-          <div className="home-hero-robot-crop">
-
-            <div className="home-hero-robot-motion">
-
-              <Image
-
-                src="/figma-home/30.webp"
-
-                alt=""
-
-                fill
-
-                priority
-
-                sizes="629px"
-
-                className="home-hero-robot"
-
-              />
-
-            </div>
-
-          </div>
-
-        </div>
-
+        <Image
+          src="/figma-home/neetrino-hero-brand.svg"
+          alt=""
+          width={1197}
+          height={234}
+          priority
+          className="home-hero-brand"
+        />
       </div>
 
 

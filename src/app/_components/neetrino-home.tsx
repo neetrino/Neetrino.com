@@ -17,6 +17,7 @@ export function NeetrinoHome(): React.JSX.Element {
         <HomeHeader />
         <CanvasScaler wrapClassName="neetrino-canvas-wrap--page">
           <div className="home-page-glow" aria-hidden />
+          <div className="home-page-center-beam" aria-hidden data-name="Rectangle 17418" />
           <h1 className="sr-only">Neetrino IT Company</h1>
           <HomeHero />
           <HomeServices />

@@ -59,17 +59,9 @@ export function ExploreButton({ href, label }: ActionButtonProps): React.JSX.Ele
     <span className="home-btn-explore-wrap">
       <span className="home-btn-explore-flare" aria-hidden />
       <a href={href} className="home-btn home-btn-explore">
-        <span className="home-btn-explore-bg" aria-hidden />
+        <span className="home-btn-explore-glow" aria-hidden />
         <span className="home-btn-explore-label">{label}</span>
         <Image src="/figma-home/safearea1.svg" alt="" width={20} height={20} aria-hidden />
-        <Image
-          src="/figma-home/ellipse3463.svg"
-          alt=""
-          width={88}
-          height={31}
-          className="home-btn-explore-glow"
-          aria-hidden
-        />
       </a>
     </span>
   );
