@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { HOME_IMAGE_QUALITY } from './home-constants';
 import { portfolioBottomRow, portfolioTopRow } from './home-data';
 import type { ProjectCard } from './home-data';
 import { HomePortfolioCarousel } from './home-portfolio-carousel';
@@ -33,6 +34,8 @@ function PortfolioCard({
         alt={title}
         fill
         sizes={`${width}px`}
+        quality={HOME_IMAGE_QUALITY}
+        loading="lazy"
         className={imageClassName ? `home-project-image ${imageClassName}` : 'home-project-image'}
       />
     </article>

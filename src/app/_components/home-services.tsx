@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { HOME_IMAGE_QUALITY } from './home-constants';
 import { serviceIllustrations, services } from './home-data';
 import { ContinueButton, ExploreButton, HomeContainer, SectionHeading, ServiceToneClass } from './home-ui';
 
@@ -20,7 +21,15 @@ export function HomeServices(): React.JSX.Element {
           <div className="home-services-illustrations" aria-hidden>
             {serviceIllustrations.map((illustration) => (
               <div key={illustration.className} className={`home-services-deco ${illustration.className}`}>
-                <Image src={illustration.src} alt="" fill sizes="260px" unoptimized />
+                <Image
+                  src={illustration.src}
+                  alt=""
+                  fill
+                  sizes="260px"
+                  quality={HOME_IMAGE_QUALITY}
+                  loading="lazy"
+                  unoptimized={'unoptimized' in illustration && illustration.unoptimized}
+                />
               </div>
             ))}
           </div>

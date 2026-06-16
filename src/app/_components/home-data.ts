@@ -57,10 +57,18 @@ export const services: ServiceCard[] = [
 
 export const serviceIllustrations = [
   { src: '/figma-home/5391.webp', className: 'home-services-deco-laptop' },
-  { src: '/figma-home/mobile-app.png', className: 'home-services-deco-phone' },
+  { src: '/figma-home/mobile-app.webp', className: 'home-services-deco-phone' },
   { src: '/figma-home/cloud-infrastructure.webp', className: 'home-services-deco-saas' },
-  { src: '/figma-home/sports00065.png', className: 'home-services-deco-crm' },
-  { src: '/figma-home/2761.png', className: 'home-services-deco-ai' },
+  {
+    src: '/figma-home/sports00065.webp',
+    className: 'home-services-deco-crm',
+    unoptimized: true,
+  },
+  {
+    src: '/figma-home/2761.webp',
+    className: 'home-services-deco-ai',
+    unoptimized: true,
+  },
 ] as const;
 
 export const portfolioTopRow: ProjectCard[] = [

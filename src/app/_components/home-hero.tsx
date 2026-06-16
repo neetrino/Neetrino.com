@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { HOME_IMAGE_QUALITY } from './home-constants';
 import { heroStats } from './home-data';
 
 import { HomeHeroBottomPanel } from './home-hero-bottom-panel';
@@ -39,6 +40,8 @@ export function HomeHero(): React.JSX.Element {
 
                 sizes="1722px"
 
+                quality={HOME_IMAGE_QUALITY}
+
                 className="home-hero-bg-mesh-image"
 
               />
@@ -67,6 +70,8 @@ export function HomeHero(): React.JSX.Element {
 
               sizes="1440px"
 
+              quality={HOME_IMAGE_QUALITY}
+
               className="home-hero-bg-philipp-image"
 
             />
@@ -75,7 +80,18 @@ export function HomeHero(): React.JSX.Element {
 
         </div>
 
-        <div className="home-hero-stage home-hero-stage-robot" aria-hidden>
+        <div className="home-hero-brand-layer" aria-hidden>
+          <Image
+            src="/figma-home/neetrino-hero-brand.svg"
+            alt=""
+            width={1197}
+            height={234}
+            priority
+            className="home-hero-brand"
+          />
+        </div>
+
+        <div className="home-hero-stage-robot" aria-hidden>
           <div className="home-hero-robot-wrap">
             <div className="home-hero-robot-crop">
               <div className="home-hero-robot-motion">
@@ -85,6 +101,7 @@ export function HomeHero(): React.JSX.Element {
                   fill
                   priority
                   sizes="629px"
+                  quality={HOME_IMAGE_QUALITY}
                   className="home-hero-robot"
                 />
               </div>
@@ -98,19 +115,6 @@ export function HomeHero(): React.JSX.Element {
 
         <div className="home-hero-lower-matte-band" />
       </div>
-
-      <div className="home-hero-brand-layer" aria-hidden>
-        <Image
-          src="/figma-home/neetrino-hero-brand.svg"
-          alt=""
-          width={1197}
-          height={234}
-          priority
-          className="home-hero-brand"
-        />
-      </div>
-
-
 
       <div className="home-hero-stage">
 
@@ -203,6 +207,7 @@ export function HomeHero(): React.JSX.Element {
               fill
               priority
               sizes="880px"
+              quality={HOME_IMAGE_QUALITY}
               className="home-hero-hand-image"
             />
           </div>
