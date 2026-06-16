@@ -14,7 +14,11 @@ function resolveHeroPlayState(isHeroVisible: boolean, isScrolling: boolean): 'ru
   return isHeroVisible && !isScrolling ? 'running' : 'paused';
 }
 
-/** Pauses hero motion while scrolling or off-screen without changing background paint. */
+/**
+ * Pauses hero motion while scrolling or off-screen.
+ * Also suppresses expensive backdrop-filter blurs on hero elements during scroll
+ * to eliminate GPU re-rasterisation jank (data-hero-scroll="scrolling" drives the CSS).
+ */
 export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps): React.JSX.Element {
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -34,6 +38,12 @@ export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps):
       const playState = resolveHeroPlayState(isHeroVisible, isScrolling);
       root.style.setProperty(HERO_PLAY_STATE_VAR, playState);
       root.dataset.heroMotion = playState;
+
+      if (isScrolling && isHeroVisible) {
+        root.dataset.heroScroll = 'scrolling';
+      } else {
+        delete root.dataset.heroScroll;
+      }
     };
 
     const observer =
@@ -76,6 +86,7 @@ export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps):
       window.removeEventListener('scroll', onScroll);
       clearTimeout(scrollIdleTimer);
       delete root.dataset.heroMotion;
+      delete root.dataset.heroScroll;
       root.style.removeProperty(HERO_PLAY_STATE_VAR);
     };
   }, []);

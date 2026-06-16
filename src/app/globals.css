@@ -926,6 +926,28 @@ html {
   }
 }
 
+/* Suppress expensive backdrop-filter re-rasterisation during scroll.
+   Both elements are large (full-width) — blurring them every scroll frame
+   saturates the GPU compositor. We swap to a static background during scroll
+   and restore smoothly once idle (180 ms debounce, matches SCROLL_IDLE_MS). */
+.home-page-scale-root[data-hero-scroll='scrolling'] .home-hero-lower-matte-band {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.home-page-scale-root[data-hero-scroll='scrolling'] .home-hero-bottom-panel-glass {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Smooth blur restore after scroll stops — avoids hard pop. */
+.home-hero-lower-matte-band,
+.home-hero-bottom-panel-glass {
+  transition: backdrop-filter 100ms ease;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-transition: -webkit-backdrop-filter 100ms ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-tech-stream-column,
   .hero-tech-packet,
