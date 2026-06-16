@@ -46,7 +46,7 @@ export function HomeFooter(): React.JSX.Element {
             <p className="home-footer-message-copy">
               Step into the digital world with one message. Our team will get back to you shortly.
             </p>
-            <form className="home-footer-form" action="#contact">
+            <form className="home-footer-form" action="/#contact">
               <label className="sr-only" htmlFor="footer-message">
                 Your message
               </label>
@@ -62,7 +62,7 @@ export function HomeFooter(): React.JSX.Element {
           <p>Copyright © 2017 - 2026 Neetrino IT Company. All Rights Reserved.</p>
           <div className="home-footer-social">
             {footerSocialIcons.map((icon) => (
-              <a key={icon.alt} href="#contact" aria-label={icon.alt}>
+              <a key={icon.alt} href="/#contact" aria-label={icon.alt}>
                 <Image src={icon.src} alt="" width={icon.width} height={icon.height} />
               </a>
             ))}
