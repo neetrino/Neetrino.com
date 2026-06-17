@@ -27,6 +27,7 @@ function AboutDecor(): React.JSX.Element {
       <div className="home-page-glow" />
       <span className="about-glow-blue-1" />
       <span className="about-glow-blue-2" />
+      <span className="about-glow-spectrum" />
       <span className="about-radial" />
 
       <div className="about-hero-streak">
