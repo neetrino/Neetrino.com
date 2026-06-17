@@ -28,9 +28,13 @@ export const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Portfolio', href: '/#portfolio' },
-  { label: 'About', href: '/#about' },
-  { label: 'Blog', href: '/#blog' },
+  { label: 'About', href: '/about' },
   { label: 'Contact', href: '/#contact' },
+];
+
+export const moreNavItems: NavItem[] = [
+  { label: 'Blog', href: '/#blog' },
+  { label: 'Team', href: '/#team' },
 ];
 
 export const heroStats: StatCard[] = [

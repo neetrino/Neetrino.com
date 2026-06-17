@@ -17,6 +17,11 @@ export type AboutFeature = {
   rest: string;
 };
 
+export type AboutValue = {
+  label: string;
+  icon: string;
+};
+
 /** Hero headline split into the exact word styling used in the Figma design. */
 export const heroHeadline = {
   line1Plain: 'WITH',
@@ -84,4 +89,11 @@ export const whyFeatures: AboutFeature[] = [
   { lead: 'A selection of over', rest: '100,000 design options' },
   { lead: 'Websites created 10 times', rest: 'faster than traditional methods' },
   { lead: '24/7 technical support', rest: 'and free consultations' },
+];
+
+export const companyValues: AboutValue[] = [
+  { label: 'Love to work', icon: '/about/value-love.webp' },
+  { label: 'Transparency', icon: '/about/value-transparency.webp' },
+  { label: 'Continuous learning', icon: '/about/value-learning.webp' },
+  { label: 'Respect for each other', icon: '/about/value-respect.webp' },
 ];

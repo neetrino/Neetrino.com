@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import {
+  companyValues,
   heroHeadline,
   heroIntroLeft,
   heroIntroRight,
@@ -57,12 +58,24 @@ export function AboutMobile(): React.JSX.Element {
       </section>
 
       <section className="about-mobile-section">
+        <h2>The values that always drive us</h2>
+        <ul className="about-mobile-values">
+          {companyValues.map((value) => (
+            <li key={value.label}>
+              <Image src={value.icon} alt="" width={32} height={32} />
+              <span>{value.label}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="about-mobile-section">
         <h2>Meet our team</h2>
         <Image
-          src="/about/team.png"
+          src="/about/team-live.webp"
           alt="Neetrino team"
-          width={620}
-          height={402}
+          width={663}
+          height={988}
           className="about-mobile-team"
         />
         <p>{teamText}</p>

@@ -3,7 +3,7 @@
 .about-body {
   position: relative;
   width: 1440px;
-  height: 3861px;
+  height: 4380px;
   overflow: hidden;
   background: #151515;
   color: #fff;
@@ -103,13 +103,13 @@
 }
 
 .about-ray-4 {
-  top: 2368px;
+  top: 2740px;
   height: 490px;
   background-image: url('/about/ray-17418.svg');
 }
 
 .about-ray-5 {
-  top: 3380px;
+  top: 3780px;
   height: 560px;
   background-image: url('/about/ray-17416.svg');
 }
@@ -128,10 +128,10 @@
 
 .about-beam {
   position: absolute;
-  top: 2280px;
+  top: 2700px;
   left: 50%;
   width: 220px;
-  height: 1120px;
+  height: 1260px;
   filter: blur(34px);
   mix-blend-mode: screen;
   transform: translateX(-50%);
@@ -254,16 +254,17 @@
 
 .about-robot {
   position: absolute;
-  top: 70px;
-  left: 770px;
-  z-index: 0;
-  width: 600px;
-  height: 980px;
+  top: -142px;
+  left: 742px;
+  z-index: -1;
+  width: 748px;
+  height: 1280px;
 }
 
 .about-robot-img {
   object-fit: contain;
   object-position: top center;
+  transform: scaleX(-1);
 }
 
 .about-headline {
@@ -366,12 +367,13 @@
 
 .about-cube {
   position: absolute;
-  top: 1315px;
-  left: 667px;
+  top: 1344px;
+  left: 634px;
   z-index: 2;
-  width: 191px;
-  height: 191px;
-  mix-blend-mode: screen;
+  width: 169px;
+  height: 169px;
+  transform: translateY(0);
+  will-change: transform;
 }
 
 .about-cube::before {
@@ -384,6 +386,24 @@
 
 .about-cube-img {
   object-fit: contain;
+}
+
+@supports (animation-timeline: scroll(root block)) {
+  .about-cube {
+    animation: about-cube-vertical-scroll linear both;
+    animation-range: 26% 60%;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes about-cube-vertical-scroll {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(1325px);
+  }
 }
 
 .about-title-mission {
@@ -492,10 +512,64 @@
   color: #f5f5f5;
 }
 
+/* ---------- Values ---------- */
+
+.about-title-values {
+  top: 2308px;
+  left: 50%;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.about-values-line {
+  position: absolute;
+  top: 2572px;
+  left: 84px;
+  width: 1273px;
+  height: 65px;
+}
+
+.about-values-line-img {
+  object-fit: fill;
+}
+
+.about-values-list {
+  position: absolute;
+  top: 2458px;
+  left: 199px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 58px;
+  align-items: center;
+  width: 1044px;
+}
+
+.about-value-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #fff;
+  text-align: center;
+}
+
+.about-value-icon {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.about-value-icon-img {
+  object-fit: contain;
+}
+
 /* ---------- Countries / map ---------- */
 
 .about-title-countries {
-  top: 2230px;
+  top: 2798px;
   left: 50%;
   text-align: center;
   transform: translateX(-50%);
@@ -503,7 +577,7 @@
 
 .about-map {
   position: absolute;
-  top: 2389px;
+  top: 2958px;
   left: 222px;
   width: 987px;
   height: 525px;
@@ -515,7 +589,7 @@
 
 .about-impact-stats {
   position: absolute;
-  top: 2987px;
+  top: 3557px;
   left: 50%;
   display: flex;
   gap: 122px;
@@ -526,37 +600,36 @@
 /* ---------- Team ---------- */
 
 .about-title-team {
-  top: 3397px;
+  top: 3910px;
   left: 132px;
   width: 299px;
   text-align: center;
 }
 
 .about-copy-team {
-  top: 3484px;
+  top: 3996px;
   left: 133px;
   width: 558px;
 }
 
 .about-team-cta {
   position: absolute;
-  top: 3636px;
+  top: 4148px;
   left: 132px;
   z-index: 3;
 }
 
 .about-team-image {
   position: absolute;
-  top: 3371px;
-  left: 768px;
-  width: 620px;
-  height: 402px;
-  overflow: hidden;
+  top: 3598px;
+  left: 790px;
+  width: 570px;
+  height: 850px;
 }
 
 .about-team-img {
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: bottom center;
 }
 
 /* ---------- Mobile fallback ---------- */
@@ -631,6 +704,21 @@
     gap: 10px;
     padding-left: 18px;
     margin: 0;
+    font-weight: 700;
+  }
+
+  .about-mobile-values {
+    display: grid;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .about-mobile-values li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     font-weight: 700;
   }
 

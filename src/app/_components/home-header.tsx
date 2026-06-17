@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { navItems } from './home-data';
+import { moreNavItems, navItems } from './home-data';
 
 export function HomeHeader(): React.JSX.Element {
   return (
@@ -20,6 +20,16 @@ export function HomeHeader(): React.JSX.Element {
               {item.label}
             </a>
           ))}
+          <details className="home-header-more">
+            <summary>More</summary>
+            <div className="home-header-more-menu">
+              {moreNavItems.map((item) => (
+                <a key={item.label} href={item.href}>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </details>
         </nav>
         <a href="/#contact" className="home-header-quote">
           Get a Quote
