@@ -535,14 +535,39 @@ html {
 }
 
 .home-header-nav a {
-  color: inherit;
+  position: relative;
+  color: rgba(255, 255, 255, 0.78);
   text-decoration: none;
-  transition: opacity 180ms ease;
+  transition: color 180ms ease, opacity 180ms ease;
 }
 
-.home-header-nav a:hover,
-.home-header-more summary:hover {
-  opacity: 0.8;
+.home-header-link::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: calc(-8px * var(--home-ui-scale));
+  left: 0;
+  height: calc(2px * var(--home-ui-scale));
+  border-radius: 999px;
+  background: #fff;
+  opacity: 0;
+  transform: scaleX(0.35);
+  transform-origin: center;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.home-header-link:hover,
+.home-header-link--active,
+.home-header-more summary:hover,
+.home-header-more--active summary {
+  color: #fff;
+  opacity: 1;
+}
+
+.home-header-link:hover::after,
+.home-header-link--active::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .home-header-more {
@@ -550,13 +575,14 @@ html {
 }
 
 .home-header-more summary {
+  position: relative;
   display: flex;
   align-items: center;
   gap: calc(6px * var(--home-ui-scale));
-  color: inherit;
+  color: rgba(255, 255, 255, 0.78);
   list-style: none;
   cursor: pointer;
-  transition: opacity 180ms ease;
+  transition: color 180ms ease, opacity 180ms ease;
 }
 
 .home-header-more summary::-webkit-details-marker {
@@ -574,6 +600,29 @@ html {
   border-right: calc(1.5px * var(--home-ui-scale)) solid currentColor;
   border-bottom: calc(1.5px * var(--home-ui-scale)) solid currentColor;
   transform: translateY(calc(-2px * var(--home-ui-scale))) rotate(45deg);
+}
+
+.home-header-more summary::before {
+  content: '';
+  position: absolute;
+  right: calc(12px * var(--home-ui-scale));
+  bottom: calc(-8px * var(--home-ui-scale));
+  left: 0;
+  height: calc(2px * var(--home-ui-scale));
+  border-radius: 999px;
+  background: #fff;
+  opacity: 0;
+  transform: scaleX(0.35);
+  transform-origin: center;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.home-header-more summary:hover::before,
+.home-header-more:focus-within summary::before,
+.home-header-more[open] summary::before,
+.home-header-more--active summary::before {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .home-header-more-menu {

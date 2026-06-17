@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ServiceCardGrid } from './services-cards';
 
 const DECORATIONS = [
@@ -20,7 +21,16 @@ export function ServicesHero(): React.JSX.Element {
           <span key={name} className={`svc-deco ${name}`} />
         ))}
       </div>
-      <p className="svc-title">SERVICES</p>
+      <Image
+        src="/services/services-title.png"
+        alt="SERVICES"
+        width={597}
+        height={64}
+        sizes="(max-width: 900px) 90vw, 597px"
+        priority
+        unoptimized
+        className="svc-title"
+      />
       <ServiceCardGrid />
     </section>
   );

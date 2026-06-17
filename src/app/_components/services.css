@@ -115,14 +115,9 @@
   z-index: 5;
   top: calc(152px * var(--home-ui-scale));
   left: calc(73px * var(--home-ui-scale));
-  margin: 0;
-  font-family: var(--font-megatrox), sans-serif;
-  font-size: calc(90px * var(--home-ui-scale));
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: calc(2px * var(--home-ui-scale));
-  color: #fffcfc;
-  white-space: nowrap;
+  display: block;
+  width: calc(597px * var(--home-ui-scale));
+  height: auto;
 }
 
 /* --------------------------------------------------------------- Card grid */
@@ -331,8 +326,8 @@
     position: relative;
     top: auto;
     left: auto;
-    font-size: clamp(56px, 16vw, 90px);
-    text-align: center;
+    width: min(100%, calc(597px * var(--home-ui-scale)));
+    margin: 0 auto;
   }
 
   .svc-grid {

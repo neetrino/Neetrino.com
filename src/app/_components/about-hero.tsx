@@ -6,7 +6,7 @@ export function AboutHero(): React.JSX.Element {
   return (
     <section className="about-hero" aria-labelledby="about-title">
       <div className="about-robot" aria-hidden>
-        <Image src="/about/robot.png" alt="" fill sizes="620px" priority className="about-robot-img" />
+        <Image src="/about/robot.webp" alt="" fill sizes="620px" priority className="about-robot-img" />
       </div>
 
       <h1 id="about-title" className="about-headline">

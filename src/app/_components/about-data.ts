@@ -73,10 +73,10 @@ export const impactStats: AboutStat[] = [
 ];
 
 export const whyIllustrations: AboutIllustration[] = [
-  { src: '/about/why-1.png', alt: 'Rocket', className: 'about-why-rocket' },
-  { src: '/about/why-2.png', alt: 'Palette', className: 'about-why-palette' },
-  { src: '/about/why-3.png', alt: 'Lightning', className: 'about-why-lightning' },
-  { src: '/about/why-4.png', alt: 'Helmet', className: 'about-why-helmet' },
+  { src: '/about/why-1.webp', alt: 'Rocket', className: 'about-why-rocket' },
+  { src: '/about/why-2.webp', alt: 'Palette', className: 'about-why-palette' },
+  { src: '/about/why-3.webp', alt: 'Lightning', className: 'about-why-lightning' },
+  { src: '/about/why-4.webp', alt: 'Helmet', className: 'about-why-helmet' },
 ];
 
 export const whyFeatures: AboutFeature[] = [

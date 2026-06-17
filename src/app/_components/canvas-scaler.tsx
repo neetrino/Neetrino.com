@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, type ReactNode } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, type ReactNode } from 'react';
 import { HOME_DESIGN_WIDTH, HOME_DESKTOP_MIN_WIDTH } from './home-constants';
 
 const SCALE_EPSILON = 0.0001;
@@ -115,7 +115,7 @@ export function CanvasScaler({
     lastAppliedRef.current = { scale, height: scaledHeight };
   }, [canvasHeight, canvasWidth]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let frame = 0;
 
     const scheduleUpdate = (): void => {
@@ -123,7 +123,7 @@ export function CanvasScaler({
       frame = requestAnimationFrame(updateScale);
     };
 
-    scheduleUpdate();
+    updateScale();
 
     const wrap = wrapRef.current;
     const inner = innerRef.current;
