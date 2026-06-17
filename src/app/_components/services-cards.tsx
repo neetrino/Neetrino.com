@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { serviceCards, type ServiceDetailCard } from './services-data';
 import { ServiceIcon } from './services-icons';
 
@@ -28,7 +27,15 @@ function ServiceDetailCardView({ card }: { card: ServiceDetailCard }): React.JSX
       </div>
       <a className="svc-card-cta" href="#contact">
         <span>Continue</span>
-        <Image src="/figma-home/safearea.svg" alt="" width={20} height={20} aria-hidden />
+        <svg className="svc-card-cta-icon" viewBox="0 0 17 17" fill="none" aria-hidden="true">
+          <path
+            d="M10.83 2.5 15.83 8.33 10.83 14.17M15.83 8.33H.83"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </a>
       <span className="svc-card-edge-glow" aria-hidden />
     </article>

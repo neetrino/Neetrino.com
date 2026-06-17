@@ -20,6 +20,12 @@
   pointer-events: none;
 }
 
+.about-decor .home-page-glow {
+  top: 0;
+  opacity: 0.32;
+  mix-blend-mode: normal;
+}
+
 .about-glow-blue-1,
 .about-glow-blue-2 {
   position: absolute;
