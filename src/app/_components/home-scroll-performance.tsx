@@ -29,9 +29,13 @@ export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps):
     }
 
     const hero = root.querySelector('.home-hero');
+    if (!(hero instanceof HTMLElement)) {
+      return;
+    }
+
     let scrollIdleTimer: ReturnType<typeof setTimeout> | undefined;
     let scrollRaf = 0;
-    let isHeroVisible = Boolean(hero);
+    let isHeroVisible = true;
     let isScrolling = false;
 
     const applyPlayState = (): void => {
@@ -46,20 +50,15 @@ export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps):
       }
     };
 
-    const observer =
-      hero instanceof HTMLElement
-        ? new IntersectionObserver(
-            ([entry]) => {
-              isHeroVisible = entry?.isIntersecting ?? false;
-              applyPlayState();
-            },
-            { rootMargin: HERO_INTERSECTION_ROOT_MARGIN, threshold: 0 },
-          )
-        : null;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isHeroVisible = entry?.isIntersecting ?? false;
+        applyPlayState();
+      },
+      { rootMargin: HERO_INTERSECTION_ROOT_MARGIN, threshold: 0 },
+    );
 
-    if (hero instanceof HTMLElement && observer) {
-      observer.observe(hero);
-    }
+    observer.observe(hero);
 
     const onScroll = (): void => {
       cancelAnimationFrame(scrollRaf);
@@ -82,7 +81,7 @@ export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps):
 
     return () => {
       cancelAnimationFrame(scrollRaf);
-      observer?.disconnect();
+      observer.disconnect();
       window.removeEventListener('scroll', onScroll);
       clearTimeout(scrollIdleTimer);
       delete root.dataset.heroMotion;

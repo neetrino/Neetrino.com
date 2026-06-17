@@ -1,0 +1,122 @@
+.contact-office {
+  margin-top: 40px;
+  padding: 16px;
+  border-radius: 22px;
+  background: #181818;
+  box-shadow: none;
+}
+
+.contact-office-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+
+.contact-office-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.contact-office-tags span,
+.contact-office-head a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 999px;
+  color: rgb(255 255 255 / 0.75);
+  font-size: 13px;
+}
+
+.contact-office-tags span {
+  padding-inline: 14px;
+  background: rgb(255 255 255 / 0.03);
+}
+
+.contact-office-head a {
+  justify-content: center;
+  padding-inline: 18px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contact-map {
+  position: relative;
+  height: 270px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 16px;
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.contact-map-placeholder {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 48% 45%, rgb(220 231 255 / 0.2), transparent 18%),
+    linear-gradient(90deg, rgb(236 241 248 / 0.95), rgb(215 224 235 / 0.95));
+}
+
+.contact-map span {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 7px 11px;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.35);
+  color: rgb(255 255 255 / 0.85);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 899px) {
+  .contact-page {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 112px 20px 48px;
+  }
+
+  .contact-content {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .contact-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    height: auto;
+    padding: 28px 22px;
+  }
+
+  .contact-kicker {
+    width: 100%;
+  }
+
+  .contact-title {
+    font-size: clamp(40px, 12vw, 56px);
+  }
+
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-office-head {
+    flex-direction: column;
+  }
+}

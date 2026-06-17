@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, type ReactNode } from 'react';
+import { useCallback, useLayoutEffect, useRef, type ReactNode } from 'react';
 import { HOME_DESIGN_WIDTH, HOME_DESKTOP_MIN_WIDTH } from './home-constants';
 
 const SCALE_EPSILON = 0.0001;
@@ -25,43 +25,6 @@ function measureContentHeight(inner: HTMLElement, canvasHeight?: number): number
   }
 
   return inner.offsetHeight;
-}
-
-function bindPendingImageLoads(container: HTMLElement, onUpdate: () => void): () => void {
-  const bindImages = (): void => {
-    container.querySelectorAll('img').forEach((img) => {
-      if (!img.complete) {
-        img.addEventListener('load', onUpdate, { once: true });
-      }
-    });
-  };
-
-  bindImages();
-
-  const observer = new MutationObserver((mutations) => {
-    let hasNewImages = false;
-
-    for (const mutation of mutations) {
-      mutation.addedNodes.forEach((node) => {
-        if (node instanceof HTMLImageElement) {
-          hasNewImages = true;
-          return;
-        }
-
-        if (node instanceof HTMLElement && node.querySelector('img')) {
-          hasNewImages = true;
-        }
-      });
-    }
-
-    if (hasNewImages) {
-      bindImages();
-      onUpdate();
-    }
-  });
-
-  observer.observe(container, { childList: true, subtree: true });
-  return () => observer.disconnect();
 }
 
 /**
@@ -115,7 +78,7 @@ export function CanvasScaler({
     lastAppliedRef.current = { scale, height: scaledHeight };
   }, [canvasHeight, canvasWidth]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let frame = 0;
 
     const scheduleUpdate = (): void => {
@@ -123,7 +86,7 @@ export function CanvasScaler({
       frame = requestAnimationFrame(updateScale);
     };
 
-    scheduleUpdate();
+    updateScale();
 
     const wrap = wrapRef.current;
     const inner = innerRef.current;
@@ -135,14 +98,12 @@ export function CanvasScaler({
     resizeObserver.observe(wrap);
     resizeObserver.observe(inner);
 
-    const unbindImages = bindPendingImageLoads(inner, scheduleUpdate);
     window.addEventListener('resize', scheduleUpdate);
     window.addEventListener('load', scheduleUpdate);
 
     return () => {
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();
-      unbindImages();
       window.removeEventListener('resize', scheduleUpdate);
       window.removeEventListener('load', scheduleUpdate);
     };

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { contactInfo, footerLinks, footerSocialIcons } from './home-data';
 import { FooterLinkColumn, HomeContainer } from './home-ui';
 
@@ -62,9 +63,9 @@ export function HomeFooter(): React.JSX.Element {
           <p>Copyright © 2017 - 2026 Neetrino IT Company. All Rights Reserved.</p>
           <div className="home-footer-social">
             {footerSocialIcons.map((icon) => (
-              <a key={icon.alt} href="/#contact" aria-label={icon.alt}>
+              <Link key={icon.alt} href="/#contact" aria-label={icon.alt}>
                 <Image src={icon.src} alt="" width={icon.width} height={icon.height} />
-              </a>
+              </Link>
             ))}
           </div>
         </div>
