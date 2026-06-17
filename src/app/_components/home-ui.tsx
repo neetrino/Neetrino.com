@@ -77,7 +77,7 @@ export function HeroStatToneClass(tone: keyof typeof heroStatToneClasses): strin
 const footerLinkHrefs: Record<string, string> = {
   About: '/#about',
   Team: '/#about',
-  'Contact us': '/#contact',
+  'Contact us': '/contact',
   Portfolio: '/#portfolio',
   Services: '/services',
   Blog: '/#blog',

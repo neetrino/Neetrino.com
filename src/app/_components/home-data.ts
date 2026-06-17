@@ -29,7 +29,7 @@ export const navItems: NavItem[] = [
   { label: 'Services', href: '/services' },
   { label: 'Portfolio', href: '/#portfolio' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const moreNavItems: NavItem[] = [

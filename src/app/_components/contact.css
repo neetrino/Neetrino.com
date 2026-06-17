@@ -1,0 +1,306 @@
+/* Contact page built on the shared 1440px Neetrino canvas. */
+
+@font-face {
+  font-family: Megatrox;
+  src: url('/fonts/Megatrox.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.contact-page {
+  position: relative;
+  z-index: 12;
+  width: 1440px;
+  height: 1116px;
+  overflow: hidden;
+  background: #151515;
+  color: #fff;
+  font-family: var(--font-inter), Inter, sans-serif;
+}
+
+.contact-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 11%, rgb(71 61 255 / 0.52), transparent 42%),
+    radial-gradient(circle at 80% -3%, rgb(147 77 255 / 0.35), transparent 38%),
+    radial-gradient(circle at 86% 45%, rgb(56 135 255 / 0.2), transparent 34%),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05), transparent 62%);
+}
+
+.contact-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.3;
+  background-image:
+    linear-gradient(to right, rgb(156 163 175 / 0.38) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(156 163 175 / 0.38) 1px, transparent 1px);
+  background-size: 91.5px 101.4px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+}
+
+.contact-content {
+  position: relative;
+  z-index: 2;
+  width: 1060px;
+  padding-top: 118px;
+  margin-inline: auto;
+}
+
+.contact-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 518px);
+  gap: 22px;
+}
+
+.contact-card,
+.contact-office {
+  border: 1px solid rgb(255 255 255 / 0.15);
+  background: linear-gradient(135deg, rgb(48 47 85 / 0.65), rgb(30 29 49 / 0.78) 46%, rgb(23 23 27 / 0.92));
+  box-shadow: 0 18px 46px rgb(20 10 70 / 0.3);
+  contain: layout paint style;
+}
+
+.contact-card {
+  height: 382px;
+  padding: 26px 30px;
+  border-radius: 24px;
+}
+
+.contact-kicker {
+  display: inline-flex;
+  align-items: center;
+  width: 428px;
+  height: 28px;
+  padding-inline: 14px;
+  margin: 0;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.06);
+  color: rgb(255 255 255 / 0.85);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.contact-kicker::before {
+  content: '+';
+  margin-right: 9px;
+  color: rgb(255 255 255 / 0.72);
+  font-size: 13px;
+}
+
+.contact-title {
+  margin: 18px 0 0;
+  color: #fff;
+  font-family: Megatrox, var(--font-inter), sans-serif;
+  font-size: 46px;
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.contact-copy,
+.contact-card-copy {
+  color: rgb(255 255 255 / 0.78);
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.contact-copy {
+  max-width: 438px;
+  margin: 14px 0 0;
+  font-size: 14px;
+}
+
+.contact-methods {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding-inline: 16px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.04);
+  color: #fff;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.contact-method:hover,
+.contact-method:focus-visible {
+  border-color: #6c63ff;
+  background: rgb(71 61 255 / 0.18);
+  box-shadow: 0 0 18px rgb(71 61 255 / 0.28);
+  transform: translateY(-2px);
+}
+
+.contact-method-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgb(255 255 255 / 0.7);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-method-label svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.contact-method-value {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.contact-social {
+  margin-top: 16px;
+}
+
+.contact-social p {
+  margin: 0;
+  color: rgb(255 255 255 / 0.55);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.contact-social-list {
+  display: flex;
+  gap: 9px;
+  margin-top: 10px;
+}
+
+.contact-social-list a {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.06);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.contact-social-list svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+}
+
+.contact-social-list .contact-social-icon-outline {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.contact-social-list a:hover,
+.contact-social-list a:focus-visible {
+  border-color: #6c63ff;
+  background: #473dff;
+  box-shadow: 0 0 18px rgb(71 61 255 / 0.45);
+  transform: translateY(-3px);
+}
+
+.contact-card-title {
+  margin: 0;
+  color: rgb(255 255 255 / 0.9);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.contact-card-copy {
+  margin: 12px 0 0;
+  font-size: 14px;
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 12px;
+  margin-top: 20px;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 22px;
+  background: rgb(255 255 255 / 0.03);
+}
+
+.contact-form input,
+.contact-form textarea {
+  min-height: 30px;
+  font-size: 12px;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  background: rgb(255 255 255 / 0.08);
+  color: #fff;
+  font: inherit;
+  outline: none;
+}
+
+.contact-form input {
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.contact-form textarea {
+  grid-column: 1 / -1;
+  min-height: 70px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  resize: vertical;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgb(255 255 255 / 0.55);
+}
+
+.contact-form button {
+  width: max-content;
+  padding: 7px 16px;
+  border: 1px solid #756cff;
+  border-radius: 999px;
+  background: rgb(77 67 255 / 0.85);
+  color: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
