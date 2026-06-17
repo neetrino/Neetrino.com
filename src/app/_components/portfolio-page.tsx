@@ -3,7 +3,6 @@ import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
 import { NeetrinoPageShell } from './neetrino-page-shell';
 import { portfolioProjects, type PortfolioProject } from './portfolio-data';
 import './portfolio.css';
-import './services.css';
 
 const SERVICE_BACKGROUND_DECORATIONS = [
   'svc-deco-glow-1',
