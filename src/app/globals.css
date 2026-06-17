@@ -704,7 +704,7 @@ html {
   position: relative;
   width: 100%;
   min-height: var(--home-hero-height);
-  overflow: hidden;
+  overflow: visible;
   contain: layout style;
 }
 
@@ -1043,26 +1043,12 @@ html {
   }
 }
 
-/* Suppress expensive backdrop-filter re-rasterisation during scroll.
-   Both elements are large (full-width) — blurring them every scroll frame
-   saturates the GPU compositor. We swap to a static background during scroll
-   and restore smoothly once idle (180 ms debounce, matches SCROLL_IDLE_MS). */
-.home-page-scale-root[data-hero-scroll='scrolling'] .home-hero-lower-matte-band {
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-
-.home-page-scale-root[data-hero-scroll='scrolling'] .home-hero-bottom-panel-glass {
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-
-/* Smooth blur restore after scroll stops — avoids hard pop. */
+/* Keep lower hero glass/matte visually stable during scroll. */
 .home-hero-lower-matte-band,
 .home-hero-bottom-panel-glass {
-  transition: backdrop-filter 100ms ease;
+  transition: none;
   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-transition: -webkit-backdrop-filter 100ms ease;
+  -webkit-transition: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1188,6 +1174,8 @@ html {
   line-height: var(--home-hero-tagline-line-height);
   color: #fff;
   text-align: left;
+  animation: none;
+  transition: none;
 }
 
 .home-hero-tagline strong {
@@ -1301,7 +1289,7 @@ html {
   position: absolute;
   inset-inline: 0;
   top: 0;
-  z-index: 20;
+  z-index: 21;
   width: min(100%, 1440px);
   height: var(--home-hero-height);
   margin-inline: auto;
@@ -1309,6 +1297,8 @@ html {
   isolation: isolate;
   contain: layout style;
   transform: translateZ(0);
+  animation: none;
+  transition: none;
 }
 
 .home-hero-hand {
@@ -1319,28 +1309,22 @@ html {
   height: var(--home-hero-hand-height);
   overflow: visible;
   pointer-events: none;
+  animation: none;
+  transition: none;
 }
 
 .home-hero-hand-motion {
   position: absolute;
   inset: 0;
   transform-origin: var(--home-hero-hand-point-origin-x) var(--home-hero-hand-point-origin-y);
-  animation: home-hero-hand-point var(--home-hero-hand-point-duration) linear infinite;
-  animation-timing-function:
-    linear,
-    cubic-bezier(0.22, 1, 0.36, 1),
-    linear,
-    cubic-bezier(0.45, 0, 0.55, 1),
-    linear,
-    linear;
-  animation-play-state: var(--home-hero-play-state);
+  animation: none;
+  transition: none;
   backface-visibility: hidden;
   contain: layout style paint;
   transform: scaleY(-1) rotate(180deg) rotate(var(--home-hero-hand-point-rotate-rest))
     translate3d(var(--home-hero-hand-point-shift-x-rest), var(--home-hero-hand-point-shift-y-rest), 0);
 }
 
-.home-page-scale-root[data-hero-motion='running'] .home-hero-hand-motion,
 .home-page-scale-root[data-hero-motion='running'] .home-hero-robot-motion {
   will-change: transform;
 }

@@ -168,6 +168,8 @@
   border-radius: calc(38px * var(--home-ui-scale));
   overflow: hidden;
   contain: layout paint style;
+  content-visibility: auto;
+  contain-intrinsic-size: calc(369px * var(--home-ui-scale)) calc(463px * var(--home-ui-scale));
 }
 
 .svc-card-fill {
