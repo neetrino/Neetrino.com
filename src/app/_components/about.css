@@ -4,7 +4,7 @@
   position: relative;
   width: 1440px;
   height: 3890px;
-  overflow: hidden;
+  overflow: visible;
   background: #151515;
   color: #fff;
   font-family: var(--font-inter), Inter, sans-serif;
@@ -45,7 +45,30 @@
   top: -220px;
   left: 980px;
   z-index: 2;
-  background-image: url('/about/ellipse-28.svg');
+  width: 1047px;
+  height: 943.3px;
+  filter: blur(512.7px);
+  border-radius: 50%;
+  background-color: #70b9ee;
+}
+
+.about-glow-spectrum {
+  position: absolute;
+  top: 130px;
+  left: 96px;
+  z-index: 0;
+  width: 341.88px;
+  height: 645.92px;
+  border-radius: 999px;
+  mix-blend-mode: plus-lighter;
+  background:
+    radial-gradient(60% 35% at 49% 78%, rgb(255 255 255 / 0.96), transparent 75%),
+    radial-gradient(54% 28% at 50% 56%, rgb(255 154 95 / 0.92), transparent 80%),
+    radial-gradient(66% 30% at 50% 35%, rgb(122 190 255 / 0.88), transparent 82%),
+    linear-gradient(90deg, rgb(11 13 18 / 0.97), transparent 35%, transparent 65%, rgb(11 13 18 / 0.97)),
+    linear-gradient(180deg, #0b0d12, #0c1017 50%, #0a0d13);
+  filter: blur(36px);
+  opacity: 0.9;
 }
 
 .about-radial {
