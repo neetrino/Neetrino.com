@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import {
-  companyValues,
   impactStats,
   missionText,
   teamText,
@@ -52,31 +51,6 @@ function AboutWhyChoose(): React.JSX.Element {
   );
 }
 
-function AboutValues(): React.JSX.Element {
-  return (
-    <section className="about-values" aria-labelledby="about-values-title">
-      <ReflectTitle
-        className="about-title-values"
-        plain="THE VALUES THAT ALWAYS "
-        accent="DRIVE US"
-      />
-      <div className="about-values-line" aria-hidden>
-        <Image src="/about/values-line.webp" alt="" fill sizes="1273px" className="about-values-line-img" />
-      </div>
-      <div className="about-values-list">
-        {companyValues.map((value) => (
-          <div key={value.label} className="about-value-item">
-            <span className="about-value-icon" aria-hidden>
-              <Image src={value.icon} alt="" fill sizes="60px" className="about-value-icon-img" />
-            </span>
-            <span>{value.label}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function AboutCountries(): React.JSX.Element {
   return (
     <section className="about-countries" aria-labelledby="about-countries-title">
@@ -117,7 +91,6 @@ export function AboutContent(): React.JSX.Element {
     <>
       <AboutMissionVision />
       <AboutWhyChoose />
-      <AboutValues />
       <AboutCountries />
       <AboutTeam />
     </>

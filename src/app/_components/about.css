@@ -3,7 +3,7 @@
 .about-body {
   position: relative;
   width: 1440px;
-  height: 4380px;
+  height: 3890px;
   overflow: hidden;
   background: #151515;
   color: #fff;
@@ -103,13 +103,13 @@
 }
 
 .about-ray-4 {
-  top: 2740px;
+  top: 2250px;
   height: 490px;
   background-image: url('/about/ray-17418.svg');
 }
 
 .about-ray-5 {
-  top: 3780px;
+  top: 3290px;
   height: 560px;
   background-image: url('/about/ray-17416.svg');
 }
@@ -132,7 +132,7 @@
   left: 591px;
   z-index: 0;
   width: 206px;
-  height: 2450px;
+  height: 2135px;
   overflow: hidden;
   border: 1px solid rgb(255 255 255 / 0.12);
   border-radius: 151px;
@@ -411,7 +411,7 @@
   }
 
   to {
-    transform: translateY(2222px);
+    transform: translateY(1907px);
   }
 }
 
@@ -446,8 +446,6 @@
 .about-why-panel,
 .about-why-illustration,
 .about-why-features,
-.about-values-line,
-.about-values-list,
 .about-map,
 .about-impact-stats,
 .about-team-cta,
@@ -535,64 +533,10 @@
   color: #f5f5f5;
 }
 
-/* ---------- Values ---------- */
-
-.about-title-values {
-  top: 2308px;
-  left: 50%;
-  text-align: center;
-  transform: translateX(-50%);
-}
-
-.about-values-line {
-  position: absolute;
-  top: 2572px;
-  left: 84px;
-  width: 1273px;
-  height: 65px;
-}
-
-.about-values-line-img {
-  object-fit: fill;
-}
-
-.about-values-list {
-  position: absolute;
-  top: 2458px;
-  left: 199px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 58px;
-  align-items: center;
-  width: 1044px;
-}
-
-.about-value-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  color: #fff;
-  text-align: center;
-}
-
-.about-value-icon {
-  position: relative;
-  width: 60px;
-  height: 60px;
-}
-
-.about-value-icon-img {
-  object-fit: contain;
-}
-
 /* ---------- Countries / map ---------- */
 
 .about-title-countries {
-  top: 2798px;
+  top: 2308px;
   left: 50%;
   text-align: center;
   transform: translateX(-50%);
@@ -600,7 +544,7 @@
 
 .about-map {
   position: absolute;
-  top: 2958px;
+  top: 2468px;
   left: 222px;
   width: 987px;
   height: 525px;
@@ -612,7 +556,7 @@
 
 .about-impact-stats {
   position: absolute;
-  top: 3557px;
+  top: 3067px;
   left: 50%;
   display: flex;
   gap: 122px;
@@ -623,28 +567,28 @@
 /* ---------- Team ---------- */
 
 .about-title-team {
-  top: 3910px;
+  top: 3420px;
   left: 132px;
   width: 299px;
   text-align: center;
 }
 
 .about-copy-team {
-  top: 3996px;
+  top: 3506px;
   left: 133px;
   width: 558px;
 }
 
 .about-team-cta {
   position: absolute;
-  top: 4148px;
+  top: 3658px;
   left: 132px;
   z-index: 3;
 }
 
 .about-team-image {
   position: absolute;
-  top: 3598px;
+  top: 3108px;
   left: 790px;
   width: 570px;
   height: 850px;
@@ -727,21 +671,6 @@
     gap: 10px;
     padding-left: 18px;
     margin: 0;
-    font-weight: 700;
-  }
-
-  .about-mobile-values {
-    display: grid;
-    gap: 16px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .about-mobile-values li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
     font-weight: 700;
   }
 
