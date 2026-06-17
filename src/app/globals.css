@@ -232,15 +232,15 @@ html {
   transform: translateX(-50%);
 }
 
-.home-page-scale-root:not(:has(.home-hero)) {
+.home-page-scale-root[data-has-home-hero='false'] {
   --home-page-glow-top: 0;
 }
 
-.home-page-scale-root:has(.about-body) .home-page-center-beam {
+.home-page-scale-root[data-has-about-body='true'] .home-page-center-beam {
   display: none !important;
 }
 
-.home-page-scale-root:not(:has(.home-hero)) .home-services {
+.home-page-scale-root[data-has-home-hero='false'] .home-services {
   padding-top: calc(var(--home-header-clearance) + var(--home-services-section-padding-top));
 }
 

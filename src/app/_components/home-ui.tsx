@@ -78,7 +78,7 @@ const footerLinkHrefs: Record<string, string> = {
   About: '/#about',
   Team: '/#about',
   'Contact us': '/contact',
-  Portfolio: '/#portfolio',
+  Portfolio: '/portfolio',
   Services: '/services',
   Blog: '/#blog',
   Website: '/services',

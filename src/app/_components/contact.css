@@ -255,7 +255,7 @@
 
 .contact-form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   padding: 12px;
   margin-top: 20px;
@@ -266,6 +266,9 @@
 
 .contact-form input,
 .contact-form textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   min-height: 30px;
   font-size: 12px;
   border: 1px solid rgb(255 255 255 / 0.15);

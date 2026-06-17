@@ -5,6 +5,8 @@ import { useEffect, useRef, type ReactNode } from 'react';
 const SCROLL_IDLE_MS = 180;
 const HERO_INTERSECTION_ROOT_MARGIN = '80px 0px';
 const HERO_PLAY_STATE_VAR = '--home-hero-play-state';
+const HOME_HERO_SELECTOR = '.home-hero';
+const ABOUT_BODY_SELECTOR = '.about-body';
 
 type HomeScrollPerformanceProps = {
   children: ReactNode;
@@ -28,9 +30,19 @@ export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps):
       return;
     }
 
-    const hero = root.querySelector('.home-hero');
-    if (!(hero instanceof HTMLElement)) {
-      return;
+    const homeHero = root.querySelector(HOME_HERO_SELECTOR);
+    const hasHomeHero = homeHero instanceof HTMLElement;
+    root.dataset.hasHomeHero = hasHomeHero ? 'true' : 'false';
+    root.dataset.hasAboutBody = root.querySelector(ABOUT_BODY_SELECTOR) ? 'true' : 'false';
+
+    if (!hasHomeHero) {
+      root.style.setProperty(HERO_PLAY_STATE_VAR, 'paused');
+
+      return () => {
+        delete root.dataset.hasHomeHero;
+        delete root.dataset.hasAboutBody;
+        root.style.removeProperty(HERO_PLAY_STATE_VAR);
+      };
     }
 
     let scrollIdleTimer: ReturnType<typeof setTimeout> | undefined;
@@ -58,7 +70,7 @@ export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps):
       { rootMargin: HERO_INTERSECTION_ROOT_MARGIN, threshold: 0 },
     );
 
-    observer.observe(hero);
+    observer.observe(homeHero);
 
     const onScroll = (): void => {
       cancelAnimationFrame(scrollRaf);
@@ -86,6 +98,8 @@ export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps):
       clearTimeout(scrollIdleTimer);
       delete root.dataset.heroMotion;
       delete root.dataset.heroScroll;
+      delete root.dataset.hasHomeHero;
+      delete root.dataset.hasAboutBody;
       root.style.removeProperty(HERO_PLAY_STATE_VAR);
     };
   }, []);

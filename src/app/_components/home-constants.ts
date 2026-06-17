@@ -16,3 +16,4 @@ export const HOME_PORTFOLIO_SCROLL_DURATION_S = 45;
 
 /** Lower quality keeps decorative/home images fast without visible loss at display size. */
 export const HOME_IMAGE_QUALITY = 60;
+export const HOME_PORTFOLIO_IMAGE_QUALITY = 52;
