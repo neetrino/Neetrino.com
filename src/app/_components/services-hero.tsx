@@ -10,7 +10,6 @@ const DECORATIONS = [
   'svc-deco-arc-1',
   'svc-deco-arc-2',
   'svc-deco-grid-far',
-  'svc-deco-grid-near',
 ] as const;
 
 export function ServicesHero(): React.JSX.Element {

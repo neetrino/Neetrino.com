@@ -93,7 +93,7 @@ export function HomePortfolio(): React.JSX.Element {
       </HomePortfolioCarousel>
       <HomeContainer>
         <div className="home-section-cta">
-          <ExploreButton href="#about" label="Explore" />
+          <ExploreButton href="/portfolio" label="Explore" />
         </div>
       </HomeContainer>
     </section>

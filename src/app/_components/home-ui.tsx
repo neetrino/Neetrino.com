@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 type SectionHeadingProps = {
@@ -47,10 +48,10 @@ export function SectionHeading({
 
 export function ContinueButton({ href, label }: ActionButtonProps): React.JSX.Element {
   return (
-    <a href={href} className="home-btn home-btn-continue">
+    <Link href={href} className="home-btn home-btn-continue">
       <span>{label}</span>
       <Image src="/figma-home/safearea.svg" alt="" width={20} height={20} aria-hidden />
-    </a>
+    </Link>
   );
 }
 
@@ -58,10 +59,10 @@ export function ExploreButton({ href, label }: ActionButtonProps): React.JSX.Ele
   return (
     <span className="home-btn-explore-wrap">
       <span className="home-btn-explore-flare" aria-hidden />
-      <a href={href} className="home-btn home-btn-explore">
+      <Link href={href} className="home-btn home-btn-explore">
         <span className="home-btn-explore-label">{label}</span>
         <Image src="/figma-home/safearea1.svg" alt="" width={20} height={20} aria-hidden />
-      </a>
+      </Link>
     </span>
   );
 }

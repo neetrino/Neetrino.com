@@ -39,7 +39,7 @@ export function HomeAbout(): React.JSX.Element {
                 </p>
               ))}
             </div>
-            <ExploreButton href="#contact" label="Explore" />
+            <ExploreButton href="/contact" label="Explore" />
           </div>
           <HomeAboutVisual />
         </div>

@@ -39,13 +39,13 @@ export function HomeServices(): React.JSX.Element {
                 <h3>{service.title}</h3>
                 <div className="home-service-spacer" aria-hidden />
                 <p>{service.subtitle}</p>
-                <ContinueButton href="#contact" label="Continue" />
+                <ContinueButton href="/services" label="Continue" />
               </article>
             ))}
           </div>
         </div>
         <div className="home-section-cta">
-          <ExploreButton href="#portfolio" label="Explore" />
+          <ExploreButton href="/services" label="Explore" />
         </div>
       </HomeContainer>
     </section>
