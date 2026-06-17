@@ -7,6 +7,8 @@
   height: calc(1584px * var(--home-ui-scale));
   overflow: hidden;
   contain: layout paint style;
+  isolation: isolate;
+  transform: translate3d(0, 0, 0);
 }
 
 /* ---------------------------------------------------------------- Background */
@@ -17,6 +19,8 @@
   z-index: 0;
   pointer-events: none;
   contain: layout paint style;
+  isolation: isolate;
+  transform: translate3d(0, 0, 0);
 }
 
 .svc-deco {
@@ -24,6 +28,14 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
+  backface-visibility: hidden;
+  contain: layout paint style;
+  transform: translate3d(0, 0, 0);
+}
+
+.svc-page-glow {
+  contain: layout paint style;
+  transform: translate3d(-50%, 0, 0);
 }
 
 .svc-deco-glow-1 {
@@ -86,7 +98,7 @@
   height: calc(917.4px * var(--home-ui-scale));
   background-image: url('/services/beam-l.svg');
   opacity: 1;
-  transform: scaleX(-1);
+  transform: translate3d(0, 0, 0) scaleX(-1);
 }
 
 .svc-deco-beam-center {
@@ -156,8 +168,6 @@
   border-radius: calc(38px * var(--home-ui-scale));
   overflow: hidden;
   contain: layout paint style;
-  content-visibility: auto;
-  contain-intrinsic-size: calc(369px * var(--home-ui-scale)) calc(463px * var(--home-ui-scale));
 }
 
 .svc-card-fill {

@@ -1,0 +1,130 @@
+/* Portfolio page layout aligned to the live /portfolio experience. */
+
+@font-face {
+  font-family: Megatrox;
+  src: url('/fonts/Megatrox.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.portfolio-body {
+  --portfolio-grid-alpha: 0.08;
+  position: relative;
+  width: 1440px;
+  height: 1594px;
+  overflow: hidden;
+  padding: 152px 72px 108px;
+  isolation: isolate;
+  background-color: #151515;
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / var(--portfolio-grid-alpha)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / var(--portfolio-grid-alpha)) 1px, transparent 1px);
+  background-size: 91.5px 101.4px;
+  background-position: center;
+  color: #fff;
+  font-family: var(--font-inter), Inter, sans-serif;
+}
+
+.portfolio-page-glow {
+  contain: layout paint style;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.portfolio-intro {
+  position: relative;
+  z-index: 4;
+  width: min(960px, 100%);
+}
+
+.portfolio-heading {
+  margin: 0;
+  color: #fff;
+  font-family: Megatrox, var(--font-inter), sans-serif;
+  font-size: 90px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.8px;
+}
+
+.portfolio-description {
+  display: none;
+  margin: 18px 0 0;
+  max-width: 880px;
+  color: rgb(255 255 255 / 0.75);
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.portfolio-list {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: repeat(2, 631px);
+  gap: 53px 30px;
+  margin-top: 131px;
+}
+
+.portfolio-card {
+  overflow: hidden;
+  border: 0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.18);
+  contain: layout paint style;
+}
+
+.portfolio-card-media {
+  position: relative;
+  width: 631px;
+  height: 364px;
+}
+
+.portfolio-card-image {
+  object-fit: cover;
+  transition: transform 260ms ease;
+}
+
+.portfolio-card:hover .portfolio-card-image {
+  transform: scale(1.02);
+}
+
+@media (max-width: 899px) {
+  .portfolio-body {
+    --portfolio-grid-alpha: 0.04;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 132px 16px 72px;
+    background-color: #151515;
+  }
+
+  .portfolio-heading {
+    font-size: clamp(44px, 15vw, 72px);
+  }
+
+  .portfolio-description {
+    display: block;
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .portfolio-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .portfolio-card {
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: 24px;
+    background: #1a1a1a;
+  }
+
+  .portfolio-card-media {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+}
