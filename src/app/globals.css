@@ -1317,7 +1317,8 @@ html {
   position: absolute;
   inset: 0;
   transform-origin: var(--home-hero-hand-point-origin-x) var(--home-hero-hand-point-origin-y);
-  animation: none;
+  animation: home-hero-hand-point var(--home-hero-hand-point-duration) ease-in-out infinite;
+  animation-play-state: var(--home-hero-play-state);
   transition: none;
   backface-visibility: hidden;
   contain: layout style paint;
