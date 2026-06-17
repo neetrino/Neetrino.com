@@ -60,7 +60,7 @@
 
 .about-hero-streak {
   position: absolute;
-  top: 120px;
+  top: 170px;
   left: 168px;
   z-index: 3;
   width: 1318px;
@@ -76,7 +76,7 @@
   position: absolute;
   left: 50%;
   width: 1437px;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(1.2);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -85,7 +85,7 @@
 }
 
 .about-ray-1 {
-  top: 405px;
+  top: 455px;
   height: 405px;
   background-image: url('/about/hero-ray.svg');
 }
@@ -149,6 +149,21 @@
     0 0 28px rgb(57 86 148 / 0.12);
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
+}
+
+.about-beam::after {
+  content: '';
+  position: absolute;
+  right: -58px;
+  bottom: -46px;
+  left: -58px;
+  height: 560px;
+  background:
+    radial-gradient(ellipse 30% 22% at 50% 91%, rgb(255 255 255 / 0.75), transparent 64%),
+    radial-gradient(ellipse 42% 38% at 50% 78%, rgb(38 95 255 / 0.85), transparent 70%),
+    radial-gradient(ellipse 62% 55% at 50% 70%, rgb(12 34 108 / 0.92), transparent 76%);
+  mix-blend-mode: screen;
+  opacity: 0.95;
 }
 
 /* ---------- Shared text primitives ---------- */
