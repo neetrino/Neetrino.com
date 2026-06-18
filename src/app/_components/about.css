@@ -8,6 +8,7 @@
   background: #151515;
   color: #fff;
   font-family: var(--font-inter), Inter, sans-serif;
+  contain: layout style;
 }
 
 /* ---------- Decorative background layer ---------- */
@@ -18,6 +19,8 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  contain: layout style paint;
+  transform: translateZ(0);
 }
 
 .about-decor .home-page-glow {
@@ -32,6 +35,8 @@
   width: 1047px;
   height: 943px;
   background: center / contain no-repeat;
+  contain: layout paint style;
+  transform: translateZ(0);
 }
 
 .about-glow-blue-1 {
@@ -111,6 +116,7 @@
   background-size: 100% 100%;
   mix-blend-mode: screen;
   opacity: 0.85;
+  contain: layout paint style;
 }
 
 .about-ray-1 {
@@ -147,12 +153,17 @@
   position: absolute;
   top: 832px;
   left: 784px;
+  z-index: 1;
   width: 826px;
   height: 338px;
-  border-radius: 85px;
-  background: rgb(217 217 217 / 0.05);
+  overflow: hidden;
+  pointer-events: none;
+  background: rgb(217 217 217 / 0.1);
   -webkit-backdrop-filter: blur(37px);
   backdrop-filter: blur(37px);
+  clip-path: path(
+    'M826 160.482C826 113.748 788.272 75.7803 741.539 75.4838L367.509 73.1103C342.403 72.951 319.461 58.8693 307.953 36.5559C296.375 14.1056 273.229 0 247.969 0H85C38.0558 0 0 38.0558 0 85V253C0 299.944 38.0558 338 85 338H741C787.944 338 826 299.944 826 253V160.482Z'
+  );
 }
 
 .about-beam {
@@ -301,13 +312,15 @@
   z-index: 1;
   width: 1440px;
   height: 1240px;
+  contain: layout style;
+  isolation: isolate;
 }
 
 .about-robot {
   position: absolute;
   top: -142px;
   left: 742px;
-  z-index: -1;
+  z-index: 0;
   width: 748px;
   height: 1280px;
 }
@@ -316,6 +329,10 @@
   object-fit: contain;
   object-position: top center;
   transform: scaleX(-1);
+}
+
+.about-hero > :not(.about-robot):not(.about-frost) {
+  z-index: 2;
 }
 
 .about-headline {
@@ -643,84 +660,3 @@
   object-position: bottom center;
 }
 
-/* ---------- Mobile fallback ---------- */
-
-.about-mobile {
-  display: none;
-}
-
-@media (max-width: 899px) {
-  .about-body {
-    display: none;
-  }
-
-  .about-mobile {
-    display: block;
-    padding: 120px 20px 64px;
-    color: #fff;
-  }
-
-  .about-mobile-headline {
-    margin: 0 0 24px;
-    font-size: clamp(2rem, 11vw, 3rem);
-    font-weight: 400;
-    line-height: 1.05;
-  }
-
-  .about-mobile-headline em {
-    font-style: italic;
-    font-weight: 900;
-  }
-
-  .about-mobile-intro {
-    margin: 0 0 16px;
-    font-weight: 200;
-    line-height: 1.6;
-    color: rgb(255 255 255 / 0.82);
-  }
-
-  .about-mobile-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px 16px;
-    margin: 32px 0;
-  }
-
-  .about-mobile-section {
-    margin-top: 40px;
-  }
-
-  .about-mobile-section h2 {
-    margin: 0 0 12px;
-    font-size: 1.6rem;
-    font-style: italic;
-    font-weight: 900;
-  }
-
-  .about-mobile-section p {
-    margin: 0;
-    font-weight: 200;
-    line-height: 1.6;
-    color: rgb(255 255 255 / 0.82);
-  }
-
-  .about-mobile-why {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  .about-mobile-features {
-    display: grid;
-    gap: 10px;
-    padding-left: 18px;
-    margin: 0;
-    font-weight: 700;
-  }
-
-  .about-mobile-team {
-    width: 100%;
-    height: auto;
-    margin-bottom: 16px;
-  }
-}

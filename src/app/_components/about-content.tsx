@@ -14,7 +14,15 @@ function AboutMissionVision(): React.JSX.Element {
   return (
     <>
       <div className="about-cube" aria-hidden>
-        <Image src="/about/cube-transparent-v2.webp" alt="" fill sizes="205px" className="about-cube-img" />
+        <Image
+          src="/about/cube-transparent-v2.webp"
+          alt=""
+          fill
+          sizes="205px"
+          loading="lazy"
+          fetchPriority="low"
+          className="about-cube-img"
+        />
       </div>
       <ReflectTitle className="about-title-mission" plain="THE " accent="MISSION" />
       <p className="about-copy about-copy-mission">{missionText}</p>
@@ -36,7 +44,15 @@ function AboutWhyChoose(): React.JSX.Element {
       />
       {whyIllustrations.map((item) => (
         <div key={item.alt} className={`about-why-illustration ${item.className}`}>
-          <Image src={item.src} alt="" fill sizes="250px" loading="eager" className="about-why-img" />
+          <Image
+            src={item.src}
+            alt=""
+            fill
+            sizes="250px"
+            loading="lazy"
+            fetchPriority="low"
+            className="about-why-img"
+          />
         </div>
       ))}
       <div className="about-why-features">
@@ -60,7 +76,15 @@ function AboutCountries(): React.JSX.Element {
         accent="10 COUNTRIES"
       />
       <div className="about-map" aria-hidden>
-        <Image src="/about/world-map.webp" alt="" fill sizes="987px" className="about-map-img" />
+        <Image
+          src="/about/world-map.webp"
+          alt=""
+          fill
+          sizes="987px"
+          loading="lazy"
+          fetchPriority="low"
+          className="about-map-img"
+        />
       </div>
       <div className="about-impact-stats">
         {impactStats.map((stat) => (
@@ -80,7 +104,15 @@ function AboutTeam(): React.JSX.Element {
         <ExploreButton href="/services" label="Explore" />
       </div>
       <div className="about-team-image">
-        <Image src="/about/team-live.webp" alt="Neetrino team" fill sizes="663px" className="about-team-img" />
+        <Image
+          src="/about/team-live.webp"
+          alt="Neetrino team"
+          fill
+          sizes="663px"
+          loading="lazy"
+          fetchPriority="low"
+          className="about-team-img"
+        />
       </div>
     </section>
   );

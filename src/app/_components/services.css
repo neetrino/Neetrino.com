@@ -1,14 +1,22 @@
 /* Services page — 1:1 with Figma node 1:904. Built on the shared 1440 canvas. */
 
 .svc-hero {
+  --portfolio-grid-alpha: 0.08;
   position: relative;
   z-index: 12;
-  width: 100%;
+  width: 1440px;
   height: calc(1584px * var(--home-ui-scale));
   overflow: hidden;
   contain: layout paint style;
   isolation: isolate;
   transform: translate3d(0, 0, 0);
+  background-color: #151515;
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / var(--portfolio-grid-alpha)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / var(--portfolio-grid-alpha)) 1px, transparent 1px);
+  background-size: 91.5px 101.4px;
+  background-position: center;
+  color: #fff;
 }
 
 /* ---------------------------------------------------------------- Background */
@@ -386,8 +394,11 @@
 
 @media (max-width: 900px) {
   .svc-hero {
+    --portfolio-grid-alpha: 0.04;
+    width: 100%;
     height: auto;
     padding: calc(120px * var(--home-ui-scale)) 20px calc(48px * var(--home-ui-scale));
+    background-color: #151515;
   }
 
   .svc-bg {

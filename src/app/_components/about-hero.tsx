@@ -6,8 +6,18 @@ export function AboutHero(): React.JSX.Element {
   return (
     <section className="about-hero" aria-labelledby="about-title">
       <div className="about-robot" aria-hidden>
-        <Image src="/about/robot.webp" alt="" fill sizes="620px" priority className="about-robot-img" />
+        <Image
+          src="/about/robot.webp"
+          alt=""
+          fill
+          sizes="620px"
+          priority
+          fetchPriority="high"
+          className="about-robot-img"
+        />
       </div>
+
+      <div className="about-frost" aria-hidden />
 
       <h1 id="about-title" className="about-headline">
         <span className="about-headline-line about-headline-1">
@@ -28,6 +38,8 @@ export function AboutHero(): React.JSX.Element {
         alt=""
         width={1352}
         height={23}
+        loading="lazy"
+        fetchPriority="low"
         className="about-hero-line"
         aria-hidden
       />
