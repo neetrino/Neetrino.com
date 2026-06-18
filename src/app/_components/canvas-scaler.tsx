@@ -12,6 +12,8 @@ type CanvasScalerProps = {
   canvasHeight?: number;
   wrapClassName?: string;
   innerClassName?: string;
+  /** Minimum viewport width at which scaling is applied. Pass 0 to scale on all viewports including mobile. */
+  minWidth?: number;
 };
 
 function measureContentHeight(inner: HTMLElement, canvasHeight?: number): number {
@@ -36,6 +38,7 @@ export function CanvasScaler({
   canvasHeight,
   wrapClassName,
   innerClassName,
+  minWidth = HOME_DESKTOP_MIN_WIDTH,
 }: CanvasScalerProps): React.JSX.Element {
   const wrapRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -50,7 +53,7 @@ export function CanvasScaler({
 
     const scaleHost = wrap.parentElement ?? wrap;
 
-    const isDesktop = window.innerWidth >= HOME_DESKTOP_MIN_WIDTH;
+    const isDesktop = window.innerWidth >= minWidth;
     if (!isDesktop) {
       if (lastAppliedRef.current.scale !== 0 || lastAppliedRef.current.height !== 0) {
         inner.style.transform = '';
@@ -76,7 +79,7 @@ export function CanvasScaler({
     wrap.style.height = `${scaledHeight}px`;
     scaleHost.style.setProperty('--home-canvas-scale', String(scale));
     lastAppliedRef.current = { scale, height: scaledHeight };
-  }, [canvasHeight, canvasWidth]);
+  }, [canvasHeight, canvasWidth, minWidth]);
 
   useLayoutEffect(() => {
     let frame = 0;
@@ -114,6 +117,7 @@ export function CanvasScaler({
       ref={wrapRef}
       className={`neetrino-canvas-wrap overflow-hidden${wrapClassName ? ` ${wrapClassName}` : ''}`}
       data-neetrino-canvas
+      data-scale-mobile={minWidth === 0 ? 'true' : undefined}
     >
       <div
         ref={innerRef}
