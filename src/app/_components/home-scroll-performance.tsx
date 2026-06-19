@@ -5,7 +5,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 const HERO_INTERSECTION_ROOT_MARGIN = '80px 0px';
 const HERO_PLAY_STATE_VAR = '--home-hero-play-state';
 const HOME_HERO_SELECTOR = '.home-hero';
-const ABOUT_BODY_SELECTOR = '.about-body';
+const ABOUT_BODY_SELECTOR = '.about-body, .about-mobile-page, .about-mobile-capsule-track';
 
 type HomeScrollPerformanceProps = {
   children: ReactNode;

@@ -1762,6 +1762,14 @@ html {
   object-fit: cover;
 }
 
+.home-footer-bg-team {
+  display: none;
+}
+
+.home-footer-bg-glow {
+  display: none;
+}
+
 .home-footer-grid {
   position: relative;
   display: flex;
