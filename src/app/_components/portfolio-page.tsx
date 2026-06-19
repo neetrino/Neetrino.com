@@ -13,9 +13,13 @@ const SERVICE_BACKGROUND_DECORATIONS = [
   'svc-deco-arc-1',
   'svc-deco-arc-2',
   'svc-deco-grid-far',
+  'svc-deco-grid-near',
 ] as const;
 
 const PORTFOLIO_RAYS = ['portfolio-ray--mid', 'portfolio-ray--end'] as const;
+
+const PORTFOLIO_PAGES = [1, 2, 3, 4, 5] as const;
+const ACTIVE_PORTFOLIO_PAGE = 3;
 
 function PortfolioCard({
   project,
@@ -27,7 +31,7 @@ function PortfolioCard({
   const isLcpCard = index === 0;
 
   return (
-    <article className="portfolio-card" aria-label={project.title}>
+    <article className={`portfolio-card portfolio-card--${project.variant ?? 'default'}`} aria-label={project.title}>
       <div className="portfolio-card-media">
         <Image
           src={project.image}
@@ -41,8 +45,52 @@ function PortfolioCard({
           decoding="async"
           className="portfolio-card-image"
         />
+        {project.variant === 'zeppelin' ? (
+          <>
+            <Image
+              src="/portfolio/cat-logo.png"
+              alt=""
+              width={114}
+              height={61}
+              loading="lazy"
+              fetchPriority="low"
+              decoding="async"
+              className="portfolio-card-logo portfolio-card-logo--cat"
+            />
+            <span className="portfolio-card-title portfolio-card-title--zeppelin">ZEPPELIN</span>
+          </>
+        ) : null}
+        <span className="portfolio-card-action" aria-hidden>
+          <span className="portfolio-card-action-arrow" />
+        </span>
       </div>
     </article>
+  );
+}
+
+function PortfolioPagination(): React.JSX.Element {
+  return (
+    <nav className="portfolio-pagination" aria-label="Portfolio pagination">
+      <span className="portfolio-pagination-item portfolio-pagination-arrow" aria-hidden>
+        ‹
+      </span>
+      {PORTFOLIO_PAGES.map((page) => (
+        <span
+          key={page}
+          className={
+            page === ACTIVE_PORTFOLIO_PAGE
+              ? 'portfolio-pagination-item portfolio-pagination-item--active'
+              : 'portfolio-pagination-item'
+          }
+          aria-current={page === ACTIVE_PORTFOLIO_PAGE ? 'page' : undefined}
+        >
+          {page}
+        </span>
+      ))}
+      <span className="portfolio-pagination-item portfolio-pagination-arrow" aria-hidden>
+        ›
+      </span>
+    </nav>
   );
 }
 
@@ -75,6 +123,7 @@ export function PortfolioPage(): React.JSX.Element {
             <PortfolioCard key={project.title} project={project} index={index} />
           ))}
         </div>
+        <PortfolioPagination />
       </section>
       <div className="portfolio-footer-ray-wrap" aria-hidden>
         <span className="portfolio-ray portfolio-ray--footer" />
