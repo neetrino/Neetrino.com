@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
 import { NeetrinoPageShell } from './neetrino-page-shell';
-import { PORTFOLIO_CANVAS_HEIGHT } from './portfolio-constants';
+import { PORTFOLIO_CANVAS_HEIGHT, PORTFOLIO_LCP_CARD_COUNT } from './portfolio-constants';
 import { portfolioProjects, type PortfolioProject } from './portfolio-data';
 import './portfolio.css';
 
@@ -29,7 +29,7 @@ function PortfolioCard({
   project: PortfolioProject;
   index: number;
 }): React.JSX.Element {
-  const isLcpCard = index === 0;
+  const isAboveFold = index < PORTFOLIO_LCP_CARD_COUNT;
 
   return (
     <article className={`portfolio-card portfolio-card--${project.variant ?? 'default'}`} aria-label={project.title}>
@@ -40,9 +40,9 @@ function PortfolioCard({
           fill
           sizes="(max-width: 899px) 50vw, (max-width: 1440px) 44vw, 631px"
           quality={HOME_PORTFOLIO_IMAGE_QUALITY}
-          priority={isLcpCard}
-          loading={isLcpCard ? 'eager' : 'lazy'}
-          fetchPriority={isLcpCard ? 'high' : 'low'}
+          priority={isAboveFold}
+          loading={isAboveFold ? 'eager' : 'lazy'}
+          fetchPriority={isAboveFold ? 'high' : 'low'}
           decoding="async"
           className="portfolio-card-image"
         />
