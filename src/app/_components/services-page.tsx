@@ -7,6 +7,9 @@ export function ServicesPage(): React.JSX.Element {
     <NeetrinoPageShell mainId="services-top" srOnlyTitle="Neetrino Services">
       <div className="home-page-glow svc-page-glow" aria-hidden />
       <ServicesHero />
+      <div className="svc-footer-ray-wrap" aria-hidden>
+        <span className="svc-ray svc-ray--footer" />
+      </div>
     </NeetrinoPageShell>
   );
 }

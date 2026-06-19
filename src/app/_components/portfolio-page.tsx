@@ -76,6 +76,9 @@ export function PortfolioPage(): React.JSX.Element {
           ))}
         </div>
       </section>
+      <div className="portfolio-footer-ray-wrap" aria-hidden>
+        <span className="portfolio-ray portfolio-ray--footer" />
+      </div>
     </NeetrinoPageShell>
   );
 }

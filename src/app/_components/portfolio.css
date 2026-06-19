@@ -13,6 +13,7 @@
   --portfolio-ray-width: 1437px;
   --portfolio-ray-mid-height: 405px;
   --portfolio-ray-end-height: 490px;
+  --portfolio-ray-footer-height: 560px;
   --portfolio-ray-end-offset: 72px;
   --portfolio-ray-scale: 1.2;
   position: relative;
@@ -181,6 +182,25 @@
   transform: translate3d(-50%, 0, 0) scale(var(--portfolio-ray-scale));
 }
 
+.portfolio-footer-ray-wrap {
+  --portfolio-ray-width: 1437px;
+  --portfolio-ray-scale: 1.2;
+  --portfolio-ray-footer-height: 560px;
+  position: relative;
+  z-index: 3;
+  width: 1440px;
+  height: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.portfolio-ray--footer {
+  top: 0;
+  height: var(--portfolio-ray-footer-height);
+  background-image: url('/about/ray-17416.svg');
+  transform: translate3d(-50%, -50%, 0) scale(var(--portfolio-ray-scale));
+}
+
 .portfolio-intro {
   position: relative;
   z-index: 4;
@@ -281,6 +301,11 @@
   .portfolio-ray {
     width: 100vw;
     max-width: var(--portfolio-ray-width);
+  }
+
+  .portfolio-footer-ray-wrap {
+    width: 100%;
+    --portfolio-ray-scale: 1;
   }
 
   .portfolio-heading {

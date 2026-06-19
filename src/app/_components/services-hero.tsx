@@ -12,12 +12,19 @@ const SERVICES_BACKGROUND_DECORATIONS = [
   'svc-deco-grid-far',
 ] as const;
 
+const SERVICE_RAYS = ['svc-ray--mid', 'svc-ray--end'] as const;
+
 export function ServicesHero(): React.JSX.Element {
   return (
     <section className="svc-hero">
       <div className="svc-bg" aria-hidden>
         {SERVICES_BACKGROUND_DECORATIONS.map((name) => (
           <span key={name} className={`svc-deco ${name}`} />
+        ))}
+      </div>
+      <div className="svc-rays" aria-hidden>
+        {SERVICE_RAYS.map((name) => (
+          <span key={name} className={`svc-ray ${name}`} />
         ))}
       </div>
       <Image
