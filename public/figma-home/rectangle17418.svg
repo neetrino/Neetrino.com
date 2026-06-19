@@ -1,0 +1,18 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 738 448.436" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Rectangle 17418" filter="url(#filter0_f_0_54)">
+<path d="M145 202.207C145 159.784 190.337 132.766 227.649 152.955L298.542 191.313C306.727 195.741 315.886 198.06 325.191 198.06H408.91C418.018 198.06 426.989 195.838 435.045 191.588L510.865 151.578C548.158 131.899 593 158.938 593 201.105V247.341C593 288.552 549.99 315.646 512.82 297.852L434.246 260.237C426.697 256.623 418.434 254.748 410.065 254.748H324.015C315.461 254.748 307.02 256.708 299.34 260.477L225.676 296.636C188.467 314.9 145 287.815 145 246.365V202.207Z" fill="url(#paint0_radial_0_54)"/>
+<path d="M505.965 142.291C550.25 118.923 603.5 151.032 603.5 201.105V247.341C603.5 296.278 552.426 328.453 508.286 307.323L429.712 269.707C423.579 266.771 416.865 265.247 410.065 265.247H324.016C317.065 265.247 310.206 266.84 303.967 269.903L230.302 306.062C186.116 327.75 134.5 295.587 134.5 246.366V202.207C134.5 151.829 188.337 119.747 232.646 143.72L303.539 182.078C310.189 185.676 317.631 187.56 325.191 187.56H408.909C416.31 187.56 423.599 185.755 430.145 182.301L505.965 142.291Z" stroke="var(--stroke-0, #2E2BFF)" stroke-width="21"/>
+</g>
+<defs>
+<filter id="filter0_f_0_54" x="0" y="2.86102e-06" width="738" height="448.436" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="62" result="effect1_foregroundBlur_0_54"/>
+</filter>
+<radialGradient id="paint0_radial_0_54" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(369 222.236) rotate(90) scale(114 224)">
+<stop offset="0.394231" stop-color="#3D8BFF"/>
+<stop offset="0.653846" stop-color="#2C80FF"/>
+<stop offset="1" stop-color="#0051FF"/>
+</radialGradient>
+</defs>
+</svg>

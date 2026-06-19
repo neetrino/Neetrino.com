@@ -1,72 +1,31 @@
-import Image from 'next/image';
-import {
-  heroHeadline,
-  heroIntroLeft,
-  heroIntroRight,
-  impactStats,
-  missionText,
-  teamText,
-  visionText,
-  whyFeatures,
-  whyIllustrations,
-} from './about-data';
-import { GradientStat } from './about-ui';
+import { AboutMobileBackground } from './about-mobile-background';
+import { AboutMobileCapsule } from './about-mobile-capsule';
+import { AboutMobileCountries, AboutMobileTeam } from './about-mobile-countries-team';
+import { AboutMobileHero } from './about-mobile-hero';
+import { AboutMobileLead } from './about-mobile-lead';
+import { AboutMobileMissionVision } from './about-mobile-mission-vision';
+import { AboutMobileWhy } from './about-mobile-why';
+import './about-mobile.css';
 
-const sections = [
-  { title: 'The Mission', body: missionText },
-  { title: 'The Vision', body: visionText },
-] as const;
-
+/** Mobile about page — flow layout matching neetrino.com/about-us. */
 export function AboutMobile(): React.JSX.Element {
   return (
     <div className="about-mobile">
-      <h1 className="about-mobile-headline">
-        {heroHeadline.line1Plain} <em>{heroHeadline.line1Accent}</em> {heroHeadline.line2}{' '}
-        {heroHeadline.line3} <em>{heroHeadline.line4}</em>
-      </h1>
-      <p className="about-mobile-intro">{heroIntroRight}</p>
-      <p className="about-mobile-intro">{heroIntroLeft}</p>
+      <AboutMobileBackground />
 
-      <div className="about-mobile-stats">
-        {impactStats.map((stat) => (
-          <GradientStat key={stat.label} {...stat} />
-        ))}
-      </div>
-
-      {sections.map((section) => (
-        <section key={section.title} className="about-mobile-section">
-          <h2>{section.title}</h2>
-          <p>{section.body}</p>
-        </section>
-      ))}
-
-      <section className="about-mobile-section">
-        <h2>Why choose us?</h2>
-        <div className="about-mobile-why">
-          {whyIllustrations.map((item) => (
-            <Image key={item.alt} src={item.src} alt={item.alt} width={96} height={96} />
-          ))}
+      <div className="about-mobile-page">
+        <div className="about-mobile-container">
+          <AboutMobileHero />
+          <AboutMobileLead />
+          <div className="about-mobile-capsule-track">
+            <AboutMobileCapsule />
+            <AboutMobileMissionVision />
+            <AboutMobileWhy />
+            <AboutMobileCountries />
+          </div>
+          <AboutMobileTeam />
         </div>
-        <ul className="about-mobile-features">
-          {whyFeatures.map((feature) => (
-            <li key={feature.lead}>
-              {feature.lead} {feature.rest}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="about-mobile-section">
-        <h2>Meet our team</h2>
-        <Image
-          src="/about/team-live.webp"
-          alt="Neetrino team"
-          width={663}
-          height={988}
-          className="about-mobile-team"
-        />
-        <p>{teamText}</p>
-      </section>
+      </div>
     </div>
   );
 }

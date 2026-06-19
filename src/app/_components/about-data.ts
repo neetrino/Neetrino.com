@@ -32,6 +32,36 @@ export const heroIntroRight =
 export const heroIntroLeft =
   'We specialize in website development, AI and bot solutions, CRM system integration, mobile app development, as well as SEO and SMM optimization—delivering a comprehensive digital presence for your business.';
 
+/** Combined hero intro with manual line breaks for the mobile flow layout. */
+export const heroIntroMobile = `${heroIntroRight}
+
+${heroIntroLeft}`;
+
+/** Mission copy with manual line breaks for the mobile flow layout. */
+export const missionTextMobile = `Our goal is to deliver fast, 
+affordable, and high-quality 
+digital solutions, 
+empowering businesses to 
+effortlessly build and 
+expand their online 
+presence, no matter how 
+complex the project.`;
+
+/** Vision copy with manual line breaks for the mobile flow layout. */
+export const visionTextMobile = `We envision a world 
+where businesses of all 
+sizes can effortlessly 
+establish a strong digital 
+presence using our fast,
+ cutting-edge 
+technological solutions. 
+Our aim is to lead the 
+transformation of website 
+and app development, 
+making these tools 
+accessible to everyone, 
+everywhere.`;
+
 export const heroParagraph = [
   { text: 'Neetrino', bold: true },
   { text: ' is the first company to', bold: false },

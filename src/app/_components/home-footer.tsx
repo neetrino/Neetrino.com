@@ -14,6 +14,30 @@ export function HomeFooter(): React.JSX.Element {
           sizes="100vw"
           className="home-footer-bg-shape"
         />
+        <div className="home-footer-bg-glow">
+          <div className="home-footer-bg-glow-expand">
+            <Image
+              src="/about/mobile-bg/ellipse-31.svg"
+              alt=""
+              fill
+              sizes="1190px"
+              loading="lazy"
+              fetchPriority="low"
+              className="home-footer-bg-glow-img"
+            />
+          </div>
+        </div>
+        <div className="home-footer-bg-team">
+          <Image
+            src="/about/mobile-bg/team-bg.png"
+            alt=""
+            fill
+            sizes="996px"
+            loading="lazy"
+            fetchPriority="low"
+            className="home-footer-bg-team-img"
+          />
+        </div>
       </div>
       <HomeContainer>
         <div className="home-footer-grid">

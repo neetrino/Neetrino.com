@@ -1,0 +1,43 @@
+/* Shared mobile footer visuals (from /about design). */
+
+@media (max-width: 899px) {
+  .home-page .home-footer-bg-shape {
+    display: none;
+  }
+
+  .home-page .home-footer-bg-glow {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 266px);
+    width: 730px;
+    height: 1081px;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .home-page .home-footer-bg-glow-expand {
+    position: absolute;
+    inset: -21.28% -31.51%;
+  }
+
+  .home-page .home-footer-bg-glow-img {
+    object-fit: fill;
+  }
+
+  .home-page .home-footer-bg-team {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 43px;
+    width: 996px;
+    height: 1773px;
+    mix-blend-mode: hard-light;
+    pointer-events: none;
+  }
+
+  .home-page .home-footer-bg-team-img {
+    object-fit: cover;
+    object-position: top center;
+  }
+}

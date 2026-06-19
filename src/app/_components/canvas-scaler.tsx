@@ -112,6 +112,14 @@ export function CanvasScaler({
     };
   }, [updateScale]);
 
+  const innerStyle =
+    minWidth === 0 || canvasHeight !== undefined
+      ? {
+          ...(minWidth === 0 ? { width: canvasWidth } : null),
+          ...(canvasHeight !== undefined ? { minHeight: canvasHeight } : null),
+        }
+      : undefined;
+
   return (
     <div
       ref={wrapRef}
@@ -122,7 +130,7 @@ export function CanvasScaler({
       <div
         ref={innerRef}
         className={`neetrino-canvas-inner${innerClassName ? ` ${innerClassName}` : ''}`}
-        style={canvasHeight !== undefined ? { minHeight: canvasHeight } : undefined}
+        style={innerStyle}
       >
         {children}
       </div>

@@ -4,6 +4,9 @@ import { HomeFooter } from './home-footer';
 import { HomeHeader } from './home-header';
 import { HomeScrollPerformance } from './home-scroll-performance';
 import { HomeSmoothAnchorScroll } from './home-smooth-anchor-scroll';
+import { MobileHeader } from './mobile-header';
+import './mobile-footer.css';
+import './mobile-header.css';
 
 type NeetrinoPageShellProps = {
   children: ReactNode;
@@ -25,6 +28,7 @@ export function NeetrinoPageShell({
       <HomeSmoothAnchorScroll />
       <HomeScrollPerformance>
         <HomeHeader />
+        <MobileHeader />
         <CanvasScaler wrapClassName="neetrino-canvas-wrap--page" minWidth={scaleOnMobile ? 0 : undefined}>
           <h1 className="sr-only">{srOnlyTitle}</h1>
           {children}
