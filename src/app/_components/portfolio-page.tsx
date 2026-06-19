@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
 import { NeetrinoPageShell } from './neetrino-page-shell';
+import { PORTFOLIO_CANVAS_HEIGHT } from './portfolio-constants';
 import { portfolioProjects, type PortfolioProject } from './portfolio-data';
 import './portfolio.css';
 
@@ -96,18 +97,24 @@ function PortfolioPagination(): React.JSX.Element {
 
 export function PortfolioPage(): React.JSX.Element {
   return (
-    <NeetrinoPageShell mainId="portfolio-top" srOnlyTitle="Neetrino Portfolio">
-      <div className="home-page-glow portfolio-page-glow" aria-hidden />
+    <NeetrinoPageShell
+      mainId="portfolio-top"
+      srOnlyTitle="Neetrino Portfolio"
+      canvasHeight={PORTFOLIO_CANVAS_HEIGHT}
+    >
       <section className="portfolio-body" aria-labelledby="portfolio-heading">
-        <div className="svc-bg" aria-hidden>
-          {SERVICE_BACKGROUND_DECORATIONS.map((name) => (
-            <span key={name} className={`svc-deco ${name}`} />
-          ))}
-        </div>
-        <div className="portfolio-rays" aria-hidden>
-          {PORTFOLIO_RAYS.map((name) => (
-            <span key={name} className={`portfolio-ray ${name}`} />
-          ))}
+        <div className="portfolio-decor" aria-hidden>
+          <div className="home-page-glow portfolio-page-glow" />
+          <div className="svc-bg">
+            {SERVICE_BACKGROUND_DECORATIONS.map((name) => (
+              <span key={name} className={`svc-deco ${name}`} />
+            ))}
+          </div>
+          <div className="portfolio-rays">
+            {PORTFOLIO_RAYS.map((name) => (
+              <span key={name} className={`portfolio-ray ${name}`} />
+            ))}
+          </div>
         </div>
         <header className="portfolio-intro">
           <h2 id="portfolio-heading" className="portfolio-heading">

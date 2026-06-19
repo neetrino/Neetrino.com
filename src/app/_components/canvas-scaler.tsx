@@ -113,9 +113,9 @@ export function CanvasScaler({
   }, [updateScale]);
 
   const innerStyle =
-    minWidth === 0 || canvasHeight !== undefined
+    minWidth === 0
       ? {
-          ...(minWidth === 0 ? { width: canvasWidth } : null),
+          width: canvasWidth,
           ...(canvasHeight !== undefined ? { minHeight: canvasHeight } : null),
         }
       : undefined;

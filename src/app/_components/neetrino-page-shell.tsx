@@ -14,6 +14,8 @@ type NeetrinoPageShellProps = {
   srOnlyTitle: string;
   /** Scale the canvas on all viewports including mobile (shows the same layout as desktop, scaled). */
   scaleOnMobile?: boolean;
+  /** Locks scaled canvas height to avoid scroll jumps when footer assets finish loading. */
+  canvasHeight?: number;
 };
 
 /** Shared page chrome: header, scaled canvas, and footer used across all marketing pages. */
@@ -22,6 +24,7 @@ export function NeetrinoPageShell({
   mainId,
   srOnlyTitle,
   scaleOnMobile,
+  canvasHeight,
 }: NeetrinoPageShellProps): React.JSX.Element {
   return (
     <main className="home-page" id={mainId}>
@@ -29,7 +32,11 @@ export function NeetrinoPageShell({
       <HomeScrollPerformance>
         <HomeHeader />
         <MobileHeader />
-        <CanvasScaler wrapClassName="neetrino-canvas-wrap--page" minWidth={scaleOnMobile ? 0 : undefined}>
+        <CanvasScaler
+          wrapClassName="neetrino-canvas-wrap--page"
+          minWidth={scaleOnMobile ? 0 : undefined}
+          canvasHeight={canvasHeight}
+        >
           <h1 className="sr-only">{srOnlyTitle}</h1>
           {children}
           <HomeFooter />

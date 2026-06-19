@@ -9,8 +9,6 @@
 }
 
 .portfolio-body {
-  --portfolio-grid-alpha: 0.22;
-  --portfolio-grid-line-width: 1.5px;
   --portfolio-ray-width: 1437px;
   --portfolio-ray-mid-height: 405px;
   --portfolio-ray-end-height: 490px;
@@ -23,23 +21,30 @@
   overflow: hidden;
   padding: 152px 72px 0;
   isolation: isolate;
+  contain: layout style;
+  transform: translate3d(0, 0, 0);
   background-color: var(--portfolio-base-bg);
   background-image:
     radial-gradient(ellipse 62% 48% at 62% 16%, rgb(56 176 255 / 0.54) 0%, transparent 66%),
-    radial-gradient(ellipse 46% 38% at 14% 24%, rgb(32 158 255 / 0.34) 0%, transparent 60%),
-    linear-gradient(to right, rgb(168 230 255 / var(--portfolio-grid-alpha)) var(--portfolio-grid-line-width), transparent var(--portfolio-grid-line-width)),
-    linear-gradient(to bottom, rgb(168 230 255 / var(--portfolio-grid-alpha)) var(--portfolio-grid-line-width), transparent var(--portfolio-grid-line-width));
-  background-size:
-    100% 100%,
-    100% 100%,
-    91.5px 101.4px,
-    91.5px 101.4px;
+    radial-gradient(ellipse 46% 38% at 14% 24%, rgb(32 158 255 / 0.34) 0%, transparent 60%);
+  background-size: 100% 100%, 100% 100%;
   background-position: center;
   color: #fff;
   font-family: var(--font-inter), Inter, sans-serif;
 }
 
-.portfolio-body::before {
+.portfolio-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  contain: layout style paint;
+  transform: translate3d(0, 0, 0);
+}
+
+.portfolio-decor::after {
   position: absolute;
   inset: 0;
   z-index: 3;
@@ -55,10 +60,10 @@
   background: var(--portfolio-base-bg);
 }
 
-.neetrino-canvas-inner:has(.portfolio-body) .portfolio-page-glow {
+.portfolio-decor .portfolio-page-glow {
   top: 0;
   bottom: auto;
-  height: 2226px;
+  height: 100%;
   opacity: 0.96;
   mix-blend-mode: plus-lighter;
   background-image:
@@ -85,7 +90,7 @@
   transform: translate3d(-50%, 0, 0);
 }
 
-.svc-bg {
+.portfolio-decor .svc-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -201,7 +206,8 @@
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  contain: layout paint style;
+  contain: layout style paint;
+  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-ray {
@@ -253,6 +259,7 @@
   position: relative;
   z-index: 4;
   width: 100%;
+  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-heading {
@@ -282,6 +289,7 @@
   gap: 40px 20px;
   width: 1295px;
   margin-top: 70px;
+  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-card {
@@ -292,6 +300,8 @@
   background: #fff;
   box-shadow: 0 24px 70px rgb(0 0 0 / 0.18);
   contain: layout paint style;
+  content-visibility: auto;
+  contain-intrinsic-size: 631px 364px;
 }
 
 .portfolio-card-media {
@@ -390,7 +400,7 @@
   color: #4e5d78;
   font-family: Poppins, var(--font-inter), sans-serif;
   font-size: 14px;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
 }
 
 .portfolio-pagination-item {
@@ -450,19 +460,10 @@
     overflow: hidden;
   }
 
-  .neetrino-canvas-inner:has(.portfolio-body) .portfolio-page-glow {
+  .portfolio-decor {
     top: 0;
+    right: auto;
     bottom: auto;
-    width: 1722px;
-    height: 2226px;
-    opacity: 0.92;
-    mix-blend-mode: plus-lighter;
-    transform: translate3d(-50%, 0, 0) scale(var(--portfolio-mobile-bg-scale));
-    transform-origin: top center;
-  }
-
-  .portfolio-body .svc-bg {
-    display: block;
     left: 50%;
     width: 1440px;
     height: 2226px;
@@ -470,8 +471,24 @@
     transform-origin: top center;
   }
 
+  .portfolio-decor .portfolio-page-glow {
+    width: 1722px;
+    height: 100%;
+    opacity: 0.92;
+    mix-blend-mode: plus-lighter;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  .portfolio-decor .svc-bg {
+    display: block;
+    inset: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+  }
+
   .portfolio-body {
-    --portfolio-grid-alpha: 0.18;
     --portfolio-ray-scale: 1;
     --portfolio-ray-end-offset: 48px;
   }
@@ -508,6 +525,7 @@
     border: 1px solid rgb(255 255 255 / 0.12);
     border-radius: 16px;
     background: #1a1a1a;
+    contain-intrinsic-size: auto 280px;
   }
 
   .portfolio-card-media {
