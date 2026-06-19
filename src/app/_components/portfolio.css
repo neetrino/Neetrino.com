@@ -10,6 +10,11 @@
 
 .portfolio-body {
   --portfolio-grid-alpha: 0.08;
+  --portfolio-ray-width: 1437px;
+  --portfolio-ray-mid-height: 405px;
+  --portfolio-ray-end-height: 490px;
+  --portfolio-ray-end-offset: 72px;
+  --portfolio-ray-scale: 1.2;
   position: relative;
   width: 1440px;
   height: 1594px;
@@ -142,6 +147,40 @@
   opacity: 1;
 }
 
+.portfolio-rays {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  contain: layout paint style;
+}
+
+.portfolio-ray {
+  position: absolute;
+  left: 50%;
+  width: var(--portfolio-ray-width);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  contain: layout paint style;
+}
+
+.portfolio-ray--mid {
+  top: 50%;
+  height: var(--portfolio-ray-mid-height);
+  background-image: url('/about/ray-17415.svg');
+  transform: translate3d(-50%, -50%, 0) scale(var(--portfolio-ray-scale));
+}
+
+.portfolio-ray--end {
+  bottom: var(--portfolio-ray-end-offset);
+  height: var(--portfolio-ray-end-height);
+  background-image: url('/about/ray-17418.svg');
+  transform: translate3d(-50%, 0, 0) scale(var(--portfolio-ray-scale));
+}
+
 .portfolio-intro {
   position: relative;
   z-index: 4;
@@ -200,14 +239,48 @@
   transform: scale(1.02);
 }
 
-@media (max-width: 899px) {
+@media (max-width: 900px) {
+  .neetrino-canvas-inner:has(.portfolio-body) {
+    /* Unitless ratio — required for transform scale(). */
+    --portfolio-mobile-bg-scale: calc(100vw / var(--home-design-width) / 1px);
+  }
+
   .portfolio-body {
-    --portfolio-grid-alpha: 0.04;
     width: 100%;
     height: auto;
     min-height: 100vh;
     padding: 132px 16px 72px;
     background-color: #151515;
+    overflow: hidden;
+  }
+
+  .neetrino-canvas-inner:has(.portfolio-body) .portfolio-page-glow {
+    top: 0;
+    bottom: auto;
+    width: 1722px;
+    height: 1594px;
+    mix-blend-mode: overlay;
+    transform: translate3d(-50%, 0, 0) scale(var(--portfolio-mobile-bg-scale));
+    transform-origin: top center;
+  }
+
+  .portfolio-body .svc-bg {
+    display: block;
+    left: 50%;
+    width: 1440px;
+    height: 1594px;
+    transform: translate3d(-50%, 0, 0) scale(var(--portfolio-mobile-bg-scale));
+    transform-origin: top center;
+  }
+
+  .portfolio-body {
+    --portfolio-ray-scale: 1;
+    --portfolio-ray-end-offset: 48px;
+  }
+
+  .portfolio-ray {
+    width: 100vw;
+    max-width: var(--portfolio-ray-width);
   }
 
   .portfolio-heading {
@@ -222,26 +295,20 @@
   }
 
   .portfolio-list {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
     margin-top: 28px;
   }
 
   .portfolio-card {
     border: 1px solid rgb(255 255 255 / 0.12);
-    border-radius: 24px;
+    border-radius: 16px;
     background: #1a1a1a;
   }
 
   .portfolio-card-media {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 10;
-  }
-}
-
-@media (max-width: 900px) {
-  .svc-bg {
-    display: none;
+    aspect-ratio: 4 / 3;
   }
 }

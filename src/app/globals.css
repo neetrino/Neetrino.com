@@ -1375,7 +1375,7 @@ html {
   pointer-events: none;
 }
 
-.home-services-deco-laptop {
+.home-services-deco.home-services-deco-laptop {
   top: calc(142px * var(--home-ui-scale));
   left: calc(4px * var(--home-ui-scale));
   width: calc(251px * var(--home-ui-scale));
@@ -1383,7 +1383,7 @@ html {
   overflow: hidden;
 }
 
-.home-services-deco-laptop img {
+.home-services-deco.home-services-deco-laptop img {
   width: 142.38% !important;
   height: 100% !important;
   max-width: none !important;
@@ -1393,19 +1393,19 @@ html {
   object-fit: cover;
 }
 
-.home-services-deco-phone {
+.home-services-deco.home-services-deco-phone {
   top: calc(157px * var(--home-ui-scale));
   left: calc(265px * var(--home-ui-scale));
   width: calc(260px * var(--home-ui-scale));
   height: calc(260px * var(--home-ui-scale));
 }
 
-.home-services-deco-phone img {
+.home-services-deco.home-services-deco-phone img {
   object-fit: cover;
   object-position: center;
 }
 
-.home-services-deco-saas {
+.home-services-deco.home-services-deco-saas {
   top: calc(181px * var(--home-ui-scale));
   left: calc(572px * var(--home-ui-scale));
   width: calc(195px * var(--home-ui-scale));
@@ -1413,7 +1413,7 @@ html {
   overflow: hidden;
 }
 
-.home-services-deco-saas img {
+.home-services-deco.home-services-deco-saas img {
   width: 137.44% !important;
   height: 140.91% !important;
   max-width: none !important;
@@ -1423,26 +1423,26 @@ html {
   object-fit: cover;
 }
 
-.home-services-deco-crm {
+.home-services-deco.home-services-deco-crm {
   top: calc(163px * var(--home-ui-scale));
   left: calc(835px * var(--home-ui-scale));
   width: calc(211px * var(--home-ui-scale));
   height: calc(209px * var(--home-ui-scale));
 }
 
-.home-services-deco-crm img {
+.home-services-deco.home-services-deco-crm img {
   object-fit: contain;
   object-position: center bottom;
 }
 
-.home-services-deco-ai {
+.home-services-deco.home-services-deco-ai {
   top: calc(161px * var(--home-ui-scale));
   left: calc(1098px * var(--home-ui-scale));
   width: calc(221px * var(--home-ui-scale));
   height: calc(231px * var(--home-ui-scale));
 }
 
-.home-services-deco-ai img {
+.home-services-deco.home-services-deco-ai img {
   object-fit: contain;
   object-position: center bottom;
 }
@@ -1969,33 +1969,33 @@ html {
     display: none;
   }
 
-  .home-hero-stage:not(.home-hero-stage-robot) {
+  .home-desktop .home-hero-stage:not(.home-hero-stage-robot) {
     min-height: auto;
     padding: 120px 20px 48px;
   }
 
-  .home-hero-stage-robot {
+  .home-desktop .home-hero-stage-robot {
     position: relative;
     height: auto;
     inset: auto;
     z-index: auto;
   }
 
-  .home-hero-bg-shell,
-  .home-hero-bg-mesh,
-  .home-hero-bg-philipp,
-  .hero-tech-atmosphere,
-  .home-hero-brand-layer,
-  .home-hero-bottom-panel,
-  .home-hero-hand-layer {
+  .home-desktop .home-hero-bg-shell,
+  .home-desktop .home-hero-bg-mesh,
+  .home-desktop .home-hero-bg-philipp,
+  .home-desktop .hero-tech-atmosphere,
+  .home-desktop .home-hero-brand-layer,
+  .home-desktop .home-hero-bottom-panel,
+  .home-desktop .home-hero-hand-layer {
     display: none;
   }
 
-  .home-hero-brand,
-  .home-hero-robot-wrap,
-  .home-hero-tagline,
-  .home-hero-stats,
-  .home-hero-chat {
+  .home-desktop .home-hero-brand,
+  .home-desktop .home-hero-robot-wrap,
+  .home-desktop .home-hero-tagline,
+  .home-desktop .home-hero-stats,
+  .home-desktop .home-hero-chat {
     position: relative;
     top: auto;
     left: auto;
@@ -2003,19 +2003,19 @@ html {
     transform: none;
   }
 
-  .home-hero-brand {
+  .home-desktop .home-hero-brand {
     width: min(100%, 20rem);
     height: auto;
     margin-inline: auto;
   }
 
-  .home-hero-robot-wrap {
+  .home-desktop .home-hero-robot-wrap {
     width: min(100%, 320px);
     height: 480px;
     margin: 24px auto 0;
   }
 
-  .home-hero-tagline {
+  .home-desktop .home-hero-tagline {
     width: 100%;
     margin-top: 24px;
     font-size: 1.125rem;
@@ -2023,7 +2023,7 @@ html {
     text-align: center;
   }
 
-  .home-hero-stats {
+  .home-desktop .home-hero-stats {
     flex-direction: column;
     align-items: stretch;
     gap: 16px;
@@ -2031,16 +2031,16 @@ html {
     margin-top: 32px;
   }
 
-  .home-hero-stats-group {
+  .home-desktop .home-hero-stats-group {
     flex-direction: column;
   }
 
-  .home-hero-stat,
-  .home-hero-stat-wide {
+  .home-desktop .home-hero-stat,
+  .home-desktop .home-hero-stat-wide {
     width: 100%;
   }
 
-  .home-hero-chat {
+  .home-desktop .home-hero-chat {
     margin: 24px auto 0;
     width: 64px;
     height: 64px;

@@ -15,6 +15,8 @@ const SERVICE_BACKGROUND_DECORATIONS = [
   'svc-deco-grid-far',
 ] as const;
 
+const PORTFOLIO_RAYS = ['portfolio-ray--mid', 'portfolio-ray--end'] as const;
+
 function PortfolioCard({
   project,
   index,
@@ -31,7 +33,7 @@ function PortfolioCard({
           src={project.image}
           alt={project.alt}
           fill
-          sizes="(max-width: 899px) 100vw, (max-width: 1440px) 44vw, 631px"
+          sizes="(max-width: 899px) 50vw, (max-width: 1440px) 44vw, 631px"
           quality={HOME_PORTFOLIO_IMAGE_QUALITY}
           priority={isLcpCard}
           loading={isLcpCard ? 'eager' : 'lazy'}
@@ -52,6 +54,11 @@ export function PortfolioPage(): React.JSX.Element {
         <div className="svc-bg" aria-hidden>
           {SERVICE_BACKGROUND_DECORATIONS.map((name) => (
             <span key={name} className={`svc-deco ${name}`} />
+          ))}
+        </div>
+        <div className="portfolio-rays" aria-hidden>
+          {PORTFOLIO_RAYS.map((name) => (
+            <span key={name} className={`portfolio-ray ${name}`} />
           ))}
         </div>
         <header className="portfolio-intro">

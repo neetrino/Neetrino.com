@@ -1,9 +1,10 @@
 import Image from 'next/image';
 
-import { HOME_IMAGE_QUALITY } from './home-constants';
 import { heroStats } from './home-data';
+import { HomeHeroBgCore } from './home-hero-bg-core';
 import { HomeHeroDeferredDecor } from './home-hero-deferred-decor';
 import { HomeHeroHandLayer } from './home-hero-hand-layer';
+import { HomeHeroRobot } from './home-hero-robot';
 
 import { HeroStatToneClass } from './home-ui';
 
@@ -13,69 +14,8 @@ export function HomeHero(): React.JSX.Element {
   return (
     <section className="home-hero" aria-label="Hero">
       <div className="home-hero-bg-shell" aria-hidden>
-        <div className="home-hero-bg-mesh">
-          <div className="home-hero-bg-mesh-scroll">
-            <div className="home-hero-bg-mesh-rotate">
-              <Image
-                src="/figma-home/vector1.svg"
-                alt=""
-                fill
-                sizes="1722px"
-                quality={HOME_IMAGE_QUALITY}
-                loading="lazy"
-                fetchPriority="low"
-                className="home-hero-bg-mesh-image"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="home-hero-bg-philipp">
-          <div className="home-hero-bg-philipp-flip">
-            <Image
-              src="/figma-home/philipp-hubert-dvvjh-ucdb30-unsplash1.webp"
-              alt=""
-              fill
-              priority
-              sizes="1440px"
-              quality={HOME_IMAGE_QUALITY}
-              fetchPriority="high"
-              className="home-hero-bg-philipp-image"
-            />
-          </div>
-        </div>
-
-        <div className="home-hero-brand-layer" aria-hidden>
-          <Image
-            src="/figma-home/neetrino-hero-brand.svg"
-            alt=""
-            width={1197}
-            height={234}
-            loading="eager"
-            fetchPriority="high"
-            className="home-hero-brand"
-          />
-        </div>
-
-        <div className="home-hero-stage-robot" aria-hidden>
-          <div className="home-hero-robot-wrap">
-            <div className="home-hero-robot-crop">
-              <div className="home-hero-robot-motion">
-                <Image
-                  src="/figma-home/30.webp"
-                  alt=""
-                  fill
-                  sizes="629px"
-                  quality={HOME_IMAGE_QUALITY}
-                  loading="lazy"
-                  fetchPriority="low"
-                  className="home-hero-robot"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <HomeHeroBgCore philippPriority brandPriority />
+        <HomeHeroRobot />
         <HomeHeroDeferredDecor />
       </div>
 
