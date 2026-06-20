@@ -10,11 +10,9 @@ export function HomeMobile(): React.JSX.Element {
       <HomeMobileBackground />
 
       <div className="home-mobile-page">
-        <div className="home-page-glow" aria-hidden />
-        <div className="home-mobile-container home-mobile-container--hero">
+        <div className="home-page-glow home-mobile-page-glow" aria-hidden />
+        <div className="home-mobile-container">
           <HomeMobileHero />
-        </div>
-        <div className="home-mobile-container home-mobile-container--after-hero">
           <HomeMobileServices />
         </div>
       </div>

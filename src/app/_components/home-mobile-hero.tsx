@@ -82,20 +82,27 @@ export function HomeMobileHero(): React.JSX.Element {
             >
               <p className="home-mobile-hero-stat-value">{thirdStat.value}</p>
               <p className="home-mobile-hero-stat-label">{thirdStat.label}</p>
-              <div className="home-mobile-hero-stat-hand" aria-hidden>
-                <Image
-                  src="/figma-home/28-a.webp"
-                  alt=""
-                  fill
-                  sizes="270px"
-                  quality={HOME_IMAGE_QUALITY}
-                  className="home-mobile-hero-stat-hand-img"
-                />
-              </div>
             </article>
           ) : null}
         </div>
       </div>
+
+      {thirdStat ? (
+        <div className="home-mobile-hero-hand-layer" aria-hidden>
+          <div className="home-mobile-hero-hand">
+            <div className="home-mobile-hero-hand-motion">
+              <Image
+                src="/figma-home/28-a.webp"
+                alt=""
+                fill
+                sizes="550px"
+                quality={HOME_IMAGE_QUALITY}
+                className="home-mobile-hero-stat-hand-img"
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }

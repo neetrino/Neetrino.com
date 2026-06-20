@@ -9,7 +9,7 @@
   position: fixed;
   top: var(--about-mobile-header-top);
   left: 50%;
-  z-index: 100;
+  z-index: 110;
   display: none;
   align-items: center;
   justify-content: space-between;
@@ -18,7 +18,8 @@
   padding: 12px 24px;
   border-radius: 999px;
   background: rgb(40 43 103 / 0.38);
-  transform: translateX(-50%);
+  isolation: isolate;
+  transform: translate3d(-50%, 0, 0);
 }
 
 .about-mobile-header-logo {
@@ -51,13 +52,13 @@
 }
 
 .about-mobile-header--menu-open {
-  z-index: 102;
+  z-index: 112;
 }
 
 .about-mobile-menu {
   position: fixed;
   inset: 0;
-  z-index: 101;
+  z-index: 111;
 }
 
 .about-mobile-menu-backdrop {
@@ -265,7 +266,7 @@
   position: fixed;
   right: 24px;
   bottom: 28px;
-  z-index: 103;
+  z-index: 113;
   display: grid;
   width: 56px;
   height: 56px;

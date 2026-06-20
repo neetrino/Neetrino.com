@@ -29,7 +29,12 @@
   --home-mobile-hero-stats-offset-top: calc(
     var(--home-mobile-stats-panel-offset) + var(--home-mobile-hero-tagline-stats-gap)
   );
-  --home-mobile-page-glow-top: 1020px;
+  --home-mobile-stat-hand-width: 550px;
+  --home-mobile-stat-hand-height: 456px;
+  --home-mobile-stat-hand-overhang: calc(10.75rem + 110px);
+  --home-mobile-stat-hand-bottom: calc(3.375rem - 52px);
+  --home-mobile-stat-hand-offset-right: 8.75rem;
+  --home-mobile-page-glow-top: 1180px;
   --home-mobile-page-grid-step-x: 25px;
   --home-mobile-page-grid-step-y: 27px;
   --home-mobile-page-grid-line-width: 0.5px;
@@ -44,36 +49,21 @@
 
 .home-mobile-page {
   position: relative;
-  z-index: 1;
   width: 100%;
 }
 
-.home-mobile-page .home-page-glow {
+.home-mobile-page-glow {
   z-index: 0;
 }
 
-.home-mobile-page .home-mobile-container {
+.home-mobile-container {
   position: relative;
   z-index: 1;
-}
-
-.home-mobile-container {
   width: 100%;
   max-width: 430px;
   margin-inline: auto;
   padding: 0 24px 48px;
-}
-
-.home-mobile-container--hero {
-  --home-mobile-hero-offset-top: calc(var(--about-mobile-header-top) + var(--about-mobile-header-height) + 18px);
-
-  padding-top: var(--home-mobile-hero-offset-top);
-  padding-inline: var(--home-mobile-hero-gutter);
-  padding-bottom: 0;
-}
-
-.home-mobile-container--after-hero {
-  padding-top: 48px;
+  overflow: visible;
 }
 
 /* ---------- Hero (Figma node 1:1478) ---------- */
@@ -92,12 +82,14 @@
 }
 
 .home-mobile-hero {
+  --home-mobile-hero-offset-top: calc(var(--about-mobile-header-top) + var(--about-mobile-header-height) + 18px);
+
   position: relative;
-  isolation: isolate;
+  z-index: 2;
   width: calc(100% + 2 * var(--home-mobile-hero-gutter));
   min-height: 0;
   margin: 0 calc(-1 * var(--home-mobile-hero-gutter));
-  padding: 0 var(--home-mobile-hero-gutter) 2rem;
+  padding: var(--home-mobile-hero-offset-top) var(--home-mobile-hero-gutter) var(--home-mobile-stat-hand-overhang);
   overflow: visible;
   contain: none;
 }
@@ -296,16 +288,18 @@
 
 .home-mobile-hero-stats {
   position: relative;
-  z-index: 3;
+  z-index: 2;
   width: var(--home-mobile-hero-block-width);
   margin-top: var(--home-mobile-hero-stats-offset-top);
   margin-inline: auto;
+  overflow: visible;
 }
 
 .home-mobile-hero-stats-panel {
   position: relative;
   width: 100%;
   padding-top: var(--home-mobile-hero-stats-row-margin);
+  overflow: visible;
 }
 
 .home-mobile-hero-stats-bg {
@@ -348,16 +342,34 @@
   min-height: 167px;
   margin-top: 16px;
   padding: 33px;
+  overflow: visible;
 }
 
-.home-mobile-hero-stat-hand {
+/* Hero-level overlay — same pattern as desktop .home-hero-hand-layer (z-index 21). */
+.home-mobile-hero-hand-layer {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 270px;
-  height: 224px;
+  inset: 0;
+  z-index: 10;
+  overflow: visible;
   pointer-events: none;
+}
+
+.home-mobile-hero-hand {
+  position: absolute;
+  right: calc(var(--home-mobile-hero-gutter) + var(--home-mobile-stat-hand-offset-right));
+  bottom: var(--home-mobile-stat-hand-bottom);
+  width: var(--home-mobile-stat-hand-width);
+  height: var(--home-mobile-stat-hand-height);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.home-mobile-hero-hand-motion {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
   transform: scaleY(-1) rotate(180deg);
+  transform-origin: 88% 72%;
 }
 
 .home-mobile-hero-stat-orange {
@@ -394,8 +406,8 @@
 }
 
 .home-mobile-hero-stat-hand-img {
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: 86% 100%;
 }
 
 .home-mobile-bg {
@@ -432,13 +444,16 @@
 
 .home-mobile-services {
   position: relative;
-  margin-top: 3rem;
+  z-index: 1;
+  margin-top: calc(3rem + 1.5rem);
+  overflow: visible;
 }
 
 .home-mobile-services-heading-glow {
   position: absolute;
-  top: -40px;
+  top: 0;
   left: 50%;
+  z-index: 0;
   width: 448px;
   height: 185px;
   transform: translateX(-50%);
@@ -610,7 +625,7 @@
 @media (max-width: 899px) {
   #home.home-page {
     overflow: visible;
-    scroll-padding-top: 0;
+    scroll-padding-top: calc(var(--about-mobile-header-top) + var(--about-mobile-header-height) + 12px);
     background: #151515;
   }
 
@@ -619,23 +634,21 @@
     overflow-x: clip;
   }
 
-  .home-mobile,
-  .home-mobile-wrap {
-    overflow-x: clip;
-  }
-
-  .home-mobile-hero {
+  #home .home-mobile,
+  #home .home-mobile-wrap {
     overflow: visible;
   }
 
-  #home .neetrino-canvas-wrap--page {
+  #home .neetrino-canvas-wrap--page,
+  #home .neetrino-canvas-inner {
     width: 100%;
     background: #151515;
   }
 
-  #home .neetrino-canvas-inner {
-    width: 100%;
-    background: #151515;
+  #home .neetrino-canvas-wrap--page,
+  #home .neetrino-canvas-inner,
+  #home .home-page-scale-root {
+    overflow: visible;
   }
 
   .home-desktop {
@@ -648,7 +661,7 @@
     background: #151515;
   }
 
-  .home-mobile-page .home-page-glow {
+  .home-mobile-page-glow {
     top: var(--home-mobile-page-glow-top);
     left: 0;
     width: 100%;
@@ -672,7 +685,6 @@
       transparent 92%
     );
   }
-
 }
 
 @media (min-width: 900px) {

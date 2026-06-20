@@ -31,7 +31,6 @@ export function NeetrinoPageShell({
       <HomeSmoothAnchorScroll />
       <HomeScrollPerformance>
         <HomeHeader />
-        <MobileHeader />
         <CanvasScaler
           wrapClassName="neetrino-canvas-wrap--page"
           minWidth={scaleOnMobile ? 0 : undefined}
@@ -41,6 +40,7 @@ export function NeetrinoPageShell({
           {children}
           <HomeFooter />
         </CanvasScaler>
+        <MobileHeader />
       </HomeScrollPerformance>
     </main>
   );
