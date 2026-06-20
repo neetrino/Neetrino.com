@@ -10,7 +10,7 @@ export type ServiceDetailCard = {
 };
 
 /**
- * Service cards in Figma grid order (row-major: 3 columns, 2 rows).
+ * Service cards in grid order (row-major: 3 columns, 2 rows).
  * Per-card colors/glows live in `services.css` (`.svc-card--<id>`).
  */
 export const serviceCards: readonly ServiceDetailCard[] = [

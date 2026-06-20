@@ -99,23 +99,26 @@ export function CanvasScaler({
 
     const resizeObserver = new ResizeObserver(scheduleUpdate);
     resizeObserver.observe(wrap);
-    resizeObserver.observe(inner);
+    if (canvasHeight === undefined) {
+      resizeObserver.observe(inner);
+    }
 
-    window.addEventListener('resize', scheduleUpdate);
-    window.addEventListener('load', scheduleUpdate);
+    const resizeOptions: AddEventListenerOptions = { passive: true };
+    window.addEventListener('resize', scheduleUpdate, resizeOptions);
+    window.addEventListener('load', scheduleUpdate, resizeOptions);
 
     return () => {
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();
-      window.removeEventListener('resize', scheduleUpdate);
-      window.removeEventListener('load', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate, resizeOptions);
+      window.removeEventListener('load', scheduleUpdate, resizeOptions);
     };
   }, [updateScale]);
 
   const innerStyle =
-    minWidth === 0 || canvasHeight !== undefined
+    minWidth === 0
       ? {
-          ...(minWidth === 0 ? { width: canvasWidth } : null),
+          width: canvasWidth,
           ...(canvasHeight !== undefined ? { minHeight: canvasHeight } : null),
         }
       : undefined;
