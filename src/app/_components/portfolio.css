@@ -42,7 +42,7 @@
   z-index: 3;
   pointer-events: none;
   content: '';
-  background: url('/portfolio/noise.png') top left / cover no-repeat;
+  background: url('/portfolio/noise.webp') top left / cover no-repeat;
   mix-blend-mode: soft-light;
   opacity: 0.14;
 }

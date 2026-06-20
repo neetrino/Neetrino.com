@@ -43,7 +43,7 @@ function PortfolioCard({
         {project.variant === 'zeppelin' ? (
           <>
             <Image
-              src="/portfolio/cat-logo.png"
+              src="/portfolio/cat-logo.webp"
               alt=""
               width={114}
               height={61}
