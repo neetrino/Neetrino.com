@@ -1,0 +1,348 @@
+/* Services page background — mirrors /portfolio decor system. */
+
+.svc-hero {
+  --svc-ray-width: 1437px;
+  --svc-ray-mid-height: 405px;
+  --svc-ray-end-height: 490px;
+  --svc-ray-footer-height: 560px;
+  --svc-ray-end-offset: 72px;
+  --svc-ray-scale: 1.2;
+  background-color: var(--svc-base-bg);
+  background-image:
+    radial-gradient(ellipse 62% 48% at 62% 16%, rgb(56 176 255 / 0.54) 0%, transparent 66%),
+    radial-gradient(ellipse 46% 38% at 14% 24%, rgb(32 158 255 / 0.34) 0%, transparent 60%);
+  background-size: 100% 100%, 100% 100%;
+  background-position: center;
+}
+
+.svc-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  contain: layout style paint;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.svc-decor::after {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  content: '';
+  background: url('/portfolio/noise.png') top left / cover no-repeat;
+  mix-blend-mode: soft-light;
+  opacity: 0.14;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.neetrino-canvas-inner:has(.svc-hero) {
+  --svc-base-bg: #122a48;
+  background: var(--svc-base-bg);
+}
+
+.svc-baked-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 1440px;
+  height: var(--svc-decor-bake-height, 2095px);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.svc-baked-bg-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.svc-hero--baked {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+  background-image: none;
+}
+
+.svc-footer-ray-wrap--baked {
+  pointer-events: none;
+}
+
+.neetrino-canvas-inner:has(.svc-hero--baked) {
+  --svc-decor-bake-height: 2095px;
+}
+
+.svc-decor .svc-page-glow {
+  top: 0;
+  bottom: auto;
+  height: 100%;
+  opacity: 0.96;
+  mix-blend-mode: plus-lighter;
+  background-image:
+    linear-gradient(to right, rgb(168 230 255 / 0.58) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width)),
+    linear-gradient(to bottom, rgb(168 230 255 / 0.58) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width));
+  -webkit-mask-image: radial-gradient(
+    ellipse 150% 96% at 50% 24%,
+    #000 0%,
+    #000 56%,
+    rgb(0 0 0 / 0.42) 76%,
+    transparent 92%
+  );
+  mask-image: radial-gradient(
+    ellipse 150% 96% at 50% 24%,
+    #000 0%,
+    #000 56%,
+    rgb(0 0 0 / 0.42) 76%,
+    transparent 92%
+  );
+}
+
+.svc-page-glow {
+  contain: layout paint style;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.svc-decor .svc-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  contain: layout paint style;
+  isolation: isolate;
+  transform: translate3d(0, 0, 0);
+}
+
+.svc-deco {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  backface-visibility: hidden;
+  contain: layout paint style;
+  transform: translate3d(0, 0, 0);
+}
+
+.svc-hero .svc-deco-glow-1 {
+  left: calc(-254.5px * var(--home-ui-scale));
+  top: calc(-927.9px * var(--home-ui-scale));
+  width: calc(2072.7px * var(--home-ui-scale));
+  height: calc(2009px * var(--home-ui-scale));
+  background-image: url('/portfolio/ellipse-27.svg');
+  opacity: 0.94;
+}
+
+.svc-hero .svc-deco-glow-2 {
+  left: calc(475.75px * var(--home-ui-scale));
+  top: calc(-762.6px * var(--home-ui-scale));
+  width: calc(2072.7px * var(--home-ui-scale));
+  height: calc(2009px * var(--home-ui-scale));
+  background-image: url('/portfolio/ellipse-28.svg');
+  opacity: 0.9;
+}
+
+.svc-deco-arc-1,
+.svc-deco-arc-2,
+.svc-deco-beam-r,
+.svc-deco-beam-l,
+.svc-deco-beam-center {
+  mix-blend-mode: plus-lighter;
+}
+
+.svc-hero .svc-deco-arc-1 {
+  left: calc(173.68px * var(--home-ui-scale));
+  top: calc(120.32px * var(--home-ui-scale));
+  width: calc(1278.6px * var(--home-ui-scale));
+  height: calc(618.4px * var(--home-ui-scale));
+  background-image: url('/portfolio/arc-1.svg');
+  opacity: 1;
+}
+
+.svc-hero .svc-deco-arc-2 {
+  left: calc(-21.5px * var(--home-ui-scale));
+  top: calc(87.1px * var(--home-ui-scale));
+  width: calc(1473.7px * var(--home-ui-scale));
+  height: calc(613.4px * var(--home-ui-scale));
+  background-image: url('/portfolio/arc-2.svg');
+  opacity: 1;
+}
+
+.svc-hero .svc-deco-beam-r {
+  left: calc(921.2px * var(--home-ui-scale));
+  top: calc(204px * var(--home-ui-scale));
+  width: calc(607.7px * var(--home-ui-scale));
+  height: calc(917.4px * var(--home-ui-scale));
+  background-image: url('/portfolio/beam-r.svg');
+  opacity: 1;
+}
+
+.svc-hero .svc-deco-beam-l {
+  left: calc(-164.7px * var(--home-ui-scale));
+  top: calc(152.3px * var(--home-ui-scale));
+  width: calc(607.7px * var(--home-ui-scale));
+  height: calc(917.4px * var(--home-ui-scale));
+  background-image: url('/portfolio/beam-l.svg');
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scaleX(-1);
+}
+
+.svc-hero .svc-deco-beam-center {
+  left: calc(927.52px * var(--home-ui-scale));
+  top: calc(-415px * var(--home-ui-scale));
+  width: calc(46px * var(--home-ui-scale));
+  height: calc(759.42px * var(--home-ui-scale));
+  background: linear-gradient(to bottom, transparent 0%, #b8fff8 52%, #3db4ff 100%);
+  filter: blur(calc(30px * var(--home-ui-scale)));
+  opacity: 0.82;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.svc-hero .svc-deco-grid-far {
+  left: calc(-223px * var(--home-ui-scale));
+  top: calc(806.7px * var(--home-ui-scale));
+  width: calc(1887px * var(--home-ui-scale));
+  height: calc(817.7px * var(--home-ui-scale));
+  background-image: url('/services/grid-far.svg');
+  opacity: 0.92;
+}
+
+.svc-hero .svc-deco-grid-near {
+  left: calc(-228px * var(--home-ui-scale));
+  top: calc(1336.8px * var(--home-ui-scale));
+  width: calc(1887px * var(--home-ui-scale));
+  height: calc(1048.3px * var(--home-ui-scale));
+  background-image: url('/services/grid-near.svg');
+  opacity: 0.88;
+}
+
+.svc-rays {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  contain: layout style paint;
+  transform: translate3d(0, 0, 0);
+}
+
+.svc-ray {
+  position: absolute;
+  left: 50%;
+  width: var(--svc-ray-width);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  contain: layout paint style;
+  backface-visibility: hidden;
+}
+
+.svc-ray--mid {
+  top: 50%;
+  height: var(--svc-ray-mid-height);
+  background-image: url('/about/ray-17415.svg');
+  transform: translate3d(-50%, -50%, 0) scale(var(--svc-ray-scale));
+}
+
+.svc-ray--end {
+  bottom: var(--svc-ray-end-offset);
+  height: var(--svc-ray-end-height);
+  background-image: url('/about/ray-17418.svg');
+  transform: translate3d(-50%, 0, 0) scale(var(--svc-ray-scale));
+}
+
+.svc-footer-ray-wrap {
+  --svc-ray-width: 1437px;
+  --svc-ray-scale: 1.2;
+  --svc-ray-footer-height: 560px;
+  position: relative;
+  z-index: 3;
+  width: 1440px;
+  height: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.svc-ray--footer {
+  top: 0;
+  height: var(--svc-ray-footer-height);
+  background-image: url('/about/ray-17416.svg');
+  transform: translate3d(-50%, -50%, 0) scale(var(--svc-ray-scale));
+}
+
+@media (max-width: 900px) {
+  .neetrino-canvas-inner:has(.svc-hero) {
+    --svc-mobile-bg-scale: calc(100vw / var(--home-design-width) / 1px);
+  }
+
+  .svc-baked-bg {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: 1440px;
+    height: var(--svc-decor-bake-height, 2095px);
+    transform: translate3d(-50%, 0, 0) scale(var(--svc-mobile-bg-scale));
+    transform-origin: top center;
+  }
+
+  .svc-hero {
+    overflow: hidden;
+  }
+
+  .svc-hero.svc-hero--baked {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+    background-image: none;
+  }
+
+  .svc-decor {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: 1440px;
+    height: 1584px;
+    transform: translate3d(-50%, 0, 0) scale(var(--svc-mobile-bg-scale));
+    transform-origin: top center;
+    will-change: transform;
+  }
+
+  .svc-decor .svc-page-glow {
+    width: 1722px;
+    height: 100%;
+    opacity: 0.92;
+    mix-blend-mode: plus-lighter;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  .svc-decor .svc-bg {
+    display: block;
+    inset: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+  }
+
+  .svc-hero {
+    --svc-ray-scale: 1;
+    --svc-ray-end-offset: 48px;
+  }
+
+  .svc-ray {
+    width: 100vw;
+    max-width: var(--svc-ray-width);
+  }
+
+  .svc-footer-ray-wrap {
+    width: 100%;
+    --svc-ray-scale: 1;
+  }
+}

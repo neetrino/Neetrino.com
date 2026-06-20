@@ -22,7 +22,6 @@
   padding: 152px 72px 0;
   isolation: isolate;
   contain: layout style;
-  transform: translate3d(0, 0, 0);
   background-color: var(--portfolio-base-bg);
   background-image:
     radial-gradient(ellipse 62% 48% at 62% 16%, rgb(56 176 255 / 0.54) 0%, transparent 66%),
@@ -41,8 +40,8 @@
   pointer-events: none;
   isolation: isolate;
   contain: layout style paint;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: 1440px 2226px;
 }
 
 .portfolio-decor::after {
@@ -54,14 +53,43 @@
   background: url('/portfolio/noise.png') top left / cover no-repeat;
   mix-blend-mode: soft-light;
   opacity: 0.14;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
 }
 
 .neetrino-canvas-inner:has(.portfolio-body) {
   --portfolio-base-bg: #122a48;
   background: var(--portfolio-base-bg);
-  backface-visibility: hidden;
+}
+
+.portfolio-baked-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 1440px;
+  height: var(--portfolio-decor-bake-height, 2737px);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.portfolio-baked-bg-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.portfolio-body--baked {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+  background-image: none;
+}
+
+.portfolio-footer-ray-wrap--baked {
+  pointer-events: none;
+}
+
+.neetrino-canvas-inner:has(.portfolio-body--baked) {
+  --portfolio-decor-bake-height: 2737px;
 }
 
 .portfolio-decor .portfolio-page-glow {
@@ -101,7 +129,6 @@
   pointer-events: none;
   contain: layout paint style;
   isolation: isolate;
-  transform: translate3d(0, 0, 0);
 }
 
 .svc-deco {
@@ -109,9 +136,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
-  backface-visibility: hidden;
   contain: layout paint style;
-  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-body .svc-deco-glow-1 {
@@ -185,8 +210,6 @@
   background: linear-gradient(to bottom, transparent 0%, #b8fff8 52%, #3db4ff 100%);
   filter: blur(calc(30px * var(--home-ui-scale)));
   opacity: 0.82;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
 }
 
 .svc-deco-grid-far {
@@ -213,7 +236,6 @@
   z-index: 2;
   pointer-events: none;
   contain: layout style paint;
-  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-ray {
@@ -226,7 +248,6 @@
   mix-blend-mode: screen;
   opacity: 0.85;
   contain: layout paint style;
-  backface-visibility: hidden;
 }
 
 .portfolio-ray--mid {
@@ -266,9 +287,6 @@
   position: relative;
   z-index: 4;
   width: 100%;
-  isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
 }
 
 .portfolio-heading {
@@ -298,9 +316,6 @@
   gap: 40px 20px;
   width: 1295px;
   margin-top: 70px;
-  isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
 }
 
 .portfolio-card {
@@ -311,8 +326,6 @@
   background: #fff;
   box-shadow: 0 24px 70px rgb(0 0 0 / 0.18);
   contain: layout paint style;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-card-media {
@@ -325,8 +338,6 @@
 .portfolio-card-image {
   z-index: 1;
   object-fit: cover;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-card--zeppelin .portfolio-card-image {
@@ -414,9 +425,7 @@
   color: #4e5d78;
   font-family: Poppins, var(--font-inter), sans-serif;
   font-size: 14px;
-  isolation: isolate;
   transform: translate3d(-50%, 0, 0);
-  backface-visibility: hidden;
 }
 
 .portfolio-pagination-item {
@@ -468,13 +477,30 @@
     --portfolio-mobile-bg-scale: calc(100vw / var(--home-design-width) / 1px);
   }
 
+  .portfolio-baked-bg {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: 1440px;
+    height: var(--portfolio-decor-bake-height, 2737px);
+    transform: translate3d(-50%, 0, 0) scale(var(--portfolio-mobile-bg-scale));
+    transform-origin: top center;
+  }
+
   .portfolio-body {
     width: 100%;
     height: auto;
     min-height: 100vh;
     padding: 132px 16px 72px;
-    background-color: var(--portfolio-base-bg);
     overflow: hidden;
+  }
+
+  .portfolio-body.portfolio-body--baked {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+    background-image: none;
   }
 
   .portfolio-decor {
@@ -486,7 +512,6 @@
     height: 2226px;
     transform: translate3d(-50%, 0, 0) scale(var(--portfolio-mobile-bg-scale));
     transform-origin: top center;
-    will-change: transform;
   }
 
   .portfolio-decor .portfolio-page-glow {

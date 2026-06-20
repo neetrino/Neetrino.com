@@ -1,15 +1,15 @@
 import { NeetrinoPageShell } from './neetrino-page-shell';
+import { ServicesBakedBackground } from './services-baked-background';
 import { ServicesHero } from './services-hero';
+import './services-background.css';
 import './services.css';
 
 export function ServicesPage(): React.JSX.Element {
   return (
     <NeetrinoPageShell mainId="services-top" srOnlyTitle="Neetrino Services">
-      <div className="home-page-glow svc-page-glow" aria-hidden />
+      <ServicesBakedBackground />
       <ServicesHero />
-      <div className="svc-footer-ray-wrap" aria-hidden>
-        <span className="svc-ray svc-ray--footer" />
-      </div>
+      <div className="svc-footer-ray-wrap svc-footer-ray-wrap--baked" aria-hidden />
     </NeetrinoPageShell>
   );
 }
