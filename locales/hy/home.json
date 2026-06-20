@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "pageTitle": "Neetrino IT Company"
+  },
+  "navigation": {
+    "mainAriaLabel": "Հիմնական նավիգացիա",
+    "moreLabel": "Ավելին",
+    "quoteLabel": "Ստանալ առաջարկ",
+    "changeLanguageAriaLabel": "Փոխել լեզուն",
+    "currentLanguageLabel": "ՀԱՅ",
+    "logoAlt": "Neetrino",
+    "logoHomeAriaLabel": "Neetrino գլխավոր էջ",
+    "mobileMenuLabel": "Մենյու",
+    "mobileMenuOpenAriaLabel": "Բացել մենյուն",
+    "mobileMenuCloseAriaLabel": "Փակել մենյուն",
+    "siteNavigationAriaLabel": "Կայքի նավիգացիա",
+    "languageGroupAriaLabel": "Լեզու",
+    "languageOptions": {
+      "en": "ENG",
+      "ru": "РУС",
+      "hy": "ՀԱՅ"
+    },
+    "items": {
+      "home": "Գլխավոր",
+      "services": "Ծառայություններ",
+      "portfolio": "Պորտֆոլիո",
+      "about": "Մեր մասին",
+      "contact": "Կապ",
+      "blog": "Բլոգ",
+      "team": "Թիմ"
+    }
+  },
+  "hero": {
+    "ariaLabel": "Հերո հատված",
+    "brand": {
+      "first": "NEET",
+      "second": "RIN",
+      "third": "O"
+    },
+    "tagline": {
+      "prefix": "Մենք ստեղծում ենք ",
+      "accent": "բարձր արդյունավետությամբ կայքեր",
+      "suffix": " և թվային լուծումներ, որոնք օգնում են բիզնեսներին աճել, մասշտաբավորվել և առանձնանալ առցանց։"
+    },
+    "chatAriaLabel": "Բացել չատը",
+    "actions": {
+      "quote": "Ստանալ առաջարկ",
+      "contact": "Կապ"
+    },
+    "stats": {
+      "experience": {
+        "value": "8+",
+        "label": "Տարվա փորձ",
+        "labelLines": ["Տարվա", "փորձ"],
+        "mobileLabelLines": ["Տարվա ", "փորձ"]
+      },
+      "clients": {
+        "value": "97%",
+        "label": "Գոհ հաճախորդներ"
+      },
+      "creations": {
+        "value": "450+",
+        "label": "Աշխատանքներ"
+      }
+    }
+  },
+  "sections": {
+    "services": {
+      "eyebrow": "ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ",
+      "title": "ԻՆՉ ԵՆՔ",
+      "highlight": "ԱՆՈՒՄ"
+    },
+    "portfolio": {
+      "eyebrow": "ՊՈՐՏՖՈԼԻՈ",
+      "title": "ՄԵՐ",
+      "highlight": " ՆԱԽԱԳԾԵՐԸ"
+    },
+    "about": {
+      "eyebrow": "ԿԱՌՈՒՑՈՒՄ ԵՆՔ ՆՊԱՏԱԿՈՎ",
+      "title": "ՈՎ",
+      "highlight": "ԵՆՔ",
+      "suffix": "ՄԵՆՔ"
+    }
+  },
+  "actions": {
+    "continue": "Շարունակել",
+    "explore": "Տեսնել ավելին"
+  },
+  "services": {
+    "cards": {
+      "website": {
+        "title": "ԿԱՅՔԵՐ",
+        "subtitle": "Անհատական մշակում"
+      },
+      "mobileApp": {
+        "title": "ՄՈԲԱՅԼ ՀԱՎԵԼՎԱԾ",
+        "subtitle": "Հավելվածների մշակում"
+      },
+      "saasPlatforms": {
+        "title": "SAAS ՀԱՐԹԱԿՆԵՐ",
+        "subtitle": "Ամպային լուծումներ"
+      },
+      "crmSystems": {
+        "title": "CRM ՀԱՄԱԿԱՐԳԵՐ",
+        "subtitle": "Գործընթացների ավտոմատացում"
+      },
+      "aiIntegrations": {
+        "title": "AI ԻՆՏԵԳՐԱՑԻԱՆԵՐ",
+        "subtitle": "AI ավտոմատացում"
+      }
+    }
+  },
+  "portfolio": {
+    "projects": {
+      "meetingAssistant": "Հանդիպումների օգնական",
+      "borborLanding": "Borbor Landing",
+      "visualHierarchy": "Վիզուալ հիերարխիա",
+      "aiListing": "AI ցուցակագրում"
+    }
+  },
+  "about": {
+    "paragraphs": [
+      [
+        {
+          "text": "Վերջին 8 տարիների ընթացքում ",
+          "bold": false
+        },
+        {
+          "text": "Neetrino IT",
+          "bold": true
+        },
+        {
+          "text": " ընկերությունը մշակել է ավելի քան ",
+          "bold": false
+        },
+        {
+          "text": "400 առցանց ռեսուրս",
+          "bold": "extrabold"
+        },
+        {
+          "text": "՝ սկսած պարզ կայքերից մինչև խոշոր ինտերնետային պորտալներ և էլեկտրոնային առևտրի հարթակներ",
+          "bold": false
+        }
+      ],
+      [
+        {
+          "text": "Մենք մասնագիտացած ենք կայքերի մշակման, AI և bot լուծումների, CRM համակարգերի ինտեգրման, մոբայլ հավելվածների մշակման, ինչպես նաև SEO և SMM օպտիմիզացիայի մեջ՝ ",
+          "bold": false
+        },
+        {
+          "text": "ապահովելով ձեր բիզնեսի ամբողջական թվային ներկայությունը։",
+          "bold": "extrabold"
+        }
+      ]
+    ]
+  },
+  "partners": {
+    "ariaLabel": "Գործընկերների լոգոներ"
+  },
+  "footer": {
+    "columns": {
+      "company": "Ընկերություն",
+      "services": "Ծառայություններ",
+      "contact": "Կապ"
+    },
+    "links": {
+      "about": "Մեր մասին",
+      "team": "Թիմ",
+      "contactUs": "Կապ մեզ հետ",
+      "portfolio": "Պորտֆոլիո",
+      "services": "Ծառայություններ",
+      "blog": "Բլոգ",
+      "website": "Կայք",
+      "mobileApp": "Մոբայլ հավելված",
+      "crmSystems": "CRM համակարգեր",
+      "saasPlatforms": "SAAS հարթակներ",
+      "aiIntegration": "AI ինտեգրացիա",
+      "all": "Բոլորը"
+    },
+    "contact": {
+      "address": "Անդրանիկ Զորավարի փ. 108/10",
+      "email": "info@neetrino.com",
+      "phone": "+374 44 343 000",
+      "hours": "Աշխատանքային ժամեր\nԵրկ. - Ուրբ. 10:00 - 19:00"
+    },
+    "message": {
+      "title": "Գրեք մեզ",
+      "copy": "Մեկ հաղորդագրությամբ մտեք թվային աշխարհ։ Մեր թիմը շուտով կկապվի ձեզ հետ։",
+      "label": "Ձեր հաղորդագրությունը",
+      "placeholder": "Մուտքագրեք ձեր հաղորդագրությունը",
+      "send": "Ուղարկել"
+    },
+    "copyright": "Copyright © 2017 - 2026 Neetrino IT Company. All Rights Reserved."
+  },
+  "social": {
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "behance": "Behance",
+    "youtube": "YouTube",
+    "twitter": "Twitter",
+    "dribbble": "Dribbble"
+  }
+}

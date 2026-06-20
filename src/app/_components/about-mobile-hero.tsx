@@ -1,9 +1,14 @@
+'use client';
+
 import Image from 'next/image';
 
-import { heroHeadline, heroIntroMobile, heroStats } from './about-data';
+import { useHomeI18n } from './home-i18n-provider';
 import { MobileHeroStat } from './about-mobile-ui';
 
 export function AboutMobileHero(): React.JSX.Element {
+  const { aboutData } = useHomeI18n();
+  const { heroHeadline, heroIntroMobile, heroStats } = aboutData;
+
   return (
     <section className="about-mobile-hero" aria-labelledby="about-mobile-title">
       <div className="about-mobile-hero-robot" aria-hidden>

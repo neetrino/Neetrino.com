@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { ServicesPage } from '../_components/services-page';
+import { servicesMessages } from '../_components/services-messages';
 
 export const metadata: Metadata = {
-  title: 'Services | Neetrino',
-  description:
-    'Neetrino services — SaaS, CRM, websites, mobile apps, AI products and ERP systems built end to end.',
+  title: servicesMessages.meta.pageTitle,
+  description: servicesMessages.meta.description,
 };
 
 export default function Services() {

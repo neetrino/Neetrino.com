@@ -1,8 +1,13 @@
+'use client';
+
 import Image from 'next/image';
-import { heroHeadline, heroIntroLeft, heroIntroRight, heroParagraph, heroStats } from './about-data';
+import { useHomeI18n } from './home-i18n-provider';
 import { GradientStat } from './about-ui';
 
 export function AboutHero(): React.JSX.Element {
+  const { aboutData } = useHomeI18n();
+  const { heroHeadline, heroIntroLeft, heroIntroRight, heroParagraph, heroStats } = aboutData;
+
   return (
     <section className="about-hero" aria-labelledby="about-title">
       <div className="about-robot" aria-hidden>

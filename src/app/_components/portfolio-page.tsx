@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
+import { useHomeI18n } from './home-i18n-provider';
 import { NeetrinoPageShell } from './neetrino-page-shell';
 import { PortfolioBakedBackground } from './portfolio-baked-background';
 import {
@@ -9,7 +12,8 @@ import {
   PORTFOLIO_TITLE_SRC,
   PORTFOLIO_TITLE_WIDTH,
 } from './portfolio-constants';
-import { portfolioProjects, type PortfolioProject } from './portfolio-data';
+import type { PortfolioProject } from './portfolio-data';
+import { portfolioMessages } from './portfolio-messages';
 import './portfolio.css';
 import './services.css';
 
@@ -52,7 +56,7 @@ function PortfolioCard({
               decoding="async"
               className="portfolio-card-logo portfolio-card-logo--cat"
             />
-            <span className="portfolio-card-title portfolio-card-title--zeppelin">ZEPPELIN</span>
+            <span className="portfolio-card-title portfolio-card-title--zeppelin">{project.overlayTitle}</span>
           </>
         ) : null}
         <span className="portfolio-card-action" aria-hidden>
@@ -64,8 +68,10 @@ function PortfolioCard({
 }
 
 function PortfolioPagination(): React.JSX.Element {
+  const { portfolioCopy } = useHomeI18n();
+
   return (
-    <nav className="portfolio-pagination" aria-label="Portfolio pagination">
+    <nav className="portfolio-pagination" aria-label={portfolioCopy.pagination.ariaLabel}>
       <span className="portfolio-pagination-item portfolio-pagination-arrow" aria-hidden>
         ‹
       </span>
@@ -89,37 +95,45 @@ function PortfolioPagination(): React.JSX.Element {
   );
 }
 
+function PortfolioBody(): React.JSX.Element {
+  const { portfolioCopy, portfolioProjects } = useHomeI18n();
+
+  return (
+    <section className="portfolio-body portfolio-body--baked" aria-labelledby="portfolio-heading">
+      <header className="portfolio-intro">
+        <div className="svc-title-wrap">
+          <Image
+            id="portfolio-heading"
+            src={PORTFOLIO_TITLE_SRC}
+            alt={portfolioCopy.hero.title}
+            width={PORTFOLIO_TITLE_WIDTH}
+            height={PORTFOLIO_TITLE_HEIGHT}
+            sizes="(max-width: 900px) 90vw, 597px"
+            priority
+            fetchPriority="high"
+            className="svc-title"
+          />
+        </div>
+      </header>
+      <div className="portfolio-list">
+        {portfolioProjects.map((project, index) => (
+          <PortfolioCard key={project.title} project={project} index={index} />
+        ))}
+      </div>
+      <PortfolioPagination />
+    </section>
+  );
+}
+
 export function PortfolioPage(): React.JSX.Element {
   return (
     <NeetrinoPageShell
       mainId="portfolio-top"
-      srOnlyTitle="Neetrino Portfolio"
+      srOnlyTitle={portfolioMessages.hero.srOnlyTitle}
       canvasHeight={PORTFOLIO_CANVAS_HEIGHT}
     >
       <PortfolioBakedBackground />
-      <section className="portfolio-body portfolio-body--baked" aria-labelledby="portfolio-heading">
-        <header className="portfolio-intro">
-          <div className="svc-title-wrap">
-            <Image
-              id="portfolio-heading"
-              src={PORTFOLIO_TITLE_SRC}
-              alt="PORTFOLIO"
-              width={PORTFOLIO_TITLE_WIDTH}
-              height={PORTFOLIO_TITLE_HEIGHT}
-              sizes="(max-width: 900px) 90vw, 597px"
-              priority
-              fetchPriority="high"
-              className="svc-title"
-            />
-          </div>
-        </header>
-        <div className="portfolio-list">
-          {portfolioProjects.map((project, index) => (
-            <PortfolioCard key={project.title} project={project} index={index} />
-          ))}
-        </div>
-        <PortfolioPagination />
-      </section>
+      <PortfolioBody />
       <div className="portfolio-footer-ray-wrap portfolio-footer-ray-wrap--baked" aria-hidden />
     </NeetrinoPageShell>
   );

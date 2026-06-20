@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { ContactPage } from '../_components/contact-page';
+import { contactMessages } from '../_components/contact-messages';
 
 export const metadata: Metadata = {
-  title: 'Contact us',
-  description:
-    'Contact Neetrino by email or phone, visit the Yerevan office, or send a project inquiry.',
+  title: contactMessages.meta.pageTitle,
+  description: contactMessages.meta.description,
 };
 
 export default function Contact(): React.JSX.Element {

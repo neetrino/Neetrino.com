@@ -1,10 +1,14 @@
-import { heroParagraph } from './about-data';
+'use client';
+
+import { useHomeI18n } from './home-i18n-provider';
 
 export function AboutMobileLead(): React.JSX.Element {
+  const { aboutData } = useHomeI18n();
+
   return (
-    <section className="about-mobile-lead-section" aria-label="About Neetrino platform">
+    <section className="about-mobile-lead-section" aria-label={aboutData.ariaLead}>
       <p className="about-mobile-lead-copy">
-        {heroParagraph.map((part, index) =>
+        {aboutData.heroParagraph.map((part, index) =>
           part.bold ? (
             <strong key={index}>{part.text}</strong>
           ) : (

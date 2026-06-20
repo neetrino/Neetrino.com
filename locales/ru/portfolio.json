@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "pageTitle": "Портфолио | Neetrino",
+    "description": "Портфолио Neetrino — избранные сайты, мобильные приложения, CRM-системы, SaaS-платформы и digital-продукты."
+  },
+  "hero": {
+    "title": "ПОРТФОЛИО",
+    "srOnlyTitle": "Портфолио Neetrino"
+  },
+  "pagination": {
+    "ariaLabel": "Навигация по портфолио"
+  },
+  "projects": {
+    "tooonExpo": {
+      "title": "Tooon Expo",
+      "alt": "Баннер Tooon Expo"
+    },
+    "zeppelin": {
+      "title": "Zeppelin",
+      "alt": "Баннер Zeppelin",
+      "overlayTitle": "ZEPPELIN"
+    },
+    "degusto": {
+      "title": "Degusto",
+      "alt": "Баннер Degusto"
+    },
+    "digitalImplant": {
+      "title": "Digital Implant Clinic",
+      "alt": "Баннер Digital Implant Clinic"
+    },
+    "borborAqua": {
+      "title": "Borbor Aqua",
+      "alt": "Баннер Borbor"
+    },
+    "marcoGroup": {
+      "title": "Marco Group",
+      "alt": "Баннер Marco Group"
+    },
+    "ncie": {
+      "title": "Национальный центр инноваций и предпринимательства",
+      "alt": "Баннер NCIE"
+    },
+    "anra": {
+      "title": "Регуляторный орган ядерной безопасности Армении",
+      "alt": "Баннер ANRA"
+    }
+  }
+}

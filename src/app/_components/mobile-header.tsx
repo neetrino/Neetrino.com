@@ -4,9 +4,11 @@ import { useCallback, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AboutMobileMenu } from './about-mobile-menu';
+import { useHomeI18n } from './home-i18n-provider';
 
 /** Compact mobile header bar (logo + Menu) shared across all marketing pages. */
 export function MobileHeader(): React.JSX.Element {
+  const { homeCopy } = useHomeI18n();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = useCallback((): void => setIsMenuOpen(false), []);
   const toggleMenu = useCallback((): void => setIsMenuOpen((open) => !open), []);
@@ -18,7 +20,7 @@ export function MobileHeader(): React.JSX.Element {
           isMenuOpen ? 'about-mobile-header about-mobile-header--menu-open' : 'about-mobile-header'
         }
       >
-        <Link href="/" className="about-mobile-header-logo" aria-label="Neetrino home">
+        <Link href="/" className="about-mobile-header-logo" aria-label={homeCopy.navigation.logoHomeAriaLabel}>
           <Image
             src="/figma-home/neetrino-logo.svg"
             alt=""
@@ -31,12 +33,16 @@ export function MobileHeader(): React.JSX.Element {
         <button
           type="button"
           className="about-mobile-header-menu"
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={
+            isMenuOpen
+              ? homeCopy.navigation.mobileMenuCloseAriaLabel
+              : homeCopy.navigation.mobileMenuOpenAriaLabel
+          }
           aria-expanded={isMenuOpen}
           aria-haspopup="dialog"
           onClick={toggleMenu}
         >
-          Menu
+          {homeCopy.navigation.mobileMenuLabel}
         </button>
       </header>
 

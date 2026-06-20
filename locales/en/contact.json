@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "pageTitle": "Contact us",
+    "description": "Contact Neetrino by email or phone, visit the Yerevan office, or send a project inquiry."
+  },
+  "hero": {
+    "srOnlyTitle": "Contact Neetrino"
+  },
+  "intro": {
+    "kicker": "Get in touch",
+    "title": "CONTACT US",
+    "copy": "Reach us by email or phone, visit our office, or send a project inquiry - we respond on business days.",
+    "methods": {
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "social": {
+      "followUs": "Follow us",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "viber": "Viber"
+    }
+  },
+  "form": {
+    "title": "Send an inquiry",
+    "copy": "Share your idea or timeline - we will reply on business days.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Your email",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us about your project",
+    "submit": "Send inquiry"
+  },
+  "office": {
+    "title": "Office",
+    "hours": "Mon - Fri, 10:00 - 19:00",
+    "citySuffix": "Yerevan, Armenia",
+    "openInMaps": "Open in Google Maps"
+  }
+}

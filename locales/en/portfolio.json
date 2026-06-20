@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "pageTitle": "Portfolio | Neetrino",
+    "description": "Neetrino portfolio — selected websites, mobile apps, CRM systems, SaaS platforms, and digital products."
+  },
+  "hero": {
+    "title": "PORTFOLIO",
+    "srOnlyTitle": "Neetrino Portfolio"
+  },
+  "pagination": {
+    "ariaLabel": "Portfolio pagination"
+  },
+  "projects": {
+    "tooonExpo": {
+      "title": "Tooon Expo",
+      "alt": "Tooon Expo banner"
+    },
+    "zeppelin": {
+      "title": "Zeppelin",
+      "alt": "Zeppelin banner",
+      "overlayTitle": "ZEPPELIN"
+    },
+    "degusto": {
+      "title": "Degusto",
+      "alt": "Degusto banner"
+    },
+    "digitalImplant": {
+      "title": "Digital Implant Clinic",
+      "alt": "Digital Implant Clinic banner"
+    },
+    "borborAqua": {
+      "title": "Borbor Aqua",
+      "alt": "Borbor banner"
+    },
+    "marcoGroup": {
+      "title": "Marco Group",
+      "alt": "Marco Group banner"
+    },
+    "ncie": {
+      "title": "National Center for Innovation and Entrepreneurship",
+      "alt": "NCIE banner"
+    },
+    "anra": {
+      "title": "Armenian Nuclear Regulatory Authority",
+      "alt": "Armenian Nuclear Regulatory Authority banner"
+    }
+  }
+}

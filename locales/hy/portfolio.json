@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "pageTitle": "Պորտֆոլիո | Neetrino",
+    "description": "Neetrino պորտֆոլիո — ընտրված կայքեր, մոբայլ հավելվածներ, CRM համակարգեր, SaaS հարթակներ և թվային արտադրանք։"
+  },
+  "hero": {
+    "title": "ՊՈՐՏՖՈԼԻՈ",
+    "srOnlyTitle": "Neetrino Պորտֆոլիո"
+  },
+  "pagination": {
+    "ariaLabel": "Պորտֆոլիոյի էջավորում"
+  },
+  "projects": {
+    "tooonExpo": {
+      "title": "Tooon Expo",
+      "alt": "Tooon Expo բաններ"
+    },
+    "zeppelin": {
+      "title": "Zeppelin",
+      "alt": "Zeppelin բաններ",
+      "overlayTitle": "ZEPPELIN"
+    },
+    "degusto": {
+      "title": "Degusto",
+      "alt": "Degusto բաններ"
+    },
+    "digitalImplant": {
+      "title": "Digital Implant Clinic",
+      "alt": "Digital Implant Clinic բաններ"
+    },
+    "borborAqua": {
+      "title": "Borbor Aqua",
+      "alt": "Borbor բաններ"
+    },
+    "marcoGroup": {
+      "title": "Marco Group",
+      "alt": "Marco Group բաններ"
+    },
+    "ncie": {
+      "title": "Արտոնագրման և ձեռնարկատիրության ազգային կենտրոն",
+      "alt": "NCIE բաններ"
+    },
+    "anra": {
+      "title": "Հայաստանի միջուկային ապահովության կարգավորող մարմին",
+      "alt": "ANRA բաններ"
+    }
+  }
+}

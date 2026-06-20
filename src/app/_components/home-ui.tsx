@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import type { FooterLink } from './home-data';
 
 type SectionHeadingProps = {
   eyebrow: string;
@@ -75,24 +76,9 @@ export function HeroStatToneClass(tone: keyof typeof heroStatToneClasses): strin
   return heroStatToneClasses[tone];
 }
 
-const footerLinkHrefs: Record<string, string> = {
-  About: '/#about',
-  Team: '/#about',
-  'Contact us': '/contact',
-  Portfolio: '/portfolio',
-  Services: '/services',
-  Blog: '/#blog',
-  Website: '/services',
-  'Mobile App': '/services',
-  'CRM Systems': '/services',
-  'SAAS Platforms': '/services',
-  'AI integration': '/services',
-  All: '/services',
-};
-
 type FooterLinkColumnProps = {
   title: string;
-  links: readonly string[];
+  links: readonly FooterLink[];
 };
 
 export function FooterLinkColumn({ title, links }: FooterLinkColumnProps): React.JSX.Element {
@@ -101,8 +87,8 @@ export function FooterLinkColumn({ title, links }: FooterLinkColumnProps): React
       <h3 className="home-footer-column-title">{title}</h3>
       <ul className="home-footer-links">
         {links.map((link) => (
-          <li key={link}>
-            <a href={footerLinkHrefs[link] ?? '/'}>{link}</a>
+          <li key={link.id}>
+            <a href={link.href}>{link.label}</a>
           </li>
         ))}
       </ul>

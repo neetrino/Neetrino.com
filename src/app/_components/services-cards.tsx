@@ -1,7 +1,16 @@
-import { serviceCards, type ServiceDetailCard } from './services-data';
+'use client';
+
+import { useHomeI18n } from './home-i18n-provider';
+import type { ServiceDetailCard } from './services-data';
 import { ServiceIcon } from './services-icons';
 
-function ServiceDetailCardView({ card }: { card: ServiceDetailCard }): React.JSX.Element {
+function ServiceDetailCardView({
+  card,
+  continueLabel,
+}: {
+  card: ServiceDetailCard;
+  continueLabel: string;
+}): React.JSX.Element {
   return (
     <article className={`svc-card svc-card--${card.id}`}>
       <span className="svc-card-fill" aria-hidden />
@@ -26,7 +35,7 @@ function ServiceDetailCardView({ card }: { card: ServiceDetailCard }): React.JSX
         </p>
       </div>
       <a className="svc-card-cta" href="#contact">
-        <span>Continue</span>
+        <span>{continueLabel}</span>
         <svg className="svc-card-cta-icon" viewBox="0 0 17 17" fill="none" aria-hidden="true">
           <path
             d="M10.83 2.5 15.83 8.33 10.83 14.17M15.83 8.33H.83"
@@ -43,10 +52,16 @@ function ServiceDetailCardView({ card }: { card: ServiceDetailCard }): React.JSX
 }
 
 export function ServiceCardGrid(): React.JSX.Element {
+  const { serviceDetailCards, servicesCopy } = useHomeI18n();
+
   return (
     <div className="svc-grid">
-      {serviceCards.map((card) => (
-        <ServiceDetailCardView key={card.id} card={card} />
+      {serviceDetailCards.map((card) => (
+        <ServiceDetailCardView
+          key={card.id}
+          card={card}
+          continueLabel={servicesCopy.actions.continue}
+        />
       ))}
     </div>
   );

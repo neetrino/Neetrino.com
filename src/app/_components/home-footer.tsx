@@ -1,9 +1,13 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { contactInfo, footerLinks, footerSocialIcons } from './home-data';
+import { useHomeI18n } from './home-i18n-provider';
 import { FooterLinkColumn, HomeContainer } from './home-ui';
 
 export function HomeFooter(): React.JSX.Element {
+  const { contactInfo, footerLinks, footerSocialIcons, homeCopy } = useHomeI18n();
+
   return (
     <footer id="contact" className="home-footer">
       <div className="home-footer-bg" aria-hidden>
@@ -42,10 +46,10 @@ export function HomeFooter(): React.JSX.Element {
       <HomeContainer>
         <div className="home-footer-grid">
           <div className="home-footer-links-group">
-            <FooterLinkColumn title="Company" links={footerLinks.Company} />
-            <FooterLinkColumn title="Services" links={footerLinks.Services} />
+            <FooterLinkColumn title={homeCopy.footer.columns.company} links={footerLinks.company} />
+            <FooterLinkColumn title={homeCopy.footer.columns.services} links={footerLinks.services} />
             <div className="home-footer-contact-column">
-              <h3 className="home-footer-column-title">Contact</h3>
+              <h3 className="home-footer-column-title">{homeCopy.footer.columns.contact}</h3>
               <ul className="home-footer-contact">
                 <li>
                   <Image src="/figma-home/vector4.svg" alt="" width={14} height={18} aria-hidden />
@@ -67,24 +71,26 @@ export function HomeFooter(): React.JSX.Element {
             </div>
           </div>
           <div className="home-footer-message">
-            <h3 className="home-footer-column-title home-footer-message-title">Message us</h3>
+            <h3 className="home-footer-column-title home-footer-message-title">
+              {homeCopy.footer.message.title}
+            </h3>
             <p className="home-footer-message-copy">
-              Step into the digital world with one message. Our team will get back to you shortly.
+              {homeCopy.footer.message.copy}
             </p>
             <form className="home-footer-form" action="/#contact">
               <label className="sr-only" htmlFor="footer-message">
-                Your message
+                {homeCopy.footer.message.label}
               </label>
-              <input id="footer-message" type="text" placeholder="Enter your message" />
+              <input id="footer-message" type="text" placeholder={homeCopy.footer.message.placeholder} />
               <button type="submit" className="home-footer-send">
-                <span>Send</span>
+                <span>{homeCopy.footer.message.send}</span>
                 <Image src="/figma-home/group221.svg" alt="" width={42} height={42} aria-hidden />
               </button>
             </form>
           </div>
         </div>
         <div className="home-footer-bottom">
-          <p>Copyright © 2017 - 2026 Neetrino IT Company. All Rights Reserved.</p>
+          <p>{homeCopy.footer.copyright}</p>
           <div className="home-footer-social">
             {footerSocialIcons.map((icon) => (
               <Link key={icon.alt} href="/#contact" aria-label={icon.alt}>

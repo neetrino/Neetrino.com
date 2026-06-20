@@ -43,9 +43,9 @@
   background: #473dff;
   color: #fff;
   font-family: inherit;
-  font-size: 14px;
+  font-size: calc(14px * var(--locale-font-scale));
   font-weight: 800;
-  line-height: 20px;
+  line-height: calc(20px * var(--locale-font-scale));
   letter-spacing: -0.15px;
   cursor: pointer;
 }
@@ -142,7 +142,7 @@
   display: block;
   padding: 16px 0;
   color: #fff;
-  font-size: 20px;
+  font-size: calc(20px * var(--locale-font-scale));
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.2px;
@@ -169,7 +169,7 @@
   justify-content: space-between;
   padding: 16px 0;
   color: #fff;
-  font-size: 20px;
+  font-size: calc(20px * var(--locale-font-scale));
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.2px;
@@ -212,7 +212,7 @@
 
 .about-mobile-menu-more-list .about-mobile-menu-link {
   padding: 10px 0;
-  font-size: 17px;
+  font-size: calc(17px * var(--locale-font-scale));
   font-weight: 700;
   color: rgb(255 255 255 / 0.88);
 }
@@ -239,7 +239,7 @@
   background: #fff;
   color: #473dff;
   font-family: inherit;
-  font-size: 14px;
+  font-size: calc(14px * var(--locale-font-scale));
   font-weight: 800;
   line-height: 1;
   cursor: pointer;

@@ -1,50 +1,50 @@
+import { portfolioMessages, type PortfolioMessages } from './portfolio-messages';
+
+export type PortfolioProjectId =
+  | 'tooonExpo'
+  | 'zeppelin'
+  | 'degusto'
+  | 'digitalImplant'
+  | 'borborAqua'
+  | 'marcoGroup'
+  | 'ncie'
+  | 'anra';
+
 export type PortfolioProject = {
   title: string;
   alt: string;
   image: string;
   variant?: 'zeppelin';
+  overlayTitle?: string;
 };
 
-export const portfolioProjects: PortfolioProject[] = [
-  {
-    title: 'Tooon Expo',
-    alt: 'Tooon Expo banner',
-    image: '/portfolio/optimized/tooon-expo.jpg',
-  },
-  {
-    title: 'Zeppelin',
-    alt: 'Zeppelin banner',
-    image: '/portfolio/optimized/zeppelin-bg.jpg',
-    variant: 'zeppelin',
-  },
-  {
-    title: 'Degusto',
-    alt: 'Degusto banner',
-    image: '/portfolio/optimized/degusto.jpg',
-  },
-  {
-    title: 'Digital Implant Clinic',
-    alt: 'Digital Implant Clinic banner',
-    image: '/portfolio/optimized/digital-implant.jpg',
-  },
-  {
-    title: 'Borbor Aqua',
-    alt: 'Borbor banner',
-    image: '/portfolio/optimized/borbor.jpg',
-  },
-  {
-    title: 'Marco Group',
-    alt: 'Marco Group banner',
-    image: '/portfolio/optimized/marco.jpg',
-  },
-  {
-    title: 'National Center for Innovation and Entrepreneurship',
-    alt: 'NCIE banner',
-    image: '/portfolio/optimized/ncie.jpg',
-  },
-  {
-    title: 'Armenian Nuclear Regulatory Authority',
-    alt: 'Armenian Nuclear Regulatory Authority banner',
-    image: '/portfolio/optimized/anra.jpg',
-  },
+const PORTFOLIO_PROJECT_META: readonly {
+  id: PortfolioProjectId;
+  image: string;
+  variant?: 'zeppelin';
+}[] = [
+  { id: 'tooonExpo', image: '/portfolio/optimized/tooon-expo.jpg' },
+  { id: 'zeppelin', image: '/portfolio/optimized/zeppelin-bg.jpg', variant: 'zeppelin' },
+  { id: 'degusto', image: '/portfolio/optimized/degusto.jpg' },
+  { id: 'digitalImplant', image: '/portfolio/optimized/digital-implant.jpg' },
+  { id: 'borborAqua', image: '/portfolio/optimized/borbor.jpg' },
+  { id: 'marcoGroup', image: '/portfolio/optimized/marco.jpg' },
+  { id: 'ncie', image: '/portfolio/optimized/ncie.jpg' },
+  { id: 'anra', image: '/portfolio/optimized/anra.jpg' },
 ];
+
+export function createPortfolioProjects(messages: PortfolioMessages): PortfolioProject[] {
+  return PORTFOLIO_PROJECT_META.map((meta) => {
+    const copy = messages.projects[meta.id];
+
+    return {
+      title: copy.title,
+      alt: copy.alt,
+      image: meta.image,
+      variant: meta.variant,
+      overlayTitle: 'overlayTitle' in copy ? copy.overlayTitle : undefined,
+    };
+  });
+}
+
+export const portfolioProjects = createPortfolioProjects(portfolioMessages);

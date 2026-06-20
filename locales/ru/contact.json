@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "pageTitle": "Связаться с нами",
+    "description": "Свяжитесь с Neetrino по email или телефону, посетите офис в Ереване или отправьте запрос по проекту."
+  },
+  "hero": {
+    "srOnlyTitle": "Контакты Neetrino"
+  },
+  "intro": {
+    "kicker": "Связаться",
+    "title": "СВЯЖИТЕСЬ С НАМИ",
+    "copy": "Напишите нам по email или телефону, посетите наш офис или отправьте запрос по проекту — мы отвечаем в рабочие дни.",
+    "methods": {
+      "email": "Email",
+      "phone": "Телефон"
+    },
+    "social": {
+      "followUs": "Подписаться",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "viber": "Viber"
+    }
+  },
+  "form": {
+    "title": "Отправить запрос",
+    "copy": "Расскажите о вашей идее или сроках — мы ответим в рабочие дни.",
+    "nameLabel": "Имя",
+    "namePlaceholder": "Ваше имя",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Ваш email",
+    "messageLabel": "Сообщение",
+    "messagePlaceholder": "Расскажите о вашем проекте",
+    "submit": "Отправить запрос"
+  },
+  "office": {
+    "title": "Офис",
+    "hours": "Пн - Пт, 10:00 - 19:00",
+    "citySuffix": "Ереван, Армения",
+    "openInMaps": "Открыть в Google Maps"
+  }
+}

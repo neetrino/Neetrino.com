@@ -1,18 +1,22 @@
+'use client';
+
 import Image from 'next/image';
 
-import { heroStats } from './home-data';
 import { HomeHeroBgCore } from './home-hero-bg-core';
 import { HomeHeroDeferredDecor } from './home-hero-deferred-decor';
 import { HomeHeroHandLayer } from './home-hero-hand-layer';
 import { HomeHeroRobot } from './home-hero-robot';
+import { useHomeI18n } from './home-i18n-provider';
 
 import { HeroStatToneClass } from './home-ui';
 
 export function HomeHero(): React.JSX.Element {
+  const { heroStats, homeCopy } = useHomeI18n();
   const [firstStat, secondStat, thirdStat] = heroStats;
+  const { hero } = homeCopy;
 
   return (
-    <section className="home-hero" aria-label="Hero">
+    <section className="home-hero" aria-label={hero.ariaLabel}>
       <div className="home-hero-bg-shell" aria-hidden>
         <HomeHeroBgCore philippPriority brandPriority />
         <HomeHeroRobot />
@@ -21,12 +25,9 @@ export function HomeHero(): React.JSX.Element {
 
       <div className="home-hero-stage">
         <p className="home-hero-tagline">
-          <span>We build </span>
-          <strong>high-performance websites</strong>
-          <span>
-            {' '}
-            and digital solutions that help businesses grow, scale, and stand out online.
-          </span>
+          <span>{hero.tagline.prefix}</span>
+          <strong>{hero.tagline.accent}</strong>
+          <span>{hero.tagline.suffix}</span>
         </p>
 
         <div className="home-hero-stats">
@@ -36,8 +37,9 @@ export function HomeHero(): React.JSX.Element {
                 <article className={`home-hero-stat ${HeroStatToneClass(firstStat.tone)}`}>
                   <p className="home-hero-stat-value">{firstStat.value}</p>
                   <p className="home-hero-stat-label">
-                    <span>Years of</span>
-                    <span>experience</span>
+                    {firstStat.labelLines?.map((line) => (
+                      <span key={line}>{line}</span>
+                    ))}
                   </p>
                 </article>
                 <article className={`home-hero-stat ${HeroStatToneClass(secondStat.tone)}`}>
@@ -56,7 +58,7 @@ export function HomeHero(): React.JSX.Element {
           ) : null}
         </div>
 
-        <a href="#contact" className="home-hero-chat" aria-label="Open chat">
+        <a href="#contact" className="home-hero-chat" aria-label={hero.chatAriaLabel}>
           <Image src="/figma-home/chat.svg" alt="" width={79} height={79} loading="lazy" fetchPriority="low" />
         </a>
       </div>
