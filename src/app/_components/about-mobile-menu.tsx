@@ -4,19 +4,12 @@ import { useEffect, useId, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { moreNavItems, navItems, type NavItem } from './home-data';
+import type { NavItem } from './home-data';
+import { useHomeI18n } from './home-i18n-provider';
 
 type AboutMobileMenuProps = {
   onClose: () => void;
 };
-
-type LanguageCode = 'ENG' | 'RUS' | 'HY';
-
-const MOBILE_MENU_LANGUAGES: ReadonlyArray<{ code: LanguageCode; label: string }> = [
-  { code: 'ENG', label: 'ENG' },
-  { code: 'RUS', label: 'РУС' },
-  { code: 'HY', label: 'ՀԱՅ' },
-];
 
 function useCurrentHash(pathname: string): string {
   const [hash, setHash] = useState('');
@@ -98,10 +91,10 @@ function MobileMenuNavLink({
 
 /** Full-screen mobile navigation panel opened from the header Menu button. */
 export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.Element {
+  const { homeCopy, languageOptions, locale, moreNavItems, navItems, setLocale } = useHomeI18n();
   const menuId = useId();
   const pathname = usePathname();
   const currentHash = useCurrentHash(pathname);
-  const [activeLanguage, setActiveLanguage] = useState<LanguageCode>('ENG');
   const isMoreActive = moreNavItems.some((item) => isNavLinkActive(item, pathname, currentHash));
 
   useEffect(() => {
@@ -126,7 +119,7 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
       <button
         type="button"
         className="about-mobile-menu-backdrop"
-        aria-label="Close menu"
+        aria-label={homeCopy.navigation.mobileMenuCloseAriaLabel}
         onClick={onClose}
       />
 
@@ -135,7 +128,7 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
         className="about-mobile-menu-panel"
         role="dialog"
         aria-modal="true"
-        aria-label="Site navigation"
+        aria-label={homeCopy.navigation.siteNavigationAriaLabel}
       >
         <div className="about-mobile-menu-watermark" aria-hidden>
           <Image
@@ -154,9 +147,9 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
           />
         </div>
 
-        <nav className="about-mobile-menu-nav" aria-label="Main navigation">
+        <nav className="about-mobile-menu-nav" aria-label={homeCopy.navigation.mainAriaLabel}>
           {navItems.map((item, index) => (
-            <div key={item.label} className="about-mobile-menu-item">
+            <div key={item.id} className="about-mobile-menu-item">
               <MobileMenuNavLink
                 item={item}
                 isActive={isNavLinkActive(item, pathname, currentHash)}
@@ -173,11 +166,11 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
                 : 'about-mobile-menu-more'
             }
           >
-            <summary>More</summary>
+            <summary>{homeCopy.navigation.moreLabel}</summary>
             <div className="about-mobile-menu-more-list">
               {moreNavItems.map((item) => (
                 <MobileMenuNavLink
-                  key={item.label}
+                  key={item.id}
                   item={item}
                   isActive={isNavLinkActive(item, pathname, currentHash)}
                   onNavigate={onClose}
@@ -187,12 +180,16 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
           </details>
         </nav>
 
-        <div className="about-mobile-menu-languages" role="group" aria-label="Language">
-          {MOBILE_MENU_LANGUAGES.map((language) => {
-            const isActive = activeLanguage === language.code;
+        <div
+          className="about-mobile-menu-languages"
+          role="group"
+          aria-label={homeCopy.navigation.languageGroupAriaLabel}
+        >
+          {languageOptions.map((language) => {
+            const isActive = locale === language.locale;
             return (
               <button
-                key={language.code}
+                key={language.locale}
                 type="button"
                 className={
                   isActive
@@ -200,12 +197,12 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
                     : 'about-mobile-menu-lang'
                 }
                 aria-pressed={isActive}
-                onClick={() => setActiveLanguage(language.code)}
+                onClick={() => setLocale(language.locale)}
               >
                 <span className="about-mobile-menu-lang-icon">
                   <GlobeIcon />
                 </span>
-                {language.label}
+                {language.codeLabel}
               </button>
             );
           })}
@@ -215,7 +212,7 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
       <button
         type="button"
         className="about-mobile-menu-toggle"
-        aria-label="Close menu"
+        aria-label={homeCopy.navigation.mobileMenuCloseAriaLabel}
         aria-controls={menuId}
         onClick={onClose}
       >

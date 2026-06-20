@@ -1,7 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import { HOME_IMAGE_QUALITY } from './home-constants';
-import { portfolioBottomRow, portfolioTopRow } from './home-data';
 import type { ProjectCard } from './home-data';
+import { useHomeI18n } from './home-i18n-provider';
 import { HomePortfolioCarousel } from './home-portfolio-carousel';
 import { ExploreButton, HomeContainer, SectionHeading } from './home-ui';
 
@@ -64,6 +66,8 @@ function PortfolioCarouselRow({
 }
 
 export function HomePortfolio(): React.JSX.Element {
+  const { homeCopy, portfolioBottomRow, portfolioTopRow } = useHomeI18n();
+
   return (
     <section id="portfolio" className="home-section home-portfolio">
       <div className="home-portfolio-bg home-portfolio-bg-top" aria-hidden>
@@ -85,7 +89,11 @@ export function HomePortfolio(): React.JSX.Element {
         />
       </div>
       <HomeContainer>
-        <SectionHeading eyebrow="PORTFOLIO" title="OUR" highlight=" PROJECTS" />
+        <SectionHeading
+          eyebrow={homeCopy.sections.portfolio.eyebrow}
+          title={homeCopy.sections.portfolio.title}
+          highlight={homeCopy.sections.portfolio.highlight}
+        />
       </HomeContainer>
       <HomePortfolioCarousel>
         <PortfolioCarouselRow projects={portfolioTopRow} direction="left" rowKey="top" />
@@ -93,7 +101,7 @@ export function HomePortfolio(): React.JSX.Element {
       </HomePortfolioCarousel>
       <HomeContainer>
         <div className="home-section-cta">
-          <ExploreButton href="/portfolio" label="Explore" />
+          <ExploreButton href="/portfolio" label={homeCopy.actions.explore} />
         </div>
       </HomeContainer>
     </section>

@@ -1,12 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 
-import { impactStats, teamText } from './about-data';
+import { useHomeI18n } from './home-i18n-provider';
 import { ExploreButton } from './home-ui';
 import { MobileImpactStat, MobileReflectTitle } from './about-mobile-ui';
 
-const MOBILE_IMPACT_STATS = impactStats.slice(0, 3);
-
 export function AboutMobileCountries(): React.JSX.Element {
+  const { aboutData } = useHomeI18n();
+  const mobileImpactStats = aboutData.impactStats.slice(0, 3);
+
   return (
     <>
       <section className="about-mobile-countries-section" aria-labelledby="about-mobile-countries-title">
@@ -14,16 +17,16 @@ export function AboutMobileCountries(): React.JSX.Element {
           className="about-mobile-countries-title"
           align="center"
           stacked
-          lines={[
-            { text: 'WE WORK WITH MORE THAN' },
-            { text: '10 COUNTRIES', accent: true },
-          ]}
+          lines={aboutData.countriesTitleMobile.lines.map((line) => ({
+            text: line.text,
+            accent: line.accent === true,
+          }))}
         />
 
         <div className="about-mobile-map-wrap">
           <Image
             src="/about/world-map.webp"
-            alt="World map"
+            alt={aboutData.countriesMapAlt}
             fill
             sizes="100vw"
             loading="lazy"
@@ -33,9 +36,9 @@ export function AboutMobileCountries(): React.JSX.Element {
         </div>
       </section>
 
-      <section className="about-mobile-impact-section" aria-label="Company impact">
+      <section className="about-mobile-impact-section" aria-label={aboutData.ariaImpact}>
         <div className="about-mobile-impact-stats">
-          {MOBILE_IMPACT_STATS.map((stat) => (
+          {mobileImpactStats.map((stat) => (
             <MobileImpactStat key={stat.label} {...stat} />
           ))}
         </div>
@@ -45,6 +48,8 @@ export function AboutMobileCountries(): React.JSX.Element {
 }
 
 export function AboutMobileTeam(): React.JSX.Element {
+  const { aboutData } = useHomeI18n();
+
   return (
     <section className="about-mobile-team-section" aria-labelledby="about-mobile-team-title">
       <div className="about-mobile-team-inner">
@@ -52,17 +57,17 @@ export function AboutMobileTeam(): React.JSX.Element {
           className="about-mobile-team-title"
           align="left"
           lines={[
-            { text: 'MEET OUR ' },
-            { text: 'TEAM', accent: true },
+            { text: aboutData.teamTitle.plain },
+            { text: aboutData.teamTitle.accent, accent: true },
           ]}
         />
 
         <div className="about-mobile-team-content">
           <div className="about-mobile-team-copy-glow" aria-hidden />
-          <p className="about-mobile-team-copy">{teamText}</p>
+          <p className="about-mobile-team-copy">{aboutData.teamText}</p>
 
           <div className="about-mobile-team-cta">
-            <ExploreButton href="/team" label="Explore" />
+            <ExploreButton href="/team" label={aboutData.exploreCta} />
           </div>
         </div>
       </div>

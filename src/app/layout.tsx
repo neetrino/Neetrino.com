@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Audiowide, DM_Sans, Inter } from 'next/font/google';
+import { AppProviders } from './_components/app-providers';
 import './globals.css';
 
 const inter = Inter({
@@ -35,7 +36,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${dmSans.variable} ${audiowide.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <AppProviders>{children}</AppProviders>
+      </body>
     </html>
   );
 }

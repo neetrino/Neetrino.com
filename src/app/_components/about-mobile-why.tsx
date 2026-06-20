@@ -1,6 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 
-import { whyFeatures, whyIllustrations } from './about-data';
+import { useHomeI18n } from './home-i18n-provider';
 import { MobileReflectTitle } from './about-mobile-ui';
 
 type WhyRowProps = {
@@ -12,6 +14,29 @@ type WhyRowProps = {
   rest: string;
   restLines?: string[];
 };
+
+const WHY_ROW_LAYOUT = [
+  {
+    illustrationClass: 'about-mobile-why-illustration--rocket',
+    imageSizes: '292px',
+    align: 'left' as const,
+  },
+  {
+    illustrationClass: 'about-mobile-why-illustration--palette',
+    imageSizes: '240px',
+    align: 'right' as const,
+  },
+  {
+    illustrationClass: 'about-mobile-why-illustration--lightning',
+    imageSizes: '300px',
+    align: 'left' as const,
+  },
+  {
+    illustrationClass: 'about-mobile-why-illustration--helmet',
+    imageSizes: '240px',
+    align: 'right' as const,
+  },
+];
 
 function AboutMobileWhyRow({
   illustrationClass,
@@ -43,6 +68,8 @@ function AboutMobileWhyRow({
 }
 
 export function AboutMobileWhy(): React.JSX.Element {
+  const { aboutData } = useHomeI18n();
+
   return (
     <section className="about-mobile-why-section" aria-labelledby="about-mobile-why-title">
       <div className="about-mobile-why-panel" aria-hidden>
@@ -61,47 +88,34 @@ export function AboutMobileWhy(): React.JSX.Element {
         className="about-mobile-why-title"
         align="left"
         lines={[
-          { text: 'WHY ' },
-          { text: 'CHOOSE', accent: true },
-          { text: ' US?' },
+          { text: aboutData.whyTitle.plain },
+          { text: aboutData.whyTitle.accent, accent: true },
+          { text: aboutData.whyTitle.trailing ?? '' },
         ]}
       />
 
       <div className="about-mobile-why-list">
-        <AboutMobileWhyRow
-          illustrationClass="about-mobile-why-illustration--rocket"
-          imageSrc={whyIllustrations[0].src}
-          imageSizes="292px"
-          align="left"
-          lead={whyFeatures[0].lead}
-          rest={whyFeatures[0].rest}
-          restLines={['execution delivered in', 'record time']}
-        />
-        <AboutMobileWhyRow
-          illustrationClass="about-mobile-why-illustration--palette"
-          imageSrc={whyIllustrations[1].src}
-          imageSizes="240px"
-          align="right"
-          lead={whyFeatures[1].lead}
-          rest={whyFeatures[1].rest}
-        />
-        <AboutMobileWhyRow
-          illustrationClass="about-mobile-why-illustration--lightning"
-          imageSrc={whyIllustrations[2].src}
-          imageSizes="300px"
-          align="left"
-          lead="Websites created"
-          rest=""
-          restLines={['10 times faster than', 'traditional methods']}
-        />
-        <AboutMobileWhyRow
-          illustrationClass="about-mobile-why-illustration--helmet"
-          imageSrc={whyIllustrations[3].src}
-          imageSizes="240px"
-          align="right"
-          lead={whyFeatures[3].lead}
-          rest={whyFeatures[3].rest}
-        />
+        {aboutData.whyMobileRows.map((row, index) => {
+          const layout = WHY_ROW_LAYOUT[index];
+          const illustration = aboutData.whyIllustrations[index];
+
+          if (!layout || !illustration) {
+            return null;
+          }
+
+          return (
+            <AboutMobileWhyRow
+              key={row.lead}
+              illustrationClass={layout.illustrationClass}
+              imageSrc={illustration.src}
+              imageSizes={layout.imageSizes}
+              align={layout.align}
+              lead={row.lead}
+              rest={row.rest}
+              restLines={row.restLines}
+            />
+          );
+        })}
       </div>
     </section>
   );

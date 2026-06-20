@@ -29,7 +29,7 @@
   border: 1px solid rgb(255 255 255 / 0.15);
   border-radius: 999px;
   color: rgb(255 255 255 / 0.75);
-  font-size: 13px;
+  font-size: calc(13px * var(--locale-font-scale));
 }
 
 .contact-office-tags span {
@@ -76,7 +76,7 @@
   border-radius: 999px;
   background: rgb(0 0 0 / 0.35);
   color: rgb(255 255 255 / 0.85);
-  font-size: 12px;
+  font-size: calc(12px * var(--locale-font-scale));
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -109,7 +109,7 @@
   }
 
   .contact-title {
-    font-size: clamp(40px, 12vw, 56px);
+    font-size: calc(clamp(40px, 12vw, 56px) * var(--locale-font-scale));
   }
 
   .contact-form {

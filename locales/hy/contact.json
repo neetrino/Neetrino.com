@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "pageTitle": "Կապ մեզ հետ",
+    "description": "Կապվեք Neetrino-ի հետ էլ. փոստով կամ հեռախոսով, այցելեք Երևանի գրասենյակը կամ ուղարկեք նախագծի հարցում։"
+  },
+  "hero": {
+    "srOnlyTitle": "Կապ Neetrino-ի հետ"
+  },
+  "intro": {
+    "kicker": "Կապվել",
+    "title": "ԿԱՊ ՄԵԶ ՀԵՏ",
+    "copy": "Կապվեք մեզ հետ էլ. փոստով կամ հեռախոսով, այցելեք մեր գրասենյակը կամ ուղարկեք նախագծի հարցում — աշխատանքային օրերին պատասխանում ենք։",
+    "methods": {
+      "email": "Էլ. փոստ",
+      "phone": "Հեռախոս"
+    },
+    "social": {
+      "followUs": "Հետևեք մեզ",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "telegram": "Telegram",
+      "whatsapp": "WhatsApp",
+      "viber": "Viber"
+    }
+  },
+  "form": {
+    "title": "Ուղարկել հարցում",
+    "copy": "Կիսվեք ձեր գաղափարով կամ ժամանակացույցով — աշխատանքային օրերին պատասխան կստանեք։",
+    "nameLabel": "Անուն",
+    "namePlaceholder": "Ձեր անունը",
+    "emailLabel": "Էլ. փոստ",
+    "emailPlaceholder": "Ձեր էլ. փոստը",
+    "messageLabel": "Հաղորդագրություն",
+    "messagePlaceholder": "Պատմեք մեզ ձեր նախագծի մասին",
+    "submit": "Ուղարկել հարցում"
+  },
+  "office": {
+    "title": "Գրասենյակ",
+    "hours": "Երկ - Ուրբ, 10:00 - 19:00",
+    "citySuffix": "Երևան, Հայաստան",
+    "openInMaps": "Բացել Google Maps-ում"
+  }
+}

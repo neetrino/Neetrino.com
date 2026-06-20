@@ -1,17 +1,22 @@
-import { aboutParagraphs } from './home-data';
+'use client';
+
 import { HomeAboutVisual } from './home-about-visual';
+import { useHomeI18n } from './home-i18n-provider';
 import { ExploreButton, HomeContainer } from './home-ui';
 
 export function HomeAbout(): React.JSX.Element {
+  const { aboutParagraphs, homeCopy } = useHomeI18n();
+  const { about } = homeCopy.sections;
+
   return (
     <section id="about" className="home-section home-about">
       <HomeContainer>
         <div className="home-about-stage">
           <div className="home-about-copy">
             <div className="home-section-heading home-section-heading-left">
-              <p className="home-eyebrow">BUILD WITH PURPOSE</p>
+              <p className="home-eyebrow">{about.eyebrow}</p>
               <h2 className="home-section-title">
-                WHO <span className="home-accent">WE</span> ARE
+                {about.title} <span className="home-accent">{about.highlight}</span> {about.suffix}
               </h2>
             </div>
             <div className="home-about-text">
@@ -39,7 +44,7 @@ export function HomeAbout(): React.JSX.Element {
                 </p>
               ))}
             </div>
-            <ExploreButton href="/contact" label="Explore" />
+            <ExploreButton href="/contact" label={homeCopy.actions.explore} />
           </div>
           <HomeAboutVisual />
         </div>

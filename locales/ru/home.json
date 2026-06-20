@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "pageTitle": "Neetrino IT Company"
+  },
+  "navigation": {
+    "mainAriaLabel": "Основная навигация",
+    "moreLabel": "Еще",
+    "quoteLabel": "Получить предложение",
+    "changeLanguageAriaLabel": "Сменить язык",
+    "currentLanguageLabel": "РУС",
+    "logoAlt": "Neetrino",
+    "logoHomeAriaLabel": "Главная Neetrino",
+    "mobileMenuLabel": "Меню",
+    "mobileMenuOpenAriaLabel": "Открыть меню",
+    "mobileMenuCloseAriaLabel": "Закрыть меню",
+    "siteNavigationAriaLabel": "Навигация по сайту",
+    "languageGroupAriaLabel": "Язык",
+    "languageOptions": {
+      "en": "ENG",
+      "ru": "РУС",
+      "hy": "ՀԱՅ"
+    },
+    "items": {
+      "home": "Главная",
+      "services": "Услуги",
+      "portfolio": "Портфолио",
+      "about": "О нас",
+      "contact": "Контакты",
+      "blog": "Блог",
+      "team": "Команда"
+    }
+  },
+  "hero": {
+    "ariaLabel": "Главный экран",
+    "brand": {
+      "first": "NEET",
+      "second": "RIN",
+      "third": "O"
+    },
+    "tagline": {
+      "prefix": "Мы создаем ",
+      "accent": "высокопроизводительные сайты",
+      "suffix": " и цифровые решения, которые помогают бизнесу расти, масштабироваться и выделяться онлайн."
+    },
+    "chatAriaLabel": "Открыть чат",
+    "actions": {
+      "quote": "Получить предложение",
+      "contact": "Контакты"
+    },
+    "stats": {
+      "experience": {
+        "value": "8+",
+        "label": "Лет опыта",
+        "labelLines": ["Лет", "опыта"],
+        "mobileLabelLines": ["Лет ", "опыта"]
+      },
+      "clients": {
+        "value": "97%",
+        "label": "Довольных клиентов"
+      },
+      "creations": {
+        "value": "450+",
+        "label": "Проектов"
+      }
+    }
+  },
+  "sections": {
+    "services": {
+      "eyebrow": "УСЛУГИ",
+      "title": "ЧТО МЫ",
+      "highlight": "ДЕЛАЕМ"
+    },
+    "portfolio": {
+      "eyebrow": "ПОРТФОЛИО",
+      "title": "НАШИ",
+      "highlight": " ПРОЕКТЫ"
+    },
+    "about": {
+      "eyebrow": "СОЗДАЕМ С ЦЕЛЬЮ",
+      "title": "КТО",
+      "highlight": "МЫ",
+      "suffix": "ТАКИЕ"
+    }
+  },
+  "actions": {
+    "continue": "Продолжить",
+    "explore": "Подробнее"
+  },
+  "services": {
+    "cards": {
+      "website": {
+        "title": "САЙТЫ",
+        "subtitle": "Индивидуальная разработка"
+      },
+      "mobileApp": {
+        "title": "МОБИЛЬНЫЕ ПРИЛОЖЕНИЯ",
+        "subtitle": "Разработка приложений"
+      },
+      "saasPlatforms": {
+        "title": "SAAS-ПЛАТФОРМЫ",
+        "subtitle": "Облачные решения"
+      },
+      "crmSystems": {
+        "title": "CRM-СИСТЕМЫ",
+        "subtitle": "Автоматизация процессов"
+      },
+      "aiIntegrations": {
+        "title": "AI-ИНТЕГРАЦИИ",
+        "subtitle": "AI-автоматизация"
+      }
+    }
+  },
+  "portfolio": {
+    "projects": {
+      "meetingAssistant": "Ассистент встреч",
+      "borborLanding": "Borbor Landing",
+      "visualHierarchy": "Визуальная иерархия",
+      "aiListing": "AI-листинг"
+    }
+  },
+  "about": {
+    "paragraphs": [
+      [
+        {
+          "text": "За последние 8 лет ",
+          "bold": false
+        },
+        {
+          "text": "Neetrino IT",
+          "bold": true
+        },
+        {
+          "text": " разработала более ",
+          "bold": false
+        },
+        {
+          "text": "400 онлайн-ресурсов",
+          "bold": "extrabold"
+        },
+        {
+          "text": ", от простых сайтов до крупных интернет-порталов и e-commerce платформ",
+          "bold": false
+        }
+      ],
+      [
+        {
+          "text": "Мы специализируемся на разработке сайтов, AI и bot-решениях, интеграции CRM-систем, разработке мобильных приложений, а также SEO и SMM-оптимизации, ",
+          "bold": false
+        },
+        {
+          "text": "создавая полноценное цифровое присутствие для вашего бизнеса.",
+          "bold": "extrabold"
+        }
+      ]
+    ]
+  },
+  "partners": {
+    "ariaLabel": "Логотипы партнеров"
+  },
+  "footer": {
+    "columns": {
+      "company": "Компания",
+      "services": "Услуги",
+      "contact": "Контакты"
+    },
+    "links": {
+      "about": "О нас",
+      "team": "Команда",
+      "contactUs": "Связаться с нами",
+      "portfolio": "Портфолио",
+      "services": "Услуги",
+      "blog": "Блог",
+      "website": "Сайт",
+      "mobileApp": "Мобильное приложение",
+      "crmSystems": "CRM-системы",
+      "saasPlatforms": "SAAS-платформы",
+      "aiIntegration": "AI-интеграция",
+      "all": "Все"
+    },
+    "contact": {
+      "address": "ул. Андраника Зоравара 108/10",
+      "email": "info@neetrino.com",
+      "phone": "+374 44 343 000",
+      "hours": "Рабочие часы\nПн. - Пт. 10:00 - 19:00"
+    },
+    "message": {
+      "title": "Напишите нам",
+      "copy": "Войдите в цифровой мир одним сообщением. Наша команда скоро свяжется с вами.",
+      "label": "Ваше сообщение",
+      "placeholder": "Введите ваше сообщение",
+      "send": "Отправить"
+    },
+    "copyright": "Copyright © 2017 - 2026 Neetrino IT Company. All Rights Reserved."
+  },
+  "social": {
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "behance": "Behance",
+    "youtube": "YouTube",
+    "twitter": "Twitter",
+    "dribbble": "Dribbble"
+  }
+}

@@ -1,52 +1,30 @@
+'use client';
+
 import { ContactMap } from './contact-map';
-import { contactInfo } from './home-data';
+import { useHomeI18n } from './home-i18n-provider';
 import { NeetrinoPageShell } from './neetrino-page-shell';
+import { contactMessages } from './contact-messages';
 import './contact.css';
 import './contact-office.css';
 
-type ContactMethod = {
-  label: string;
-  value: string;
-  href: string;
-  icon: 'email' | 'phone';
+type ContactMethodIcon = 'email' | 'phone';
+
+type SocialIconKey = 'facebook' | 'instagram' | 'linkedin' | 'telegram' | 'whatsapp' | 'viber';
+
+const SOCIAL_HREFS: Record<SocialIconKey, string> = {
+  facebook: 'https://www.facebook.com/Neetrino',
+  instagram: 'https://www.instagram.com/neetrino_it_agency/',
+  linkedin: 'https://www.linkedin.com/company/neetrino-it-agency/',
+  telegram: 'https://telegram.me/neetrino',
+  whatsapp: 'https://wa.me/37444343000',
+  viber: 'viber://chat?number=%2B37444343000',
 };
 
-type SocialLink = {
-  label: string;
-  href: string;
-  icon: 'facebook' | 'instagram' | 'linkedin' | 'telegram' | 'whatsapp' | 'viber';
-};
-
-const CONTACT_METHODS: ContactMethod[] = [
-  {
-    label: 'Email',
-    value: contactInfo.email,
-    href: `mailto:${contactInfo.email}`,
-    icon: 'email',
-  },
-  {
-    label: 'Phone',
-    value: contactInfo.phone,
-    href: `tel:${contactInfo.phone.replace(/\s+/g, '')}`,
-    icon: 'phone',
-  },
-];
-
-const SOCIAL_LINKS: SocialLink[] = [
-  { label: 'Facebook', href: 'https://www.facebook.com/Neetrino', icon: 'facebook' },
-  { label: 'Instagram', href: 'https://www.instagram.com/neetrino_it_agency/', icon: 'instagram' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/neetrino-it-agency/', icon: 'linkedin' },
-  { label: 'Telegram', href: 'https://telegram.me/neetrino', icon: 'telegram' },
-  { label: 'WhatsApp', href: 'https://wa.me/37444343000', icon: 'whatsapp' },
-  { label: 'Viber', href: 'viber://chat?number=%2B37444343000', icon: 'viber' },
-];
-
-const OFFICE_ADDRESS = `${contactInfo.address}, Yerevan, Armenia`;
 const MAP_URL = 'https://www.google.com/maps?q=40.1684703,44.4458742&z=15&output=embed';
 const MAP_LINK =
   'https://www.google.com/maps/place/Neetrino+IT+Company/@40.1684411,44.3634731,12z/data=!4m6!3m5!1s0x6a7d86fee77d7891:0x1a931845d2acd1e2!8m2!3d40.1684703!4d44.4458742!16s%2Fg%2F11tjg95w_6?entry=tts';
 
-const SOCIAL_ICON_PATHS: Record<SocialLink['icon'], string> = {
+const SOCIAL_ICON_PATHS: Record<SocialIconKey, string> = {
   facebook: 'M13.7 20v-7.1h2.4l.4-2.8h-2.8V8.3c0-.8.2-1.4 1.4-1.4h1.5V4.4c-.7-.1-1.5-.2-2.2-.2-2.2 0-3.7 1.3-3.7 3.8v2.1H8.2v2.8h2.5V20h3z',
   instagram: 'M7.2 2.8h9.6a4.4 4.4 0 0 1 4.4 4.4v9.6a4.4 4.4 0 0 1-4.4 4.4H7.2a4.4 4.4 0 0 1-4.4-4.4V7.2a4.4 4.4 0 0 1 4.4-4.4Zm4.8 4.7a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Zm5.1-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z',
   linkedin: 'M5.1 8.8h3.2V20H5.1V8.8Zm1.6-4.9a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6ZM10.3 8.8h3v1.5h.1c.4-.8 1.5-1.8 3.1-1.8 3.3 0 3.9 2.2 3.9 5V20h-3.2v-5.8c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V20h-3.2V8.8h.4Z',
@@ -55,7 +33,16 @@ const SOCIAL_ICON_PATHS: Record<SocialLink['icon'], string> = {
   viber: 'M8.7 3.8h6.6a4.9 4.9 0 0 1 4.9 4.9v4.1a4.9 4.9 0 0 1-4.9 4.9h-2.6L9 20.4v-2.7h-.3a4.9 4.9 0 0 1-4.9-4.9V8.7a4.9 4.9 0 0 1 4.9-4.9Zm-.4 4.1c-.3.1-.6.7-.6 1 .3 3.6 2.6 6 6.2 6.4.4 0 .9-.3 1-.7l.4-1.2c.1-.3 0-.6-.3-.8l-1.6-.9c-.3-.2-.6-.1-.8.2l-.5.7c-1-.5-1.8-1.3-2.2-2.3l.7-.5c.3-.2.4-.5.2-.8L9.9 7.5c-.2-.3-.5-.4-.8-.3l-.8.7Z',
 };
 
-function ContactGlyph({ icon }: { icon: ContactMethod['icon'] }): React.JSX.Element {
+const SOCIAL_ICON_KEYS: readonly SocialIconKey[] = [
+  'facebook',
+  'instagram',
+  'linkedin',
+  'telegram',
+  'whatsapp',
+  'viber',
+];
+
+function ContactGlyph({ icon }: { icon: ContactMethodIcon }): React.JSX.Element {
   if (icon === 'email') {
     return (
       <svg viewBox="0 0 24 24" aria-hidden>
@@ -72,7 +59,7 @@ function ContactGlyph({ icon }: { icon: ContactMethod['icon'] }): React.JSX.Elem
   );
 }
 
-function SocialIcon({ icon }: { icon: SocialLink['icon'] }): React.JSX.Element {
+function SocialIcon({ icon }: { icon: SocialIconKey }): React.JSX.Element {
   if (icon === 'whatsapp') {
     return (
       <svg viewBox="0 0 24 24" className="contact-social-icon-outline" aria-hidden>
@@ -101,17 +88,33 @@ function SocialIcon({ icon }: { icon: SocialLink['icon'] }): React.JSX.Element {
 }
 
 function ContactIntroCard(): React.JSX.Element {
+  const { contactCopy, contactInfo } = useHomeI18n();
+  const { intro } = contactCopy;
+
+  const contactMethods: { label: string; value: string; href: string; icon: ContactMethodIcon }[] = [
+    {
+      label: intro.methods.email,
+      value: contactInfo.email,
+      href: `mailto:${contactInfo.email}`,
+      icon: 'email',
+    },
+    {
+      label: intro.methods.phone,
+      value: contactInfo.phone,
+      href: `tel:${contactInfo.phone.replace(/\s+/g, '')}`,
+      icon: 'phone',
+    },
+  ];
+
   return (
     <article className="contact-card contact-intro-card">
-      <p className="contact-kicker">Get in touch</p>
-      <h2 className="contact-title">CONTACT US</h2>
-      <p className="contact-copy">
-        Reach us by email or phone, visit our office, or send a project inquiry - we respond on business days.
-      </p>
+      <p className="contact-kicker">{intro.kicker}</p>
+      <h2 className="contact-title">{intro.title}</h2>
+      <p className="contact-copy">{intro.copy}</p>
 
       <div className="contact-methods">
-        {CONTACT_METHODS.map((method) => (
-          <a key={method.label} className="contact-method" href={method.href}>
+        {contactMethods.map((method) => (
+          <a key={method.icon} className="contact-method" href={method.href}>
             <span className="contact-method-label">
               <ContactGlyph icon={method.icon} />
               {method.label}
@@ -122,11 +125,17 @@ function ContactIntroCard(): React.JSX.Element {
       </div>
 
       <div className="contact-social">
-        <p>Follow us</p>
+        <p>{intro.social.followUs}</p>
         <div className="contact-social-list">
-          {SOCIAL_LINKS.map((link) => (
-            <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
-              <SocialIcon icon={link.icon} />
+          {SOCIAL_ICON_KEYS.map((icon) => (
+            <a
+              key={icon}
+              href={SOCIAL_HREFS[icon]}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={intro.social[icon]}
+            >
+              <SocialIcon icon={icon} />
             </a>
           ))}
         </div>
@@ -136,48 +145,55 @@ function ContactIntroCard(): React.JSX.Element {
 }
 
 function ContactFormCard(): React.JSX.Element {
+  const { contactCopy } = useHomeI18n();
+  const { form } = contactCopy;
+
   return (
     <article className="contact-card contact-form-card">
-      <h2 className="contact-card-title">Send an inquiry</h2>
-      <p className="contact-card-copy">Share your idea or timeline - we will reply on business days.</p>
+      <h2 className="contact-card-title">{form.title}</h2>
+      <p className="contact-card-copy">{form.copy}</p>
 
       <form className="contact-form" action="/contact">
         <label className="sr-only" htmlFor="contact-name">
-          Name
+          {form.nameLabel}
         </label>
-        <input id="contact-name" name="name" type="text" placeholder="Your name" />
+        <input id="contact-name" name="name" type="text" placeholder={form.namePlaceholder} />
 
         <label className="sr-only" htmlFor="contact-email">
-          Email
+          {form.emailLabel}
         </label>
-        <input id="contact-email" name="email" type="email" placeholder="Your email" />
+        <input id="contact-email" name="email" type="email" placeholder={form.emailPlaceholder} />
 
         <label className="sr-only" htmlFor="contact-message">
-          Message
+          {form.messageLabel}
         </label>
-        <textarea id="contact-message" name="message" rows={5} placeholder="Tell us about your project" />
+        <textarea id="contact-message" name="message" rows={5} placeholder={form.messagePlaceholder} />
 
-        <button type="submit">Send inquiry</button>
+        <button type="submit">{form.submit}</button>
       </form>
     </article>
   );
 }
 
 function ContactOfficeSection(): React.JSX.Element {
+  const { contactCopy, contactInfo } = useHomeI18n();
+  const { office } = contactCopy;
+  const officeAddress = `${contactInfo.address}, ${office.citySuffix}`;
+
   return (
     <section className="contact-office" aria-labelledby="contact-office-title">
       <div className="contact-office-head">
         <div>
           <h2 id="contact-office-title" className="contact-card-title">
-            Office
+            {office.title}
           </h2>
           <div className="contact-office-tags">
-            <span>{OFFICE_ADDRESS}</span>
-            <span>Mon - Fri, 10:00 - 19:00</span>
+            <span>{officeAddress}</span>
+            <span>{office.hours}</span>
           </div>
         </div>
         <a href={MAP_LINK} target="_blank" rel="noopener noreferrer">
-          Open in Google Maps
+          {office.openInMaps}
         </a>
       </div>
 
@@ -188,7 +204,7 @@ function ContactOfficeSection(): React.JSX.Element {
 
 export function ContactPage(): React.JSX.Element {
   return (
-    <NeetrinoPageShell mainId="contact-top" srOnlyTitle="Contact Neetrino">
+    <NeetrinoPageShell mainId="contact-top" srOnlyTitle={contactMessages.hero.srOnlyTitle}>
       <section className="contact-page">
         <div className="contact-bg" aria-hidden />
         <div className="contact-grid" aria-hidden />

@@ -1,16 +1,13 @@
+'use client';
+
 import Image from 'next/image';
-import {
-  impactStats,
-  missionText,
-  teamText,
-  visionText,
-  whyFeatures,
-  whyIllustrations,
-} from './about-data';
+import { useHomeI18n } from './home-i18n-provider';
 import { ExploreButton } from './home-ui';
 import { GradientStat, ReflectTitle } from './about-ui';
 
 function AboutMissionVision(): React.JSX.Element {
+  const { aboutData } = useHomeI18n();
+
   return (
     <>
       <div className="about-cube" aria-hidden>
@@ -24,25 +21,35 @@ function AboutMissionVision(): React.JSX.Element {
           className="about-cube-img"
         />
       </div>
-      <ReflectTitle className="about-title-mission" plain="THE " accent="MISSION" />
-      <p className="about-copy about-copy-mission">{missionText}</p>
-      <ReflectTitle className="about-title-vision" plain="THE " accent="VISION" />
-      <p className="about-copy about-copy-vision">{visionText}</p>
+      <ReflectTitle
+        className="about-title-mission"
+        plain={aboutData.missionTitle.plain}
+        accent={aboutData.missionTitle.accent}
+      />
+      <p className="about-copy about-copy-mission">{aboutData.missionText}</p>
+      <ReflectTitle
+        className="about-title-vision"
+        plain={aboutData.visionTitle.plain}
+        accent={aboutData.visionTitle.accent}
+      />
+      <p className="about-copy about-copy-vision">{aboutData.visionText}</p>
     </>
   );
 }
 
 function AboutWhyChoose(): React.JSX.Element {
+  const { aboutData } = useHomeI18n();
+
   return (
     <section className="about-why" aria-labelledby="about-why-title">
       <div className="about-why-panel" aria-hidden />
       <ReflectTitle
         className="about-title-why"
-        plain="WHY "
-        accent="CHOOSE"
-        trailing=" US?"
+        plain={aboutData.whyTitle.plain}
+        accent={aboutData.whyTitle.accent}
+        trailing={aboutData.whyTitle.trailing}
       />
-      {whyIllustrations.map((item) => (
+      {aboutData.whyIllustrations.map((item) => (
         <div key={item.alt} className={`about-why-illustration ${item.className}`}>
           <Image
             src={item.src}
@@ -56,7 +63,7 @@ function AboutWhyChoose(): React.JSX.Element {
         </div>
       ))}
       <div className="about-why-features">
-        {whyFeatures.map((feature) => (
+        {aboutData.whyFeatures.map((feature) => (
           <p key={feature.lead} className="about-why-feature">
             <span>{feature.lead}</span>
             <span>{feature.rest}</span>
@@ -68,12 +75,14 @@ function AboutWhyChoose(): React.JSX.Element {
 }
 
 function AboutCountries(): React.JSX.Element {
+  const { aboutData } = useHomeI18n();
+
   return (
     <section className="about-countries" aria-labelledby="about-countries-title">
       <ReflectTitle
         className="about-title-countries"
-        plain="WE WORK WITH MORE THAN "
-        accent="10 COUNTRIES"
+        plain={aboutData.countriesTitle.plain}
+        accent={aboutData.countriesTitle.accent}
       />
       <div className="about-map" aria-hidden>
         <Image
@@ -87,7 +96,7 @@ function AboutCountries(): React.JSX.Element {
         />
       </div>
       <div className="about-impact-stats">
-        {impactStats.map((stat) => (
+        {aboutData.impactStats.map((stat) => (
           <GradientStat key={stat.label} {...stat} />
         ))}
       </div>
@@ -96,17 +105,23 @@ function AboutCountries(): React.JSX.Element {
 }
 
 function AboutTeam(): React.JSX.Element {
+  const { aboutData } = useHomeI18n();
+
   return (
     <section className="about-team" aria-labelledby="about-team-title">
-      <ReflectTitle className="about-title-team" plain="MEET OUR " accent="TEAM" />
-      <p className="about-copy about-copy-team">{teamText}</p>
+      <ReflectTitle
+        className="about-title-team"
+        plain={aboutData.teamTitle.plain}
+        accent={aboutData.teamTitle.accent}
+      />
+      <p className="about-copy about-copy-team">{aboutData.teamText}</p>
       <div className="about-team-cta">
-        <ExploreButton href="/services" label="Explore" />
+        <ExploreButton href="/services" label={aboutData.exploreCta} />
       </div>
       <div className="about-team-image">
         <Image
           src="/about/team-live.webp"
-          alt="Neetrino team"
+          alt={aboutData.teamImageAlt}
           fill
           sizes="663px"
           loading="lazy"

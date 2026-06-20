@@ -15,6 +15,7 @@
   --about-mobile-capsule-stick-top: calc(
     var(--about-mobile-header-top) + var(--about-mobile-header-height) + var(--about-mobile-capsule-gap)
   );
+  --about-mobile-cube-start: 4rem;
   --about-mobile-design-height: 5425;
 
   position: relative;
@@ -317,7 +318,7 @@
 
 .about-mobile-reflect-title-main {
   margin: 0;
-  font-size: clamp(1.3125rem, 5.5vw, 2.125rem);
+  font-size: calc(clamp(1.3125rem, 5.5vw, 2.125rem) * var(--locale-font-scale));
   font-style: italic;
   font-weight: 900;
   line-height: 1.1;
@@ -346,7 +347,7 @@
 
 .about-mobile-reflect-title-mirror-inner {
   transform: scaleY(-1);
-  font-size: clamp(1.3125rem, 5.5vw, 2.125rem);
+  font-size: calc(clamp(1.3125rem, 5.5vw, 2.125rem) * var(--locale-font-scale));
   font-style: italic;
   font-weight: 900;
   line-height: 1.1;
@@ -444,7 +445,7 @@
 
 .about-mobile-hero-headline {
   margin: 0;
-  font-size: clamp(1.875rem, 10.5vw, 2.875rem);
+  font-size: calc(clamp(1.875rem, 10.5vw, 2.875rem) * var(--locale-font-scale));
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: 1.27px;
@@ -467,9 +468,9 @@
   max-width: min(100%, 22rem);
   margin: 0.75rem 0 0;
   padding-right: min(50vw, 12.5rem);
-  font-size: 13px;
+  font-size: calc(13px * var(--locale-font-scale));
   font-weight: 400;
-  line-height: 21.125px;
+  line-height: calc(21.125px * var(--locale-font-scale));
   letter-spacing: -0.15px;
   color: rgb(255 255 255 / 0.9);
   white-space: pre-line;
@@ -563,7 +564,7 @@
   position: relative;
   z-index: 1;
   margin: 0;
-  font-size: clamp(1.75rem, 7vw, 2.25rem);
+  font-size: calc(clamp(1.75rem, 7vw, 2.25rem) * var(--locale-font-scale));
   font-weight: 900;
   line-height: 1;
   letter-spacing: 0.01em;
@@ -589,7 +590,7 @@
   z-index: 1;
   max-width: 11rem;
   margin: 0.25rem 0 0;
-  font-size: 11px;
+  font-size: calc(11px * var(--locale-font-scale));
   font-weight: 400;
   line-height: 1.2;
   text-align: center;
@@ -608,9 +609,9 @@
 .about-mobile-lead-copy {
   max-width: 100%;
   margin: 0;
-  font-size: 14px;
+  font-size: calc(14px * var(--locale-font-scale));
   font-weight: 400;
-  line-height: 22px;
+  line-height: calc(22px * var(--locale-font-scale));
   color: #fff;
   white-space: pre-line;
 }
@@ -625,13 +626,12 @@
   position: relative;
   z-index: 1;
   isolation: isolate;
-  view-timeline-name: --about-mobile-capsule-track;
-  view-timeline-axis: block;
 }
 
 .about-mobile-capsule {
   --about-mobile-beam-width: 128px;
   --about-mobile-cube-size: 131px;
+  --about-mobile-cube-translate-y: 0px;
 
   position: absolute;
   top: 0;
@@ -684,13 +684,13 @@
 
 .about-mobile-cube {
   position: absolute;
-  top: 4rem;
+  top: var(--about-mobile-cube-start);
   left: 50%;
   z-index: 1;
   width: var(--about-mobile-cube-size);
   height: var(--about-mobile-cube-size);
-  transform: translateX(-50%);
-  will-change: top;
+  transform: translate3d(-50%, var(--about-mobile-cube-translate-y), 0);
+  will-change: transform;
 }
 
 .about-mobile-cube::before {
@@ -704,32 +704,6 @@
 .about-mobile-cube-img {
   object-fit: contain;
   filter: brightness(0.82) contrast(1.08) saturate(0.94) drop-shadow(0 12px 28px rgb(0 0 0 / 0.28));
-}
-
-@supports (animation-timeline: scroll(root block)) {
-  .about-mobile-cube {
-    animation: about-mobile-cube-vertical-scroll linear both;
-    animation-range: 22% 86%;
-    animation-timeline: scroll(root block);
-  }
-}
-
-@supports (animation-timeline: view()) {
-  .about-mobile-cube {
-    animation: about-mobile-cube-vertical-scroll linear both;
-    animation-range: entry 0% exit 100%;
-    animation-timeline: --about-mobile-capsule-track;
-  }
-}
-
-@keyframes about-mobile-cube-vertical-scroll {
-  from {
-    top: 4rem;
-  }
-
-  to {
-    top: calc(100% - var(--about-mobile-cube-size));
-  }
 }
 
 /* ---------- Mission / Vision ---------- */
@@ -763,9 +737,9 @@
 .about-mobile-mv-copy {
   max-width: min(100%, 17.5rem);
   margin: 0.75rem 0 0;
-  font-size: 14px;
+  font-size: calc(14px * var(--locale-font-scale));
   font-weight: 200;
-  line-height: 22px;
+  line-height: calc(22px * var(--locale-font-scale));
   color: #fff;
   white-space: pre-line;
 }
@@ -817,7 +791,7 @@
 
 .about-mobile-why-title .about-mobile-reflect-title-main,
 .about-mobile-why-title .about-mobile-reflect-title-mirror-inner {
-  font-size: clamp(1.375rem, 6vw, 2rem);
+  font-size: calc(clamp(1.375rem, 6vw, 2rem) * var(--locale-font-scale));
 }
 
 .about-mobile-why-list {
@@ -887,7 +861,7 @@
   min-width: 0;
   width: 100%;
   max-width: 24rem;
-  font-size: 15px;
+  font-size: calc(15px * var(--locale-font-scale));
   font-weight: 700;
   line-height: 1.75;
   color: #fff;
@@ -931,7 +905,7 @@
 
 .about-mobile-countries-title .about-mobile-reflect-title-main,
 .about-mobile-countries-title .about-mobile-reflect-title-mirror-inner {
-  font-size: clamp(1.25rem, 5.5vw, 1.875rem);
+  font-size: calc(clamp(1.25rem, 5.5vw, 1.875rem) * var(--locale-font-scale));
 }
 
 .about-mobile-map-wrap {
@@ -977,7 +951,7 @@
 
 .about-mobile-impact-stat-blur {
   grid-area: 1 / 1;
-  font-size: 1.875rem;
+  font-size: calc(1.875rem * var(--locale-font-scale));
   font-weight: 900;
   line-height: 1;
   opacity: 0.55;
@@ -988,7 +962,7 @@
   z-index: 1;
   grid-area: 1 / 1;
   margin: 0;
-  font-size: 1.875rem;
+  font-size: calc(1.875rem * var(--locale-font-scale));
   font-weight: 900;
   line-height: 1;
   background-clip: text;
@@ -1021,7 +995,7 @@
 
 .about-mobile-impact-stat-label {
   margin: 0.5rem 0 0;
-  font-size: 12px;
+  font-size: calc(12px * var(--locale-font-scale));
   font-weight: 300;
   color: #fff;
 }
@@ -1047,8 +1021,8 @@
 
 .about-mobile-team-title .about-mobile-reflect-title-main,
 .about-mobile-team-title .about-mobile-reflect-title-mirror-inner {
-  font-size: 35px;
-  line-height: 35px;
+  font-size: calc(35px * var(--locale-font-scale));
+  line-height: calc(35px * var(--locale-font-scale));
 }
 
 .about-mobile-team-content {
@@ -1079,9 +1053,9 @@
   z-index: 1;
   margin: 0;
   max-width: 315px;
-  font-size: 16px;
+  font-size: calc(16px * var(--locale-font-scale));
   font-weight: 200;
-  line-height: 24px;
+  line-height: calc(24px * var(--locale-font-scale));
   color: #fff;
 }
 

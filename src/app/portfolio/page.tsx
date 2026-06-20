@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { PortfolioPage } from '../_components/portfolio-page';
+import { portfolioMessages } from '../_components/portfolio-messages';
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Neetrino',
-  description:
-    'Neetrino portfolio — selected websites, mobile apps, CRM systems, SaaS platforms, and digital products.',
+  title: portfolioMessages.meta.pageTitle,
+  description: portfolioMessages.meta.description,
 };
 
 export default function Portfolio(): React.JSX.Element {

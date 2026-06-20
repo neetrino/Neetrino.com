@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { AboutPage } from '../_components/about-page';
+import { aboutMessages } from '../_components/about-messages';
 
 export const metadata: Metadata = {
-  title: 'About | Neetrino',
-  description:
-    'About Neetrino — a digital product company building websites, mobile apps, CRM systems, SaaS platforms, and AI integrations.',
+  title: aboutMessages.meta.pageTitle,
+  description: aboutMessages.meta.description,
 };
 
 export default function About() {

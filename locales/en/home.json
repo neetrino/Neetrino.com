@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "pageTitle": "Neetrino IT Company"
+  },
+  "navigation": {
+    "mainAriaLabel": "Main navigation",
+    "moreLabel": "More",
+    "quoteLabel": "Get a Quote",
+    "changeLanguageAriaLabel": "Change language",
+    "currentLanguageLabel": "ENG",
+    "logoAlt": "Neetrino",
+    "logoHomeAriaLabel": "Neetrino home",
+    "mobileMenuLabel": "Menu",
+    "mobileMenuOpenAriaLabel": "Open menu",
+    "mobileMenuCloseAriaLabel": "Close menu",
+    "siteNavigationAriaLabel": "Site navigation",
+    "languageGroupAriaLabel": "Language",
+    "languageOptions": {
+      "en": "ENG",
+      "ru": "РУС",
+      "hy": "ՀԱՅ"
+    },
+    "items": {
+      "home": "Home",
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "about": "About",
+      "contact": "Contact",
+      "blog": "Blog",
+      "team": "Team"
+    }
+  },
+  "hero": {
+    "ariaLabel": "Hero",
+    "brand": {
+      "first": "NEET",
+      "second": "RIN",
+      "third": "O"
+    },
+    "tagline": {
+      "prefix": "We build ",
+      "accent": "high-performance websites",
+      "suffix": " and digital solutions that help businesses grow, scale, and stand out online."
+    },
+    "chatAriaLabel": "Open chat",
+    "actions": {
+      "quote": "Get a Quote",
+      "contact": "Contact"
+    },
+    "stats": {
+      "experience": {
+        "value": "8+",
+        "label": "Years of experience",
+        "labelLines": ["Years of", "experience"],
+        "mobileLabelLines": ["Years of ", "experience"]
+      },
+      "clients": {
+        "value": "97%",
+        "label": "Satisfied clients"
+      },
+      "creations": {
+        "value": "450+",
+        "label": "Creations"
+      }
+    }
+  },
+  "sections": {
+    "services": {
+      "eyebrow": "SERVICES",
+      "title": "WHAT WE",
+      "highlight": "DO"
+    },
+    "portfolio": {
+      "eyebrow": "PORTFOLIO",
+      "title": "OUR",
+      "highlight": " PROJECTS"
+    },
+    "about": {
+      "eyebrow": "BUILD WITH PURPOSE",
+      "title": "WHO",
+      "highlight": "WE",
+      "suffix": "ARE"
+    }
+  },
+  "actions": {
+    "continue": "Continue",
+    "explore": "Explore"
+  },
+  "services": {
+    "cards": {
+      "website": {
+        "title": "WEBSITE",
+        "subtitle": "Custom Development"
+      },
+      "mobileApp": {
+        "title": "MOBILE APP",
+        "subtitle": "App Development"
+      },
+      "saasPlatforms": {
+        "title": "SAAS PLATFORMS",
+        "subtitle": "Cloud Solutions"
+      },
+      "crmSystems": {
+        "title": "CRM SYSTEMS",
+        "subtitle": "Process Automation"
+      },
+      "aiIntegrations": {
+        "title": "AI INTEGRATIONS",
+        "subtitle": "AI Automation"
+      }
+    }
+  },
+  "portfolio": {
+    "projects": {
+      "meetingAssistant": "Meeting Assistant",
+      "borborLanding": "Borbor Landing",
+      "visualHierarchy": "Visual Hierarchy",
+      "aiListing": "AI Listing"
+    }
+  },
+  "about": {
+    "paragraphs": [
+      [
+        {
+          "text": "Over the past 8 years, ",
+          "bold": false
+        },
+        {
+          "text": "Neetrino IT",
+          "bold": true
+        },
+        {
+          "text": " has developed more than ",
+          "bold": false
+        },
+        {
+          "text": "400 online resources",
+          "bold": "extrabold"
+        },
+        {
+          "text": ", ranging from simple websites to large-scale internet portals and e-commerce platforms",
+          "bold": false
+        }
+      ],
+      [
+        {
+          "text": "We specialize in website development, AI and bot solutions, CRM system integration, mobile app development, as well as SEO and SMM optimization—",
+          "bold": false
+        },
+        {
+          "text": "delivering a comprehensive digital presence for your business.",
+          "bold": "extrabold"
+        }
+      ]
+    ]
+  },
+  "partners": {
+    "ariaLabel": "Partner logos"
+  },
+  "footer": {
+    "columns": {
+      "company": "Company",
+      "services": "Services",
+      "contact": "Contact"
+    },
+    "links": {
+      "about": "About",
+      "team": "Team",
+      "contactUs": "Contact us",
+      "portfolio": "Portfolio",
+      "services": "Services",
+      "blog": "Blog",
+      "website": "Website",
+      "mobileApp": "Mobile App",
+      "crmSystems": "CRM Systems",
+      "saasPlatforms": "SAAS Platforms",
+      "aiIntegration": "AI integration",
+      "all": "All"
+    },
+    "contact": {
+      "address": "108/10 Andranik Zoravar St.",
+      "email": "info@neetrino.com",
+      "phone": "+374 44 343 000",
+      "hours": "Working Hours\nMon. - Fri. 10AM - 7PM"
+    },
+    "message": {
+      "title": "Message us",
+      "copy": "Step into the digital world with one message. Our team will get back to you shortly.",
+      "label": "Your message",
+      "placeholder": "Enter your message",
+      "send": "Send"
+    },
+    "copyright": "Copyright © 2017 - 2026 Neetrino IT Company. All Rights Reserved."
+  },
+  "social": {
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "behance": "Behance",
+    "youtube": "YouTube",
+    "twitter": "Twitter",
+    "dribbble": "Dribbble"
+  }
+}

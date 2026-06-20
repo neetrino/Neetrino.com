@@ -337,9 +337,9 @@
   bottom: 20px;
   color: #f6ff00;
   font-family: Orbitron, var(--font-inter), sans-serif;
-  font-size: 55px;
+  font-size: calc(55px * var(--locale-font-scale));
   font-weight: 900;
-  line-height: 40px;
+  line-height: calc(40px * var(--locale-font-scale));
 }
 
 .portfolio-card-action {
@@ -397,7 +397,7 @@
   justify-content: center;
   color: #4e5d78;
   font-family: Poppins, var(--font-inter), sans-serif;
-  font-size: 14px;
+  font-size: calc(14px * var(--locale-font-scale));
   transform: translate3d(-50%, 0, 0);
 }
 
@@ -424,7 +424,7 @@
 }
 
 .portfolio-pagination-arrow {
-  font-size: 18px;
+  font-size: calc(18px * var(--locale-font-scale));
   line-height: 1;
 }
 

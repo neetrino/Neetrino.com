@@ -1,3 +1,5 @@
+import { aboutMessages, type AboutMessages } from './about-messages';
+
 export type GradientTone = 'purple' | 'orange' | 'green' | 'peach' | 'cyan';
 
 export type AboutStat = {
@@ -17,101 +19,132 @@ export type AboutFeature = {
   rest: string;
 };
 
-/** Hero headline split into the exact word styling used in the Figma design. */
-export const heroHeadline = {
-  line1Plain: 'WITH',
-  line1Accent: 'US',
-  line2: 'EVERY IDEA',
-  line3: 'BECOMES',
-  line4: 'POSSIBLE',
-} as const;
+export type AboutRichTextPart = {
+  text: string;
+  bold: boolean;
+};
 
-export const heroIntroRight =
-  'Over the past 7 years, Neetrino IT has developed more than 400 online resources, ranging from simple websites to large-scale internet portals and e-commerce platforms.';
+export type AboutReflectTitle = {
+  plain: string;
+  accent: string;
+  trailing?: string;
+};
 
-export const heroIntroLeft =
-  'We specialize in website development, AI and bot solutions, CRM system integration, mobile app development, as well as SEO and SMM optimization—delivering a comprehensive digital presence for your business.';
+export type AboutMobileReflectLine = {
+  text: string;
+  accent?: boolean;
+};
 
-/** Combined hero intro with manual line breaks for the mobile flow layout. */
-export const heroIntroMobile = `${heroIntroRight}
+export type AboutMobileWhyRow = {
+  lead: string;
+  rest: string;
+  restLines?: string[];
+};
 
-${heroIntroLeft}`;
+export type AboutPageData = {
+  heroHeadline: AboutMessages['headline'];
+  heroIntroRight: string;
+  heroIntroLeft: string;
+  heroIntroMobile: string;
+  heroParagraph: readonly AboutRichTextPart[];
+  missionText: string;
+  visionText: string;
+  missionTextMobile: string;
+  visionTextMobile: string;
+  teamText: string;
+  heroStats: AboutStat[];
+  impactStats: AboutStat[];
+  whyIllustrations: AboutIllustration[];
+  whyFeatures: AboutFeature[];
+  whyMobileRows: AboutMobileWhyRow[];
+  missionTitle: AboutReflectTitle;
+  visionTitle: AboutReflectTitle;
+  whyTitle: AboutReflectTitle;
+  countriesTitle: AboutReflectTitle;
+  countriesTitleMobile: AboutMessages['countries']['titleMobile'];
+  teamTitle: AboutReflectTitle;
+  teamImageAlt: string;
+  countriesMapAlt: string;
+  exploreCta: string;
+  ariaMissionVision: string;
+  ariaLead: string;
+  ariaImpact: string;
+};
 
-/** Mission copy with manual line breaks for the mobile flow layout. */
-export const missionTextMobile = `Our goal is to deliver fast, 
-affordable, and high-quality 
-digital solutions, 
-empowering businesses to 
-effortlessly build and 
-expand their online 
-presence, no matter how 
-complex the project.`;
-
-/** Vision copy with manual line breaks for the mobile flow layout. */
-export const visionTextMobile = `We envision a world 
-where businesses of all 
-sizes can effortlessly 
-establish a strong digital 
-presence using our fast,
- cutting-edge 
-technological solutions. 
-Our aim is to lead the 
-transformation of website 
-and app development, 
-making these tools 
-accessible to everyone, 
-everywhere.`;
-
-export const heroParagraph = [
-  { text: 'Neetrino', bold: true },
-  { text: ' is the first company to', bold: false },
-  { text: ' offer website sales', bold: true },
-  { text: ' through a Platform that provides access to ', bold: false },
-  { text: 'over 100,000', bold: true },
-  {
-    text: ' professional designs. Our Platform enables businesses to quickly and affordably create fully functional websites, perfectly tailored to',
-    bold: false,
-  },
-  { text: ' modern business needs', bold: true },
-  {
-    text: '. We not only save you time and resources but also guarantee high quality, advanced functionality, and ongoing support—maximizing the efficiency and competitiveness of ',
-    bold: false,
-  },
-  { text: 'your online presence', bold: true },
-  { text: '.', bold: false },
+const WHY_ILLUSTRATION_META = [
+  { src: '/about/why-1.webp', className: 'about-why-rocket' },
+  { src: '/about/why-2.webp', className: 'about-why-palette' },
+  { src: '/about/why-3.webp', className: 'about-why-lightning' },
+  { src: '/about/why-4.webp', className: 'about-why-helmet' },
 ] as const;
 
-export const missionText =
-  'Our goal is to deliver fast, affordable, and high-quality digital solutions, empowering businesses to effortlessly build and expand their online presence, no matter how complex the project.';
+function mapStats(
+  stats: AboutMessages['stats']['hero'] | AboutMessages['stats']['impact'],
+): AboutStat[] {
+  return stats.map((stat) => ({
+    value: stat.value,
+    label: stat.label,
+    tone: stat.tone as GradientTone,
+  }));
+}
 
-export const visionText =
-  'We envision a world where businesses of all sizes can effortlessly establish a strong digital presence using our fast, cutting-edge technological solutions. Our aim is to lead the transformation of website and app development, making these tools accessible to everyone, everywhere.';
+function mapLeadParts(parts: AboutMessages['lead']['parts']): AboutRichTextPart[] {
+  return parts.map((part) => ({
+    text: part.text,
+    bold: part.bold === true,
+  }));
+}
 
-export const teamText = visionText;
+export function createAboutPageData(messages: AboutMessages): AboutPageData {
+  return {
+    heroHeadline: messages.headline,
+    heroIntroRight: messages.intro.right,
+    heroIntroLeft: messages.intro.left,
+    heroIntroMobile: messages.intro.mobile,
+    heroParagraph: mapLeadParts(messages.lead.parts),
+    missionText: messages.mission.text,
+    visionText: messages.vision.text,
+    missionTextMobile: messages.mission.textMobile,
+    visionTextMobile: messages.vision.textMobile,
+    teamText: messages.team.text,
+    heroStats: mapStats(messages.stats.hero),
+    impactStats: mapStats(messages.stats.impact),
+    whyIllustrations: WHY_ILLUSTRATION_META.map((item, index) => ({
+      src: item.src,
+      className: item.className,
+      alt: messages.why.illustrationAlts[index] ?? '',
+    })),
+    whyFeatures: messages.why.features,
+    whyMobileRows: messages.why.mobileRows,
+    missionTitle: messages.mission.title,
+    visionTitle: messages.vision.title,
+    whyTitle: messages.why.title,
+    countriesTitle: messages.countries.title,
+    countriesTitleMobile: messages.countries.titleMobile,
+    teamTitle: messages.team.title,
+    teamImageAlt: messages.team.imageAlt,
+    countriesMapAlt: messages.countries.mapAlt,
+    exploreCta: messages.actions.explore,
+    ariaMissionVision: messages.aria.missionVision,
+    ariaLead: messages.aria.lead,
+    ariaImpact: messages.aria.impact,
+  };
+}
 
-export const heroStats: AboutStat[] = [
-  { value: '450+', label: 'Projects Delivered', tone: 'purple' },
-  { value: '6+', label: 'Core Services', tone: 'orange' },
-  { value: '24/7', label: 'Support Available', tone: 'green' },
-];
+export const aboutPageData = createAboutPageData(aboutMessages);
 
-export const impactStats: AboutStat[] = [
-  { value: '380+', label: 'Active Users', tone: 'purple' },
-  { value: '400+', label: 'Projects Done', tone: 'orange' },
-  { value: '25+', label: 'Members', tone: 'peach' },
-  { value: '8', label: 'Years of Experience', tone: 'cyan' },
-];
-
-export const whyIllustrations: AboutIllustration[] = [
-  { src: '/about/why-1.webp', alt: 'Rocket', className: 'about-why-rocket' },
-  { src: '/about/why-2.webp', alt: 'Palette', className: 'about-why-palette' },
-  { src: '/about/why-3.webp', alt: 'Lightning', className: 'about-why-lightning' },
-  { src: '/about/why-4.webp', alt: 'Helmet', className: 'about-why-helmet' },
-];
-
-export const whyFeatures: AboutFeature[] = [
-  { lead: 'Fast and premium', rest: 'execution delivered in record time' },
-  { lead: 'A selection of over', rest: '100,000 design options' },
-  { lead: 'Websites created 10 times', rest: 'faster than traditional methods' },
-  { lead: '24/7 technical support', rest: 'and free consultations' },
-];
+// Legacy exports for any remaining static imports.
+export const heroHeadline = aboutPageData.heroHeadline;
+export const heroIntroRight = aboutPageData.heroIntroRight;
+export const heroIntroLeft = aboutPageData.heroIntroLeft;
+export const heroIntroMobile = aboutPageData.heroIntroMobile;
+export const heroParagraph = aboutPageData.heroParagraph;
+export const missionText = aboutPageData.missionText;
+export const visionText = aboutPageData.visionText;
+export const missionTextMobile = aboutPageData.missionTextMobile;
+export const visionTextMobile = aboutPageData.visionTextMobile;
+export const teamText = aboutPageData.teamText;
+export const heroStats = aboutPageData.heroStats;
+export const impactStats = aboutPageData.impactStats;
+export const whyIllustrations = aboutPageData.whyIllustrations;
+export const whyFeatures = aboutPageData.whyFeatures;

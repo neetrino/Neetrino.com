@@ -1,17 +1,26 @@
+'use client';
+
 import Image from 'next/image';
 
 import { HOME_IMAGE_QUALITY } from './home-constants';
-import { serviceIllustrations, services } from './home-data';
+import { serviceIllustrations } from './home-data';
+import { useHomeI18n } from './home-i18n-provider';
 import { ContinueButton, SectionHeading, ServiceToneClass } from './home-ui';
 
 export function HomeMobileServices(): React.JSX.Element {
+  const { homeCopy, services } = useHomeI18n();
+
   return (
     <section id="services" className="home-mobile-services" aria-labelledby="home-mobile-services-title">
       <div className="home-mobile-services-heading-glow" aria-hidden>
         <Image src="/figma-home/rectangle17417.svg" alt="" fill sizes="448px" />
       </div>
 
-      <SectionHeading eyebrow="SERVICES" title="WHAT WE" highlight="DO" />
+      <SectionHeading
+        eyebrow={homeCopy.sections.services.eyebrow}
+        title={homeCopy.sections.services.title}
+        highlight={homeCopy.sections.services.highlight}
+      />
 
       <div className="home-mobile-services-list">
         {services.map((service, index) => {
@@ -22,7 +31,7 @@ export function HomeMobileServices(): React.JSX.Element {
 
           return (
             <article
-              key={service.title}
+              key={service.id}
               className={`home-mobile-service-card ${ServiceToneClass(service.tone)}`}
             >
               <div className="home-mobile-service-card-glow" aria-hidden>
@@ -44,7 +53,7 @@ export function HomeMobileServices(): React.JSX.Element {
               <div className="home-mobile-service-card-body">
                 <h3 id={index === 0 ? 'home-mobile-services-title' : undefined}>{service.title}</h3>
                 <p>{service.subtitle}</p>
-                <ContinueButton href="/services" label="Continue" />
+                <ContinueButton href="/services" label={homeCopy.actions.continue} />
               </div>
             </article>
           );

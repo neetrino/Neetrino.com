@@ -9,7 +9,7 @@
   position: fixed;
   top: var(--about-mobile-header-top);
   left: 50%;
-  z-index: 100;
+  z-index: 110;
   display: none;
   align-items: center;
   justify-content: space-between;
@@ -18,7 +18,8 @@
   padding: 12px 24px;
   border-radius: 999px;
   background: rgb(40 43 103 / 0.38);
-  transform: translateX(-50%);
+  isolation: isolate;
+  transform: translate3d(-50%, 0, 0);
 }
 
 .about-mobile-header-logo {
@@ -43,21 +44,21 @@
   background: #473dff;
   color: #fff;
   font-family: inherit;
-  font-size: 14px;
+  font-size: calc(14px * var(--locale-font-scale));
   font-weight: 800;
-  line-height: 20px;
+  line-height: calc(20px * var(--locale-font-scale));
   letter-spacing: -0.15px;
   cursor: pointer;
 }
 
 .about-mobile-header--menu-open {
-  z-index: 102;
+  z-index: 112;
 }
 
 .about-mobile-menu {
   position: fixed;
   inset: 0;
-  z-index: 101;
+  z-index: 111;
 }
 
 .about-mobile-menu-backdrop {
@@ -142,7 +143,7 @@
   display: block;
   padding: 16px 0;
   color: #fff;
-  font-size: 20px;
+  font-size: calc(20px * var(--locale-font-scale));
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.2px;
@@ -169,7 +170,7 @@
   justify-content: space-between;
   padding: 16px 0;
   color: #fff;
-  font-size: 20px;
+  font-size: calc(20px * var(--locale-font-scale));
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.2px;
@@ -212,7 +213,7 @@
 
 .about-mobile-menu-more-list .about-mobile-menu-link {
   padding: 10px 0;
-  font-size: 17px;
+  font-size: calc(17px * var(--locale-font-scale));
   font-weight: 700;
   color: rgb(255 255 255 / 0.88);
 }
@@ -239,7 +240,7 @@
   background: #fff;
   color: #473dff;
   font-family: inherit;
-  font-size: 14px;
+  font-size: calc(14px * var(--locale-font-scale));
   font-weight: 800;
   line-height: 1;
   cursor: pointer;
@@ -265,7 +266,7 @@
   position: fixed;
   right: 24px;
   bottom: 28px;
-  z-index: 103;
+  z-index: 113;
   display: grid;
   width: 56px;
   height: 56px;
