@@ -2,9 +2,16 @@ import Image from 'next/image';
 import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
 import { NeetrinoPageShell } from './neetrino-page-shell';
 import { PortfolioBakedBackground } from './portfolio-baked-background';
-import { PORTFOLIO_CANVAS_HEIGHT, PORTFOLIO_LCP_CARD_COUNT } from './portfolio-constants';
+import {
+  PORTFOLIO_CANVAS_HEIGHT,
+  PORTFOLIO_LCP_CARD_COUNT,
+  PORTFOLIO_TITLE_HEIGHT,
+  PORTFOLIO_TITLE_SRC,
+  PORTFOLIO_TITLE_WIDTH,
+} from './portfolio-constants';
 import { portfolioProjects, type PortfolioProject } from './portfolio-data';
 import './portfolio.css';
+import './services.css';
 
 const PORTFOLIO_PAGES = [1, 2, 3, 4, 5] as const;
 const ACTIVE_PORTFOLIO_PAGE = 3;
@@ -92,13 +99,19 @@ export function PortfolioPage(): React.JSX.Element {
       <PortfolioBakedBackground />
       <section className="portfolio-body portfolio-body--baked" aria-labelledby="portfolio-heading">
         <header className="portfolio-intro">
-          <h2 id="portfolio-heading" className="portfolio-heading">
-            Portfolio
-          </h2>
-          <p className="portfolio-description">
-            A curated selection of digital products and interfaces delivered for growing businesses
-            across different industries.
-          </p>
+          <div className="svc-title-wrap">
+            <Image
+              id="portfolio-heading"
+              src={PORTFOLIO_TITLE_SRC}
+              alt="PORTFOLIO"
+              width={PORTFOLIO_TITLE_WIDTH}
+              height={PORTFOLIO_TITLE_HEIGHT}
+              sizes="(max-width: 900px) 90vw, 597px"
+              priority
+              fetchPriority="high"
+              className="svc-title"
+            />
+          </div>
         </header>
         <div className="portfolio-list">
           {portfolioProjects.map((project, index) => (

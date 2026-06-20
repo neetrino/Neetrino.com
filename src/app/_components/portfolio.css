@@ -1,13 +1,5 @@
 /* Portfolio page layout aligned to the live /portfolio experience. */
 
-@font-face {
-  font-family: Megatrox;
-  src: url('/fonts/Megatrox.otf') format('opentype');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
 .portfolio-body {
   --portfolio-ray-width: 1437px;
   --portfolio-ray-mid-height: 405px;
@@ -289,25 +281,6 @@
   width: 100%;
 }
 
-.portfolio-heading {
-  margin: 0;
-  color: #fff;
-  font-family: Megatrox, var(--font-inter), sans-serif;
-  font-size: 90px;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0.8px;
-}
-
-.portfolio-description {
-  display: none;
-  margin: 18px 0 0;
-  max-width: 880px;
-  color: rgb(255 255 255 / 0.75);
-  font-size: 21px;
-  line-height: 1.55;
-}
-
 .portfolio-list {
   position: relative;
   z-index: 4;
@@ -503,6 +476,36 @@
     background-image: none;
   }
 
+  .portfolio-intro .svc-title-wrap {
+    width: min(100%, calc(597px * var(--home-ui-scale)));
+    margin: 0 auto;
+  }
+
+  .portfolio-intro .svc-title-wrap::before {
+    position: absolute;
+    inset: -18px -12px;
+    z-index: 0;
+    pointer-events: none;
+    content: '';
+    border-radius: 18px;
+    background: radial-gradient(
+      ellipse 92% 130% at 50% 50%,
+      rgb(18 42 72 / 0.78) 0%,
+      rgb(18 42 72 / 0.34) 54%,
+      transparent 80%
+    );
+  }
+
+  .portfolio-intro .svc-title {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    margin: 0;
+    filter:
+      drop-shadow(0 0 10px rgb(18 42 72 / 0.9))
+      drop-shadow(0 4px 14px rgb(0 0 0 / 0.42));
+  }
+
   .portfolio-decor {
     top: 0;
     right: auto;
@@ -544,17 +547,6 @@
   .portfolio-footer-ray-wrap {
     width: 100%;
     --portfolio-ray-scale: 1;
-  }
-
-  .portfolio-heading {
-    font-size: clamp(44px, 15vw, 72px);
-  }
-
-  .portfolio-description {
-    display: block;
-    margin-top: 14px;
-    font-size: 14px;
-    line-height: 1.7;
   }
 
   .portfolio-list {

@@ -277,6 +277,7 @@
 
 @media (max-width: 900px) {
   .neetrino-canvas-inner:has(.svc-hero) {
+    /* Unitless ratio: required for transform scale(). */
     --svc-mobile-bg-scale: calc(100vw / var(--home-design-width) / 1px);
   }
 
