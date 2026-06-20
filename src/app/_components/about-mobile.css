@@ -15,6 +15,7 @@
   --about-mobile-capsule-stick-top: calc(
     var(--about-mobile-header-top) + var(--about-mobile-header-height) + var(--about-mobile-capsule-gap)
   );
+  --about-mobile-cube-start: 4rem;
   --about-mobile-design-height: 5425;
 
   position: relative;
@@ -625,13 +626,12 @@
   position: relative;
   z-index: 1;
   isolation: isolate;
-  view-timeline-name: --about-mobile-capsule-track;
-  view-timeline-axis: block;
 }
 
 .about-mobile-capsule {
   --about-mobile-beam-width: 128px;
   --about-mobile-cube-size: 131px;
+  --about-mobile-cube-translate-y: 0px;
 
   position: absolute;
   top: 0;
@@ -684,13 +684,13 @@
 
 .about-mobile-cube {
   position: absolute;
-  top: 4rem;
+  top: var(--about-mobile-cube-start);
   left: 50%;
   z-index: 1;
   width: var(--about-mobile-cube-size);
   height: var(--about-mobile-cube-size);
-  transform: translateX(-50%);
-  will-change: top;
+  transform: translate3d(-50%, var(--about-mobile-cube-translate-y), 0);
+  will-change: transform;
 }
 
 .about-mobile-cube::before {
@@ -704,32 +704,6 @@
 .about-mobile-cube-img {
   object-fit: contain;
   filter: brightness(0.82) contrast(1.08) saturate(0.94) drop-shadow(0 12px 28px rgb(0 0 0 / 0.28));
-}
-
-@supports (animation-timeline: scroll(root block)) {
-  .about-mobile-cube {
-    animation: about-mobile-cube-vertical-scroll linear both;
-    animation-range: 22% 86%;
-    animation-timeline: scroll(root block);
-  }
-}
-
-@supports (animation-timeline: view()) {
-  .about-mobile-cube {
-    animation: about-mobile-cube-vertical-scroll linear both;
-    animation-range: entry 0% exit 100%;
-    animation-timeline: --about-mobile-capsule-track;
-  }
-}
-
-@keyframes about-mobile-cube-vertical-scroll {
-  from {
-    top: 4rem;
-  }
-
-  to {
-    top: calc(100% - var(--about-mobile-cube-size));
-  }
 }
 
 /* ---------- Mission / Vision ---------- */
