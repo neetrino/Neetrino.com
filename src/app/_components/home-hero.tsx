@@ -8,6 +8,7 @@ import { HomeHeroHandLayer } from './home-hero-hand-layer';
 import { HomeHeroRobot } from './home-hero-robot';
 import { useHomeI18n } from './home-i18n-provider';
 
+import { AnimatedStatValue } from './animated-stat-value';
 import { HeroStatToneClass } from './home-ui';
 
 export function HomeHero(): React.JSX.Element {
@@ -35,7 +36,7 @@ export function HomeHero(): React.JSX.Element {
             {firstStat && secondStat ? (
               <>
                 <article className={`home-hero-stat ${HeroStatToneClass(firstStat.tone)}`}>
-                  <p className="home-hero-stat-value">{firstStat.value}</p>
+                  <AnimatedStatValue value={firstStat.value} className="home-hero-stat-value" />
                   <p className="home-hero-stat-label">
                     {firstStat.labelLines?.map((line) => (
                       <span key={line}>{line}</span>
@@ -43,7 +44,7 @@ export function HomeHero(): React.JSX.Element {
                   </p>
                 </article>
                 <article className={`home-hero-stat ${HeroStatToneClass(secondStat.tone)}`}>
-                  <p className="home-hero-stat-value">{secondStat.value}</p>
+                  <AnimatedStatValue value={secondStat.value} className="home-hero-stat-value" />
                   <p className="home-hero-stat-label">{secondStat.label}</p>
                 </article>
               </>
@@ -52,7 +53,7 @@ export function HomeHero(): React.JSX.Element {
 
           {thirdStat ? (
             <article className={`home-hero-stat home-hero-stat-wide ${HeroStatToneClass(thirdStat.tone)}`}>
-              <p className="home-hero-stat-value">{thirdStat.value}</p>
+              <AnimatedStatValue value={thirdStat.value} className="home-hero-stat-value" />
               <p className="home-hero-stat-label">{thirdStat.label}</p>
             </article>
           ) : null}

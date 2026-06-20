@@ -25,13 +25,14 @@
     var(--home-mobile-hero-actions-block-height) - var(--home-mobile-stats-panel-offset) + 25px +
       var(--home-mobile-hero-stats-row-gap)
   );
-  --home-mobile-hero-tagline-stats-gap: 2.5rem;
+  --home-mobile-hero-tagline-stats-gap: 0.2rem;
   --home-mobile-hero-stats-offset-top: calc(
     var(--home-mobile-stats-panel-offset) + var(--home-mobile-hero-tagline-stats-gap)
   );
   --home-mobile-stat-hand-width: 550px;
   --home-mobile-stat-hand-height: 456px;
-  --home-mobile-stat-hand-overhang: calc(10.75rem + 110px);
+  --home-mobile-stat-hand-overhang: calc(8rem + 60px);
+  --home-mobile-services-offset-top: 1.5rem;
   --home-mobile-stat-hand-bottom: calc(3.375rem - 52px);
   --home-mobile-stat-hand-offset-right: 8.75rem;
   --home-mobile-page-glow-top: 1180px;
@@ -445,7 +446,7 @@
 .home-mobile-services {
   position: relative;
   z-index: 1;
-  margin-top: calc(3rem + 1.5rem);
+  margin-top: var(--home-mobile-services-offset-top);
   overflow: visible;
 }
 

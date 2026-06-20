@@ -8,6 +8,7 @@ import { HomeHeroBgCore } from './home-hero-bg-core';
 import { HomeHeroRobot } from './home-hero-robot';
 import { HomeHeroTechAtmosphere } from './home-hero-tech-atmosphere';
 import { useHomeI18n } from './home-i18n-provider';
+import { AnimatedStatValue } from './animated-stat-value';
 import { HeroStatToneClass } from './home-ui';
 
 /** Mobile hero — Figma node 1:1478 flow layout; background matches desktop. */
@@ -59,7 +60,7 @@ export function HomeMobileHero(): React.JSX.Element {
           <div className="home-mobile-hero-stats-row">
             {firstStat ? (
               <article className={`home-mobile-hero-stat ${HeroStatToneClass(firstStat.tone)}`}>
-                <p className="home-mobile-hero-stat-value">{firstStat.value}</p>
+                <AnimatedStatValue value={firstStat.value} className="home-mobile-hero-stat-value" />
                 <p className="home-mobile-hero-stat-label">
                   {firstStat.mobileLabelLines?.map((line) => (
                     <span key={line}>{line}</span>
@@ -70,7 +71,7 @@ export function HomeMobileHero(): React.JSX.Element {
 
             {secondStat ? (
               <article className={`home-mobile-hero-stat ${HeroStatToneClass(secondStat.tone)}`}>
-                <p className="home-mobile-hero-stat-value">{secondStat.value}</p>
+                <AnimatedStatValue value={secondStat.value} className="home-mobile-hero-stat-value" />
                 <p className="home-mobile-hero-stat-label">{secondStat.label}</p>
               </article>
             ) : null}
@@ -80,7 +81,7 @@ export function HomeMobileHero(): React.JSX.Element {
             <article
               className={`home-mobile-hero-stat home-mobile-hero-stat-wide ${HeroStatToneClass(thirdStat.tone)}`}
             >
-              <p className="home-mobile-hero-stat-value">{thirdStat.value}</p>
+              <AnimatedStatValue value={thirdStat.value} className="home-mobile-hero-stat-value" />
               <p className="home-mobile-hero-stat-label">{thirdStat.label}</p>
             </article>
           ) : null}
