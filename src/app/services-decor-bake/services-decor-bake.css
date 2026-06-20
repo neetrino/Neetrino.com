@@ -1,0 +1,14 @@
+.services-decor-bake-root {
+  position: relative;
+  overflow: hidden;
+  background: #122a48;
+}
+
+.svc-hero--decor-bake {
+  min-height: 0;
+  padding: 0;
+}
+
+.svc-decor--decor-bake {
+  content-visibility: visible;
+}

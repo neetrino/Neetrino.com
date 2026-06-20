@@ -83,7 +83,7 @@
   --home-service-dark: #292929;
   --home-portfolio-card-gap: 12px;
   --home-portfolio-row-gap: 45px;
-  --home-portfolio-scroll-duration: 45s;
+  --home-portfolio-scroll-duration: 10s;
   --home-portfolio-play-state: running;
   --home-portfolio-accent-bg-height: calc(236px * var(--home-ui-scale));
   --home-page-grid-step-x: calc(91.5px * var(--home-ui-scale));

@@ -70,7 +70,7 @@ export function AboutMobileTeam(): React.JSX.Element {
       <div className="about-mobile-team-image-wrap" aria-hidden>
         <div className="about-mobile-team-image-frame">
           <Image
-            src="/about/meet-our-team-collaboration-mobile.png"
+            src="/about/meet-our-team-collaboration-mobile.webp"
             alt=""
             fill
             sizes="90vw"

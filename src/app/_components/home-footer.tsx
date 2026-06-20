@@ -29,7 +29,7 @@ export function HomeFooter(): React.JSX.Element {
         </div>
         <div className="home-footer-bg-team">
           <Image
-            src="/about/mobile-bg/team-bg.png"
+            src="/about/mobile-bg/team-bg.webp"
             alt=""
             fill
             sizes="996px"

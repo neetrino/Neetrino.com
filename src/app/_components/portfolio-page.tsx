@@ -1,23 +1,17 @@
 import Image from 'next/image';
 import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
 import { NeetrinoPageShell } from './neetrino-page-shell';
-import { PORTFOLIO_CANVAS_HEIGHT, PORTFOLIO_LCP_CARD_COUNT } from './portfolio-constants';
+import { PortfolioBakedBackground } from './portfolio-baked-background';
+import {
+  PORTFOLIO_CANVAS_HEIGHT,
+  PORTFOLIO_LCP_CARD_COUNT,
+  PORTFOLIO_TITLE_HEIGHT,
+  PORTFOLIO_TITLE_SRC,
+  PORTFOLIO_TITLE_WIDTH,
+} from './portfolio-constants';
 import { portfolioProjects, type PortfolioProject } from './portfolio-data';
 import './portfolio.css';
-
-const SERVICE_BACKGROUND_DECORATIONS = [
-  'svc-deco-glow-1',
-  'svc-deco-glow-2',
-  'svc-deco-beam-l',
-  'svc-deco-beam-r',
-  'svc-deco-beam-center',
-  'svc-deco-arc-1',
-  'svc-deco-arc-2',
-  'svc-deco-grid-far',
-  'svc-deco-grid-near',
-] as const;
-
-const PORTFOLIO_RAYS = ['portfolio-ray--mid', 'portfolio-ray--end'] as const;
+import './services.css';
 
 const PORTFOLIO_PAGES = [1, 2, 3, 4, 5] as const;
 const ACTIVE_PORTFOLIO_PAGE = 3;
@@ -49,7 +43,7 @@ function PortfolioCard({
         {project.variant === 'zeppelin' ? (
           <>
             <Image
-              src="/portfolio/cat-logo.png"
+              src="/portfolio/cat-logo.webp"
               alt=""
               width={114}
               height={61}
@@ -102,28 +96,22 @@ export function PortfolioPage(): React.JSX.Element {
       srOnlyTitle="Neetrino Portfolio"
       canvasHeight={PORTFOLIO_CANVAS_HEIGHT}
     >
-      <section className="portfolio-body" aria-labelledby="portfolio-heading">
-        <div className="portfolio-decor" aria-hidden>
-          <div className="home-page-glow portfolio-page-glow" />
-          <div className="svc-bg">
-            {SERVICE_BACKGROUND_DECORATIONS.map((name) => (
-              <span key={name} className={`svc-deco ${name}`} />
-            ))}
-          </div>
-          <div className="portfolio-rays">
-            {PORTFOLIO_RAYS.map((name) => (
-              <span key={name} className={`portfolio-ray ${name}`} />
-            ))}
-          </div>
-        </div>
+      <PortfolioBakedBackground />
+      <section className="portfolio-body portfolio-body--baked" aria-labelledby="portfolio-heading">
         <header className="portfolio-intro">
-          <h2 id="portfolio-heading" className="portfolio-heading">
-            Portfolio
-          </h2>
-          <p className="portfolio-description">
-            A curated selection of digital products and interfaces delivered for growing businesses
-            across different industries.
-          </p>
+          <div className="svc-title-wrap">
+            <Image
+              id="portfolio-heading"
+              src={PORTFOLIO_TITLE_SRC}
+              alt="PORTFOLIO"
+              width={PORTFOLIO_TITLE_WIDTH}
+              height={PORTFOLIO_TITLE_HEIGHT}
+              sizes="(max-width: 900px) 90vw, 597px"
+              priority
+              fetchPriority="high"
+              className="svc-title"
+            />
+          </div>
         </header>
         <div className="portfolio-list">
           {portfolioProjects.map((project, index) => (
@@ -132,9 +120,7 @@ export function PortfolioPage(): React.JSX.Element {
         </div>
         <PortfolioPagination />
       </section>
-      <div className="portfolio-footer-ray-wrap" aria-hidden>
-        <span className="portfolio-ray portfolio-ray--footer" />
-      </div>
+      <div className="portfolio-footer-ray-wrap portfolio-footer-ray-wrap--baked" aria-hidden />
     </NeetrinoPageShell>
   );
 }

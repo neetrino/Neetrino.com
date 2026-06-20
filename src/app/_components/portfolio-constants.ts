@@ -10,3 +10,13 @@ export const PORTFOLIO_CARD_MEDIA_HEIGHT = 364;
 
 /** Above-the-fold cards — eager load avoids decode jank while scrolling. */
 export const PORTFOLIO_LCP_CARD_COUNT = 4;
+
+/** Baked decor stack (body gradients + decor + footer ray) in design pixels. */
+export const PORTFOLIO_DECOR_BAKE_WIDTH = 1440;
+export const PORTFOLIO_DECOR_BAKE_HEIGHT = PORTFOLIO_CANVAS_HEIGHT;
+export const PORTFOLIO_DECOR_BAKE_SRC = '/portfolio/optimized/decor-stack.webp';
+
+/** Glitch title image — transparent webp, same treatment as /services `services-title.webp`. */
+export const PORTFOLIO_TITLE_SRC = '/portfolio/portfolio-title.webp';
+export const PORTFOLIO_TITLE_WIDTH = 597;
+export const PORTFOLIO_TITLE_HEIGHT = 64;

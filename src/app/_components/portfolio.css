@@ -1,13 +1,5 @@
 /* Portfolio page layout aligned to the live /portfolio experience. */
 
-@font-face {
-  font-family: Megatrox;
-  src: url('/fonts/Megatrox.otf') format('opentype');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
 .portfolio-body {
   --portfolio-ray-width: 1437px;
   --portfolio-ray-mid-height: 405px;
@@ -22,7 +14,6 @@
   padding: 152px 72px 0;
   isolation: isolate;
   contain: layout style;
-  transform: translate3d(0, 0, 0);
   background-color: var(--portfolio-base-bg);
   background-image:
     radial-gradient(ellipse 62% 48% at 62% 16%, rgb(56 176 255 / 0.54) 0%, transparent 66%),
@@ -41,8 +32,8 @@
   pointer-events: none;
   isolation: isolate;
   contain: layout style paint;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: 1440px 2226px;
 }
 
 .portfolio-decor::after {
@@ -51,17 +42,46 @@
   z-index: 3;
   pointer-events: none;
   content: '';
-  background: url('/portfolio/noise.png') top left / cover no-repeat;
+  background: url('/portfolio/noise.webp') top left / cover no-repeat;
   mix-blend-mode: soft-light;
   opacity: 0.14;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
 }
 
 .neetrino-canvas-inner:has(.portfolio-body) {
   --portfolio-base-bg: #122a48;
   background: var(--portfolio-base-bg);
-  backface-visibility: hidden;
+}
+
+.portfolio-baked-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 1440px;
+  height: var(--portfolio-decor-bake-height, 2737px);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.portfolio-baked-bg-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.portfolio-body--baked {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+  background-image: none;
+}
+
+.portfolio-footer-ray-wrap--baked {
+  pointer-events: none;
+}
+
+.neetrino-canvas-inner:has(.portfolio-body--baked) {
+  --portfolio-decor-bake-height: 2737px;
 }
 
 .portfolio-decor .portfolio-page-glow {
@@ -101,7 +121,6 @@
   pointer-events: none;
   contain: layout paint style;
   isolation: isolate;
-  transform: translate3d(0, 0, 0);
 }
 
 .svc-deco {
@@ -109,9 +128,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
-  backface-visibility: hidden;
   contain: layout paint style;
-  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-body .svc-deco-glow-1 {
@@ -185,8 +202,6 @@
   background: linear-gradient(to bottom, transparent 0%, #b8fff8 52%, #3db4ff 100%);
   filter: blur(calc(30px * var(--home-ui-scale)));
   opacity: 0.82;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
 }
 
 .svc-deco-grid-far {
@@ -213,7 +228,6 @@
   z-index: 2;
   pointer-events: none;
   contain: layout style paint;
-  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-ray {
@@ -226,7 +240,6 @@
   mix-blend-mode: screen;
   opacity: 0.85;
   contain: layout paint style;
-  backface-visibility: hidden;
 }
 
 .portfolio-ray--mid {
@@ -266,28 +279,6 @@
   position: relative;
   z-index: 4;
   width: 100%;
-  isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-}
-
-.portfolio-heading {
-  margin: 0;
-  color: #fff;
-  font-family: Megatrox, var(--font-inter), sans-serif;
-  font-size: 90px;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0.8px;
-}
-
-.portfolio-description {
-  display: none;
-  margin: 18px 0 0;
-  max-width: 880px;
-  color: rgb(255 255 255 / 0.75);
-  font-size: 21px;
-  line-height: 1.55;
 }
 
 .portfolio-list {
@@ -298,9 +289,6 @@
   gap: 40px 20px;
   width: 1295px;
   margin-top: 70px;
-  isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
 }
 
 .portfolio-card {
@@ -311,8 +299,6 @@
   background: #fff;
   box-shadow: 0 24px 70px rgb(0 0 0 / 0.18);
   contain: layout paint style;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-card-media {
@@ -325,8 +311,6 @@
 .portfolio-card-image {
   z-index: 1;
   object-fit: cover;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
 }
 
 .portfolio-card--zeppelin .portfolio-card-image {
@@ -414,9 +398,7 @@
   color: #4e5d78;
   font-family: Poppins, var(--font-inter), sans-serif;
   font-size: 14px;
-  isolation: isolate;
   transform: translate3d(-50%, 0, 0);
-  backface-visibility: hidden;
 }
 
 .portfolio-pagination-item {
@@ -468,13 +450,60 @@
     --portfolio-mobile-bg-scale: calc(100vw / var(--home-design-width) / 1px);
   }
 
+  .portfolio-baked-bg {
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: 1440px;
+    height: var(--portfolio-decor-bake-height, 2737px);
+    transform: translate3d(-50%, 0, 0) scale(var(--portfolio-mobile-bg-scale));
+    transform-origin: top center;
+  }
+
   .portfolio-body {
     width: 100%;
     height: auto;
     min-height: 100vh;
     padding: 132px 16px 72px;
-    background-color: var(--portfolio-base-bg);
     overflow: hidden;
+  }
+
+  .portfolio-body.portfolio-body--baked {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+    background-image: none;
+  }
+
+  .portfolio-intro .svc-title-wrap {
+    width: min(100%, calc(597px * var(--home-ui-scale)));
+    margin: 0 auto;
+  }
+
+  .portfolio-intro .svc-title-wrap::before {
+    position: absolute;
+    inset: -18px -12px;
+    z-index: 0;
+    pointer-events: none;
+    content: '';
+    border-radius: 18px;
+    background: radial-gradient(
+      ellipse 92% 130% at 50% 50%,
+      rgb(18 42 72 / 0.78) 0%,
+      rgb(18 42 72 / 0.34) 54%,
+      transparent 80%
+    );
+  }
+
+  .portfolio-intro .svc-title {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    margin: 0;
+    filter:
+      drop-shadow(0 0 10px rgb(18 42 72 / 0.9))
+      drop-shadow(0 4px 14px rgb(0 0 0 / 0.42));
   }
 
   .portfolio-decor {
@@ -486,7 +515,6 @@
     height: 2226px;
     transform: translate3d(-50%, 0, 0) scale(var(--portfolio-mobile-bg-scale));
     transform-origin: top center;
-    will-change: transform;
   }
 
   .portfolio-decor .portfolio-page-glow {
@@ -519,17 +547,6 @@
   .portfolio-footer-ray-wrap {
     width: 100%;
     --portfolio-ray-scale: 1;
-  }
-
-  .portfolio-heading {
-    font-size: clamp(44px, 15vw, 72px);
-  }
-
-  .portfolio-description {
-    display: block;
-    margin-top: 14px;
-    font-size: 14px;
-    line-height: 1.7;
   }
 
   .portfolio-list {
