@@ -83,10 +83,10 @@ export const serviceIllustrations = [
 ] as const;
 
 export const partnerLogos = [
-  { src: '/figma-home/vector3.svg', width: 136, height: 79 },
-  { src: '/figma-home/vector2.svg', width: 175, height: 53 },
-  { src: '/figma-home/vector3.svg', width: 136, height: 79 },
-  { src: '/figma-home/vector2.svg', width: 175, height: 53 },
+  { src: '/figma-home/group70643.svg', width: 136, height: 79 },
+  { src: '/figma-home/group221.svg', width: 175, height: 53 },
+  { src: '/figma-home/group70643.svg', width: 136, height: 79 },
+  { src: '/figma-home/group221.svg', width: 175, height: 53 },
 ] as const;
 
 function normalizeRichTextPart(part: MessageRichTextPart): RichTextPart {
@@ -161,14 +161,14 @@ export function createHomeData(messages: HomeMessages) {
   const portfolioTopRow: ProjectCard[] = [
     {
       title: portfolio.projects.meetingAssistant,
-      image: '/figma-home/stanislav-hristov3.webp',
+      image: '/portfolio/optimized/digital-implant.jpg',
       width: 505,
       height: 378,
       radius: 43,
     },
     {
       title: portfolio.projects.borborLanding,
-      image: '/figma-home/ui-design21.webp',
+      image: '/portfolio/optimized/borbor.jpg',
       imageClassName: 'home-project-image-borbor',
       width: 505,
       height: 378,
@@ -176,7 +176,7 @@ export function createHomeData(messages: HomeMessages) {
     },
     {
       title: portfolio.projects.visualHierarchy,
-      image: '/figma-home/2661.webp',
+      image: '/portfolio/optimized/degusto.jpg',
       imageClassName: 'home-project-image-visual',
       width: 592,
       height: 383,
@@ -187,21 +187,21 @@ export function createHomeData(messages: HomeMessages) {
   const portfolioBottomRow: ProjectCard[] = [
     {
       title: portfolio.projects.aiListing,
-      image: '/figma-home/klever-klever-io-instagram-photos-and-videos3.webp',
+      image: '/portfolio/optimized/anra.jpg',
       width: 379,
       height: 378,
       radius: 32,
     },
     {
       title: portfolio.projects.meetingAssistant,
-      image: '/figma-home/stanislav-hristov3.webp',
+      image: '/portfolio/optimized/digital-implant.jpg',
       width: 505,
       height: 378,
       radius: 43,
     },
     {
       title: portfolio.projects.borborLanding,
-      image: '/figma-home/ui-design21.webp',
+      image: '/portfolio/optimized/borbor.jpg',
       imageClassName: 'home-project-image-borbor',
       width: 505,
       height: 378,
@@ -209,7 +209,7 @@ export function createHomeData(messages: HomeMessages) {
     },
     {
       title: portfolio.projects.visualHierarchy,
-      image: '/figma-home/2661.webp',
+      image: '/portfolio/optimized/degusto.jpg',
       imageClassName: 'home-project-image-visual',
       width: 592,
       height: 383,
@@ -264,7 +264,7 @@ export function createHomeData(messages: HomeMessages) {
     { src: '/figma-home/group.svg', alt: messages.social.behance, width: 24, height: 15 },
     { src: '/figma-home/group74.svg', alt: messages.social.youtube, width: 21, height: 15 },
     { src: '/figma-home/vector7.svg', alt: messages.social.twitter, width: 20, height: 20 },
-    { src: '/figma-home/vector8.svg', alt: messages.social.dribbble, width: 19, height: 20 },
+    { src: '/figma-home/group221.svg', alt: messages.social.dribbble, width: 19, height: 20 },
   ] as const;
 
   const homeCopy = {

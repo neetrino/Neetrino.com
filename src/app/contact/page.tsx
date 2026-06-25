@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: contactMessages.meta.description,
 };
 
+export const revalidate = 300;
+
 export default function Contact(): React.JSX.Element {
   return <ContactPage />;
 }

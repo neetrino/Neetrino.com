@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: portfolioMessages.meta.description,
 };
 
+export const revalidate = 300;
+
 export default function Portfolio(): React.JSX.Element {
   return <PortfolioPage />;
 }

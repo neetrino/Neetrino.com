@@ -20,7 +20,7 @@ export function HomeHero(): React.JSX.Element {
     <section className="home-hero" aria-label={hero.ariaLabel}>
       <div className="home-hero-bg-shell" aria-hidden>
         <HomeHeroBgCore philippPriority brandPriority />
-        <HomeHeroRobot />
+        <HomeHeroRobot priority />
         <HomeHeroDeferredDecor />
       </div>
 

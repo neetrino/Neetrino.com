@@ -1,5 +1,7 @@
 import { NeetrinoHome } from './_components/neetrino-home';
 
-export default function Home() {
+export const revalidate = 300;
+
+export default function Home(): React.JSX.Element {
   return <NeetrinoHome />;
 }

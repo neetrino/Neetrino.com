@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { HOME_IMAGE_QUALITY } from './home-constants';
 import { useDeferredMount } from './use-deferred-mount';
 
-const ABOUT_DECOR_BASE_IDLE_MS = 250;
 const ABOUT_DECOR_HEAVY_IDLE_MS = 800;
 const ABOUT_DECOR_ROOT_MARGIN = '160px 0px';
 
@@ -23,8 +22,9 @@ function AboutDecorBase(): React.JSX.Element {
           alt=""
           fill
           sizes="1318px"
-          loading="lazy"
-          fetchPriority="low"
+          priority
+          loading="eager"
+          fetchPriority="high"
           className="about-hero-streak-img"
         />
       </div>
@@ -42,7 +42,7 @@ function AboutDecorHeavy(): React.JSX.Element {
         <div className="home-hero-bg-mesh-scroll">
           <div className="home-hero-bg-mesh-rotate">
             <Image
-              src="/figma-home/vector1.svg"
+              src="/about/hero-streak.svg"
               alt=""
               fill
               sizes="1722px"
@@ -68,10 +68,6 @@ function AboutDecorHeavy(): React.JSX.Element {
 
 /** Staged about background decor to keep first paint fast without changing final UI. */
 export function AboutDeferredDecor(): React.JSX.Element {
-  const { isReady: isBaseReady, sentinelRef: baseSentinelRef } = useDeferredMount({
-    idleTimeoutMs: ABOUT_DECOR_BASE_IDLE_MS,
-    rootMargin: ABOUT_DECOR_ROOT_MARGIN,
-  });
   const { isReady: isHeavyReady, sentinelRef: heavySentinelRef } = useDeferredMount({
     idleTimeoutMs: ABOUT_DECOR_HEAVY_IDLE_MS,
     rootMargin: ABOUT_DECOR_ROOT_MARGIN,
@@ -79,8 +75,7 @@ export function AboutDeferredDecor(): React.JSX.Element {
 
   return (
     <div className="about-decor" aria-hidden>
-      <span ref={baseSentinelRef} className="home-hero-deferred-sentinel" aria-hidden />
-      {isBaseReady ? <AboutDecorBase /> : null}
+      <AboutDecorBase />
       <span ref={heavySentinelRef} className="home-hero-deferred-sentinel" aria-hidden />
       {isHeavyReady ? <AboutDecorHeavy /> : null}
     </div>
