@@ -16,6 +16,7 @@ export function PortfolioBakedBackground(): React.JSX.Element {
         width={PORTFOLIO_DECOR_BAKE_WIDTH}
         height={PORTFOLIO_DECOR_BAKE_HEIGHT}
         priority
+        unoptimized
         sizes={`${PORTFOLIO_DECOR_BAKE_WIDTH}px`}
         className="portfolio-baked-bg-image"
       />

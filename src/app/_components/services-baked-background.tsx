@@ -16,6 +16,7 @@ export function ServicesBakedBackground(): React.JSX.Element {
         width={SERVICES_DECOR_BAKE_WIDTH}
         height={SERVICES_DECOR_BAKE_HEIGHT}
         priority
+        unoptimized
         sizes={`${SERVICES_DECOR_BAKE_WIDTH}px`}
         className="svc-baked-bg-image"
       />

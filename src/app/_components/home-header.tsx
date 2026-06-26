@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import type { NavItem } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
 
@@ -48,10 +48,17 @@ export function HomeHeader(): React.JSX.Element {
   const { activeLanguage, homeCopy, languageOptions, locale, moreNavItems, navItems, setLocale } =
     useHomeI18n();
   const pathname = usePathname();
+  const router = useRouter();
   const currentHash = useCurrentHash(pathname);
   const languageMenuRef = useRef<HTMLDivElement>(null);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const isMoreActive = moreNavItems.some((item) => isHeaderLinkActive(item, pathname, currentHash));
+
+  // Links inside the collapsed "More" dropdown are hidden, so Next.js never
+  // auto-prefetches them. Warm them on open/hover to keep navigation client-side.
+  const prefetchMoreItems = useCallback((): void => {
+    moreNavItems.forEach((item) => router.prefetch(item.href));
+  }, [moreNavItems, router]);
 
   useEffect(() => {
     if (!isLanguageOpen) {
@@ -99,8 +106,15 @@ export function HomeHeader(): React.JSX.Element {
               isActive={isHeaderLinkActive(item, pathname, currentHash)}
             />
           ))}
-          <details className={isMoreActive ? 'home-header-more home-header-more--active' : 'home-header-more'}>
-            <summary>{homeCopy.navigation.moreLabel}</summary>
+          <details
+            className={isMoreActive ? 'home-header-more home-header-more--active' : 'home-header-more'}
+            onToggle={(event) => {
+              if (event.currentTarget.open) {
+                prefetchMoreItems();
+              }
+            }}
+          >
+            <summary onMouseEnter={prefetchMoreItems}>{homeCopy.navigation.moreLabel}</summary>
             <div className="home-header-more-menu">
               {moreNavItems.map((item) => (
                 <HeaderNavLink

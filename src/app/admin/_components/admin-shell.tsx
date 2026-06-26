@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
+import { logoutAdmin } from '@/app/admin/_actions/auth-actions';
+import { AdminNavIcon } from './admin-nav-icon';
 
 const ADMIN_NAV_ITEMS = [
   { href: '/admin/blog', label: 'Blog', icon: 'doc' },
@@ -12,17 +14,13 @@ const ADMIN_NAV_ITEMS = [
   { href: '/admin/orders', label: 'Orders', icon: 'cart' },
 ] as const;
 
-function AdminIcon({ name }: { name: string }): React.JSX.Element {
-  return <span className={`admin-nav-icon admin-nav-icon--${name}`} aria-hidden />;
-}
-
 export function AdminShell({ children }: { children: ReactNode }): React.JSX.Element {
   const pathname = usePathname();
 
   return (
     <div className="admin-page">
       <aside className="admin-sidebar" aria-label="Admin navigation">
-        <Link href="/admin/blog" className="admin-brand" aria-label="Neetrino admin home">
+        <Link href="/" className="admin-brand" aria-label="Neetrino home">
           <span className="admin-brand-mark">N</span>
           <span>
             <strong>Neetrino</strong>
@@ -35,7 +33,7 @@ export function AdminShell({ children }: { children: ReactNode }): React.JSX.Ele
 
             return (
               <Link key={item.href} href={item.href} className={isActive ? 'admin-nav-item is-active' : 'admin-nav-item'}>
-                <AdminIcon name={item.icon} />
+                <AdminNavIcon name={item.icon} />
                 <span>{item.label}</span>
               </Link>
             );
@@ -49,9 +47,11 @@ export function AdminShell({ children }: { children: ReactNode }): React.JSX.Ele
               <small>Status: on</small>
             </span>
           </div>
-          <button type="button" className="admin-footer-action">
-            Logout
-          </button>
+          <form action={logoutAdmin} className="admin-footer-form">
+            <button type="submit" className="admin-footer-action admin-footer-action--logout">
+              Logout
+            </button>
+          </form>
           <button type="button" className="admin-footer-action">
             Collapse
           </button>

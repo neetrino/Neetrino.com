@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { requireAdminSession } from '@/lib/admin-session';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 import type { ContactActionState } from '@/app/_actions/contact-actions';
@@ -19,6 +20,8 @@ export async function deleteContactMessage(
   _previousState: ContactActionState,
   formData: FormData,
 ): Promise<ContactActionState> {
+  await requireAdminSession();
+
   try {
     const messageId = readRequiredId(formData, 'messageId');
 

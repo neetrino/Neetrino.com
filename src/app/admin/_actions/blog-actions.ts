@@ -6,6 +6,7 @@ import { BLOG_LOCALES, BLOG_LOCALE_LABELS, type BlogLocale } from '@/lib/blog-lo
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 import { deleteR2Object, R2ConfigurationError, uploadR2Object } from '@/lib/r2/storage';
+import { requireAdminSession } from '@/lib/admin-session';
 
 const DEFAULT_BLOG_STATUS = 'DRAFT';
 const SLUG_SEPARATOR = '-';
@@ -166,6 +167,8 @@ async function uploadCoverImage(file: File): Promise<{ coverImageKey: string; co
 }
 
 export async function createBlogPost(formData: FormData): Promise<void> {
+  await requireAdminSession();
+
   const translations = readTranslations(formData);
   const coverImage = readOptionalCoverImage(formData);
 
@@ -239,6 +242,8 @@ async function replaceCoverImage(
 }
 
 export async function toggleBlogPostStatus(formData: FormData): Promise<void> {
+  await requireAdminSession();
+
   try {
     const postId = readBlogPostId(formData);
     const post = await prisma.blogPost.findUnique({ where: { id: postId } });
@@ -269,6 +274,8 @@ export async function deleteBlogPost(
   formData: FormData,
 ): Promise<BlogActionState> {
   void previousState;
+
+  await requireAdminSession();
 
   try {
     const postId = readBlogPostId(formData);
@@ -301,6 +308,8 @@ export async function deleteBlogPost(
 }
 
 export async function updateBlogPost(formData: FormData): Promise<void> {
+  await requireAdminSession();
+
   const postId = readBlogPostId(formData);
   const translations = readTranslations(formData);
   const coverImage = readOptionalCoverImage(formData);

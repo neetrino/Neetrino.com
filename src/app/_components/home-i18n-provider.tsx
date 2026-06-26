@@ -20,7 +20,7 @@ import {
 import { createAboutPageData, type AboutPageData } from './about-data';
 import { aboutMessagesByLocale, type AboutMessages } from './about-messages';
 import { contactMessagesByLocale, type ContactMessages } from './contact-messages';
-import { createPortfolioProjects, type PortfolioProject } from './portfolio-data';
+import { portfolioProjects, type PortfolioProject } from './portfolio-data';
 import { portfolioMessagesByLocale, type PortfolioMessages } from './portfolio-messages';
 import { createServiceDetailCards, type ServiceDetailCard } from './services-data';
 import { blogMessagesByLocale, type BlogMessages } from './blog-messages';
@@ -97,7 +97,7 @@ export function HomeI18nProvider({ children }: { children: ReactNode }): React.J
       languageOptions: HOME_LANGUAGE_OPTIONS,
       locale,
       portfolioCopy,
-      portfolioProjects: createPortfolioProjects(portfolioCopy),
+      portfolioProjects,
       servicesCopy,
       serviceDetailCards: createServiceDetailCards(servicesCopy),
       setLocale: setLocaleState,

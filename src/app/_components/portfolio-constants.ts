@@ -14,7 +14,7 @@ export const PORTFOLIO_LCP_CARD_COUNT = 4;
 /** Baked decor stack (body gradients + decor + footer ray) in design pixels. */
 export const PORTFOLIO_DECOR_BAKE_WIDTH = 1440;
 export const PORTFOLIO_DECOR_BAKE_HEIGHT = PORTFOLIO_CANVAS_HEIGHT;
-export const PORTFOLIO_DECOR_BAKE_SRC = '/portfolio/optimized/decor-stack.webp';
+export const PORTFOLIO_DECOR_BAKE_SRC = '/portfolio/decor-stack.webp';
 
 /** Glitch title image — transparent webp, same treatment as /services `services-title.webp`. */
 export const PORTFOLIO_TITLE_SRC = '/portfolio/portfolio-title.webp';

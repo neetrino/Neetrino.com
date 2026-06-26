@@ -6,6 +6,7 @@ import { getNextPortfolioAssetStatus } from '@/lib/portfolio-asset-status';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 import { R2ConfigurationError, deleteR2Object, uploadR2Object } from '@/lib/r2/storage';
+import { requireAdminSession } from '@/lib/admin-session';
 
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
 const PORTFOLIO_UPLOAD_PREFIX = 'portfolio';
@@ -133,6 +134,8 @@ export async function uploadPortfolioImage(
 ): Promise<PortfolioUploadState> {
   void previousState;
 
+  await requireAdminSession();
+
   try {
     const image = readImageFile(formData);
     const title = readOptionalText(formData, 'title') ?? createTitleFromFile(image);
@@ -173,6 +176,8 @@ export async function deletePortfolioImage(
 ): Promise<PortfolioDeleteState> {
   void previousState;
 
+  await requireAdminSession();
+
   try {
     const assetId = readPortfolioAssetId(formData);
     const asset = await prisma.portfolioAsset.findUnique({ where: { id: assetId } });
@@ -194,6 +199,8 @@ export async function deletePortfolioImage(
 }
 
 export async function reorderPortfolioAssets(formData: FormData): Promise<PortfolioActionState> {
+  await requireAdminSession();
+
   try {
     const orderedIds = readOrderedAssetIds(formData);
     const assets = await prisma.portfolioAsset.findMany({
@@ -233,6 +240,8 @@ export async function reorderPortfolioAssets(formData: FormData): Promise<Portfo
 }
 
 export async function togglePortfolioAssetStatus(formData: FormData): Promise<PortfolioActionState> {
+  await requireAdminSession();
+
   try {
     const assetId = readPortfolioAssetId(formData);
     const asset = await prisma.portfolioAsset.findUnique({ where: { id: assetId } });

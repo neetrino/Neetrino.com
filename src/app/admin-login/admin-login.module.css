@@ -1,0 +1,97 @@
+.page {
+  align-items: center;
+  background:
+    radial-gradient(circle at top left, rgba(114, 86, 255, 0.24), transparent 32rem),
+    linear-gradient(135deg, #0d1020 0%, #11182b 48%, #070b14 100%);
+  color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.card {
+  background: rgba(15, 23, 42, 0.86);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 1.5rem;
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.36);
+  max-width: 28rem;
+  padding: 2rem;
+  width: 100%;
+}
+
+.eyebrow {
+  color: #a5b4fc;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: clamp(2rem, 8vw, 3.25rem);
+  line-height: 0.95;
+  margin: 0;
+}
+
+.description {
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 1rem 0 1.75rem;
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.label {
+  color: #e2e8f0;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.input {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.34);
+  border-radius: 0.875rem;
+  color: #f8fafc;
+  font: inherit;
+  padding: 0.875rem 1rem;
+}
+
+.input:focus {
+  border-color: #a5b4fc;
+  outline: 3px solid rgba(165, 180, 252, 0.2);
+}
+
+.button {
+  background: #f8fafc;
+  border: 0;
+  border-radius: 999rem;
+  color: #0f172a;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  padding: 0.95rem 1.25rem;
+}
+
+.button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(248, 113, 113, 0.38);
+  border-radius: 0.875rem;
+  color: #fecaca;
+  margin: 0;
+  padding: 0.875rem 1rem;
+}
