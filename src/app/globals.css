@@ -1653,8 +1653,6 @@ html:lang(hy) {
   gap: calc(var(--home-portfolio-row-gap) * var(--home-ui-scale));
   width: 100%;
   overflow: hidden;
-  content-visibility: auto;
-  contain-intrinsic-size: auto calc(860px * var(--home-ui-scale));
 }
 
 .home-portfolio-row {
@@ -1669,6 +1667,7 @@ html:lang(hy) {
   gap: calc(var(--home-portfolio-card-gap) * var(--home-ui-scale));
   width: max-content;
   transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .home-portfolio-row--left .home-portfolio-track {
