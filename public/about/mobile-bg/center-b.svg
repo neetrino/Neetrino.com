@@ -1,12 +1,1 @@
-<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 116.376 386.688" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Center B" filter="url(#filter0_f_0_100)" style="mix-blend-mode:overlay">
-<path d="M39.1652 85.0123C39.1652 82.304 34.7694 229.737 32.5715 303.792L30 356.688H86.3756L85.8481 292.789L81.9579 85.0123L76.617 292.789L75.3642 43.1183L67.7816 292.789L66.0013 43.1183L59.012 292.789L56.902 73.1635L53.1437 292.789L51.2975 219.581L48.9897 292.789L47.2753 30C45.2533 114.352 41.2092 283.734 41.2092 286.442C41.2092 289.827 39.1652 88.3976 39.1652 85.0123Z" fill="var(--fill-0, #E0EFFF)"/>
-</g>
-<defs>
-<filter id="filter0_f_0_100" x="0" y="0" width="116.376" height="386.688" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="15" result="effect1_foregroundBlur_0_100"/>
-</filter>
-</defs>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" overflow="visible" preserveAspectRatio="none" style="display:block" viewBox="0 0 116.376 386.688"><g filter="url(#a)" style="mix-blend-mode:overlay"><path fill="var(--fill-0, #e0efff)" d="M39.165 85.012c0-2.708-4.396 144.725-6.593 218.78L30 356.688h56.376l-.528-63.899-3.89-207.777-5.341 207.777-1.253-249.67-7.582 249.67-1.78-249.67-6.99 249.67-2.11-219.625-3.758 219.625-1.846-73.208-2.308 73.208L47.275 30c-2.022 84.352-6.066 253.734-6.066 256.442 0 3.385-2.044-198.044-2.044-201.43"/></g><defs><filter id="a" width="116.376" height="386.688" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_0_100" stdDeviation="15"/></filter></defs></svg>

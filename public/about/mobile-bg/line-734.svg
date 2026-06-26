@@ -1,17 +1,1 @@
-<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 778.142 28.0833" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Line 734" filter="url(#filter0_f_0_9)" style="mix-blend-mode:plus-lighter">
-<path d="M9.36111 14.0417L768.781 14.0417" stroke="url(#paint0_linear_0_9)" stroke-width="9.36111"/>
-</g>
-<defs>
-<filter id="filter0_f_0_9" x="-1.26098e-09" y="0" width="778.142" height="28.0833" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="4.68056" result="effect1_foregroundBlur_0_9"/>
-</filter>
-<linearGradient id="paint0_linear_0_9" x1="9.36111" y1="2.5737e+07" x2="768.781" y2="2.5737e+07" gradientUnits="userSpaceOnUse">
-<stop stop-color="white" stop-opacity="0"/>
-<stop offset="0.8" stop-color="#FF6613"/>
-<stop offset="1" stop-color="#1797FF"/>
-</linearGradient>
-</defs>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" overflow="visible" preserveAspectRatio="none" style="display:block" viewBox="0 0 778.142 28.083"><g filter="url(#a)" style="mix-blend-mode:plus-lighter"><path stroke="url(#b)" stroke-width="9.361" d="M9.361 14.042h759.42"/></g><defs><linearGradient id="b" x1="9.361" x2="768.781" y1="25737000" y2="25737000" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity="0"/><stop offset=".8" stop-color="#ff6613"/><stop offset="1" stop-color="#1797ff"/></linearGradient><filter id="a" width="778.142" height="28.083" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_0_9" stdDeviation="4.681"/></filter></defs></svg>

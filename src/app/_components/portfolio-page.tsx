@@ -95,8 +95,8 @@ function PortfolioPagination(): React.JSX.Element {
   );
 }
 
-function PortfolioBody(): React.JSX.Element {
-  const { portfolioCopy, portfolioProjects } = useHomeI18n();
+function PortfolioBody({ projects }: { projects: PortfolioProject[] }): React.JSX.Element {
+  const { portfolioCopy } = useHomeI18n();
 
   return (
     <section className="portfolio-body portfolio-body--baked" aria-labelledby="portfolio-heading">
@@ -116,8 +116,8 @@ function PortfolioBody(): React.JSX.Element {
         </div>
       </header>
       <div className="portfolio-list">
-        {portfolioProjects.map((project, index) => (
-          <PortfolioCard key={project.title} project={project} index={index} />
+        {projects.map((project, index) => (
+          <PortfolioCard key={`${project.title}-${project.image}`} project={project} index={index} />
         ))}
       </div>
       <PortfolioPagination />
@@ -125,7 +125,7 @@ function PortfolioBody(): React.JSX.Element {
   );
 }
 
-export function PortfolioPage(): React.JSX.Element {
+export function PortfolioPage({ projects }: { projects: PortfolioProject[] }): React.JSX.Element {
   return (
     <NeetrinoPageShell
       mainId="portfolio-top"
@@ -133,7 +133,7 @@ export function PortfolioPage(): React.JSX.Element {
       canvasHeight={PORTFOLIO_CANVAS_HEIGHT}
     >
       <PortfolioBakedBackground />
-      <PortfolioBody />
+      <PortfolioBody projects={projects} />
       <div className="portfolio-footer-ray-wrap portfolio-footer-ray-wrap--baked" aria-hidden />
     </NeetrinoPageShell>
   );
