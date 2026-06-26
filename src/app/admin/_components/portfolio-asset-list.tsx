@@ -17,6 +17,7 @@ import { PortfolioStatusToggle } from './portfolio-status-toggle';
 import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
 import { formatPortfolioSlotMeta } from '@/lib/portfolio-slots';
 import { getPortfolioVisibilityLabel } from '@/lib/portfolio-asset-status';
+import { isRemoteImageUrl } from '@/lib/image-url';
 
 const DEFAULT_PORTFOLIO_ROW_HEIGHT = 109;
 
@@ -98,6 +99,7 @@ function PortfolioRow({
           width={72}
           height={72}
           sizes="72px"
+          unoptimized={isRemoteImageUrl(asset.url)}
           className="admin-portfolio-thumb"
         />
       </div>

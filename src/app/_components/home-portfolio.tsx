@@ -6,6 +6,7 @@ import type { ProjectCard } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
 import { HomePortfolioCarousel } from './home-portfolio-carousel';
 import { ExploreButton, HomeContainer, SectionHeading } from './home-ui';
+import { isRemoteImageUrl } from '@/lib/image-url';
 
 type PortfolioCardProps = ProjectCard;
 
@@ -42,6 +43,7 @@ function PortfolioCard({
         sizes={`${width}px`}
         quality={HOME_IMAGE_QUALITY}
         loading="lazy"
+        unoptimized={isRemoteImageUrl(image)}
         className={imageClassName ? `home-project-image ${imageClassName}` : 'home-project-image'}
       />
     </article>

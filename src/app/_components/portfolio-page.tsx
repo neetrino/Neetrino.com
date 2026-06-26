@@ -14,6 +14,7 @@ import {
 } from './portfolio-constants';
 import type { PortfolioProject } from './portfolio-data';
 import { portfolioMessages } from './portfolio-messages';
+import { isRemoteImageUrl } from '@/lib/image-url';
 import './portfolio.css';
 import './services.css';
 
@@ -42,6 +43,7 @@ function PortfolioCard({
           loading={isAboveFold ? 'eager' : 'lazy'}
           fetchPriority={isAboveFold ? 'high' : 'low'}
           decoding="async"
+          unoptimized={isRemoteImageUrl(project.image)}
           className="portfolio-card-image"
         />
         {project.variant === 'zeppelin' ? (
