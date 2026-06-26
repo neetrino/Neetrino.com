@@ -1,5 +1,8 @@
 import type { ProjectCard } from '@/app/_components/home-data';
+import { portfolioBottomRow, portfolioTopRow } from '@/app/_components/home-data';
 import type { PortfolioProject } from '@/app/_components/portfolio-data';
+import { portfolioProjects as staticPortfolioProjects } from '@/app/_components/portfolio-data';
+import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 
 const HOME_PORTFOLIO_TOP_TEMPLATES = [
@@ -55,24 +58,42 @@ function splitHomeRows(assets: PublicPortfolioAsset[]): Pick<PublicPortfolioData
   };
 }
 
-export async function getPublicPortfolioData(): Promise<PublicPortfolioData> {
-  const assets = await prisma.portfolioAsset.findMany({
-    where: { status: 'ACTIVE' },
-    orderBy: { sortOrder: 'asc' },
-    select: {
-      alt: true,
-      title: true,
-      url: true,
-    },
-  });
-  const rows = splitHomeRows(assets);
-
+function getStaticPortfolioData(): PublicPortfolioData {
   return {
-    ...rows,
-    portfolioProjects: assets.map((asset) => ({
-      title: asset.title,
-      alt: asset.alt,
-      image: asset.url,
-    })),
+    homeTopRow: portfolioTopRow,
+    homeBottomRow: portfolioBottomRow,
+    portfolioProjects: staticPortfolioProjects,
   };
+}
+
+export async function getPublicPortfolioData(): Promise<PublicPortfolioData> {
+  if (!process.env.DATABASE_URL) {
+    logger.error('DATABASE_URL is not set; using static portfolio data.');
+    return getStaticPortfolioData();
+  }
+
+  try {
+    const assets = await prisma.portfolioAsset.findMany({
+      where: { status: 'ACTIVE' },
+      orderBy: { sortOrder: 'asc' },
+      select: {
+        alt: true,
+        title: true,
+        url: true,
+      },
+    });
+    const rows = splitHomeRows(assets);
+
+    return {
+      ...rows,
+      portfolioProjects: assets.map((asset) => ({
+        title: asset.title,
+        alt: asset.alt,
+        image: asset.url,
+      })),
+    };
+  } catch (error) {
+    logger.error('Failed to load portfolio assets; using static portfolio data.', { error });
+    return getStaticPortfolioData();
+  }
 }

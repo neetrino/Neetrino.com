@@ -110,7 +110,7 @@ export function createHomeData(messages: HomeMessages) {
 
   const moreNavItems: NavItem[] = [
     { id: 'blog', label: navigation.items.blog, href: '/blog' },
-    { id: 'team', label: navigation.items.team, href: '/#team' },
+    { id: 'team', label: navigation.items.team, href: '/team' },
   ];
 
   const heroStats: StatCard[] = [
@@ -220,7 +220,7 @@ export function createHomeData(messages: HomeMessages) {
   const footerLinks = {
     company: [
       { id: 'about', label: footer.links.about, href: '/#about' },
-      { id: 'team', label: footer.links.team, href: '/#about' },
+      { id: 'team', label: footer.links.team, href: '/team' },
       { id: 'contactUs', label: footer.links.contactUs, href: '/contact' },
       { id: 'portfolio', label: footer.links.portfolio, href: '/portfolio' },
       { id: 'services', label: footer.links.services, href: '/services' },
