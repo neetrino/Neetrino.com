@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "pageTitle": "Team | Neetrino",
+    "description": "Meet the Neetrino team — designers, engineers, and strategists building modern digital products."
+  },
+  "hero": {
+    "kicker": "Our people",
+    "srOnlyTitle": "Meet the Neetrino Team",
+    "title": { "plain": "MEET OUR ", "accent": "TEAM" },
+    "intro": "We are a multidisciplinary team united by one goal — turning ambitious ideas into reliable digital products. From strategy and design to engineering and support, we build together."
+  },
+  "stats": [
+    { "value": "25+", "label": "Team Members", "tone": "purple" },
+    { "value": "8", "label": "Years of Experience", "tone": "cyan" },
+    { "value": "10+", "label": "Countries Served", "tone": "orange" }
+  ],
+  "showcase": {
+    "heading": "Built by collaboration",
+    "text": "Every project brings designers, developers, and product minds to the same table. That mix is what helps us ship faster, iterate smarter, and support clients long after launch."
+  },
+  "imageAlt": "Neetrino team at work",
+  "values": {
+    "ariaLabel": "What defines our team",
+    "items": [
+      {
+        "title": "Precision",
+        "description": "We care about the details — from UX flows to production code — so every release feels polished and dependable."
+      },
+      {
+        "title": "Momentum",
+        "description": "Tight feedback loops, clear ownership, and modern tooling keep projects moving without sacrificing quality."
+      },
+      {
+        "title": "Partnership",
+        "description": "We work as an extension of your team, staying close to goals, timelines, and the outcomes that matter."
+      }
+    ]
+  },
+  "cta": {
+    "label": "Start a project"
+  }
+}
