@@ -97,7 +97,7 @@ function normalizeRichTextPart(part: MessageRichTextPart): RichTextPart {
 }
 
 export function createHomeData(messages: HomeMessages) {
-  const { actions, footer, hero, meta, navigation, portfolio } = messages;
+  const { actions, footer, hero, meta, navigation } = messages;
   const serviceCards = messages.services.cards;
 
   const navItems: NavItem[] = [
@@ -158,64 +158,10 @@ export function createHomeData(messages: HomeMessages) {
     },
   ];
 
-  const portfolioTopRow: ProjectCard[] = [
-    {
-      title: portfolio.projects.meetingAssistant,
-      image: '/portfolio/optimized/digital-implant.jpg',
-      width: 505,
-      height: 378,
-      radius: 43,
-    },
-    {
-      title: portfolio.projects.borborLanding,
-      image: '/portfolio/optimized/borbor.jpg',
-      imageClassName: 'home-project-image-borbor',
-      width: 505,
-      height: 378,
-      radius: 45,
-    },
-    {
-      title: portfolio.projects.visualHierarchy,
-      image: '/portfolio/optimized/degusto.jpg',
-      imageClassName: 'home-project-image-visual',
-      width: 592,
-      height: 383,
-      radius: 35,
-    },
-  ];
-
-  const portfolioBottomRow: ProjectCard[] = [
-    {
-      title: portfolio.projects.aiListing,
-      image: '/portfolio/optimized/anra.jpg',
-      width: 379,
-      height: 378,
-      radius: 32,
-    },
-    {
-      title: portfolio.projects.meetingAssistant,
-      image: '/portfolio/optimized/digital-implant.jpg',
-      width: 505,
-      height: 378,
-      radius: 43,
-    },
-    {
-      title: portfolio.projects.borborLanding,
-      image: '/portfolio/optimized/borbor.jpg',
-      imageClassName: 'home-project-image-borbor',
-      width: 505,
-      height: 378,
-      radius: 45,
-    },
-    {
-      title: portfolio.projects.visualHierarchy,
-      image: '/portfolio/optimized/degusto.jpg',
-      imageClassName: 'home-project-image-visual',
-      width: 592,
-      height: 383,
-      radius: 35,
-    },
-  ];
+  // Portfolio cards are sourced from the admin (database). No static image
+  // fallback is provided; when the database is unavailable the rows are empty.
+  const portfolioTopRow: ProjectCard[] = [];
+  const portfolioBottomRow: ProjectCard[] = [];
 
   const footerLinks = {
     company: [
