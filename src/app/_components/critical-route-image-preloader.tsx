@@ -7,6 +7,7 @@ const CRITICAL_ROUTE_IMAGES = [
   '/about/robot.webp',
   '/portfolio/optimized/decor-stack.webp',
   '/portfolio/portfolio-title.webp',
+  '/blog/blog-title.webp',
   '/services/optimized/decor-stack.webp',
   '/services/services-title.webp',
 ] as const;

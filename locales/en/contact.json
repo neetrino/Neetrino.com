@@ -33,7 +33,10 @@
     "emailPlaceholder": "Your email",
     "messageLabel": "Message",
     "messagePlaceholder": "Tell us about your project",
-    "submit": "Send inquiry"
+    "submit": "Send inquiry",
+    "submitting": "Sending...",
+    "sentLabel": "Sent",
+    "errorMessage": "Try again"
   },
   "office": {
     "title": "Office",

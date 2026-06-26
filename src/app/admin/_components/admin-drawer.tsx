@@ -8,6 +8,7 @@ type AdminDrawerProps = {
   title: string;
   description: string;
   initialScrollPosition?: 'top' | 'bottom';
+  renderTrigger?: (props: { open: () => void }) => ReactNode;
   children: ReactNode;
 };
 
@@ -16,10 +17,12 @@ export function AdminDrawer({
   title,
   description,
   initialScrollPosition = 'top',
+  renderTrigger,
   children,
 }: AdminDrawerProps): React.JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const drawerRef = useRef<HTMLElement>(null);
+  const openDrawer = (): void => setIsOpen(true);
 
   useEffect(() => {
     if (!isOpen || initialScrollPosition !== 'bottom') {
@@ -46,9 +49,13 @@ export function AdminDrawer({
 
   return (
     <>
-      <button type="button" className="admin-primary-button" onClick={() => setIsOpen(true)}>
-        {buttonLabel}
-      </button>
+      {renderTrigger ? (
+        renderTrigger({ open: openDrawer })
+      ) : (
+        <button type="button" className="admin-primary-button" onClick={openDrawer}>
+          {buttonLabel}
+        </button>
+      )}
       {isOpen ? (
         <div className="admin-drawer-layer" role="presentation">
           <button

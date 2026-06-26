@@ -1,5 +1,6 @@
 'use client';
 
+import { ContactForm } from './contact-form';
 import { ContactMap } from './contact-map';
 import { useHomeI18n } from './home-i18n-provider';
 import { NeetrinoPageShell } from './neetrino-page-shell';
@@ -144,37 +145,6 @@ function ContactIntroCard(): React.JSX.Element {
   );
 }
 
-function ContactFormCard(): React.JSX.Element {
-  const { contactCopy } = useHomeI18n();
-  const { form } = contactCopy;
-
-  return (
-    <article className="contact-card contact-form-card">
-      <h2 className="contact-card-title">{form.title}</h2>
-      <p className="contact-card-copy">{form.copy}</p>
-
-      <form className="contact-form" action="/contact">
-        <label className="sr-only" htmlFor="contact-name">
-          {form.nameLabel}
-        </label>
-        <input id="contact-name" name="name" type="text" placeholder={form.namePlaceholder} />
-
-        <label className="sr-only" htmlFor="contact-email">
-          {form.emailLabel}
-        </label>
-        <input id="contact-email" name="email" type="email" placeholder={form.emailPlaceholder} />
-
-        <label className="sr-only" htmlFor="contact-message">
-          {form.messageLabel}
-        </label>
-        <textarea id="contact-message" name="message" rows={5} placeholder={form.messagePlaceholder} />
-
-        <button type="submit">{form.submit}</button>
-      </form>
-    </article>
-  );
-}
-
 function ContactOfficeSection(): React.JSX.Element {
   const { contactCopy, contactInfo } = useHomeI18n();
   const { office } = contactCopy;
@@ -211,7 +181,7 @@ export function ContactPage(): React.JSX.Element {
         <div className="contact-content">
           <div className="contact-hero-grid">
             <ContactIntroCard />
-            <ContactFormCard />
+            <ContactForm />
           </div>
           <ContactOfficeSection />
         </div>

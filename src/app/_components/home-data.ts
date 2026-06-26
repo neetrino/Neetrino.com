@@ -109,7 +109,7 @@ export function createHomeData(messages: HomeMessages) {
   ];
 
   const moreNavItems: NavItem[] = [
-    { id: 'blog', label: navigation.items.blog, href: '/#blog' },
+    { id: 'blog', label: navigation.items.blog, href: '/blog' },
     { id: 'team', label: navigation.items.team, href: '/#team' },
   ];
 
@@ -224,7 +224,7 @@ export function createHomeData(messages: HomeMessages) {
       { id: 'contactUs', label: footer.links.contactUs, href: '/contact' },
       { id: 'portfolio', label: footer.links.portfolio, href: '/portfolio' },
       { id: 'services', label: footer.links.services, href: '/services' },
-      { id: 'blog', label: footer.links.blog, href: '/#blog' },
+      { id: 'blog', label: footer.links.blog, href: '/blog' },
     ],
     services: [
       { id: 'website', label: footer.links.website, href: '/services' },

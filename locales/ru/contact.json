@@ -33,7 +33,10 @@
     "emailPlaceholder": "Ваш email",
     "messageLabel": "Сообщение",
     "messagePlaceholder": "Расскажите о вашем проекте",
-    "submit": "Отправить запрос"
+    "submit": "Отправить запрос",
+    "submitting": "Отправка...",
+    "sentLabel": "Отправлено",
+    "errorMessage": "Попробуйте снова"
   },
   "office": {
     "title": "Офис",

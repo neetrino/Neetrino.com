@@ -102,6 +102,30 @@
   font-size: 13px;
 }
 
+.admin-tab-button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.admin-tab-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.admin-tab-button.is-active {
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+}
+
+.admin-translation-panel {
+  display: grid;
+  gap: 16px;
+}
+
 .admin-tab.is-active {
   border-radius: 12px;
   background: #111;
@@ -151,6 +175,12 @@
 
 .admin-upload-message--success {
   color: #067647;
+}
+
+.admin-cover-note {
+  margin: 0;
+  color: var(--admin-muted);
+  font-size: 13px;
 }
 
 .admin-gallery {

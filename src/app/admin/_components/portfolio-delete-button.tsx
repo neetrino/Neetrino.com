@@ -30,7 +30,7 @@ export function PortfolioDeleteButton({
   }
 
   return (
-    <form action={formAction} className="admin-card-delete-form" onSubmit={handleSubmit}>
+    <form action={formAction} className="admin-portfolio-delete-form" onSubmit={handleSubmit}>
       <input name="assetId" type="hidden" value={assetId} />
       <button type="submit" className="admin-danger-button" disabled={isPending}>
         {isPending ? 'Deleting...' : 'Delete'}

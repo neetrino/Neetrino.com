@@ -1,18 +1,18 @@
-import Image from 'next/image';
 import { AdminPageHeader } from '../_components/admin-page-header';
-import { PortfolioDeleteButton } from '../_components/portfolio-delete-button';
+import { serializeAdminPortfolioAsset } from '../_components/admin-portfolio-asset';
+import { PortfolioAssetList } from '../_components/portfolio-asset-list';
 import { PortfolioUploadButton } from '../_components/portfolio-upload-button';
 import { deletePortfolioImage, uploadPortfolioImage } from '../_actions/portfolio-actions';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 
-const BYTE_UNIT = 1024;
-const IMAGE_SIZE_LABEL_DIGITS = 1;
+const PORTFOLIO_ADMIN_DESCRIPTION =
+  'Upload images, WebM animations, or GIF fallbacks. Reorder cards and toggle visibility. Slots update automatically. Recommended: WebM for better performance. GIF is supported as fallback. Max 10 MB.';
 
 async function getPortfolioAssets() {
   try {
     return await prisma.portfolioAsset.findMany({
-      orderBy: { createdAt: 'desc' },
+      orderBy: { sortOrder: 'asc' },
     });
   } catch (error) {
     logger.error('Failed to load admin portfolio assets.', { error });
@@ -20,37 +20,25 @@ async function getPortfolioAssets() {
   }
 }
 
-function formatImageSize(sizeBytes: number): string {
-  return `${(sizeBytes / BYTE_UNIT / BYTE_UNIT).toFixed(IMAGE_SIZE_LABEL_DIGITS)} MB`;
-}
-
 export default async function AdminPortfolioPage(): Promise<React.JSX.Element> {
   const assets = await getPortfolioAssets();
+  const adminAssets = assets.map(serializeAdminPortfolioAsset);
 
   return (
     <>
-      <AdminPageHeader title="Portfolio" description="Upload and manage portfolio images from the admin panel.">
+      <AdminPageHeader title="Portfolio" description={PORTFOLIO_ADMIN_DESCRIPTION}>
         <div className="admin-header-actions">
-          <PortfolioUploadButton action={uploadPortfolioImage} assetType="IMAGE" label="Upload" />
+          <PortfolioUploadButton
+            action={uploadPortfolioImage}
+            assetType="IMAGE"
+            label="Upload animation / image"
+          />
         </div>
       </AdminPageHeader>
-      {assets.length > 0 ? (
-        <section className="admin-gallery" aria-label="Portfolio assets">
-          {assets.map((asset) => (
-            <article key={asset.id} className="admin-gallery-card">
-              <Image src={asset.url} alt={asset.alt} width={380} height={285} sizes="260px" />
-              <div>
-                <h2>{asset.title}</h2>
-                <p>
-                  {asset.assetType === 'ANIMATION_IMAGE' ? 'Animation image' : 'Image'} / {formatImageSize(asset.sizeBytes)}
-                </p>
-                <PortfolioDeleteButton action={deletePortfolioImage} assetId={asset.id} assetTitle={asset.title} />
-              </div>
-            </article>
-          ))}
-        </section>
+      {adminAssets.length > 0 ? (
+        <PortfolioAssetList assets={adminAssets} deleteAction={deletePortfolioImage} />
       ) : (
-        <div className="admin-empty">No portfolio images yet. Upload the first image from the left panel.</div>
+        <div className="admin-empty">No portfolio assets yet. Upload the first item from the button above.</div>
       )}
     </>
   );

@@ -7,6 +7,7 @@ import type { ReactNode } from 'react';
 const ADMIN_NAV_ITEMS = [
   { href: '/admin/blog', label: 'Blog', icon: 'doc' },
   { href: '/admin/portfolio', label: 'Portfolio', icon: 'grid' },
+  { href: '/admin/contact', label: 'Messages', icon: 'message' },
   { href: '/admin/products', label: 'Products', icon: 'box' },
   { href: '/admin/orders', label: 'Orders', icon: 'cart' },
 ] as const;

@@ -57,7 +57,8 @@ function splitHomeRows(assets: PublicPortfolioAsset[]): Pick<PublicPortfolioData
 
 export async function getPublicPortfolioData(): Promise<PublicPortfolioData> {
   const assets = await prisma.portfolioAsset.findMany({
-    orderBy: { createdAt: 'desc' },
+    where: { status: 'ACTIVE' },
+    orderBy: { sortOrder: 'asc' },
     select: {
       alt: true,
       title: true,

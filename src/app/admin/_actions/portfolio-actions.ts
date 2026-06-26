@@ -2,14 +2,16 @@
 
 import { randomUUID } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
+import { getNextPortfolioAssetStatus } from '@/lib/portfolio-asset-status';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 import { R2ConfigurationError, deleteR2Object, uploadR2Object } from '@/lib/r2/storage';
 
-const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
 const PORTFOLIO_UPLOAD_PREFIX = 'portfolio';
 const PORTFOLIO_ASSET_TYPES = ['IMAGE', 'ANIMATION_IMAGE'] as const;
 const SUPPORTED_IMAGE_TYPES = ['image/avif', 'image/jpeg', 'image/png', 'image/webp'] as const;
+const PORTFOLIO_REVALIDATE_PATHS = ['/admin/portfolio', '/portfolio', '/'] as const;
 
 export type PortfolioUploadState = {
   status: 'idle' | 'success' | 'error';
@@ -17,6 +19,11 @@ export type PortfolioUploadState = {
 };
 
 export type PortfolioDeleteState = {
+  status: 'idle' | 'success' | 'error';
+  message: string;
+};
+
+export type PortfolioActionState = {
   status: 'idle' | 'success' | 'error';
   message: string;
 };
@@ -35,7 +42,7 @@ function readImageFile(formData: FormData): File {
   }
 
   if (file.size > MAX_IMAGE_BYTES) {
-    throw new Error('Portfolio image must be smaller than 8MB.');
+    throw new Error('Portfolio image must be smaller than 10MB.');
   }
 
   if (!SUPPORTED_IMAGE_TYPES.includes(file.type as (typeof SUPPORTED_IMAGE_TYPES)[number])) {
@@ -90,6 +97,36 @@ function readPortfolioAssetId(formData: FormData): string {
   return value;
 }
 
+function readOrderedAssetIds(formData: FormData): string[] {
+  const value = formData.get('orderedIds');
+
+  if (typeof value !== 'string' || value.trim().length === 0) {
+    throw new Error('Portfolio order is required.');
+  }
+
+  const parsed: unknown = JSON.parse(value);
+
+  if (!Array.isArray(parsed) || parsed.some((item) => typeof item !== 'string' || item.trim().length === 0)) {
+    throw new Error('Portfolio order must be a list of asset ids.');
+  }
+
+  return parsed;
+}
+
+function revalidatePortfolioPaths(): void {
+  for (const path of PORTFOLIO_REVALIDATE_PATHS) {
+    revalidatePath(path);
+  }
+}
+
+async function getNextPortfolioSortOrder(): Promise<number> {
+  const result = await prisma.portfolioAsset.aggregate({
+    _max: { sortOrder: true },
+  });
+
+  return (result._max.sortOrder ?? -1) + 1;
+}
+
 export async function uploadPortfolioImage(
   previousState: PortfolioUploadState,
   formData: FormData,
@@ -112,6 +149,7 @@ export async function uploadPortfolioImage(
         title,
         alt,
         assetType: readAssetType(formData),
+        sortOrder: await getNextPortfolioSortOrder(),
         key: uploaded.key,
         url: uploaded.url,
         contentType: image.type,
@@ -119,7 +157,7 @@ export async function uploadPortfolioImage(
       },
     });
 
-    revalidatePath('/admin/portfolio');
+    revalidatePortfolioPaths();
 
     return { status: 'success', message: 'Portfolio image uploaded.' };
   } catch (error) {
@@ -145,12 +183,78 @@ export async function deletePortfolioImage(
 
     await deleteR2Object({ key: asset.key });
     await prisma.portfolioAsset.delete({ where: { id: asset.id } });
-    revalidatePath('/admin/portfolio');
+    revalidatePortfolioPaths();
 
     return { status: 'success', message: 'Portfolio image deleted.' };
   } catch (error) {
     logger.error('Failed to delete portfolio image.', { error });
 
     return { status: 'error', message: getUploadErrorMessage(error) };
+  }
+}
+
+export async function reorderPortfolioAssets(formData: FormData): Promise<PortfolioActionState> {
+  try {
+    const orderedIds = readOrderedAssetIds(formData);
+    const assets = await prisma.portfolioAsset.findMany({
+      select: { id: true },
+    });
+
+    if (orderedIds.length !== assets.length) {
+      return { status: 'error', message: 'Portfolio order is incomplete.' };
+    }
+
+    const knownIds = new Set(assets.map((asset) => asset.id));
+
+    if (orderedIds.some((id) => !knownIds.has(id))) {
+      return { status: 'error', message: 'Portfolio order contains unknown assets.' };
+    }
+
+    await prisma.$transaction(
+      orderedIds.map((id, index) =>
+        prisma.portfolioAsset.update({
+          where: { id },
+          data: { sortOrder: index },
+        }),
+      ),
+    );
+
+    revalidatePortfolioPaths();
+
+    return { status: 'success', message: 'Portfolio order updated.' };
+  } catch (error) {
+    logger.error('Failed to reorder portfolio assets.', { error });
+
+    return {
+      status: 'error',
+      message: error instanceof Error ? error.message : 'Portfolio reorder failed.',
+    };
+  }
+}
+
+export async function togglePortfolioAssetStatus(formData: FormData): Promise<PortfolioActionState> {
+  try {
+    const assetId = readPortfolioAssetId(formData);
+    const asset = await prisma.portfolioAsset.findUnique({ where: { id: assetId } });
+
+    if (!asset) {
+      return { status: 'error', message: 'Portfolio asset was not found.' };
+    }
+
+    await prisma.portfolioAsset.update({
+      where: { id: asset.id },
+      data: { status: getNextPortfolioAssetStatus(asset.status) },
+    });
+
+    revalidatePortfolioPaths();
+
+    return { status: 'success', message: 'Portfolio visibility updated.' };
+  } catch (error) {
+    logger.error('Failed to toggle portfolio asset status.', { error });
+
+    return {
+      status: 'error',
+      message: error instanceof Error ? error.message : 'Portfolio visibility update failed.',
+    };
   }
 }
