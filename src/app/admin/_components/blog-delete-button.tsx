@@ -3,6 +3,7 @@
 import { useActionState } from 'react';
 import type { BlogActionState } from '../_actions/blog-actions';
 import { deleteBlogPost } from '../_actions/blog-actions';
+import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
 
 const INITIAL_DELETE_STATE: BlogActionState = {
   status: 'idle',
@@ -16,9 +17,10 @@ type BlogDeleteButtonProps = {
 
 export function BlogDeleteButton({ postId, postTitle }: BlogDeleteButtonProps): React.JSX.Element {
   const [state, formAction, isPending] = useActionState(deleteBlogPost, INITIAL_DELETE_STATE);
+  const { copy } = useAdminI18n();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
-    const confirmed = window.confirm(`Delete "${postTitle}"?`);
+    const confirmed = window.confirm(formatAdminMessage(copy.blog.deleteConfirm, { title: postTitle }));
 
     if (!confirmed) {
       event.preventDefault();
@@ -32,7 +34,7 @@ export function BlogDeleteButton({ postId, postTitle }: BlogDeleteButtonProps): 
         type="submit"
         className="admin-icon-button admin-icon-button--danger"
         disabled={isPending}
-        aria-label={`Delete ${postTitle}`}
+        aria-label={formatAdminMessage(copy.blog.deleteAria, { title: postTitle })}
       >
         <span className="admin-icon admin-icon--delete" aria-hidden />
       </button>

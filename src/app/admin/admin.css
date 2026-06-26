@@ -70,6 +70,31 @@
   margin-top: 34px;
 }
 
+.admin-language-switcher {
+  display: flex;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.admin-language-button {
+  border: 1px solid var(--admin-border);
+  border-radius: 999px;
+  background: #fff;
+  color: #555a62;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  padding: 7px 9px;
+}
+
+.admin-language-button.is-active {
+  border-color: #111;
+  background: #111;
+  color: #fff;
+}
+
 .admin-nav-item {
   display: flex;
   align-items: center;
@@ -166,6 +191,12 @@
   flex-wrap: wrap;
 }
 
+.admin-portfolio-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin: -12px 0 22px;
+}
+
 .admin-primary-button {
   border: 0;
   border-radius: 999px;
@@ -176,6 +207,7 @@
   font-size: 14px;
   font-weight: 800;
   padding: 16px 26px;
+  white-space: nowrap;
 }
 
 .admin-primary-button:disabled {

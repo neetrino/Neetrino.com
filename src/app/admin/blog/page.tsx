@@ -1,6 +1,8 @@
 import { AdminDrawer } from '../_components/admin-drawer';
 import { AdminPageHeader } from '../_components/admin-page-header';
+import { AdminSection } from '../_components/admin-section';
 import { serializeAdminBlogPost } from '../_components/admin-blog-post';
+import { AdminText } from '../_components/admin-text';
 import { BlogDeleteButton } from '../_components/blog-delete-button';
 import { BlogEditDrawer } from '../_components/blog-edit-drawer';
 import { BlogPostForm } from '../_components/blog-post-form';
@@ -39,7 +41,7 @@ function getEnglishTranslation(post: BlogPostItem) {
 function BlogPostCard({ post }: { post: BlogPostItem }): React.JSX.Element {
   const englishTranslation = getEnglishTranslation(post);
   const localeCount = post.translations.length;
-  const postTitle = englishTranslation?.title ?? 'Untitled post';
+  const postTitle = englishTranslation?.title ?? '';
   const adminPost = serializeAdminBlogPost(post);
 
   return (
@@ -48,11 +50,11 @@ function BlogPostCard({ post }: { post: BlogPostItem }): React.JSX.Element {
         B
       </span>
       <div>
-        <h2>{postTitle}</h2>
-        <p>{englishTranslation?.excerpt ?? 'No excerpt yet.'}</p>
+        <h2>{postTitle || <AdminText path="blog.untitled" />}</h2>
+        <p>{englishTranslation?.excerpt ?? <AdminText path="blog.noExcerpt" />}</p>
         <p>
-          {BLOG_DATE_FORMATTER.format(post.createdAt)} · {localeCount} language
-          {localeCount === 1 ? '' : 's'}
+          {BLOG_DATE_FORMATTER.format(post.createdAt)} · {localeCount}{' '}
+          <AdminText path={localeCount === 1 ? 'blog.languageSingular' : 'blog.languagePlural'} />
         </p>
       </div>
       <div className="admin-card-meta">
@@ -71,23 +73,25 @@ export default async function AdminBlogPage(): Promise<React.JSX.Element> {
 
   return (
     <>
-      <AdminPageHeader title="Blog posts" description="Manage published and draft blog content.">
+      <AdminPageHeader sectionKey="blog">
         <AdminDrawer
-          buttonLabel="Create new post"
-          title="Create new post"
-          description="Create the post content and publishing fields."
+          buttonLabelPath="blog.createButton"
+          titlePath="blog.createTitle"
+          descriptionPath="blog.createDescription"
           initialScrollPosition="bottom"
         >
           <BlogPostForm />
         </AdminDrawer>
       </AdminPageHeader>
-      <section className="admin-list" aria-label="Blog post list">
+      <AdminSection className="admin-list" ariaLabelPath="blog.listAria">
         {posts.length > 0 ? (
           posts.map((post) => <BlogPostCard key={post.id} post={post} />)
         ) : (
-          <div className="admin-empty">No blog posts yet. Create the first draft from the left panel.</div>
+          <div className="admin-empty">
+            <AdminText path="blog.empty" />
+          </div>
         )}
-      </section>
+      </AdminSection>
     </>
   );
 }

@@ -1,0 +1,121 @@
+.paymentSection {
+  position: relative;
+  z-index: 2;
+  min-height: 360px;
+  padding: 132px 174px 96px;
+}
+
+.paymentSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 91px 101px;
+  mask-image: linear-gradient(to bottom, #000 0%, rgb(0 0 0 / 0.8) 52%, transparent 100%);
+}
+
+.paymentCard {
+  overflow: hidden;
+  max-width: 944px;
+  border: 1px solid rgb(108 101 255 / 0.28);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 78% 10%, rgb(74 61 255 / 0.22), transparent 34%),
+    linear-gradient(135deg, rgb(34 31 66 / 0.94), rgb(20 20 30 / 0.9));
+  box-shadow: 0 28px 90px rgb(0 0 0 / 0.34);
+  padding: 34px;
+}
+
+.productName {
+  margin: 0;
+  color: #fff;
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.description {
+  max-width: 640px;
+  margin: 12px 0 0;
+  color: rgb(255 255 255 / 0.74);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.price {
+  margin: 28px 0 22px;
+  color: #fff;
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.payButton {
+  display: grid;
+  width: 100%;
+  min-height: 36px;
+  place-items: center;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #473dff, #5d55ff);
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: inherit;
+  text-decoration: none;
+  box-shadow: 0 16px 36px rgb(71 61 255 / 0.35);
+}
+
+.payButton:hover {
+  filter: brightness(1.08);
+}
+
+.paymentNote {
+  margin: 14px 0 0;
+  color: rgb(255 255 255 / 0.54);
+  font-size: 12px;
+  text-align: center;
+}
+
+.paymentStatusSuccess,
+.paymentStatusError {
+  margin: 0 0 18px;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.paymentStatusSuccess {
+  border: 1px solid rgb(92 255 187 / 0.28);
+  background: rgb(92 255 187 / 0.12);
+  color: rgb(196 255 230);
+}
+
+.paymentStatusError {
+  border: 1px solid rgb(255 112 112 / 0.32);
+  background: rgb(255 112 112 / 0.12);
+  color: rgb(255 207 207);
+}
+
+@media (max-width: 760px) {
+  .paymentSection {
+    padding: 118px 18px 72px;
+  }
+
+  .paymentCard {
+    padding: 24px;
+  }
+
+  .productName {
+    font-size: 34px;
+  }
+
+  .price {
+    font-size: 30px;
+  }
+}

@@ -1,25 +1,57 @@
 import { AdminPageHeader } from '../_components/admin-page-header';
+import { ProductManager } from '../_components/product-manager';
+import type { AdminProduct, ProductStatus, ProductType } from '../_actions/product-actions';
+import { logger } from '@/lib/logger';
+import { prisma } from '@/lib/prisma';
 
-const PRODUCT_PREVIEW_ITEMS = ['Catalog structure', 'Pricing', 'Availability'] as const;
+const PRODUCT_TYPES = ['ONE_TIME', 'PERMANENT'] as const;
+const PRODUCT_STATUSES = ['ACTIVE', 'INACTIVE'] as const;
 
-export default function AdminProductsPage(): React.JSX.Element {
+function serializeProduct(product: {
+  id: string;
+  name: string;
+  description: string | null;
+  priceAmd: number;
+  type: string;
+  status: string;
+  secretSlug: string;
+  createdAt: Date;
+  updatedAt: Date;
+}): AdminProduct {
+  return {
+    id: product.id,
+    name: product.name,
+    description: product.description ?? '',
+    priceAmd: product.priceAmd,
+    type: PRODUCT_TYPES.includes(product.type as ProductType) ? (product.type as ProductType) : 'ONE_TIME',
+    status: PRODUCT_STATUSES.includes(product.status as ProductStatus) ? (product.status as ProductStatus) : 'ACTIVE',
+    secretSlug: product.secretSlug,
+    createdAt: product.createdAt.toISOString(),
+    updatedAt: product.updatedAt.toISOString(),
+  };
+}
+
+async function getProducts(): Promise<AdminProduct[]> {
+  try {
+    const products = await prisma.paymentProduct.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return products.map(serializeProduct);
+  } catch (error) {
+    logger.error('Failed to load admin products.', { error });
+    return [];
+  }
+}
+
+export default async function AdminProductsPage(): Promise<React.JSX.Element> {
+  const products = await getProducts();
+  const appUrl = process.env.APP_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
+
   return (
     <>
-      <AdminPageHeader title="Products" description="Product management shell is ready for the next requirements." />
-      <section className="admin-list" aria-label="Products setup">
-        {PRODUCT_PREVIEW_ITEMS.map((item) => (
-          <article key={item} className="admin-card">
-            <span className="admin-card-icon" aria-hidden>
-              P
-            </span>
-            <div>
-              <h2>{item}</h2>
-              <p>Prepared admin block. Details can be connected when the product rules are confirmed.</p>
-            </div>
-            <span className="admin-status">Ready</span>
-          </article>
-        ))}
-      </section>
+      <AdminPageHeader sectionKey="products" />
+      <ProductManager appUrl={appUrl} initialProducts={products} />
     </>
   );
 }

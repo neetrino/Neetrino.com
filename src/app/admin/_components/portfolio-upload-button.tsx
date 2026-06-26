@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useRef } from 'react';
 import type { PortfolioUploadState } from '../_actions/portfolio-actions';
+import { useAdminI18n } from './admin-i18n-provider';
 
 const INITIAL_UPLOAD_STATE: PortfolioUploadState = {
   status: 'idle',
@@ -11,17 +12,21 @@ const INITIAL_UPLOAD_STATE: PortfolioUploadState = {
 type PortfolioUploadButtonProps = {
   action: (state: PortfolioUploadState, formData: FormData) => Promise<PortfolioUploadState>;
   assetType: 'IMAGE' | 'ANIMATION_IMAGE';
-  label: string;
+  label?: string;
+  labelPath?: 'portfolio.upload';
 };
 
 export function PortfolioUploadButton({
   action,
   assetType,
   label,
+  labelPath,
 }: PortfolioUploadButtonProps): React.JSX.Element {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [state, formAction, isPending] = useActionState(action, INITIAL_UPLOAD_STATE);
+  const { copy } = useAdminI18n();
+  const buttonLabel = label ?? (labelPath ? copy.portfolio.upload : '');
 
   useEffect(() => {
     if (state.status === 'success' && fileInputRef.current) {
@@ -47,7 +52,7 @@ export function PortfolioUploadButton({
         disabled={isPending}
         onClick={() => fileInputRef.current?.click()}
       >
-        {isPending ? 'Uploading...' : label}
+        {isPending ? copy.portfolio.uploading : buttonLabel}
       </button>
       {state.message ? (
         <p className={`admin-upload-message admin-upload-message--${state.status}`}>{state.message}</p>

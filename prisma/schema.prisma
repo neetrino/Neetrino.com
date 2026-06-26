@@ -76,3 +76,39 @@ model ContactMessage {
 
   @@map("contact_messages")
 }
+
+model PaymentProduct {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  priceAmd    Int      @map("price_amd")
+  type        String   @default("ONE_TIME")
+  status      String   @default("ACTIVE")
+  secretSlug  String   @unique @map("secret_slug")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  attempts    PaymentAttempt[]
+
+  @@map("payment_products")
+}
+
+model PaymentAttempt {
+  id                    String         @id @default(cuid())
+  productId             String         @map("product_id")
+  status                String         @default("PENDING")
+  provider              String         @default("ARCA")
+  amountAmd             Int            @map("amount_amd")
+  currency              String         @default("AMD")
+  providerTransactionId String?        @unique @map("provider_transaction_id")
+  redirectUrl           String?        @map("redirect_url")
+  providerResponse      Json?          @map("provider_response")
+  failureMessage        String?        @map("failure_message")
+  paidAt                DateTime?      @map("paid_at")
+  createdAt             DateTime       @default(now()) @map("created_at")
+  updatedAt             DateTime       @updatedAt @map("updated_at")
+  product               PaymentProduct @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([productId])
+  @@index([status])
+  @@map("payment_attempts")
+}
