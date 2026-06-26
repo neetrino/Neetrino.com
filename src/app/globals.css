@@ -1260,6 +1260,8 @@ html:lang(hy) {
   background: var(--home-hero-stat-purple);
   color: #fffcfc;
   cursor: pointer;
+  transform: translateZ(0);
+  will-change: background-color;
   transition:
     background-color 0.25s ease,
     color 0.25s ease;

@@ -88,7 +88,7 @@ export function FooterLinkColumn({ title, links }: FooterLinkColumnProps): React
       <ul className="home-footer-links">
         {links.map((link) => (
           <li key={link.id}>
-            <a href={link.href}>{link.label}</a>
+            <Link href={link.href}>{link.label}</Link>
           </li>
         ))}
       </ul>
