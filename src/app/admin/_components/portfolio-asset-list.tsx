@@ -14,6 +14,7 @@ import {
 } from './portfolio-asset-list-drag';
 import { PortfolioDeleteButton } from './portfolio-delete-button';
 import { PortfolioStatusToggle } from './portfolio-status-toggle';
+import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
 import { formatPortfolioSlotMeta } from '@/lib/portfolio-slots';
 import { getPortfolioVisibilityLabel } from '@/lib/portfolio-asset-status';
 
@@ -51,6 +52,8 @@ function PortfolioRow({
   onHandlePointerUp,
   onHandlePointerCancel,
 }: PortfolioRowProps): React.JSX.Element {
+  const { copy } = useAdminI18n();
+
   return (
     <li
       data-portfolio-row
@@ -75,7 +78,7 @@ function PortfolioRow({
         role="button"
         tabIndex={0}
         className="admin-portfolio-drag-handle"
-        aria-label={`Reorder ${asset.title}`}
+        aria-label={formatAdminMessage(copy.portfolio.reorderAria, { title: asset.title })}
         onPointerDown={(event) => onHandlePointerDown(index, event)}
         onPointerMove={onHandlePointerMove}
         onPointerUp={onHandlePointerUp}
@@ -119,14 +122,18 @@ export function PortfolioAssetList({ assets: initialAssets, deleteAction }: Port
   const [rowHeight, setRowHeight] = useState(DEFAULT_PORTFOLIO_ROW_HEIGHT);
   const [animatePositions, setAnimatePositions] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const { copy } = useAdminI18n();
 
   useEffect(() => {
-    setAssets(initialAssets);
+    const timer = window.setTimeout(() => setAssets(initialAssets), 0);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
   }, [initialAssets]);
 
   useEffect(() => {
     if (draggedIndex === null || overIndex === null) {
-      setAnimatePositions(false);
       return;
     }
 
@@ -164,6 +171,7 @@ export function PortfolioAssetList({ assets: initialAssets, deleteAction }: Port
     if (draggedIndex === null || overIndex === null) {
       setDraggedIndex(null);
       setOverIndex(null);
+      setAnimatePositions(false);
       return;
     }
 
@@ -175,6 +183,7 @@ export function PortfolioAssetList({ assets: initialAssets, deleteAction }: Port
 
     setDraggedIndex(null);
     setOverIndex(null);
+    setAnimatePositions(false);
   }
 
   function handleHandlePointerDown(index: number, event: React.PointerEvent<HTMLSpanElement>): void {
@@ -188,6 +197,7 @@ export function PortfolioAssetList({ assets: initialAssets, deleteAction }: Port
       return;
     }
 
+    setAnimatePositions(false);
     setRowHeight(rowElement.offsetHeight);
     setDraggedIndex(index);
     setOverIndex(index);
@@ -218,6 +228,7 @@ export function PortfolioAssetList({ assets: initialAssets, deleteAction }: Port
 
     setDraggedIndex(null);
     setOverIndex(null);
+    setAnimatePositions(false);
   }
 
   const isDragging = draggedIndex !== null && overIndex !== null;
@@ -225,7 +236,7 @@ export function PortfolioAssetList({ assets: initialAssets, deleteAction }: Port
   const gapTop = isDragging ? overIndex * rowHeight : 0;
 
   return (
-    <section className="admin-portfolio-list" aria-label="Portfolio assets">
+    <section className="admin-portfolio-list" aria-label={copy.portfolio.listAria}>
       <ul
         ref={listRef}
         className={isDragging ? 'admin-portfolio-list-items admin-portfolio-list-items--dragging' : 'admin-portfolio-list-items'}

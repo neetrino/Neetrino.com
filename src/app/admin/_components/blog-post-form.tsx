@@ -4,7 +4,8 @@ import { useState, type FormEvent } from 'react';
 import { BLOG_LOCALES, BLOG_LOCALE_LABELS, type BlogLocale } from '@/lib/blog-locales';
 import { createBlogPost, updateBlogPost } from '../_actions/blog-actions';
 import type { AdminBlogPost } from './admin-blog-post';
-import { AdminSubmitButton } from './admin-submit-button';
+import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
+import type { AdminMessages } from './admin-messages';
 
 type LocaleFields = {
   slug: string;
@@ -38,69 +39,76 @@ function BlogTranslationPanel({
   locale,
   fields,
   onFieldChange,
+  copy,
 }: {
   locale: BlogLocale;
   fields: LocaleFields;
   onFieldChange: (field: keyof LocaleFields, value: string) => void;
+  copy: AdminMessages;
 }): React.JSX.Element {
   const label = BLOG_LOCALE_LABELS[locale];
   const isEnglish = locale === 'en';
+  const formCopy = copy.blog.form;
 
   return (
-    <div className="admin-translation-panel" role="tabpanel" aria-label={`${label} translation`}>
+    <div
+      className="admin-translation-panel"
+      role="tabpanel"
+      aria-label={formatAdminMessage(formCopy.translationPanelAria, { label })}
+    >
       <label className="admin-field">
-        <span>Slug</span>
+        <span>{formCopy.slug}</span>
         <input
           value={fields.slug}
-          placeholder={isEnglish ? 'online-booking-systems-in-2026' : `${locale}-slug`}
+          placeholder={isEnglish ? formCopy.slugPlaceholder : formatAdminMessage(formCopy.localizedSlugPlaceholder, { locale })}
           onChange={(event) => onFieldChange('slug', event.target.value)}
         />
       </label>
       <label className="admin-field">
-        <span>Title</span>
+        <span>{formCopy.title}</span>
         <input
           value={fields.title}
-          placeholder={isEnglish ? 'Online Booking Systems in 2026' : `${label} title`}
+          placeholder={isEnglish ? formCopy.titlePlaceholder : formatAdminMessage(formCopy.localizedTitlePlaceholder, { label })}
           onChange={(event) => onFieldChange('title', event.target.value)}
         />
       </label>
       <label className="admin-field">
-        <span>Excerpt / short description</span>
+        <span>{formCopy.excerpt}</span>
         <textarea
           value={fields.excerpt}
-          placeholder={isEnglish ? 'Short summary for the admin list.' : `${label} excerpt`}
+          placeholder={isEnglish ? formCopy.excerptPlaceholder : formatAdminMessage(formCopy.localizedExcerptPlaceholder, { label })}
           onChange={(event) => onFieldChange('excerpt', event.target.value)}
         />
       </label>
       <label className="admin-field">
-        <span>Content / full text</span>
+        <span>{formCopy.content}</span>
         <textarea
           value={fields.content}
-          placeholder={isEnglish ? 'Write the first draft here.' : `${label} content`}
+          placeholder={isEnglish ? formCopy.contentPlaceholder : formatAdminMessage(formCopy.localizedContentPlaceholder, { label })}
           onChange={(event) => onFieldChange('content', event.target.value)}
         />
       </label>
       <label className="admin-field">
-        <span>Image alt</span>
+        <span>{formCopy.imageAlt}</span>
         <input
           value={fields.imageAlt}
-          placeholder="Descriptive alt text for the cover image"
+          placeholder={formCopy.imageAltPlaceholder}
           onChange={(event) => onFieldChange('imageAlt', event.target.value)}
         />
       </label>
       <label className="admin-field">
-        <span>SEO title</span>
+        <span>{formCopy.seoTitle}</span>
         <input
           value={fields.seoTitle}
-          placeholder="SEO title for search results"
+          placeholder={formCopy.seoTitlePlaceholder}
           onChange={(event) => onFieldChange('seoTitle', event.target.value)}
         />
       </label>
       <label className="admin-field">
-        <span>SEO description</span>
+        <span>{formCopy.seoDescription}</span>
         <textarea
           value={fields.seoDescription}
-          placeholder="Short SEO description for search engines."
+          placeholder={formCopy.seoDescriptionPlaceholder}
           onChange={(event) => onFieldChange('seoDescription', event.target.value)}
         />
       </label>
@@ -136,6 +144,8 @@ export function BlogPostForm({ post }: { post?: AdminBlogPost }): React.JSX.Elem
   const [activeLocale, setActiveLocale] = useState<BlogLocale>('en');
   const [localeFields, setLocaleFields] = useState(() => createLocaleStateFromPost(post));
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { copy } = useAdminI18n();
+  const formCopy = copy.blog.form;
 
   const updateLocaleField = (field: keyof LocaleFields, value: string): void => {
     setLocaleFields((current) => ({
@@ -184,17 +194,17 @@ export function BlogPostForm({ post }: { post?: AdminBlogPost }): React.JSX.Elem
     <form onSubmit={handleSubmit} encType="multipart/form-data" className="admin-form admin-form--wide">
       {isEditing && post ? <input name="postId" type="hidden" value={post.id} /> : null}
       <section className="admin-form-section">
-        <h3 className="admin-form-section-title">Common fields</h3>
+        <h3 className="admin-form-section-title">{formCopy.commonFields}</h3>
         <div className="admin-form-grid admin-form-grid--two">
           <label className="admin-field">
-            <span>Status</span>
+            <span>{copy.common.status}</span>
             <select name="status" defaultValue={post?.status ?? 'DRAFT'} disabled={isSubmitting}>
-              <option value="DRAFT">Draft</option>
-              <option value="PUBLISHED">Published</option>
+              <option value="DRAFT">{copy.common.draft}</option>
+              <option value="PUBLISHED">{copy.common.published}</option>
             </select>
           </label>
           <label className="admin-field">
-            <span>Published date</span>
+            <span>{formCopy.publishedDate}</span>
             <input
               name="publishedAt"
               type="date"
@@ -204,8 +214,8 @@ export function BlogPostForm({ post }: { post?: AdminBlogPost }): React.JSX.Elem
           </label>
         </div>
         <label className="admin-field admin-file-field">
-          <span>{isEditing ? 'Replace cover image' : 'Cover image'}</span>
-          {post?.coverImageUrl ? <p className="admin-cover-note">Current cover image is saved.</p> : null}
+          <span>{isEditing ? formCopy.replaceCover : formCopy.coverImage}</span>
+          {post?.coverImageUrl ? <p className="admin-cover-note">{formCopy.coverSaved}</p> : null}
           <input
             name="coverImage"
             type="file"
@@ -216,8 +226,8 @@ export function BlogPostForm({ post }: { post?: AdminBlogPost }): React.JSX.Elem
       </section>
 
       <section className="admin-form-section">
-        <h3 className="admin-form-section-title">Translations</h3>
-        <div className="admin-tabs" role="tablist" aria-label="Translation language tabs">
+        <h3 className="admin-form-section-title">{formCopy.translations}</h3>
+        <div className="admin-tabs" role="tablist" aria-label={formCopy.translationTabsAria}>
           {BLOG_LOCALES.map((locale) => {
             const isActive = locale === activeLocale;
 
@@ -245,6 +255,7 @@ export function BlogPostForm({ post }: { post?: AdminBlogPost }): React.JSX.Elem
             locale={activeLocale}
             fields={localeFields[activeLocale]}
             onFieldChange={updateLocaleField}
+            copy={copy}
           />
         </div>
       </section>
@@ -255,7 +266,7 @@ export function BlogPostForm({ post }: { post?: AdminBlogPost }): React.JSX.Elem
           className="admin-primary-button admin-primary-button--full"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Saving...' : isEditing ? 'Update post' : 'Save post'}
+          {isSubmitting ? copy.common.saving : isEditing ? formCopy.updatePost : formCopy.savePost}
         </button>
       </div>
     </form>

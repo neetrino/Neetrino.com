@@ -1,6 +1,7 @@
 'use client';
 
 import { AdminDrawer } from './admin-drawer';
+import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
 import type { AdminBlogPost } from './admin-blog-post';
 import { BlogPostForm } from './blog-post-form';
 
@@ -10,13 +11,20 @@ type BlogEditDrawerProps = {
 };
 
 export function BlogEditDrawer({ post, postTitle }: BlogEditDrawerProps): React.JSX.Element {
+  const { copy } = useAdminI18n();
+
   return (
     <AdminDrawer
-      buttonLabel="Edit post"
-      title="Edit post"
-      description={`Update content and publishing fields for "${postTitle}".`}
+      buttonLabel={copy.blog.editButton}
+      title={copy.blog.editTitle}
+      description={formatAdminMessage(copy.blog.editDescription, { title: postTitle })}
       renderTrigger={({ open }) => (
-        <button type="button" className="admin-icon-button" aria-label={`Edit ${postTitle}`} onClick={open}>
+        <button
+          type="button"
+          className="admin-icon-button"
+          aria-label={formatAdminMessage(copy.blog.editAria, { title: postTitle })}
+          onClick={open}
+        >
           <span className="admin-icon admin-icon--edit" aria-hidden />
         </button>
       )}

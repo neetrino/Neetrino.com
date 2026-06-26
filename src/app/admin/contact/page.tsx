@@ -1,4 +1,6 @@
 import { AdminPageHeader } from '../_components/admin-page-header';
+import { AdminSection } from '../_components/admin-section';
+import { AdminText } from '../_components/admin-text';
 import { ContactDeleteButton } from '../_components/contact-delete-button';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
@@ -52,17 +54,16 @@ export default async function AdminContactPage(): Promise<React.JSX.Element> {
 
   return (
     <>
-      <AdminPageHeader
-        title="Messages"
-        description="Contact form submissions from the public /contact page."
-      />
-      <section className="admin-list" aria-label="Contact message list">
+      <AdminPageHeader sectionKey="messages" />
+      <AdminSection className="admin-list" ariaLabelPath="messages.listAria">
         {messages.length > 0 ? (
           messages.map((message) => <ContactMessageCard key={message.id} message={message} />)
         ) : (
-          <div className="admin-empty">No messages yet. Submissions from /contact will appear here.</div>
+          <div className="admin-empty">
+            <AdminText path="messages.empty" />
+          </div>
         )}
-      </section>
+      </AdminSection>
     </>
   );
 }

@@ -3,6 +3,7 @@
 import { useActionState } from 'react';
 import { deleteContactMessage } from '../_actions/contact-actions';
 import type { ContactActionState } from '@/app/_actions/contact-actions';
+import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
 
 const INITIAL_DELETE_STATE: ContactActionState = {
   status: 'idle',
@@ -19,9 +20,10 @@ export function ContactDeleteButton({
   senderName,
 }: ContactDeleteButtonProps): React.JSX.Element {
   const [state, formAction, isPending] = useActionState(deleteContactMessage, INITIAL_DELETE_STATE);
+  const { copy } = useAdminI18n();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
-    const confirmed = window.confirm(`Delete message from "${senderName}"?`);
+    const confirmed = window.confirm(formatAdminMessage(copy.messages.deleteConfirm, { name: senderName }));
 
     if (!confirmed) {
       event.preventDefault();
@@ -35,7 +37,7 @@ export function ContactDeleteButton({
         type="submit"
         className="admin-icon-button admin-icon-button--danger"
         disabled={isPending}
-        aria-label={`Delete message from ${senderName}`}
+        aria-label={formatAdminMessage(copy.messages.deleteAria, { name: senderName })}
       >
         <span className="admin-icon admin-icon--delete" aria-hidden />
       </button>

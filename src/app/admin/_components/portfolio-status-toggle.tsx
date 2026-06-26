@@ -2,6 +2,7 @@
 
 import { useTransition } from 'react';
 import { togglePortfolioAssetStatus } from '../_actions/portfolio-actions';
+import { useAdminI18n } from './admin-i18n-provider';
 import { isPortfolioAssetActive } from '@/lib/portfolio-asset-status';
 
 type PortfolioStatusToggleProps = {
@@ -12,6 +13,7 @@ type PortfolioStatusToggleProps = {
 export function PortfolioStatusToggle({ assetId, status }: PortfolioStatusToggleProps): React.JSX.Element {
   const [isPending, startTransition] = useTransition();
   const isActive = isPortfolioAssetActive(status);
+  const { copy } = useAdminI18n();
 
   function handleChange(): void {
     const formData = new FormData();
@@ -30,9 +32,9 @@ export function PortfolioStatusToggle({ assetId, status }: PortfolioStatusToggle
         checked={isActive}
         onChange={handleChange}
         disabled={isPending}
-        aria-label={isActive ? 'Set asset to draft' : 'Activate asset'}
+        aria-label={isActive ? copy.portfolio.setDraftAria : copy.portfolio.activateAria}
       />
-      <span>Active</span>
+      <span>{copy.common.active}</span>
     </label>
   );
 }
