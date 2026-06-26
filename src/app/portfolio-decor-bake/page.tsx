@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+export const revalidate = 300;
+
 /** Internal route — Playwright captures this tree to build decor-stack.webp. */
 export default function PortfolioDecorBakePage(): React.JSX.Element {
   return (

@@ -307,3 +307,41 @@
   font-size: calc(11px * var(--locale-font-scale));
   font-weight: 700;
 }
+
+.contact-form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.contact-form button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.contact-form-sent {
+  color: #4ade80;
+  font-size: calc(12px * var(--locale-font-scale));
+  font-weight: 700;
+  animation: contact-form-sent-in 0.22s ease;
+}
+
+.contact-form-error {
+  color: #fca5a5;
+  font-size: calc(12px * var(--locale-font-scale));
+  font-weight: 600;
+}
+
+@keyframes contact-form-sent-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

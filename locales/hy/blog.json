@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "pageTitle": "Բլոգ",
+    "description": "Neetrino թիմի հոդվածներ, նորություններ և մտքեր։"
+  },
+  "hero": {
+    "srOnlyTitle": "Neetrino բլոգ",
+    "kicker": "Մտքեր",
+    "title": "ԲԼՈԳ"
+  },
+  "list": {
+    "ariaLabel": "Հրապարակված բլոգի գրառումներ",
+    "empty": "Դեռ հրապարակված գրառումներ չկան։ Շուտով կվերադառնանք։",
+    "readMore": "Կարդալ հոդվածը",
+    "coverFallbackAlt": "Բլոգի շապիկի նկար"
+  },
+  "post": {
+    "backLabel": "Վերադառնալ բլոգ"
+  }
+}

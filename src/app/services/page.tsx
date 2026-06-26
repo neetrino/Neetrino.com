@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: servicesMessages.meta.description,
 };
 
-export default function Services() {
+export const revalidate = 300;
+
+export default function Services(): React.JSX.Element {
   return <ServicesPage />;
 }

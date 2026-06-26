@@ -4,10 +4,18 @@ import { HomeMobile } from './home-mobile';
 import { HomePartners } from './home-partners';
 import { HomePortfolio } from './home-portfolio';
 import { HomeServices } from './home-services';
-import { homeCopy } from './home-data';
+import { homeCopy, type ProjectCard } from './home-data';
 import { NeetrinoPageShell } from './neetrino-page-shell';
 
-export function NeetrinoHome(): React.JSX.Element {
+type NeetrinoHomeProps = {
+  portfolioBottomRow: ProjectCard[];
+  portfolioTopRow: ProjectCard[];
+};
+
+export function NeetrinoHome({
+  portfolioBottomRow,
+  portfolioTopRow,
+}: NeetrinoHomeProps): React.JSX.Element {
   return (
     <NeetrinoPageShell mainId="home" srOnlyTitle={homeCopy.meta.pageTitle}>
       <div className="home-desktop">
@@ -15,7 +23,7 @@ export function NeetrinoHome(): React.JSX.Element {
         <div className="home-page-center-beam" aria-hidden data-name="Rectangle 17418" />
         <HomeHero />
         <HomeServices />
-        <HomePortfolio />
+        <HomePortfolio bottomRow={portfolioBottomRow} topRow={portfolioTopRow} />
         <HomeAbout />
         <HomePartners />
       </div>

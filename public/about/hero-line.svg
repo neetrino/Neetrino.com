@@ -1,12 +1,1 @@
-<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 1352 22.8372" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Group 2087329588">
-<circle id="Ellipse 3465" cx="11.4187" cy="11.4186" r="11.4186" fill="var(--fill-0, #FF7500)"/>
-<rect id="Rectangle 240650148" width="1340" height="3" transform="matrix(1 0 0 -1 11.9998 13)" fill="url(#paint0_linear_0_449)"/>
-</g>
-<defs>
-<linearGradient id="paint0_linear_0_449" x1="1340" y1="1.5" x2="0" y2="1.5" gradientUnits="userSpaceOnUse">
-<stop stop-color="#FF7907" stop-opacity="0"/>
-<stop offset="1" stop-color="#FF7500"/>
-</linearGradient>
-</defs>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" overflow="visible" preserveAspectRatio="none" style="display:block" viewBox="0 0 1352 22.837"><circle cx="11.419" cy="11.419" r="11.419" fill="var(--fill-0, #ff7500)"/><path fill="url(#a)" d="M0 0h1340v3H0z" transform="matrix(1 0 0 -1 12 13)"/><defs><linearGradient id="a" x1="1340" x2="0" y1="1.5" y2="1.5" gradientUnits="userSpaceOnUse"><stop stop-color="#ff7907" stop-opacity="0"/><stop offset="1" stop-color="#ff7500"/></linearGradient></defs></svg>

@@ -33,7 +33,10 @@
     "emailPlaceholder": "Ձեր էլ. փոստը",
     "messageLabel": "Հաղորդագրություն",
     "messagePlaceholder": "Պատմեք մեզ ձեր նախագծի մասին",
-    "submit": "Ուղարկել հարցում"
+    "submit": "Ուղարկել հարցում",
+    "submitting": "Ուղարկվում է...",
+    "sentLabel": "Ուղարկված",
+    "errorMessage": "Կրկին փորձեք"
   },
   "office": {
     "title": "Գրասենյակ",

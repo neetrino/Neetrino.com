@@ -14,6 +14,10 @@ type PortfolioCarouselRowProps = {
   direction: 'left' | 'right';
   rowKey: string;
 };
+type HomePortfolioProps = {
+  bottomRow: ProjectCard[];
+  topRow: ProjectCard[];
+};
 
 function PortfolioCard({
   title,
@@ -49,6 +53,10 @@ function PortfolioCarouselRow({
   direction,
   rowKey,
 }: PortfolioCarouselRowProps): React.JSX.Element {
+  if (projects.length === 0) {
+    return <div className={`home-portfolio-row home-portfolio-row--${direction}`} />;
+  }
+
   const loopedProjects = [...projects, ...projects];
 
   return (
@@ -65,8 +73,8 @@ function PortfolioCarouselRow({
   );
 }
 
-export function HomePortfolio(): React.JSX.Element {
-  const { homeCopy, portfolioBottomRow, portfolioTopRow } = useHomeI18n();
+export function HomePortfolio({ bottomRow, topRow }: HomePortfolioProps): React.JSX.Element {
+  const { homeCopy } = useHomeI18n();
 
   return (
     <section id="portfolio" className="home-section home-portfolio">
@@ -96,8 +104,8 @@ export function HomePortfolio(): React.JSX.Element {
         />
       </HomeContainer>
       <HomePortfolioCarousel>
-        <PortfolioCarouselRow projects={portfolioTopRow} direction="left" rowKey="top" />
-        <PortfolioCarouselRow projects={portfolioBottomRow} direction="right" rowKey="bottom" />
+        <PortfolioCarouselRow projects={topRow} direction="left" rowKey="top" />
+        <PortfolioCarouselRow projects={bottomRow} direction="right" rowKey="bottom" />
       </HomePortfolioCarousel>
       <HomeContainer>
         <div className="home-section-cta">

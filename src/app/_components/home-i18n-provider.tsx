@@ -23,12 +23,14 @@ import { contactMessagesByLocale, type ContactMessages } from './contact-message
 import { createPortfolioProjects, type PortfolioProject } from './portfolio-data';
 import { portfolioMessagesByLocale, type PortfolioMessages } from './portfolio-messages';
 import { createServiceDetailCards, type ServiceDetailCard } from './services-data';
+import { blogMessagesByLocale, type BlogMessages } from './blog-messages';
 import { servicesMessagesByLocale, type ServicesMessages } from './services-messages';
 
 type HomeI18nContextValue = ReturnType<typeof createHomeData> & {
   activeLanguage: HomeLanguageOption;
   aboutCopy: AboutMessages;
   aboutData: AboutPageData;
+  blogCopy: BlogMessages;
   contactCopy: ContactMessages;
   languageOptions: readonly HomeLanguageOption[];
   locale: HomeLocale;
@@ -79,12 +81,14 @@ export function HomeI18nProvider({ children }: { children: ReactNode }): React.J
     const portfolioCopy = portfolioMessagesByLocale[locale];
     const contactCopy = contactMessagesByLocale[locale];
     const aboutCopy = aboutMessagesByLocale[locale];
+    const blogCopy = blogMessagesByLocale[locale];
 
     return {
       ...createHomeData(homeMessagesByLocale[locale]),
       activeLanguage,
       aboutCopy,
       aboutData: createAboutPageData(aboutCopy),
+      blogCopy,
       contactCopy,
       languageOptions: HOME_LANGUAGE_OPTIONS,
       locale,

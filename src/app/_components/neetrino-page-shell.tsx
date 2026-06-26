@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { CanvasScaler } from './canvas-scaler';
+import { CriticalRouteImagePreloader } from './critical-route-image-preloader';
 import { HomeFooter } from './home-footer';
 import { HomeHeader } from './home-header';
 import { HomeScrollPerformance } from './home-scroll-performance';
@@ -29,6 +30,7 @@ export function NeetrinoPageShell({
   return (
     <main className="home-page" id={mainId}>
       <HomeSmoothAnchorScroll />
+      <CriticalRouteImagePreloader />
       <HomeScrollPerformance>
         <HomeHeader />
         <CanvasScaler

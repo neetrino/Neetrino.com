@@ -4,6 +4,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 
 const HERO_INTERSECTION_ROOT_MARGIN = '80px 0px';
 const HERO_PLAY_STATE_VAR = '--home-hero-play-state';
+const SCROLL_IDLE_MS = 180;
 const HOME_MOBILE_WRAP_SELECTOR = '.home-mobile-wrap';
 const HOME_HERO_MOBILE_SELECTOR = '.home-mobile-hero';
 const HOME_HERO_DESKTOP_SELECTOR = '.home-desktop .home-hero';
@@ -31,7 +32,7 @@ function resolveHomeHero(root: HTMLElement): HTMLElement | null {
   return desktopHero instanceof HTMLElement ? desktopHero : null;
 }
 
-/** Pauses hero motion when the hero is off-screen. */
+/** Pauses hero motion when the hero is off-screen or while the user is actively scrolling. */
 export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps): React.JSX.Element {
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -42,10 +43,32 @@ export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps):
     }
 
     let observedHero: HTMLElement | null = null;
+    let isHeroVisible = false;
+    let isScrolling = false;
+    let scrollIdleTimer = 0;
 
-    const applyPlayState = (isHeroVisible: boolean): void => {
-      const playState = isHeroVisible ? 'running' : 'paused';
+    /** Hero motion runs only while the hero is visible and the user is not actively scrolling. */
+    const syncPlayState = (): void => {
+      const playState = isHeroVisible && !isScrolling ? 'running' : 'paused';
       root.style.setProperty(HERO_PLAY_STATE_VAR, playState);
+    };
+
+    const applyPlayState = (heroVisible: boolean): void => {
+      isHeroVisible = heroVisible;
+      syncPlayState();
+    };
+
+    const handleScroll = (): void => {
+      if (!isScrolling) {
+        isScrolling = true;
+        syncPlayState();
+      }
+
+      window.clearTimeout(scrollIdleTimer);
+      scrollIdleTimer = window.setTimeout(() => {
+        isScrolling = false;
+        syncPlayState();
+      }, SCROLL_IDLE_MS);
     };
 
     const observer = new IntersectionObserver(
@@ -84,8 +107,13 @@ export function HomeScrollPerformance({ children }: HomeScrollPerformanceProps):
 
     mobileLayoutQuery.addEventListener('change', handleLayoutChange);
 
+    const scrollListenerOptions: AddEventListenerOptions = { passive: true };
+    window.addEventListener('scroll', handleScroll, scrollListenerOptions);
+
     return () => {
       mobileLayoutQuery.removeEventListener('change', handleLayoutChange);
+      window.removeEventListener('scroll', handleScroll, scrollListenerOptions);
+      window.clearTimeout(scrollIdleTimer);
       observer.disconnect();
       delete root.dataset.hasHomeHero;
       delete root.dataset.hasAboutBody;
