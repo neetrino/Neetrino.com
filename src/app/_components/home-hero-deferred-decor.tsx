@@ -1,7 +1,6 @@
 'use client';
 
 import { HomeHeroBottomPanel } from './home-hero-bottom-panel';
-import { HomeHeroTechAtmosphere } from './home-hero-tech-atmosphere';
 import { useDeferredMount } from './use-deferred-mount';
 
 const DEFER_IDLE_TIMEOUT_MS = 900;
@@ -17,12 +16,7 @@ export function HomeHeroDeferredDecor(): React.JSX.Element | null {
   return (
     <>
       <span ref={sentinelRef} className="home-hero-deferred-sentinel" aria-hidden />
-      {isReady ? (
-        <>
-          <HomeHeroBottomPanel />
-          <HomeHeroTechAtmosphere />
-        </>
-      ) : null}
+      {isReady ? <HomeHeroBottomPanel /> : null}
     </>
   );
 }

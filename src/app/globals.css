@@ -71,10 +71,6 @@
   --home-hero-bg-mesh-scroll-height: calc(3723px * var(--home-ui-scale));
   --home-hero-bg-philipp-top: calc(-72px * var(--home-ui-scale));
   --home-hero-bg-philipp-height: calc(916px * var(--home-ui-scale));
-  --home-hero-atmosphere-cycle-ms: 2800ms;
-  --home-hero-tech-scan-cycle-ms: 4200ms;
-  --home-hero-tech-packet-cycle-ms: 2200ms;
-  --home-hero-tech-token-cycle-ms: 3600ms;
   --home-hero-play-state: paused;
   --home-hero-stat-orange: #ff7500;
   --home-hero-stat-navy: #0d266c;
@@ -929,208 +925,6 @@ html:lang(hy) {
   object-position: left top;
 }
 
-.hero-tech-atmosphere {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  overflow: hidden;
-  pointer-events: none;
-  isolation: isolate;
-  contain: strict;
-  content-visibility: auto;
-  contain-intrinsic-size: auto var(--home-hero-bg-height);
-}
-
-.hero-tech-atmosphere-zone {
-  position: absolute;
-  inset: 0;
-  width: 38%;
-  max-width: calc(520px * var(--home-ui-scale));
-  contain: strict;
-}
-
-.hero-tech-grid-line {
-  position: absolute;
-  inset-inline: 0;
-  height: 1px;
-  background-color: rgb(120 180 255 / 0.42);
-  animation: hero-tech-grid-flicker var(--hero-atmosphere-cycle-ms, var(--home-hero-atmosphere-cycle-ms)) ease-in-out infinite;
-  animation-play-state: var(--home-hero-play-state);
-}
-
-.hero-tech-stream-column {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  border-radius: 999px;
-  background-color: rgb(100 160 255 / 0.62);
-  transform-origin: 50%;
-  animation: hero-tech-stream-pulse var(--hero-atmosphere-cycle-ms, var(--home-hero-atmosphere-cycle-ms)) ease-in-out infinite;
-  animation-play-state: var(--home-hero-play-state);
-}
-
-.hero-tech-packet {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: calc(100% + 6px);
-  height: 14px;
-  margin-left: calc(-50% - 3px);
-  border-radius: 2px;
-  background-color: rgb(210 235 255 / 0.9);
-  animation: hero-tech-packet-fall var(--hero-tech-packet-cycle-ms, var(--home-hero-tech-packet-cycle-ms)) linear infinite;
-  animation-play-state: var(--home-hero-play-state);
-}
-
-.hero-tech-code-token {
-  position: absolute;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: rgb(190 225 255 / 0.88);
-  white-space: nowrap;
-  animation: hero-tech-token-drift var(--hero-tech-token-cycle-ms, var(--home-hero-tech-token-cycle-ms)) ease-in-out infinite;
-  animation-play-state: var(--home-hero-play-state);
-}
-
-.hero-tech-circuit-node {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  margin-top: -4px;
-  margin-left: -4px;
-  border-radius: 999px;
-  background-color: rgb(180 220 255 / 0.9);
-  animation: hero-tech-node-pulse var(--hero-atmosphere-cycle-ms, var(--home-hero-atmosphere-cycle-ms)) ease-in-out infinite;
-  animation-play-state: var(--home-hero-play-state);
-}
-
-.hero-tech-scanline {
-  position: absolute;
-  top: 0;
-  inset-inline: 0;
-  height: 2px;
-  background-color: rgb(200 235 255 / 0.75);
-  animation: hero-tech-scanline-sweep var(--hero-tech-scan-cycle-ms, var(--home-hero-tech-scan-cycle-ms)) linear infinite;
-  animation-play-state: var(--home-hero-play-state);
-}
-
-@keyframes hero-tech-grid-flicker {
-  0%,
-  100% {
-    opacity: 0.12;
-  }
-
-  50% {
-    opacity: 0.32;
-  }
-}
-
-@keyframes hero-tech-stream-pulse {
-  0%,
-  100% {
-    opacity: calc(var(--hero-stream-opacity, 0.8) * 0.45);
-    transform: scaleY(0.88);
-  }
-
-  50% {
-    opacity: var(--hero-stream-opacity, 0.8);
-    transform: scaleY(1);
-  }
-}
-
-@keyframes hero-tech-packet-fall {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, -120%, 0) scaleY(0.6);
-  }
-
-  12% {
-    opacity: 1;
-  }
-
-  88% {
-    opacity: 0.85;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate3d(0, 520%, 0) scaleY(1);
-  }
-}
-
-@keyframes hero-tech-token-drift {
-  0%,
-  100% {
-    opacity: 0.35;
-    transform: translate3d(0, 0, 0);
-  }
-
-  50% {
-    opacity: 0.95;
-    transform: translate3d(8px, -10px, 0);
-  }
-}
-
-@keyframes hero-tech-node-pulse {
-  0%,
-  100% {
-    opacity: 0.4;
-    transform: scale(0.85);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.15);
-  }
-}
-
-@keyframes hero-tech-scanline-sweep {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, -8%, 0);
-  }
-
-  8% {
-    opacity: 0.85;
-  }
-
-  92% {
-    opacity: 0.7;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate3d(0, 108%, 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-tech-stream-column,
-  .hero-tech-packet,
-  .hero-tech-code-token,
-  .hero-tech-circuit-node,
-  .hero-tech-scanline,
-  .hero-tech-grid-line,
-  .home-hero-robot-motion,
-  .home-hero-hand-motion {
-    animation: none;
-  }
-
-  .home-hero-hand-motion {
-    transform: scaleY(-1) rotate(180deg) rotate(var(--home-hero-hand-point-rotate-aim))
-      translate3d(var(--home-hero-hand-point-shift-x-aim), var(--home-hero-hand-point-shift-y-aim), 0);
-  }
-
-  .hero-tech-stream-column {
-    opacity: calc(var(--hero-stream-opacity, 0.8) * 0.55);
-  }
-
-  .hero-tech-code-token {
-    opacity: 0.7;
-  }
-}
-
 .home-hero-bottom-panel {
   position: absolute;
   top: var(--home-hero-panel-top);
@@ -1381,6 +1175,18 @@ html:lang(hy) {
   100% {
     transform: scaleY(-1) rotate(180deg) rotate(var(--home-hero-hand-point-rotate-rest))
       translate3d(var(--home-hero-hand-point-shift-x-rest), var(--home-hero-hand-point-shift-y-rest), 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-robot-motion,
+  .home-hero-hand-motion {
+    animation: none;
+  }
+
+  .home-hero-hand-motion {
+    transform: scaleY(-1) rotate(180deg) rotate(var(--home-hero-hand-point-rotate-aim))
+      translate3d(var(--home-hero-hand-point-shift-x-aim), var(--home-hero-hand-point-shift-y-aim), 0);
   }
 }
 
@@ -2055,7 +1861,6 @@ html:lang(hy) {
   .home-desktop .home-hero-bg-shell,
   .home-desktop .home-hero-bg-mesh,
   .home-desktop .home-hero-bg-philipp,
-  .home-desktop .hero-tech-atmosphere,
   .home-desktop .home-hero-brand-layer,
   .home-desktop .home-hero-bottom-panel,
   .home-desktop .home-hero-hand-layer {
