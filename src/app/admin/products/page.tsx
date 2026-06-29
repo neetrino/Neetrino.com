@@ -1,6 +1,7 @@
 import { AdminPageHeader } from '../_components/admin-page-header';
 import { ProductManager } from '../_components/product-manager';
 import type { AdminProduct, ProductStatus, ProductType } from '../_actions/product-actions';
+import { resolveAppUrl } from '@/lib/app-url';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 
@@ -45,8 +46,7 @@ async function getProducts(): Promise<AdminProduct[]> {
 }
 
 export default async function AdminProductsPage(): Promise<React.JSX.Element> {
-  const products = await getProducts();
-  const appUrl = process.env.APP_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
+  const [products, appUrl] = await Promise.all([getProducts(), resolveAppUrl()]);
 
   return (
     <>
