@@ -69,14 +69,6 @@
 
 /* ---------- Hero (Figma node 1:1478) ---------- */
 
-@font-face {
-  font-family: Megatrox;
-  src: url('/fonts/Megatrox.otf') format('opentype');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
 .home-mobile-hero.home-hero {
   min-height: 0;
   contain: none;
@@ -216,7 +208,7 @@
   gap: 0;
   margin: 0;
   color: #fffcfc;
-  font-family: Megatrox, var(--font-inter), sans-serif;
+  font-family: var(--font-megatrox), var(--font-inter), sans-serif;
   font-size: calc(clamp(74px, 21.2vw, 91px) * var(--locale-font-scale));
   font-weight: 400;
   line-height: calc(clamp(64px, 18.1vw, 78px) * var(--locale-font-scale));

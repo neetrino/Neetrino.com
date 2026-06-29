@@ -1,13 +1,5 @@
 /* Blog listing and article pages on the shared 1440px Neetrino canvas. */
 
-@font-face {
-  font-family: Megatrox;
-  src: url('/fonts/Megatrox.otf') format('opentype');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
 .blog-page {
   position: relative;
   z-index: 12;
@@ -135,7 +127,7 @@
   width: 100%;
   height: 100%;
   color: rgb(255 255 255 / 0.35);
-  font-family: Megatrox, var(--font-inter), sans-serif;
+  font-family: var(--font-megatrox), var(--font-inter), sans-serif;
   font-size: calc(46px * var(--locale-font-scale));
   font-weight: 400;
   letter-spacing: 0.08em;
@@ -251,7 +243,7 @@
 .blog-article-title {
   margin: 0;
   color: #fff;
-  font-family: Megatrox, var(--font-inter), sans-serif;
+  font-family: var(--font-megatrox), var(--font-inter), sans-serif;
   font-size: calc(46px * var(--locale-font-scale));
   font-weight: 400;
   line-height: 1.05;
