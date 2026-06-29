@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useState } from 'react';
 import { staticAsset } from '@/lib/static-asset';
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import type { NavItem } from './home-data';
@@ -139,14 +139,14 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
         aria-label={homeCopy.navigation.siteNavigationAriaLabel}
       >
         <div className="about-mobile-menu-watermark" aria-hidden>
-          <Image
+          <CdnImage
             src={staticAsset("/figma-home/neetrino-hero-brand.svg")}
             alt=""
             width={280}
             height={120}
             className="about-mobile-menu-watermark-brand"
           />
-          <Image
+          <CdnImage
             src={staticAsset("/about/robot-mobile.webp")}
             alt=""
             width={220}

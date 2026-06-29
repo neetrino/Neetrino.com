@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 
 import { useHomeI18n } from './home-i18n-provider';
@@ -54,7 +54,7 @@ function AboutMobileWhyRow({
   return (
     <div className={rowClass}>
       <div className={`about-mobile-why-illustration ${illustrationClass}`}>
-        <Image src={imageSrc} alt="" fill sizes={imageSizes} className="about-mobile-why-img" />
+        <CdnImage src={imageSrc} alt="" fill sizes={imageSizes} className="about-mobile-why-img" />
       </div>
       <div className="about-mobile-why-copy">
         <p>{lead}</p>
@@ -74,7 +74,7 @@ export function AboutMobileWhy(): React.JSX.Element {
   return (
     <section className="about-mobile-why-section" aria-labelledby="about-mobile-why-title">
       <div className="about-mobile-why-panel" aria-hidden>
-        <Image
+        <CdnImage
           src={staticAsset("/about/why-panel-mobile.svg")}
           alt=""
           fill

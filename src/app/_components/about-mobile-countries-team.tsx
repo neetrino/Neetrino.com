@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 
 import { useHomeI18n } from './home-i18n-provider';
@@ -25,7 +25,7 @@ export function AboutMobileCountries(): React.JSX.Element {
         />
 
         <div className="about-mobile-map-wrap">
-          <Image
+          <CdnImage
             src={staticAsset("/about/world-map.webp")}
             alt={aboutData.countriesMapAlt}
             fill
@@ -75,7 +75,7 @@ export function AboutMobileTeam(): React.JSX.Element {
 
       <div className="about-mobile-team-image-wrap" aria-hidden>
         <div className="about-mobile-team-image-frame">
-          <Image
+          <CdnImage
             src={staticAsset("/about/meet-our-team-collaboration-mobile.webp")}
             alt=""
             fill

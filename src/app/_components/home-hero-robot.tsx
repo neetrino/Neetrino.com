@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 
 import { HOME_IMAGE_QUALITY } from './home-constants';
@@ -14,7 +14,7 @@ export function HomeHeroRobot({ priority = false }: HomeHeroRobotProps): React.J
       <div className="home-hero-robot-wrap">
         <div className="home-hero-robot-crop">
           <div className="home-hero-robot-motion">
-            <Image
+            <CdnImage
               src={staticAsset("/figma-home/30.webp")}
               alt=""
               fill
