@@ -4,7 +4,6 @@ import Link from 'next/link';
 
 import { HomeHeroBgCore } from './home-hero-bg-core';
 import { HomeHeroRobot } from './home-hero-robot';
-import { HomeHeroTechAtmosphere } from './home-hero-tech-atmosphere';
 import { useHomeI18n } from './home-i18n-provider';
 import { AnimatedStatValue } from './animated-stat-value';
 import { HeroStatToneClass } from './home-ui';
@@ -21,7 +20,6 @@ export function HomeMobileHero(): React.JSX.Element {
         <div className="home-hero-bg-shell">
           <HomeHeroBgCore philippPriority />
         </div>
-        <HomeHeroTechAtmosphere />
       </div>
 
       <div className="home-mobile-hero-robot-layer" aria-hidden>

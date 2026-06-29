@@ -152,21 +152,6 @@
   display: none;
 }
 
-.home-mobile-hero .hero-tech-atmosphere {
-  inset: 0;
-  z-index: 2;
-  width: 100%;
-  max-width: none;
-  opacity: 0.88;
-  content-visibility: visible;
-  contain: none;
-}
-
-.home-mobile-hero .hero-tech-atmosphere-zone {
-  width: 100%;
-  max-width: none;
-}
-
 .home-mobile-hero-robot-layer {
   position: absolute;
   top: calc(-1 * var(--home-mobile-hero-offset-top));
