@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 import { useHomeI18n } from './home-i18n-provider';
 import { ExploreButton } from './home-ui';
 import { GradientStat, ReflectTitle } from './about-ui';
@@ -12,7 +13,7 @@ function AboutMissionVision(): React.JSX.Element {
     <>
       <div className="about-cube" aria-hidden>
         <Image
-          src="/about/cube-transparent-v2.webp"
+          src={staticAsset("/about/cube-transparent-v2.webp")}
           alt=""
           fill
           sizes="205px"
@@ -86,7 +87,7 @@ function AboutCountries(): React.JSX.Element {
       />
       <div className="about-map" aria-hidden>
         <Image
-          src="/about/world-map.webp"
+          src={staticAsset("/about/world-map.webp")}
           alt=""
           fill
           sizes="987px"
@@ -120,7 +121,7 @@ function AboutTeam(): React.JSX.Element {
       </div>
       <div className="about-team-image">
         <Image
-          src="/about/team-live.webp"
+          src={staticAsset("/about/team-live.webp")}
           alt={aboutData.teamImageAlt}
           fill
           sizes="663px"

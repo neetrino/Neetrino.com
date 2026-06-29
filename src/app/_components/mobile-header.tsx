@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import { staticAsset } from '@/lib/static-asset';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AboutMobileMenu } from './about-mobile-menu';
@@ -22,7 +23,7 @@ export function MobileHeader(): React.JSX.Element {
       >
         <Link href="/" className="about-mobile-header-logo" aria-label={homeCopy.navigation.logoHomeAriaLabel}>
           <Image
-            src="/figma-home/neetrino-logo.svg"
+            src={staticAsset("/figma-home/neetrino-logo.svg")}
             alt=""
             width={96}
             height={32}

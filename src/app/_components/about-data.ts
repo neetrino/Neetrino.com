@@ -1,4 +1,5 @@
 import { aboutMessages, type AboutMessages } from './about-messages';
+import { staticAsset } from '@/lib/static-asset';
 
 export type GradientTone = 'purple' | 'orange' | 'green' | 'peach' | 'cyan';
 
@@ -110,7 +111,7 @@ export function createAboutPageData(messages: AboutMessages): AboutPageData {
     heroStats: mapStats(messages.stats.hero),
     impactStats: mapStats(messages.stats.impact),
     whyIllustrations: WHY_ILLUSTRATION_META.map((item, index) => ({
-      src: item.src,
+      src: staticAsset(item.src),
       className: item.className,
       alt: messages.why.illustrationAlts[index] ?? '',
     })),

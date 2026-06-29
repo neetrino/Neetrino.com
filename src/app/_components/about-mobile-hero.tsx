@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 
 import { useHomeI18n } from './home-i18n-provider';
 import { MobileHeroStat } from './about-mobile-ui';
@@ -16,7 +17,7 @@ export function AboutMobileHero(): React.JSX.Element {
           <div className="about-mobile-hero-robot-flip">
             <div className="about-mobile-hero-robot-frame">
               <Image
-                src="/about/robot-mobile.webp"
+                src={staticAsset("/about/robot-mobile.webp")}
                 alt=""
                 fill
                 priority

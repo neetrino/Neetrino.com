@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 
 import { useHomeI18n } from './home-i18n-provider';
 import { ExploreButton } from './home-ui';
@@ -25,7 +26,7 @@ export function AboutMobileCountries(): React.JSX.Element {
 
         <div className="about-mobile-map-wrap">
           <Image
-            src="/about/world-map.webp"
+            src={staticAsset("/about/world-map.webp")}
             alt={aboutData.countriesMapAlt}
             fill
             sizes="100vw"
@@ -75,7 +76,7 @@ export function AboutMobileTeam(): React.JSX.Element {
       <div className="about-mobile-team-image-wrap" aria-hidden>
         <div className="about-mobile-team-image-frame">
           <Image
-            src="/about/meet-our-team-collaboration-mobile.webp"
+            src={staticAsset("/about/meet-our-team-collaboration-mobile.webp")}
             alt=""
             fill
             sizes="90vw"

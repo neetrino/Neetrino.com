@@ -43,7 +43,7 @@
   top: -360px;
   left: 250px;
   z-index: 2;
-  background-image: url('/about/ellipse-27.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/ellipse-27.svg');
 }
 
 .about-glow-blue-2 {
@@ -122,31 +122,31 @@
 .about-ray-1 {
   top: 455px;
   height: 405px;
-  background-image: url('/about/hero-ray.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/hero-ray.svg');
 }
 
 .about-ray-2 {
   top: 985px;
   height: 405px;
-  background-image: url('/about/ray-17414.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17414.svg');
 }
 
 .about-ray-3 {
   top: 1585px;
   height: 490px;
-  background-image: url('/about/ray-17415.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17415.svg');
 }
 
 .about-ray-4 {
   top: 2250px;
   height: 490px;
-  background-image: url('/about/ray-17418.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17418.svg');
 }
 
 .about-ray-5 {
   top: 3290px;
   height: 560px;
-  background-image: url('/about/ray-17416.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17416.svg');
 }
 
 .about-frost {
@@ -198,7 +198,7 @@
   left: 50%;
   width: 293px;
   height: 280px;
-  background: center / contain no-repeat url('/about/beam-bottom-glow.svg');
+  background: center / contain no-repeat url('https://cdn.neetrino.com/static/about/beam-bottom-glow.svg');
   mix-blend-mode: overlay;
   transform: translateX(-50%);
   pointer-events: none;

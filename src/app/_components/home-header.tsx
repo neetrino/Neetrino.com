@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { staticAsset } from '@/lib/static-asset';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -91,7 +92,7 @@ export function HomeHeader(): React.JSX.Element {
       <div className="home-header-inner">
         <Link href="/" className="home-header-logo">
           <Image
-            src="/figma-home/neetrino-logo.svg"
+            src={staticAsset("/figma-home/neetrino-logo.svg")}
             alt={homeCopy.navigation.logoAlt}
             width={130}
             height={37}

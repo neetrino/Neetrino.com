@@ -1,4 +1,5 @@
 import { homeMessages, type HomeMessages } from './home-messages';
+import { staticAsset } from '@/lib/static-asset';
 
 export type ServiceCard = {
   id: ServiceCardId;
@@ -67,26 +68,26 @@ type MessageRichTextPart = {
 };
 
 export const serviceIllustrations = [
-  { src: '/figma-home/5391.webp', className: 'home-services-deco-laptop' },
-  { src: '/figma-home/mobile-app.webp', className: 'home-services-deco-phone' },
-  { src: '/figma-home/cloud-infrastructure.webp', className: 'home-services-deco-saas' },
+  { src: staticAsset('/figma-home/5391.webp'), className: 'home-services-deco-laptop' },
+  { src: staticAsset('/figma-home/mobile-app.webp'), className: 'home-services-deco-phone' },
+  { src: staticAsset('/figma-home/cloud-infrastructure.webp'), className: 'home-services-deco-saas' },
   {
-    src: '/figma-home/sports00065.webp',
+    src: staticAsset('/figma-home/sports00065.webp'),
     className: 'home-services-deco-crm',
     unoptimized: true,
   },
   {
-    src: '/figma-home/2761.webp',
+    src: staticAsset('/figma-home/2761.webp'),
     className: 'home-services-deco-ai',
     unoptimized: true,
   },
 ] as const;
 
 export const partnerLogos = [
-  { src: '/figma-home/group70643.svg', width: 136, height: 79 },
-  { src: '/figma-home/group221.svg', width: 175, height: 53 },
-  { src: '/figma-home/group70643.svg', width: 136, height: 79 },
-  { src: '/figma-home/group221.svg', width: 175, height: 53 },
+  { src: staticAsset('/figma-home/group70643.svg'), width: 136, height: 79 },
+  { src: staticAsset('/figma-home/group221.svg'), width: 175, height: 53 },
+  { src: staticAsset('/figma-home/group70643.svg'), width: 136, height: 79 },
+  { src: staticAsset('/figma-home/group221.svg'), width: 175, height: 53 },
 ] as const;
 
 function normalizeRichTextPart(part: MessageRichTextPart): RichTextPart {
@@ -195,22 +196,22 @@ export function createHomeData(messages: HomeMessages) {
 
   const footerSocialIcons = [
     {
-      src: '/figma-home/social-media-icon-square-facebook.svg',
+      src: staticAsset('/figma-home/social-media-icon-square-facebook.svg'),
       alt: messages.social.facebook,
       width: 11,
       height: 19,
     },
     {
-      src: '/figma-home/social-media-icon-square-instagram.svg',
+      src: staticAsset('/figma-home/social-media-icon-square-instagram.svg'),
       alt: messages.social.instagram,
       width: 19,
       height: 19,
     },
-    { src: '/figma-home/group73.svg', alt: messages.social.linkedin, width: 19, height: 18 },
-    { src: '/figma-home/group.svg', alt: messages.social.behance, width: 24, height: 15 },
-    { src: '/figma-home/group74.svg', alt: messages.social.youtube, width: 21, height: 15 },
-    { src: '/figma-home/vector7.svg', alt: messages.social.twitter, width: 20, height: 20 },
-    { src: '/figma-home/group221.svg', alt: messages.social.dribbble, width: 19, height: 20 },
+    { src: staticAsset('/figma-home/group73.svg'), alt: messages.social.linkedin, width: 19, height: 18 },
+    { src: staticAsset('/figma-home/group.svg'), alt: messages.social.behance, width: 24, height: 15 },
+    { src: staticAsset('/figma-home/group74.svg'), alt: messages.social.youtube, width: 21, height: 15 },
+    { src: staticAsset('/figma-home/vector7.svg'), alt: messages.social.twitter, width: 20, height: 20 },
+    { src: staticAsset('/figma-home/group221.svg'), alt: messages.social.dribbble, width: 19, height: 20 },
   ] as const;
 
   const homeCopy = {

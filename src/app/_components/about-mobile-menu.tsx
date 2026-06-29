@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useId, useState } from 'react';
+import { staticAsset } from '@/lib/static-asset';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -139,14 +140,14 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
       >
         <div className="about-mobile-menu-watermark" aria-hidden>
           <Image
-            src="/figma-home/neetrino-hero-brand.svg"
+            src={staticAsset("/figma-home/neetrino-hero-brand.svg")}
             alt=""
             width={280}
             height={120}
             className="about-mobile-menu-watermark-brand"
           />
           <Image
-            src="/about/robot-mobile.webp"
+            src={staticAsset("/about/robot-mobile.webp")}
             alt=""
             width={220}
             height={320}

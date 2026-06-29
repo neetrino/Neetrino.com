@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 
 import type { GradientTone } from './about-data';
 import { useHomeI18n } from './home-i18n-provider';
@@ -10,7 +11,7 @@ import { ServicesBakedBackground } from './services-baked-background';
 import './services-background.css';
 import './team.css';
 
-const TEAM_IMAGE_SRC = '/about/team-live.webp';
+const TEAM_IMAGE_SRC = staticAsset('/about/team-live.webp');
 
 const statToneClass: Record<GradientTone, string> = {
   purple: 'team-stat-value--purple',

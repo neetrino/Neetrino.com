@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 import { HOME_IMAGE_QUALITY } from './home-constants';
 import { serviceIllustrations } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
@@ -13,7 +14,7 @@ export function HomeServices(): React.JSX.Element {
     <section id="services" className="home-section home-services">
       <div className="home-services-bg" aria-hidden>
         <Image
-          src="/figma-home/rectangle17411.svg"
+          src={staticAsset("/figma-home/rectangle17411.svg")}
           alt=""
           fill
           sizes="100vw"

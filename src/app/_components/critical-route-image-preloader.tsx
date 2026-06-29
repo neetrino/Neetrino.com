@@ -2,14 +2,16 @@
 
 import { useEffect } from 'react';
 
+import { staticAsset } from '@/lib/static-asset';
+
 const CRITICAL_ROUTE_IMAGES = [
-  '/about/hero-streak.svg',
-  '/about/robot.webp',
-  '/portfolio/decor-stack.webp',
-  '/portfolio/portfolio-title.webp',
-  '/blog/blog-title.webp',
-  '/services/decor-stack.webp',
-  '/services/services-title.webp',
+  staticAsset('/about/hero-streak.svg'),
+  staticAsset('/about/robot.webp'),
+  staticAsset('/portfolio/decor-stack.webp'),
+  staticAsset('/portfolio/portfolio-title.webp'),
+  staticAsset('/blog/blog-title.webp'),
+  staticAsset('/services/decor-stack.webp'),
+  staticAsset('/services/services-title.webp'),
 ] as const;
 
 function preloadImage(src: string): void {
