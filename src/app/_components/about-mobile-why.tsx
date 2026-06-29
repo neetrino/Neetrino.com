@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 
 import { useHomeI18n } from './home-i18n-provider';
 import { MobileReflectTitle } from './about-mobile-ui';
@@ -74,7 +75,7 @@ export function AboutMobileWhy(): React.JSX.Element {
     <section className="about-mobile-why-section" aria-labelledby="about-mobile-why-title">
       <div className="about-mobile-why-panel" aria-hidden>
         <Image
-          src="/about/why-panel-mobile.svg"
+          src={staticAsset("/about/why-panel-mobile.svg")}
           alt=""
           fill
           sizes="417px"

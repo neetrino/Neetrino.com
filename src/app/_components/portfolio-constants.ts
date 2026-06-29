@@ -1,3 +1,5 @@
+import { staticAsset } from '@/lib/static-asset';
+
 /** Fixed desktop portfolio body height in design pixels (Figma). */
 export const PORTFOLIO_BODY_HEIGHT = 2226;
 
@@ -14,9 +16,9 @@ export const PORTFOLIO_LCP_CARD_COUNT = 4;
 /** Baked decor stack (body gradients + decor + footer ray) in design pixels. */
 export const PORTFOLIO_DECOR_BAKE_WIDTH = 1440;
 export const PORTFOLIO_DECOR_BAKE_HEIGHT = PORTFOLIO_CANVAS_HEIGHT;
-export const PORTFOLIO_DECOR_BAKE_SRC = '/portfolio/decor-stack.webp';
+export const PORTFOLIO_DECOR_BAKE_SRC = staticAsset('/portfolio/decor-stack.webp');
 
 /** Glitch title image — transparent webp, same treatment as /services `services-title.webp`. */
-export const PORTFOLIO_TITLE_SRC = '/portfolio/portfolio-title.webp';
+export const PORTFOLIO_TITLE_SRC = staticAsset('/portfolio/portfolio-title.webp');
 export const PORTFOLIO_TITLE_WIDTH = 597;
 export const PORTFOLIO_TITLE_HEIGHT = 64;

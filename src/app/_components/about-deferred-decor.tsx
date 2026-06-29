@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 
 import { HOME_IMAGE_QUALITY } from './home-constants';
 import { useDeferredMount } from './use-deferred-mount';
@@ -18,7 +19,7 @@ function AboutDecorBase(): React.JSX.Element {
 
       <div className="about-hero-streak">
         <Image
-          src="/about/hero-streak.svg"
+          src={staticAsset("/about/hero-streak.svg")}
           alt=""
           fill
           sizes="1318px"
@@ -42,7 +43,7 @@ function AboutDecorHeavy(): React.JSX.Element {
         <div className="home-hero-bg-mesh-scroll">
           <div className="home-hero-bg-mesh-rotate">
             <Image
-              src="/about/hero-streak.svg"
+              src={staticAsset("/about/hero-streak.svg")}
               alt=""
               fill
               sizes="1722px"

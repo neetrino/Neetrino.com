@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import type { FooterLink } from './home-data';
@@ -51,7 +52,7 @@ export function ContinueButton({ href, label }: ActionButtonProps): React.JSX.El
   return (
     <Link href={href} className="home-btn home-btn-continue">
       <span>{label}</span>
-      <Image src="/figma-home/safearea.svg" alt="" width={20} height={20} aria-hidden />
+      <Image src={staticAsset("/figma-home/safearea.svg")} alt="" width={20} height={20} aria-hidden />
     </Link>
   );
 }
@@ -62,7 +63,7 @@ export function ExploreButton({ href, label }: ActionButtonProps): React.JSX.Ele
       <span className="home-btn-explore-flare" aria-hidden />
       <Link href={href} className="home-btn home-btn-explore">
         <span className="home-btn-explore-label">{label}</span>
-        <Image src="/figma-home/safearea1.svg" alt="" width={20} height={20} aria-hidden />
+        <Image src={staticAsset("/figma-home/safearea1.svg")} alt="" width={20} height={20} aria-hidden />
       </Link>
     </span>
   );

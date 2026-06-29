@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 
 import { HOME_IMAGE_QUALITY } from './home-constants';
 import { serviceIllustrations } from './home-data';
@@ -13,7 +14,7 @@ export function HomeMobileServices(): React.JSX.Element {
   return (
     <section id="services" className="home-mobile-services" aria-labelledby="home-mobile-services-title">
       <div className="home-mobile-services-heading-glow" aria-hidden>
-        <Image src="/figma-home/rectangle17417.svg" alt="" fill sizes="448px" />
+        <Image src={staticAsset("/figma-home/rectangle17417.svg")} alt="" fill sizes="448px" />
       </div>
 
       <SectionHeading
@@ -35,7 +36,7 @@ export function HomeMobileServices(): React.JSX.Element {
               className={`home-mobile-service-card ${ServiceToneClass(service.tone)}`}
             >
               <div className="home-mobile-service-card-glow" aria-hidden>
-                <Image src="/figma-home/rectangle17418.svg" alt="" fill sizes="448px" />
+                <Image src={staticAsset("/figma-home/rectangle17418.svg")} alt="" fill sizes="448px" />
               </div>
 
               <div className={`home-mobile-service-card-art ${illustration.className}`}>

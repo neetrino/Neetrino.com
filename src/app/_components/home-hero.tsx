@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 
 import { HomeHeroBgCore } from './home-hero-bg-core';
 import { HomeHeroDeferredDecor } from './home-hero-deferred-decor';
@@ -60,7 +61,7 @@ export function HomeHero(): React.JSX.Element {
         </div>
 
         <a href="#contact" className="home-hero-chat" aria-label={hero.chatAriaLabel}>
-          <Image src="/figma-home/chat.svg" alt="" width={79} height={79} loading="lazy" fetchPriority="low" />
+          <Image src={staticAsset("/figma-home/chat.svg")} alt="" width={79} height={79} loading="lazy" fetchPriority="low" />
         </a>
       </div>
 

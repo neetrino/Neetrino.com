@@ -33,7 +33,7 @@
   z-index: 3;
   pointer-events: none;
   content: '';
-  background: url('/portfolio/noise.webp') top left / cover no-repeat;
+  background: url('https://cdn.neetrino.com/static/portfolio/noise.webp') top left / cover no-repeat;
   mix-blend-mode: soft-light;
   opacity: 0.14;
   backface-visibility: hidden;
@@ -132,7 +132,7 @@
   top: calc(-927.9px * var(--home-ui-scale));
   width: calc(2072.7px * var(--home-ui-scale));
   height: calc(2009px * var(--home-ui-scale));
-  background-image: url('/portfolio/ellipse-27.svg');
+  background-image: url('https://cdn.neetrino.com/static/portfolio/ellipse-27.svg');
   opacity: 0.94;
 }
 
@@ -141,7 +141,7 @@
   top: calc(-762.6px * var(--home-ui-scale));
   width: calc(2072.7px * var(--home-ui-scale));
   height: calc(2009px * var(--home-ui-scale));
-  background-image: url('/portfolio/ellipse-28.svg');
+  background-image: url('https://cdn.neetrino.com/static/portfolio/ellipse-28.svg');
   opacity: 0.9;
 }
 
@@ -158,7 +158,7 @@
   top: calc(120.32px * var(--home-ui-scale));
   width: calc(1278.6px * var(--home-ui-scale));
   height: calc(618.4px * var(--home-ui-scale));
-  background-image: url('/portfolio/arc-1.svg');
+  background-image: url('https://cdn.neetrino.com/static/portfolio/arc-1.svg');
   opacity: 1;
 }
 
@@ -167,7 +167,7 @@
   top: calc(87.1px * var(--home-ui-scale));
   width: calc(1473.7px * var(--home-ui-scale));
   height: calc(613.4px * var(--home-ui-scale));
-  background-image: url('/portfolio/arc-2.svg');
+  background-image: url('https://cdn.neetrino.com/static/portfolio/arc-2.svg');
   opacity: 1;
 }
 
@@ -176,7 +176,7 @@
   top: calc(204px * var(--home-ui-scale));
   width: calc(607.7px * var(--home-ui-scale));
   height: calc(917.4px * var(--home-ui-scale));
-  background-image: url('/portfolio/beam-r.svg');
+  background-image: url('https://cdn.neetrino.com/static/portfolio/beam-r.svg');
   opacity: 1;
 }
 
@@ -185,7 +185,7 @@
   top: calc(152.3px * var(--home-ui-scale));
   width: calc(607.7px * var(--home-ui-scale));
   height: calc(917.4px * var(--home-ui-scale));
-  background-image: url('/portfolio/beam-l.svg');
+  background-image: url('https://cdn.neetrino.com/static/portfolio/beam-l.svg');
   opacity: 1;
   transform: translate3d(0, 0, 0) scaleX(-1);
 }
@@ -207,7 +207,7 @@
   top: calc(806.7px * var(--home-ui-scale));
   width: calc(1887px * var(--home-ui-scale));
   height: calc(817.7px * var(--home-ui-scale));
-  background-image: url('/services/grid-far.svg');
+  background-image: url('https://cdn.neetrino.com/static/services/grid-far.svg');
   opacity: 0.92;
 }
 
@@ -216,7 +216,7 @@
   top: calc(1336.8px * var(--home-ui-scale));
   width: calc(1887px * var(--home-ui-scale));
   height: calc(1048.3px * var(--home-ui-scale));
-  background-image: url('/services/grid-near.svg');
+  background-image: url('https://cdn.neetrino.com/static/services/grid-near.svg');
   opacity: 0.88;
 }
 
@@ -245,14 +245,14 @@
 .svc-ray--mid {
   top: 50%;
   height: var(--svc-ray-mid-height);
-  background-image: url('/about/ray-17415.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17415.svg');
   transform: translate3d(-50%, -50%, 0) scale(var(--svc-ray-scale));
 }
 
 .svc-ray--end {
   bottom: var(--svc-ray-end-offset);
   height: var(--svc-ray-end-height);
-  background-image: url('/about/ray-17418.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17418.svg');
   transform: translate3d(-50%, 0, 0) scale(var(--svc-ray-scale));
 }
 
@@ -271,7 +271,7 @@
 .svc-ray--footer {
   top: 0;
   height: var(--svc-ray-footer-height);
-  background-image: url('/about/ray-17416.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17416.svg');
   transform: translate3d(-50%, -50%, 0) scale(var(--svc-ray-scale));
 }
 

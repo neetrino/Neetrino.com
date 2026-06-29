@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 import { useEffect, useRef } from 'react';
 
 const MOBILE_MAX_WIDTH_PX = 899;
@@ -112,7 +113,7 @@ export function AboutMobileCapsule(): React.JSX.Element {
       <span className="about-mobile-beam" />
       <div ref={cubeRef} className="about-mobile-cube">
         <Image
-          src="/about/cube-transparent-v2.webp"
+          src={staticAsset("/about/cube-transparent-v2.webp")}
           alt=""
           fill
           sizes="131px"

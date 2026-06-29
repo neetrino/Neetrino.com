@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
 import { useHomeI18n } from './home-i18n-provider';
 import { NeetrinoPageShell } from './neetrino-page-shell';
@@ -49,7 +50,7 @@ function PortfolioCard({
         {project.variant === 'zeppelin' ? (
           <>
             <Image
-              src="/portfolio/cat-logo.webp"
+              src={staticAsset("/portfolio/cat-logo.webp")}
               alt=""
               width={114}
               height={61}

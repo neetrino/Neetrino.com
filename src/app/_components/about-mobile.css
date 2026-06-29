@@ -69,11 +69,11 @@
 }
 
 .about-mobile-bg-hero-beam-line--a {
-  background-image: url('/about/mobile-bg/line-734.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/mobile-bg/line-734.svg');
 }
 
 .about-mobile-bg-hero-beam-line--b {
-  background-image: url('/about/mobile-bg/line-735.svg');
+  background-image: url('https://cdn.neetrino.com/static/about/mobile-bg/line-735.svg');
 }
 
 .about-mobile-bg-hero-beam-glow {
@@ -676,7 +676,7 @@
   left: 50%;
   width: 180px;
   height: 170px;
-  background: center / contain no-repeat url('/about/beam-bottom-glow.svg');
+  background: center / contain no-repeat url('https://cdn.neetrino.com/static/about/beam-bottom-glow.svg');
   mix-blend-mode: overlay;
   transform: translateX(-50%);
   pointer-events: none;

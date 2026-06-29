@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { staticAsset } from '@/lib/static-asset';
 import { HOME_IMAGE_QUALITY } from './home-constants';
 import type { ProjectCard } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
@@ -82,7 +83,7 @@ export function HomePortfolio({ bottomRow, topRow }: HomePortfolioProps): React.
     <section id="portfolio" className="home-section home-portfolio">
       <div className="home-portfolio-bg home-portfolio-bg-top" aria-hidden>
         <Image
-          src="/figma-home/rectangle17411.svg"
+          src={staticAsset("/figma-home/rectangle17411.svg")}
           alt=""
           fill
           sizes="100vw"
@@ -91,7 +92,7 @@ export function HomePortfolio({ bottomRow, topRow }: HomePortfolioProps): React.
       </div>
       <div className="home-portfolio-bg home-portfolio-bg-bottom" aria-hidden>
         <Image
-          src="/figma-home/rectangle17411.svg"
+          src={staticAsset("/figma-home/rectangle17411.svg")}
           alt=""
           fill
           sizes="100vw"
