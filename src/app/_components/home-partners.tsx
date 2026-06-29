@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage as Image } from '@/lib/cdn-image';
 import { partnerLogos } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
 import { HomeContainer } from './home-ui';

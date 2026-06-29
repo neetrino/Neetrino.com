@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo } from 'react';
-import Image from 'next/image';
+import { CdnImage as Image } from '@/lib/cdn-image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { resolveBlogTranslation } from '@/lib/blog-translation';

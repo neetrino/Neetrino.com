@@ -13,7 +13,7 @@ export function CdnImage({ src, unoptimized, ...props }: ImageProps): React.JSX.
     <Image
       {...props}
       src={src}
-      unoptimized={unoptimized ?? isRemoteImageUrl(resolvedSrc)}
+      unoptimized={unoptimized || isRemoteImageUrl(resolvedSrc)}
     />
   );
 }

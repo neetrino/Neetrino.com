@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage as Image } from '@/lib/cdn-image';
 import { useEffect, useRef, useState, useTransition } from 'react';
 import type { PortfolioDeleteState } from '../_actions/portfolio-actions';
 import { reorderPortfolioAssets } from '../_actions/portfolio-actions';
