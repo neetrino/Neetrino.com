@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 import { useHomeI18n } from './home-i18n-provider';
 import { ServiceCardGrid } from './services-cards';
@@ -11,7 +11,7 @@ export function ServicesHero(): React.JSX.Element {
   return (
     <section className="svc-hero svc-hero--baked">
       <div className="svc-title-wrap">
-        <Image
+        <CdnImage
           src={staticAsset("/services/services-title.webp")}
           alt={servicesCopy.hero.title}
           width={597}

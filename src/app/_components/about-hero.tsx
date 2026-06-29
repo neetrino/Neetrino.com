@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 import { useHomeI18n } from './home-i18n-provider';
 import { GradientStat } from './about-ui';
@@ -12,7 +12,7 @@ export function AboutHero(): React.JSX.Element {
   return (
     <section className="about-hero" aria-labelledby="about-title">
       <div className="about-robot" aria-hidden>
-        <Image
+        <CdnImage
           src={staticAsset("/about/robot.webp")}
           alt=""
           fill
@@ -39,7 +39,7 @@ export function AboutHero(): React.JSX.Element {
       <p className="about-intro about-intro-right">{heroIntroRight}</p>
       <p className="about-intro about-intro-left">{heroIntroLeft}</p>
 
-      <Image
+      <CdnImage
         src={staticAsset("/about/hero-line.svg")}
         alt=""
         width={1352}

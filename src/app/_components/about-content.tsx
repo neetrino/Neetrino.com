@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 import { useHomeI18n } from './home-i18n-provider';
 import { ExploreButton } from './home-ui';
@@ -12,7 +12,7 @@ function AboutMissionVision(): React.JSX.Element {
   return (
     <>
       <div className="about-cube" aria-hidden>
-        <Image
+        <CdnImage
           src={staticAsset("/about/cube-transparent-v2.webp")}
           alt=""
           fill
@@ -52,7 +52,7 @@ function AboutWhyChoose(): React.JSX.Element {
       />
       {aboutData.whyIllustrations.map((item) => (
         <div key={item.alt} className={`about-why-illustration ${item.className}`}>
-          <Image
+          <CdnImage
             src={item.src}
             alt=""
             fill
@@ -86,7 +86,7 @@ function AboutCountries(): React.JSX.Element {
         accent={aboutData.countriesTitle.accent}
       />
       <div className="about-map" aria-hidden>
-        <Image
+        <CdnImage
           src={staticAsset("/about/world-map.webp")}
           alt=""
           fill
@@ -120,7 +120,7 @@ function AboutTeam(): React.JSX.Element {
         <ExploreButton href="/services" label={aboutData.exploreCta} />
       </div>
       <div className="about-team-image">
-        <Image
+        <CdnImage
           src={staticAsset("/about/team-live.webp")}
           alt={aboutData.teamImageAlt}
           fill

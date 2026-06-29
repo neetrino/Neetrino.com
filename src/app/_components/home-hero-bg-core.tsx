@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 
 import { HOME_IMAGE_QUALITY } from './home-constants';
@@ -18,7 +18,7 @@ export function HomeHeroBgCore({
       <div className="home-hero-bg-mesh">
         <div className="home-hero-bg-mesh-scroll">
           <div className="home-hero-bg-mesh-rotate">
-            <Image
+            <CdnImage
               src={staticAsset("/about/hero-streak.svg")}
               alt=""
               fill
@@ -34,7 +34,7 @@ export function HomeHeroBgCore({
 
       <div className="home-hero-bg-philipp">
         <div className="home-hero-bg-philipp-flip">
-          <Image
+          <CdnImage
             src={staticAsset("/figma-home/philipp-hubert-dvvjh-ucdb30-unsplash1.webp")}
             alt=""
             fill
@@ -48,7 +48,7 @@ export function HomeHeroBgCore({
       </div>
 
       <div className="home-hero-brand-layer" aria-hidden>
-        <Image
+        <CdnImage
           src={staticAsset("/figma-home/neetrino-hero-brand.svg")}
           alt=""
           width={1197}

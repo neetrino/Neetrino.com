@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 
 import { HOME_IMAGE_QUALITY } from './home-constants';
@@ -18,7 +18,7 @@ function AboutDecorBase(): React.JSX.Element {
       <span className="about-radial" />
 
       <div className="about-hero-streak">
-        <Image
+        <CdnImage
           src={staticAsset("/about/hero-streak.svg")}
           alt=""
           fill
@@ -42,7 +42,7 @@ function AboutDecorHeavy(): React.JSX.Element {
       <div className="home-hero-bg-mesh">
         <div className="home-hero-bg-mesh-scroll">
           <div className="home-hero-bg-mesh-rotate">
-            <Image
+            <CdnImage
               src={staticAsset("/about/hero-streak.svg")}
               alt=""
               fill

@@ -3,7 +3,7 @@ import type { NextConfig } from 'next';
 const IMAGE_CACHE_SECONDS = 300;
 const ASSET_CACHE_CONTROL = 'public, max-age=86400, stale-while-revalidate=604800';
 const PUBLIC_ASSET_FOLDERS = ['about', 'fonts', 'images', 'portfolio', 'services'];
-const r2PublicUrl = process.env.R2_PUBLIC_URL;
+const r2PublicUrl = process.env.R2_PUBLIC_URL ?? process.env.NEXT_PUBLIC_R2_PUBLIC_URL;
 const PUBLIC_ASSET_CACHE_HEADERS = [
   {
     key: 'Cache-Control',

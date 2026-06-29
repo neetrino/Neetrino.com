@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 
 import type { GradientTone } from './about-data';
@@ -75,7 +75,7 @@ export function TeamPage(): React.JSX.Element {
             <div className="team-showcase-media">
               <div className="team-showcase-glow" aria-hidden />
               <div className="team-showcase-frame">
-                <Image
+                <CdnImage
                   src={TEAM_IMAGE_SRC}
                   alt={teamCopy.imageAlt}
                   fill

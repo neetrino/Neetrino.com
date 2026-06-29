@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 
 import { useHomeI18n } from './home-i18n-provider';
@@ -16,7 +16,7 @@ export function AboutMobileHero(): React.JSX.Element {
         <div className="about-mobile-hero-robot-scale">
           <div className="about-mobile-hero-robot-flip">
             <div className="about-mobile-hero-robot-frame">
-              <Image
+              <CdnImage
                 src={staticAsset("/about/robot-mobile.webp")}
                 alt=""
                 fill

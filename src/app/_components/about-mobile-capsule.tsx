@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 import { useEffect, useRef } from 'react';
 
@@ -112,7 +112,7 @@ export function AboutMobileCapsule(): React.JSX.Element {
     <div ref={capsuleRef} className="about-mobile-capsule" aria-hidden>
       <span className="about-mobile-beam" />
       <div ref={cubeRef} className="about-mobile-cube">
-        <Image
+        <CdnImage
           src={staticAsset("/about/cube-transparent-v2.webp")}
           alt=""
           fill
