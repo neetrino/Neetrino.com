@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react';
 import { staticAsset } from '@/lib/static-asset';
-import Image from 'next/image';
+import { CdnImage as Image } from '@/lib/cdn-image';
 import Link from 'next/link';
 import { AboutMobileMenu } from './about-mobile-menu';
 import { useHomeI18n } from './home-i18n-provider';

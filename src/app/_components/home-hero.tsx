@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage as Image } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 
 import { HomeHeroBgCore } from './home-hero-bg-core';

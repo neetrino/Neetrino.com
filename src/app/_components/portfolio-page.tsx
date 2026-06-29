@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage as Image } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
 import { useHomeI18n } from './home-i18n-provider';

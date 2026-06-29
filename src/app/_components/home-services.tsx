@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CdnImage as Image } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 import { HOME_IMAGE_QUALITY } from './home-constants';
 import { serviceIllustrations } from './home-data';

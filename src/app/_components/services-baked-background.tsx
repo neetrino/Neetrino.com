@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { CdnImage as Image } from '@/lib/cdn-image';
 
 import {
   SERVICES_DECOR_BAKE_HEIGHT,

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { staticAsset } from '@/lib/static-asset';
-import Image from 'next/image';
+import { CdnImage as Image } from '@/lib/cdn-image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import type { NavItem } from './home-data';
