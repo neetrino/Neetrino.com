@@ -575,20 +575,39 @@
 }
 
 .home-mobile-service-card-art.home-services-deco-saas img {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-  width: 137.44% !important;
-  height: 140.91% !important;
+  width: 112% !important;
+  height: 112% !important;
   inset: auto !important;
-  top: -16.67% !important;
-  left: -17.24% !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
   max-width: none;
 }
 
-.home-mobile-service-card-art.home-services-deco-crm img,
-.home-mobile-service-card-art.home-services-deco-ai img {
-  object-fit: cover;
+.home-mobile-service-card-art.home-services-deco-crm img {
+  object-fit: contain;
   object-position: center;
+  width: 96% !important;
+  height: 96% !important;
+  inset: auto !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  max-width: none;
+}
+
+.home-mobile-service-card-art.home-services-deco-ai img {
+  object-fit: contain;
+  object-position: center;
+  width: 104% !important;
+  height: 104% !important;
+  inset: auto !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  max-width: none;
 }
 
 .home-mobile-service-card-body {
@@ -615,7 +634,8 @@
 .home-mobile-service-card-body .home-btn-continue {
   width: fit-content;
   margin-top: auto;
-  padding: 16px 24px;
+  min-height: 44px;
+  padding: 10px 24px;
   border-radius: 40px;
   font-size: calc(18px * var(--locale-font-scale));
 }
