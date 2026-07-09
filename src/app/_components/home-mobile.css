@@ -40,6 +40,7 @@
   --home-mobile-robot-offset-top: 132px;
   --home-mobile-robot-offset-inline: -50px;
   --home-mobile-stats-glass-top-radius: 20px;
+  --home-mobile-stats-glass-bottom-radius: 56px;
   --home-mobile-stats-panel-lift: 24px;
   --home-mobile-stat-hand-bottom: calc(3.375rem - 52px);
   --home-mobile-stat-hand-offset-right: 8.75rem;
@@ -332,7 +333,8 @@
   overflow: hidden;
   pointer-events: none;
   border-radius:
-    var(--home-mobile-stats-glass-top-radius) var(--home-mobile-stats-glass-top-radius) 39px 39px;
+    var(--home-mobile-stats-glass-top-radius) var(--home-mobile-stats-glass-top-radius)
+    var(--home-mobile-stats-glass-bottom-radius) var(--home-mobile-stats-glass-bottom-radius);
   background:
     linear-gradient(180deg, rgb(255 255 255 / 0.1) 0%, rgb(255 255 255 / 0.05) 52%, rgb(255 255 255 / 0.03) 100%),
     linear-gradient(135deg, rgb(255 255 255 / 0.08) 0%, transparent 42%, rgb(255 255 255 / 0.04) 100%);
