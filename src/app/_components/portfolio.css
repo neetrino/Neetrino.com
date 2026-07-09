@@ -622,11 +622,6 @@
     width: 244px;
   }
 
-  .neetrino-canvas-inner:has(.portfolio-body) .home-footer-message {
-    flex: 0 0 426px;
-    width: 426px;
-  }
-
   .neetrino-canvas-inner:has(.portfolio-body) .home-footer-bottom {
     flex-direction: row;
     text-align: left;

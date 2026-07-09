@@ -23,10 +23,10 @@ export function MobileHeader(): React.JSX.Element {
       >
         <Link href="/" className="about-mobile-header-logo" aria-label={homeCopy.navigation.logoHomeAriaLabel}>
           <Image
-            src={staticAsset("/figma-home/neetrino-logo.svg")}
+            src={staticAsset('/figma-home/neetrino-logo.png')}
             alt=""
-            width={96}
-            height={32}
+            width={460}
+            height={93}
             priority
             className="about-mobile-header-logo-img"
           />
