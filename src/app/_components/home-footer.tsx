@@ -72,17 +72,17 @@ export function HomeFooter(): React.JSX.Element {
             </div>
           </div>
         </div>
-      </HomeContainer>
-      <div className="home-footer-bottom">
-        <p>{homeCopy.footer.copyright}</p>
-        <div className="home-footer-social">
-          {footerSocialIcons.map((icon) => (
-            <Link key={icon.alt} href="/#contact" aria-label={icon.alt}>
-              <CdnImage src={icon.src} alt="" width={icon.width} height={icon.height} />
-            </Link>
-          ))}
+        <div className="home-footer-bottom">
+          <p>{homeCopy.footer.copyright}</p>
+          <div className="home-footer-social">
+            {footerSocialIcons.map((icon) => (
+              <Link key={icon.alt} href="/#contact" aria-label={icon.alt}>
+                <CdnImage src={icon.src} alt="" width={icon.width} height={icon.height} />
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      </HomeContainer>
     </footer>
   );
 }

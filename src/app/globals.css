@@ -1639,8 +1639,29 @@ html:lang(hy) {
   object-fit: cover;
 }
 
-.home-footer-bg-team {
-  display: none;
+@media (min-width: 900px) {
+  .home-footer-bg-shape {
+    object-fit: fill;
+  }
+
+  .home-footer-bg-team {
+    display: block;
+    position: absolute;
+    right: calc(-24px * var(--home-footer-ui-scale));
+    bottom: calc(-8px * var(--home-footer-ui-scale));
+    z-index: 0;
+    width: calc(520px * var(--home-footer-ui-scale));
+    height: calc(620px * var(--home-footer-ui-scale));
+    mix-blend-mode: hard-light;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+  }
+
+  .home-footer-bg-team-img {
+    object-fit: cover;
+    object-position: top center;
+  }
 }
 
 .home-footer-bg-glow {
