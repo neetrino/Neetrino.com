@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-
+ 
 const MAX_NAME_LENGTH = 120;
 const MAX_EMAIL_LENGTH = 254;
 const MAX_MESSAGE_LENGTH = 4000;
