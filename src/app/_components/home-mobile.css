@@ -27,7 +27,8 @@
   );
   --home-mobile-hero-tagline-stats-gap: 0.2rem;
   --home-mobile-hero-stats-offset-top: calc(
-    var(--home-mobile-stats-panel-offset) + var(--home-mobile-hero-tagline-stats-gap)
+    var(--home-mobile-stats-panel-offset) + var(--home-mobile-hero-tagline-stats-gap) -
+      var(--home-mobile-stats-panel-lift)
   );
   --home-mobile-stat-hand-width: 550px;
   --home-mobile-stat-hand-height: 456px;
@@ -38,6 +39,8 @@
   --home-mobile-hero-seam-fade-height: 44px;
   --home-mobile-robot-offset-top: 132px;
   --home-mobile-robot-offset-inline: -50px;
+  --home-mobile-stats-glass-top-radius: 20px;
+  --home-mobile-stats-panel-lift: 24px;
   --home-mobile-stat-hand-bottom: calc(3.375rem - 52px);
   --home-mobile-stat-hand-offset-right: 8.75rem;
   --home-mobile-page-glow-top: 1180px;
@@ -304,8 +307,9 @@
   top: calc(-1 * var(--home-mobile-stats-panel-offset) - var(--home-mobile-hero-seam-fade-height));
   left: 50%;
   z-index: 0;
-  width: 100vw;
+  width: var(--home-mobile-stats-panel-width);
   height: calc(var(--home-mobile-stats-panel-offset) + var(--home-mobile-hero-seam-fade-height));
+  border-radius: var(--home-mobile-stats-glass-top-radius) var(--home-mobile-stats-glass-top-radius) 0 0;
   background:
     linear-gradient(
       180deg,
@@ -314,20 +318,6 @@
       rgb(42 79 143 / 0.38) 58%,
       rgb(28 58 107 / 0.52) 100%
     );
-  pointer-events: none;
-  transform: translateX(-50%);
-}
-
-.home-mobile-hero-stats-panel::after {
-  content: '';
-  position: absolute;
-  top: calc(-1 * var(--home-mobile-stats-panel-offset) + 6px);
-  left: 50%;
-  z-index: 1;
-  width: min(76%, 300px);
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.28) 50%, transparent 100%);
-  opacity: 0.45;
   pointer-events: none;
   transform: translateX(-50%);
 }
@@ -341,6 +331,8 @@
   height: calc(var(--home-mobile-stats-panel-height) + 10px);
   overflow: hidden;
   pointer-events: none;
+  border-radius:
+    var(--home-mobile-stats-glass-top-radius) var(--home-mobile-stats-glass-top-radius) 39px 39px;
   background:
     linear-gradient(180deg, rgb(255 255 255 / 0.1) 0%, rgb(255 255 255 / 0.05) 52%, rgb(255 255 255 / 0.03) 100%),
     linear-gradient(135deg, rgb(255 255 255 / 0.08) 0%, transparent 42%, rgb(255 255 255 / 0.04) 100%);
@@ -363,10 +355,7 @@
     rgb(0 0 0 / 0.78) 17%,
     #000 26%
   );
-  clip-path: path(
-    'M445 80.521C445 66.98 438.773 56.003 431.094 56.003L202.035 56.003C197.018 56.003 192.39 51.238 189.924 43.534L179.982 12.469C177.516 4.765 172.888 0 167.871 0H13.906C6.226 0 0 10.977 0 24.519V224.481C0 238.023 6.226 249 13.906 249H431.094C438.773 249 445 238.023 445 224.481V80.521Z'
-  );
-  transform: translateX(-50%) rotate(180deg);
+  transform: translateX(-50%);
 }
 
 .home-mobile-hero-stats-row {
