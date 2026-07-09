@@ -22,8 +22,12 @@ export function useCountUp(target: number, isActive: boolean): number {
     }
 
     if (prefersReducedMotion()) {
-      setCurrent(target);
-      return;
+      const frameId = requestAnimationFrame(() => {
+        setCurrent(target);
+      });
+      return () => {
+        cancelAnimationFrame(frameId);
+      };
     }
 
     const startTime = performance.now();

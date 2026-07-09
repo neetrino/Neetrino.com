@@ -59,7 +59,9 @@ export function HomeI18nProvider({ children }: { children: ReactNode }): React.J
     const storedLocale = window.localStorage.getItem(HOME_LOCALE_STORAGE_KEY);
 
     if (isHomeLocale(storedLocale)) {
-      setLocaleState(storedLocale);
+      queueMicrotask(() => {
+        setLocaleState(storedLocale);
+      });
     } else {
       isRestoringLocaleRef.current = false;
     }
