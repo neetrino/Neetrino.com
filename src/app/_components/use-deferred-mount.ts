@@ -43,7 +43,6 @@ export function useDeferredMount({
     }
 
     let cancelled = false;
-    let idleId: number | undefined;
     let observer: IntersectionObserver | undefined;
 
     const mount = (): void => {
@@ -65,7 +64,7 @@ export function useDeferredMount({
       observer.observe(sentinel);
     }
 
-    idleId = scheduleIdleTask(mount, idleTimeoutMs);
+    const idleId = scheduleIdleTask(mount, idleTimeoutMs);
 
     return () => {
       cancelled = true;

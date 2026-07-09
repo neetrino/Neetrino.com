@@ -183,13 +183,6 @@
       "phone": "+374 44 343 000",
       "hours": "Working Hours\nMon. - Fri. 10AM - 7PM"
     },
-    "message": {
-      "title": "Message us",
-      "copy": "Step into the digital world with one message. Our team will get back to you shortly.",
-      "label": "Your message",
-      "placeholder": "Enter your message",
-      "send": "Send"
-    },
     "copyright": "Copyright © 2017 - 2026 Neetrino IT Company. All Rights Reserved."
   },
   "social": {

@@ -24,14 +24,18 @@ export function ContactForm(): React.JSX.Element {
     }
 
     formRef.current?.reset();
-    setShowSent(true);
 
-    const timer = window.setTimeout(() => {
+    const showTimer = window.setTimeout(() => {
+      setShowSent(true);
+    }, 0);
+
+    const hideTimer = window.setTimeout(() => {
       setShowSent(false);
     }, SUCCESS_FEEDBACK_MS);
 
     return () => {
-      window.clearTimeout(timer);
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
     };
   }, [state.status]);
 

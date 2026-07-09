@@ -71,24 +71,6 @@ export function HomeFooter(): React.JSX.Element {
               </ul>
             </div>
           </div>
-          <div className="home-footer-message">
-            <h3 className="home-footer-column-title home-footer-message-title">
-              {homeCopy.footer.message.title}
-            </h3>
-            <p className="home-footer-message-copy">
-              {homeCopy.footer.message.copy}
-            </p>
-            <form className="home-footer-form" action="/#contact">
-              <label className="sr-only" htmlFor="footer-message">
-                {homeCopy.footer.message.label}
-              </label>
-              <input id="footer-message" type="text" placeholder={homeCopy.footer.message.placeholder} />
-              <button type="submit" className="home-footer-send">
-                <span>{homeCopy.footer.message.send}</span>
-                <CdnImage src={staticAsset("/figma-home/group221.svg")} alt="" width={42} height={42} aria-hidden />
-              </button>
-            </form>
-          </div>
         </div>
         <div className="home-footer-bottom">
           <p>{homeCopy.footer.copyright}</p>

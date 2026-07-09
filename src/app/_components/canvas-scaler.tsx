@@ -113,7 +113,7 @@ export function CanvasScaler({
       window.removeEventListener('resize', scheduleUpdate, resizeOptions);
       window.removeEventListener('load', scheduleUpdate, resizeOptions);
     };
-  }, [updateScale]);
+  }, [canvasHeight, updateScale]);
 
   const innerStyle =
     minWidth === 0

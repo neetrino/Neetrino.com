@@ -92,10 +92,10 @@ export function HomeHeader(): React.JSX.Element {
       <div className="home-header-inner">
         <Link href="/" className="home-header-logo">
           <Image
-            src={staticAsset("/figma-home/neetrino-logo.svg")}
+            src={staticAsset('/figma-home/neetrino-logo.png')}
             alt={homeCopy.navigation.logoAlt}
-            width={130}
-            height={37}
+            width={460}
+            height={93}
             priority
           />
         </Link>
