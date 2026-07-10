@@ -1,0 +1,337 @@
+/* Services mobile background — Figma node 1:911 (Light Rays Effect). */
+
+@media (max-width: 900px) {
+  .svc-mobile-bg-shell {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .svc-mobile-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--svc-base-bg, #122a48);
+    --svc-mobile-grid-step-x: 32px;
+    --svc-mobile-grid-step-y: 35px;
+    --svc-mobile-grid-line-width: 0.5px;
+    --svc-mobile-grid-blur: 2.5px;
+    --svc-mobile-footer-seam-height: 96px;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 76%,
+      rgb(0 0 0 / 0.65) 88%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 76%,
+      rgb(0 0 0 / 0.65) 88%,
+      transparent 100%
+    );
+  }
+
+  .svc-mobile-bg::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 5;
+    height: var(--svc-mobile-footer-seam-height);
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgb(18 42 72 / 0.55) 38%,
+      rgb(21 21 21 / 0.42) 68%,
+      rgb(28 30 72 / 0.58) 100%
+    );
+  }
+
+  #services-top .svc-mobile-bg-shell {
+    padding-bottom: 24px;
+  }
+
+  #services-top .home-footer {
+    position: relative;
+    z-index: 12;
+    margin-top: -48px;
+  }
+
+  #services-top .home-footer::before {
+    height: 112px;
+    background: linear-gradient(
+      180deg,
+      rgb(18 42 72 / 0.96) 0%,
+      rgb(21 21 21 / 0.9) 16%,
+      rgb(71 61 255 / 0.1) 36%,
+      rgb(28 30 72 / 0.34) 68%,
+      transparent 100%
+    );
+    -webkit-backdrop-filter: blur(44px) saturate(1.55);
+    backdrop-filter: blur(44px) saturate(1.55);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
+  }
+
+  .svc-mobile-bg-img,
+  .svc-mobile-bg-mesh-image {
+    object-fit: fill;
+  }
+
+  /* Star 22 — rotated grid with plus-lighter blend */
+  .svc-mobile-bg-mesh {
+    position: absolute;
+    top: -275vw;
+    left: 50%;
+    z-index: 0;
+    width: 392vw;
+    height: 408vw;
+    overflow: hidden;
+    mix-blend-mode: plus-lighter;
+    opacity: 0.96;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .svc-mobile-bg-mesh-scroll {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .svc-mobile-bg-mesh-rotate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 310vw;
+    height: 348vw;
+    filter: blur(var(--svc-mobile-grid-blur));
+    transform: translate(-50%, -50%) rotate(24.39deg);
+    transform-origin: center center;
+  }
+
+  .svc-mobile-bg-grid-far {
+    position: absolute;
+    inset: -8%;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url('https://cdn.neetrino.com/static/services/grid-far.svg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 142vw auto;
+    filter: blur(calc(var(--svc-mobile-grid-blur) + 1px));
+    opacity: 0.72;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgb(0 0 0 / 0.35) 0%,
+      #000 18%,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgb(0 0 0 / 0.35) 0%,
+      #000 18%,
+      #000 100%
+    );
+  }
+
+  .svc-mobile-bg-grid {
+    position: absolute;
+    inset: -12px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.88;
+    mix-blend-mode: plus-lighter;
+    filter: blur(calc(var(--svc-mobile-grid-blur) + 0.5px));
+    background-image:
+      linear-gradient(
+        to right,
+        rgb(168 230 255 / 0.62) var(--svc-mobile-grid-line-width),
+        transparent var(--svc-mobile-grid-line-width)
+      ),
+      linear-gradient(
+        to bottom,
+        rgb(168 230 255 / 0.62) var(--svc-mobile-grid-line-width),
+        transparent var(--svc-mobile-grid-line-width)
+      );
+    background-size: var(--svc-mobile-grid-step-x) var(--svc-mobile-grid-step-y);
+    -webkit-mask-image: radial-gradient(
+      ellipse 150% 120% at 50% 18%,
+      #000 0%,
+      #000 52%,
+      rgb(0 0 0 / 0.55) 78%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 150% 120% at 50% 18%,
+      #000 0%,
+      #000 52%,
+      rgb(0 0 0 / 0.55) 78%,
+      transparent 100%
+    );
+  }
+
+  .svc-mobile-bg-ellipse {
+    position: absolute;
+    z-index: 1;
+    mix-blend-mode: normal;
+    pointer-events: none;
+  }
+
+  .svc-mobile-bg-ellipse-expand {
+    position: absolute;
+    inset: -52% -49%;
+  }
+
+  .svc-mobile-bg-ellipse--left {
+    top: -26vw;
+    left: calc(50% - 42vw);
+    width: 73vw;
+    height: 68vw;
+    opacity: 0.94;
+  }
+
+  .svc-mobile-bg-ellipse--right {
+    top: -17vw;
+    left: calc(50% + 8vw);
+    width: 73vw;
+    height: 68vw;
+    opacity: 0.9;
+  }
+
+  /* Group 2087329577 — center beam, arcs, side panels */
+  .svc-mobile-bg-hero-beam {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .svc-mobile-bg-hero-beam-line {
+    position: absolute;
+    top: -109vw;
+    left: calc(50% + 2.5vw);
+    width: 53vw;
+    height: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    mix-blend-mode: plus-lighter;
+    transform: rotate(90deg);
+    transform-origin: left top;
+  }
+
+  .svc-mobile-bg-hero-beam-line--a {
+    background-image: url('https://cdn.neetrino.com/static/about/mobile-bg/line-734.svg');
+  }
+
+  .svc-mobile-bg-hero-beam-line--b {
+    background-image: url('https://cdn.neetrino.com/static/about/mobile-bg/line-735.svg');
+  }
+
+  .svc-mobile-bg-hero-beam-glow {
+    position: absolute;
+    top: -109vw;
+    left: calc(50% + 0.8vw);
+    width: 3.2vw;
+    height: 53vw;
+    mix-blend-mode: plus-lighter;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0) 0%, #ff6613 80%, #1797ff 100%);
+  }
+
+  .svc-mobile-bg-hero-beam-glow--1 {
+    filter: blur(35.104px);
+    opacity: 0.5;
+  }
+
+  .svc-mobile-bg-hero-beam-glow--2 {
+    filter: blur(15.212px);
+    opacity: 0.2;
+  }
+
+  .svc-mobile-bg-hero-beam-glow--3 {
+    filter: blur(24.573px);
+    opacity: 0.1;
+  }
+
+  .svc-mobile-bg-hero-side {
+    position: absolute;
+    mix-blend-mode: plus-lighter;
+  }
+
+  .svc-mobile-bg-hero-side--left {
+    top: 28vw;
+    left: -181vw;
+    width: 90vw;
+    height: 30vw;
+  }
+
+  .svc-mobile-bg-hero-side--right {
+    top: 36vw;
+    left: -80vw;
+    width: 77vw;
+    height: 31vw;
+  }
+
+  .svc-mobile-bg-hero-side-expand {
+    position: absolute;
+    inset: -20.42% -6.75%;
+  }
+
+  .svc-mobile-bg-hero-side-expand--right {
+    inset: -20.19% -7.95%;
+  }
+
+  .svc-mobile-bg-hero-panel {
+    position: absolute;
+    mix-blend-mode: plus-lighter;
+  }
+
+  .svc-mobile-bg-hero-panel--left {
+    top: 55vw;
+    left: -204vw;
+    width: 24vw;
+    height: 45vw;
+    transform: scaleY(-1) rotate(180deg);
+  }
+
+  .svc-mobile-bg-hero-panel--right {
+    top: 67vw;
+    left: 52vw;
+    width: 24vw;
+    height: 45vw;
+  }
+
+  .svc-mobile-bg-hero-panel-expand {
+    position: absolute;
+    inset: -21.01% -39.7%;
+  }
+
+  .svc-mobile-bg-shell .svc-hero.svc-hero--baked {
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+  }
+
+  .svc-mobile-bg-shell .svc-title-wrap,
+  .svc-mobile-bg-shell .svc-grid {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+@media (min-width: 901px) {
+  .svc-mobile-bg-shell {
+    display: contents;
+  }
+
+  .svc-mobile-bg {
+    display: none;
+  }
+}
