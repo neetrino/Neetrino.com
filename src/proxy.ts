@@ -18,7 +18,7 @@ function createLoginRedirect(request: NextRequest): NextResponse {
   return NextResponse.redirect(loginUrl);
 }
 
-export async function middleware(request: NextRequest): Promise<NextResponse> {
+export async function proxy(request: NextRequest): Promise<NextResponse> {
   const pathname = request.nextUrl.pathname;
   const session = request.cookies.get(ADMIN_SESSION_COOKIE_NAME);
   const isAuthenticated = await verifyAdminSessionCookie(session?.value);

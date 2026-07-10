@@ -4,6 +4,8 @@ type MobileReflectTitleProps = {
   className?: string;
   align?: 'left' | 'center' | 'right';
   stacked?: boolean;
+  showMirror?: boolean;
+  titleId?: string;
   lines: Array<{ text: string; accent?: boolean }>;
 };
 
@@ -28,6 +30,8 @@ export function MobileReflectTitle({
   className = '',
   align = 'left',
   stacked = false,
+  showMirror = true,
+  titleId,
   lines,
 }: MobileReflectTitleProps): React.JSX.Element {
   const alignClass = `about-mobile-reflect-title--${align}`;
@@ -47,10 +51,12 @@ export function MobileReflectTitle({
 
   return (
     <div className={`about-mobile-reflect-title ${alignClass} ${className}`.trim()}>
-      <h2 className="about-mobile-reflect-title-main">{renderLines()}</h2>
-      <div className="about-mobile-reflect-title-mirror" aria-hidden>
-        <div className="about-mobile-reflect-title-mirror-inner">{renderLines()}</div>
-      </div>
+      <h2 id={titleId} className="about-mobile-reflect-title-main">{renderLines()}</h2>
+      {showMirror ? (
+        <div className="about-mobile-reflect-title-mirror" aria-hidden>
+          <div className="about-mobile-reflect-title-mirror-inner">{renderLines()}</div>
+        </div>
+      ) : null}
     </div>
   );
 }
