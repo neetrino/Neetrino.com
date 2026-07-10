@@ -1195,23 +1195,6 @@ html:lang(hy) {
   object-position: 86% 100%;
 }
 
-.home-hero-chat {
-  position: absolute;
-  top: calc(630px * var(--home-ui-scale));
-  right: calc(50px * var(--home-ui-scale));
-  z-index: 4;
-  display: grid;
-  width: calc(79px * var(--home-ui-scale));
-  height: calc(79px * var(--home-ui-scale));
-  place-items: center;
-  text-decoration: none;
-}
-
-.home-hero-chat img {
-  width: 100%;
-  height: 100%;
-}
-
 .home-services {
   padding-top: var(--home-services-section-padding-top);
   padding-bottom: calc(96px * var(--home-ui-scale));
@@ -1415,12 +1398,8 @@ html:lang(hy) {
 }
 
 .home-portfolio {
-  padding-block: calc(51px * var(--home-ui-scale)) calc(96px * var(--home-ui-scale));
+  padding-block: calc(51px * var(--home-ui-scale)) calc(48px * var(--home-ui-scale));
   overflow: visible;
-}
-
-.home-portfolio .home-container {
-  width: min(100%, 1440px);
 }
 
 .home-portfolio-bg {
@@ -1530,7 +1509,7 @@ html:lang(hy) {
 }
 
 .home-about {
-  padding-block: calc(147px * var(--home-ui-scale)) calc(96px * var(--home-ui-scale));
+  padding-block: calc(72px * var(--home-ui-scale)) calc(48px * var(--home-ui-scale));
   overflow: visible;
 }
 
@@ -1594,7 +1573,7 @@ html:lang(hy) {
 }
 
 .home-partners {
-  padding-block: calc(48px * var(--home-ui-scale));
+  padding-block: calc(24px * var(--home-ui-scale));
 }
 
 .home-partners-track {
@@ -1771,6 +1750,10 @@ html:lang(hy) {
     margin: 0;
     margin-top: calc(50px * var(--home-footer-ui-scale));
   }
+
+  #home .home-footer {
+    padding-top: calc(48px * var(--home-footer-ui-scale));
+  }
 }
 
 .home-footer-social {
@@ -1846,8 +1829,7 @@ html:lang(hy) {
   .home-desktop .home-hero-brand,
   .home-desktop .home-hero-robot-wrap,
   .home-desktop .home-hero-tagline,
-  .home-desktop .home-hero-stats,
-  .home-desktop .home-hero-chat {
+  .home-desktop .home-hero-stats {
     position: relative;
     top: auto;
     left: auto;
@@ -1890,12 +1872,6 @@ html:lang(hy) {
   .home-desktop .home-hero-stat,
   .home-desktop .home-hero-stat-wide {
     width: 100%;
-  }
-
-  .home-desktop .home-hero-chat {
-    margin: 24px auto 0;
-    width: 64px;
-    height: 64px;
   }
 
   .home-services-grid {

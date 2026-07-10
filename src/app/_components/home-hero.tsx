@@ -1,8 +1,5 @@
 'use client';
 
-import { CdnImage as Image } from '@/lib/cdn-image';
-import { staticAsset } from '@/lib/static-asset';
-
 import { HomeHeroBgCore } from './home-hero-bg-core';
 import { HomeHeroDeferredDecor } from './home-hero-deferred-decor';
 import { HomeHeroHandLayer } from './home-hero-hand-layer';
@@ -59,10 +56,6 @@ export function HomeHero(): React.JSX.Element {
             </article>
           ) : null}
         </div>
-
-        <a href="#contact" className="home-hero-chat" aria-label={hero.chatAriaLabel}>
-          <Image src={staticAsset("/figma-home/chat.svg")} alt="" width={79} height={79} loading="lazy" fetchPriority="low" />
-        </a>
       </div>
 
       <HomeHeroHandLayer />
