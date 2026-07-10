@@ -2,7 +2,7 @@ export type PortfolioProject = {
   title: string;
   alt: string;
   image: string;
-  variant?: 'zeppelin';
+  variant?: 'anra' | 'degusto' | 'digital-implant' | 'dvbs' | 'ncie' | 'toon' | 'zeppelin';
   overlayTitle?: string;
 };
 

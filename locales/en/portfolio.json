@@ -8,7 +8,10 @@
     "srOnlyTitle": "Neetrino Portfolio"
   },
   "pagination": {
-    "ariaLabel": "Portfolio pagination"
+    "ariaLabel": "Portfolio pagination",
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "goToPage": "Go to page {page}"
   },
   "projects": {
     "tooonExpo": {

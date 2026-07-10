@@ -8,7 +8,6 @@ const CRITICAL_ROUTE_IMAGES = [
   staticAsset('/about/hero-streak.svg'),
   staticAsset('/about/robot.webp'),
   staticAsset('/portfolio/decor-stack.webp'),
-  staticAsset('/portfolio/portfolio-title.webp'),
   staticAsset('/blog/blog-title.webp'),
   staticAsset('/services/decor-stack.webp'),
   staticAsset('/services/services-title.webp'),

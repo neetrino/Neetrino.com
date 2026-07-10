@@ -1,5 +1,9 @@
 import type { ProjectCard } from '@/app/_components/home-data';
 import { portfolioBottomRow, portfolioTopRow } from '@/app/_components/home-data';
+import {
+  PORTFOLIO_ANRA_MOCKUP_SRC,
+  PORTFOLIO_DVBS_BANNER_SRC,
+} from '@/app/_components/portfolio-constants';
 import type { PortfolioProject } from '@/app/_components/portfolio-data';
 import { portfolioProjects as staticPortfolioProjects } from '@/app/_components/portfolio-data';
 import { logger } from '@/lib/logger';
@@ -66,6 +70,78 @@ function getStaticPortfolioData(): PublicPortfolioData {
   };
 }
 
+function normalizePortfolioText(value: string | null | undefined): string {
+  return typeof value === 'string' ? value.trim().toLowerCase() : '';
+}
+
+function resolvePortfolioVariant(title: string, alt: string): PortfolioProject['variant'] {
+  const normalizedTitle = normalizePortfolioText(title);
+  const normalizedAlt = normalizePortfolioText(alt);
+  const combined = `${normalizedTitle} ${normalizedAlt}`;
+
+  if (combined.includes('tooon') || combined.includes('toon expo')) {
+    return 'toon';
+  }
+
+  if (combined.includes('degusto')) {
+    return 'degusto';
+  }
+
+  if (combined.includes('dvbs') || combined.includes('borbor')) {
+    return 'dvbs';
+  }
+
+  if (combined.includes('digital implant')) {
+    return 'digital-implant';
+  }
+
+  if (combined.includes('ncie')) {
+    return 'ncie';
+  }
+
+  if (combined.includes('anra') || combined.includes('nuclear regulatory')) {
+    return 'anra';
+  }
+
+  if (combined.includes('zeppelin')) {
+    return 'zeppelin';
+  }
+
+  return undefined;
+}
+
+function toPortfolioProject(asset: PublicPortfolioAsset): PortfolioProject {
+  const variant = resolvePortfolioVariant(asset.title, asset.alt);
+  let image = asset.url;
+
+  if (variant === 'dvbs') {
+    image = PORTFOLIO_DVBS_BANNER_SRC;
+  }
+
+  if (variant === 'anra') {
+    image = PORTFOLIO_ANRA_MOCKUP_SRC;
+  }
+
+  return {
+    title: asset.title,
+    alt: asset.alt,
+    image,
+    variant,
+  };
+}
+
+function toErrorContext(error: unknown): Record<string, unknown> {
+  if (error instanceof Error) {
+    return {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+    };
+  }
+
+  return { error };
+}
+
 export async function getPublicPortfolioData(): Promise<PublicPortfolioData> {
   if (!process.env.DATABASE_URL) {
     logger.error('DATABASE_URL is not set; using static portfolio data.');
@@ -86,14 +162,10 @@ export async function getPublicPortfolioData(): Promise<PublicPortfolioData> {
 
     return {
       ...rows,
-      portfolioProjects: assets.map((asset) => ({
-        title: asset.title,
-        alt: asset.alt,
-        image: asset.url,
-      })),
+      portfolioProjects: assets.map(toPortfolioProject),
     };
   } catch (error) {
-    logger.error('Failed to load portfolio assets; using static portfolio data.', { error });
+    logger.error('Failed to load portfolio assets; using static portfolio data.', toErrorContext(error));
     return getStaticPortfolioData();
   }
 }
