@@ -8,7 +8,10 @@
     "srOnlyTitle": "Neetrino Պորտֆոլիո"
   },
   "pagination": {
-    "ariaLabel": "Պորտֆոլիոյի էջավորում"
+    "ariaLabel": "Պորտֆոլիոյի էջավորում",
+    "previousPage": "Նախորդ էջ",
+    "nextPage": "Հաջորդ էջ",
+    "goToPage": "Անցնել {page} էջ"
   },
   "projects": {
     "tooonExpo": {

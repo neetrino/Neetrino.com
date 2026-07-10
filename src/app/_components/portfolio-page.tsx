@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { CdnImage as Image } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
@@ -7,11 +8,10 @@ import { useHomeI18n } from './home-i18n-provider';
 import { NeetrinoPageShell } from './neetrino-page-shell';
 import { PortfolioBakedBackground } from './portfolio-baked-background';
 import {
+  PORTFOLIO_ANRA_SCREEN_SRC,
   PORTFOLIO_CANVAS_HEIGHT,
+  PORTFOLIO_ITEMS_PER_PAGE,
   PORTFOLIO_LCP_CARD_COUNT,
-  PORTFOLIO_TITLE_HEIGHT,
-  PORTFOLIO_TITLE_SRC,
-  PORTFOLIO_TITLE_WIDTH,
 } from './portfolio-constants';
 import type { PortfolioProject } from './portfolio-data';
 import { portfolioMessages } from './portfolio-messages';
@@ -19,8 +19,39 @@ import { isRemoteImageUrl } from '@/lib/image-url';
 import './portfolio.css';
 import './services.css';
 
-const PORTFOLIO_PAGES = [1, 2, 3, 4, 5] as const;
-const ACTIVE_PORTFOLIO_PAGE = 3;
+type PortfolioPaginationState = {
+  currentPage: number;
+  itemsPerPage: number;
+  totalPages: number;
+  visibleProjects: PortfolioProject[];
+  goToPage: (page: number) => void;
+};
+
+function formatPortfolioPageLabel(template: string, page: number): string {
+  return template.replace('{page}', String(page));
+}
+
+function usePortfolioPagination(projects: PortfolioProject[]): PortfolioPaginationState {
+  const [page, setPage] = useState(1);
+  const itemsPerPage = PORTFOLIO_ITEMS_PER_PAGE;
+
+  const totalPages = Math.max(1, Math.ceil(projects.length / itemsPerPage));
+  const currentPage = Math.min(page, totalPages);
+  const visibleStart = (currentPage - 1) * itemsPerPage;
+  const visibleProjects = projects.slice(visibleStart, visibleStart + itemsPerPage);
+
+  const goToPage = (nextPage: number): void => {
+    setPage(Math.min(Math.max(nextPage, 1), totalPages));
+  };
+
+  return {
+    currentPage,
+    itemsPerPage,
+    totalPages,
+    visibleProjects,
+    goToPage,
+  };
+}
 
 function PortfolioCard({
   project,
@@ -34,19 +65,50 @@ function PortfolioCard({
   return (
     <article className={`portfolio-card portfolio-card--${project.variant ?? 'default'}`} aria-label={project.title}>
       <div className="portfolio-card-media">
-        <Image
-          src={project.image}
-          alt={project.alt}
-          fill
-          sizes="(max-width: 899px) 50vw, (max-width: 1440px) 44vw, 631px"
-          quality={HOME_PORTFOLIO_IMAGE_QUALITY}
-          priority={isAboveFold}
-          loading={isAboveFold ? 'eager' : 'lazy'}
-          fetchPriority={isAboveFold ? 'high' : 'low'}
-          decoding="async"
-          unoptimized={isRemoteImageUrl(project.image)}
-          className="portfolio-card-image"
-        />
+        {project.variant === 'anra' ? (
+          <>
+            <Image
+              src={project.image}
+              alt={project.alt}
+              fill
+              sizes="(max-width: 899px) 100vw, (max-width: 1440px) 44vw, 631px"
+              quality={HOME_PORTFOLIO_IMAGE_QUALITY}
+              priority={isAboveFold}
+              loading={isAboveFold ? 'eager' : 'lazy'}
+              fetchPriority={isAboveFold ? 'high' : 'low'}
+              decoding="async"
+              unoptimized={isRemoteImageUrl(project.image)}
+              className="portfolio-card-image portfolio-card-image--anra-mockup"
+            />
+            <div className="portfolio-card-screen portfolio-card-screen--anra">
+              <Image
+                src={PORTFOLIO_ANRA_SCREEN_SRC}
+                alt=""
+                fill
+                sizes="(max-width: 899px) 21vw, 133px"
+                quality={HOME_PORTFOLIO_IMAGE_QUALITY}
+                loading="lazy"
+                fetchPriority="low"
+                decoding="async"
+                className="portfolio-card-screen-image"
+              />
+            </div>
+          </>
+        ) : (
+          <Image
+            src={project.image}
+            alt={project.alt}
+            fill
+            sizes="(max-width: 899px) 100vw, (max-width: 1440px) 44vw, 631px"
+            quality={HOME_PORTFOLIO_IMAGE_QUALITY}
+            priority={isAboveFold}
+            loading={isAboveFold ? 'eager' : 'lazy'}
+            fetchPriority={isAboveFold ? 'high' : 'low'}
+            decoding="async"
+            unoptimized={isRemoteImageUrl(project.image)}
+            className="portfolio-card-image"
+          />
+        )}
         {project.variant === 'zeppelin' ? (
           <>
             <Image
@@ -70,60 +132,87 @@ function PortfolioCard({
   );
 }
 
-function PortfolioPagination(): React.JSX.Element {
+function PortfolioPagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}): React.JSX.Element | null {
   const { portfolioCopy } = useHomeI18n();
+
+  if (totalPages <= 1) {
+    return null;
+  }
+
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
     <nav className="portfolio-pagination" aria-label={portfolioCopy.pagination.ariaLabel}>
-      <span className="portfolio-pagination-item portfolio-pagination-arrow" aria-hidden>
+      <button
+        type="button"
+        className="portfolio-pagination-item portfolio-pagination-arrow"
+        aria-label={portfolioCopy.pagination.previousPage}
+        disabled={currentPage <= 1}
+        onClick={() => onPageChange(currentPage - 1)}
+      >
         ‹
-      </span>
-      {PORTFOLIO_PAGES.map((page) => (
-        <span
-          key={page}
-          className={
-            page === ACTIVE_PORTFOLIO_PAGE
-              ? 'portfolio-pagination-item portfolio-pagination-item--active'
-              : 'portfolio-pagination-item'
-          }
-          aria-current={page === ACTIVE_PORTFOLIO_PAGE ? 'page' : undefined}
-        >
-          {page}
-        </span>
-      ))}
-      <span className="portfolio-pagination-item portfolio-pagination-arrow" aria-hidden>
+      </button>
+      {pages.map((page) => {
+        const isActive = page === currentPage;
+
+        return (
+          <button
+            key={page}
+            type="button"
+            className={
+              isActive
+                ? 'portfolio-pagination-item portfolio-pagination-item--active'
+                : 'portfolio-pagination-item'
+            }
+            aria-label={formatPortfolioPageLabel(portfolioCopy.pagination.goToPage, page)}
+            aria-current={isActive ? 'page' : undefined}
+            disabled={isActive}
+            onClick={() => onPageChange(page)}
+          >
+            {page}
+          </button>
+        );
+      })}
+      <button
+        type="button"
+        className="portfolio-pagination-item portfolio-pagination-arrow"
+        aria-label={portfolioCopy.pagination.nextPage}
+        disabled={currentPage >= totalPages}
+        onClick={() => onPageChange(currentPage + 1)}
+      >
         ›
-      </span>
+      </button>
     </nav>
   );
 }
 
 function PortfolioBody({ projects }: { projects: PortfolioProject[] }): React.JSX.Element {
   const { portfolioCopy } = useHomeI18n();
+  const { currentPage, totalPages, visibleProjects, goToPage } = usePortfolioPagination(projects);
 
   return (
     <section className="portfolio-body portfolio-body--baked" aria-labelledby="portfolio-heading">
       <header className="portfolio-intro">
-        <div className="svc-title-wrap">
-          <Image
-            id="portfolio-heading"
-            src={PORTFOLIO_TITLE_SRC}
-            alt={portfolioCopy.hero.title}
-            width={PORTFOLIO_TITLE_WIDTH}
-            height={PORTFOLIO_TITLE_HEIGHT}
-            sizes="(max-width: 900px) 90vw, 597px"
-            priority
-            fetchPriority="high"
-            className="svc-title"
-          />
+        <div className="portfolio-title-wrap">
+          <h1 id="portfolio-heading" className="portfolio-title">
+            {portfolioCopy.hero.title}
+          </h1>
         </div>
       </header>
       <div className="portfolio-list">
-        {projects.map((project, index) => (
+        {visibleProjects.map((project, index) => (
           <PortfolioCard key={`${project.title}-${project.image}`} project={project} index={index} />
         ))}
       </div>
-      <PortfolioPagination />
+      <PortfolioPagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
     </section>
   );
 }

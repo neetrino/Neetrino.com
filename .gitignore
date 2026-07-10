@@ -16,6 +16,12 @@ dist/
 build/
 coverage/
 
+# Static assets served from CDN (R2) — do not commit local copies
+static/portfolio/*
+!static/portfolio/.gitkeep
+public/portfolio/*
+!public/portfolio/.gitkeep
+
 # Logs and temp
 *.log
 npm-debug.log*

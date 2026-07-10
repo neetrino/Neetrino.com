@@ -44,10 +44,24 @@ export function AboutMobileHero(): React.JSX.Element {
           </h1>
         </div>
 
-        <p className="about-mobile-hero-intro">{heroIntroMobile}</p>
+        {heroIntroMobile.split('\n\n').map((paragraph, index) => (
+          <p
+            key={index}
+            className={
+              index === 0
+                ? 'about-mobile-hero-intro about-mobile-hero-intro--primary'
+                : 'about-mobile-hero-intro about-mobile-hero-intro--secondary'
+            }
+          >
+            {paragraph}
+          </p>
+        ))}
 
         <div className="about-mobile-hero-stats-panel">
-          <div className="about-mobile-hero-stats-bg" aria-hidden />
+          <div className="about-mobile-hero-stats-bg" aria-hidden>
+            <span className="about-mobile-hero-stats-bg-blur" />
+            <span className="about-mobile-hero-stats-bg-fill" />
+          </div>
           <div className="about-mobile-hero-stats-grid">
             {heroStats.map((stat) => (
               <MobileHeroStat key={stat.label} {...stat} />

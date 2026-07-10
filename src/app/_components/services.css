@@ -276,7 +276,7 @@
   .svc-hero {
     width: 100%;
     min-height: 100vh;
-    padding: 132px 16px 72px;
+    padding: 132px 16px 48px;
   }
 
   .svc-title-wrap {
@@ -310,41 +310,47 @@
   }
 
   .svc-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 10px;
     margin-top: 28px;
   }
 
   .svc-card {
     width: 100%;
     height: auto;
-    min-height: calc(320px * var(--home-ui-scale));
-    gap: calc(16px * var(--home-ui-scale));
-    padding: calc(24px * var(--home-ui-scale)) calc(16px * var(--home-ui-scale));
-    border-radius: calc(24px * var(--home-ui-scale));
+    min-height: 0;
+    gap: calc(10px * var(--home-ui-scale));
+    padding: calc(16px * var(--home-ui-scale)) calc(14px * var(--home-ui-scale));
+    border-radius: calc(18px * var(--home-ui-scale));
+    contain-intrinsic-size: auto;
+  }
+
+  .svc-card-text {
+    gap: calc(8px * var(--home-ui-scale));
   }
 
   .svc-card-title {
     max-width: none;
-    font-size: calc(18px * var(--home-ui-scale) * var(--locale-font-scale));
-    line-height: calc(22px * var(--home-ui-scale) * var(--locale-font-scale));
+    font-size: calc(17px * var(--home-ui-scale) * var(--locale-font-scale));
+    line-height: calc(21px * var(--home-ui-scale) * var(--locale-font-scale));
   }
 
   .svc-card-desc {
     max-width: none;
     font-size: calc(12px * var(--home-ui-scale) * var(--locale-font-scale));
-    line-height: calc(18px * var(--home-ui-scale) * var(--locale-font-scale));
+    line-height: calc(16px * var(--home-ui-scale) * var(--locale-font-scale));
   }
 
   .svc-card-cta {
-    padding: calc(10px * var(--home-ui-scale)) calc(16px * var(--home-ui-scale));
-    font-size: calc(14px * var(--home-ui-scale) * var(--locale-font-scale));
-    line-height: calc(18px * var(--home-ui-scale) * var(--locale-font-scale));
+    margin-top: calc(4px * var(--home-ui-scale));
+    padding: calc(8px * var(--home-ui-scale)) calc(14px * var(--home-ui-scale));
+    font-size: calc(13px * var(--home-ui-scale) * var(--locale-font-scale));
+    line-height: calc(16px * var(--home-ui-scale) * var(--locale-font-scale));
   }
 
   .svc-card-icon {
-    width: calc(28px * var(--home-ui-scale));
-    height: calc(28px * var(--home-ui-scale));
+    width: calc(24px * var(--home-ui-scale));
+    height: calc(24px * var(--home-ui-scale));
   }
 
   .svc-card--website {

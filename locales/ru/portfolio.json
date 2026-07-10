@@ -8,7 +8,10 @@
     "srOnlyTitle": "Портфолио Neetrino"
   },
   "pagination": {
-    "ariaLabel": "Навигация по портфолио"
+    "ariaLabel": "Навигация по портфолио",
+    "previousPage": "Предыдущая страница",
+    "nextPage": "Следующая страница",
+    "goToPage": "Перейти на страницу {page}"
   },
   "projects": {
     "tooonExpo": {

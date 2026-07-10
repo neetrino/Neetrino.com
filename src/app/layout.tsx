@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { Audiowide, DM_Sans, Inter } from 'next/font/google';
+import { DM_Sans, Inter } from 'next/font/google';
 import { AppProviders } from './_components/app-providers';
+import { megatroxFont } from '@/lib/fonts/megatrox';
 import './globals.css';
 
 const inter = Inter({
@@ -13,12 +14,6 @@ const dmSans = DM_Sans({
   variable: '--font-dm-sans',
   subsets: ['latin'],
   weight: ['400', '500', '700'],
-});
-
-const audiowide = Audiowide({
-  variable: '--font-megatrox',
-  subsets: ['latin'],
-  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -34,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${dmSans.variable} ${audiowide.variable} h-full antialiased`}
+      className={`${inter.variable} ${dmSans.variable} ${megatroxFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <AppProviders>{children}</AppProviders>

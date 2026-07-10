@@ -276,24 +276,21 @@
 }
 
 @media (max-width: 900px) {
+  #services-top .neetrino-canvas-wrap--page {
+    background: var(--svc-base-bg, #122a48);
+  }
+
   .neetrino-canvas-inner:has(.svc-hero) {
-    /* Unitless ratio: required for transform scale(). */
-    --svc-mobile-bg-scale: calc(100vw / var(--home-design-width) / 1px);
+    --svc-base-bg: #122a48;
+    background: var(--svc-base-bg);
   }
 
   .svc-baked-bg {
-    top: 0;
-    right: auto;
-    bottom: auto;
-    left: 50%;
-    width: 1440px;
-    height: var(--svc-decor-bake-height, 2095px);
-    transform: translate3d(-50%, 0, 0) scale(var(--svc-mobile-bg-scale));
-    transform-origin: top center;
+    display: none;
   }
 
   .svc-hero {
-    overflow: hidden;
+    overflow: visible;
   }
 
   .svc-hero.svc-hero--baked {
@@ -304,6 +301,8 @@
   }
 
   .svc-decor {
+    /* Unitless ratio: required for transform scale(). */
+    --svc-mobile-bg-scale: calc(100vw / var(--home-design-width) / 1px);
     top: 0;
     right: auto;
     bottom: auto;
