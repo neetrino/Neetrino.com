@@ -86,28 +86,6 @@
   #contact-top.home-page .home-footer {
     margin-top: 0;
     padding-top: 32px;
-    overflow: hidden;
-  }
-
-  #contact-top.home-page .home-footer::before {
-    display: none;
-  }
-
-  #contact-top.home-page .home-footer-bg {
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      rgb(0 0 0 / 0) 0%,
-      rgb(0 0 0 / 0.62) 16%,
-      #000 34%,
-      #000 100%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      rgb(0 0 0 / 0) 0%,
-      rgb(0 0 0 / 0.62) 16%,
-      #000 34%,
-      #000 100%
-    );
   }
 
   .contact-page {

@@ -183,16 +183,7 @@
 }
 
 .team-showcase-glow {
-  position: absolute;
-  inset: calc(12px * var(--home-ui-scale)) calc(-24px * var(--home-ui-scale))
-    calc(-24px * var(--home-ui-scale)) calc(-24px * var(--home-ui-scale));
-  border-radius: calc(32px * var(--home-ui-scale));
-  background: radial-gradient(
-    ellipse 80% 70% at 50% 60%,
-    rgb(56 176 255 / 0.35) 0%,
-    transparent 72%
-  );
-  pointer-events: none;
+  display: none;
 }
 
 .team-showcase-frame {
@@ -200,15 +191,20 @@
   z-index: 1;
   width: 100%;
   height: calc(520px * var(--home-ui-scale));
-  border: 1px solid rgb(168 230 255 / 0.2);
-  border-radius: calc(28px * var(--home-ui-scale));
-  overflow: hidden;
-  background: linear-gradient(180deg, rgb(18 42 72 / 0.4), rgb(8 24 44 / 0.85));
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
 }
 
 .team-showcase-image {
+  width: calc(100% + 100px) !important;
+  height: calc(100% + 100px) !important;
+  inset: -50px !important;
   object-fit: contain;
   object-position: bottom center;
+  transform: translate(40px, 10px) scale(1.24);
+  transform-origin: center bottom;
 }
 
 /* Values */
