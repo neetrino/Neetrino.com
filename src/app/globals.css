@@ -399,61 +399,46 @@ html:lang(hy) {
   min-height: var(--home-btn-explore-height);
   padding: 0 calc(21px * var(--home-ui-scale)) 0 calc(23px * var(--home-ui-scale));
   overflow: hidden;
-  border: 1px solid transparent;
+  border: 1px solid rgb(106 146 255 / 0.75);
   border-radius: var(--home-radius-lg);
   background:
-    linear-gradient(#000, #000) padding-box,
-    linear-gradient(155deg, #6a92ff 13.86%, #001f37 100%) border-box;
+    radial-gradient(120% 95% at 50% 112%, rgb(96 149 255 / 0.34) 0%, rgb(96 149 255 / 0) 72%),
+    radial-gradient(120% 110% at 50% -20%, rgb(255 255 255 / 0.2) 0%, rgb(255 255 255 / 0) 62%),
+    linear-gradient(155deg, #1b3ea8 0%, #091838 62%, #030814 100%);
   color: #fff;
   font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-size: calc(18px * var(--home-ui-scale) * var(--locale-font-scale));
   font-weight: 500;
   line-height: calc(24px * var(--home-ui-scale) * var(--locale-font-scale));
   text-align: center;
-  box-shadow: inset 0 calc(-8px * var(--home-ui-scale)) calc(16px * var(--home-ui-scale))
-    calc(-4px * var(--home-ui-scale)) rgb(15 31 180 / 0.62);
+  box-shadow:
+    inset 0 calc(-8px * var(--home-ui-scale)) calc(16px * var(--home-ui-scale))
+      calc(-4px * var(--home-ui-scale)) rgb(15 31 180 / 0.52),
+    0 0 0 calc(1px * var(--home-ui-scale)) rgb(7 24 68 / 0.55);
   transition:
     transform 180ms ease,
     box-shadow 220ms ease;
 }
 
+.home-btn-explore::after {
+  content: none;
+}
+
 .home-btn-explore::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  z-index: 0;
-  width: var(--home-btn-explore-glow-width);
-  height: var(--home-btn-explore-glow-height);
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse 100% 100% at 50% 100%,
-    rgb(72 110 255 / 0.85) 0%,
-    rgb(15 31 180 / 0.72) 38%,
-    rgb(15 31 180 / 0.38) 68%,
-    rgb(15 31 180 / 0) 100%
-  );
-  opacity: 0.82;
-  transform: translateX(-50%);
-  transition: opacity 220ms ease, transform 220ms ease;
+  content: none;
 }
 
 .home-btn-explore-label {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .home-btn-explore > img {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   flex: 0 0 auto;
   width: calc(20px * var(--home-ui-scale));
   height: calc(20px * var(--home-ui-scale));
-}
-
-.home-btn-explore-wrap:hover .home-btn-explore::before,
-.home-btn-explore-wrap:focus-within .home-btn-explore::before {
-  transform: translateX(-50%) translateY(18%) scale(1.06);
 }
 
 .home-btn-explore-wrap:hover .home-btn-explore,

@@ -137,6 +137,7 @@
 .about-mobile-bg-hero-panel {
   position: absolute;
   mix-blend-mode: plus-lighter;
+  display: none;
 }
 
 .about-mobile-bg-hero-panel--left {
@@ -454,7 +455,7 @@
   max-width: calc(100vw - 24px);
   height: 217px;
   min-height: 217px;
-  margin-top: -2.75rem;
+  margin-top: 0;
   margin-left: calc(24px - var(--about-mobile-gutter));
 }
 
@@ -1477,14 +1478,16 @@
 
 .about-mobile-team-image-frame {
   position: relative;
-  width: min(90vw, 540px);
-  height: min(90vw, 420px);
+  width: min(110vw, 690px);
+  height: min(110vw, 570px);
   margin: 0 0 0 auto;
 }
 
 .about-mobile-team-image {
   object-fit: contain;
   object-position: bottom right;
+  transform: translate(200px, 120px) scaleX(-1) scale(1.45);
+  transform-origin: center bottom;
 }
 
 /* ---------- Viewport switch ---------- */
