@@ -1,10 +1,10 @@
 'use client';
 
-import { useCallback, useEffect, useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { staticAsset } from '@/lib/static-asset';
 import { CdnImage } from '@/lib/cdn-image';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import type { NavItem } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
 
@@ -95,15 +95,7 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
   const { homeCopy, languageOptions, locale, moreNavItems, navItems, setLocale } = useHomeI18n();
   const menuId = useId();
   const pathname = usePathname();
-  const router = useRouter();
   const currentHash = useCurrentHash(pathname);
-  const isMoreActive = moreNavItems.some((item) => isNavLinkActive(item, pathname, currentHash));
-
-  // Collapsed "More" links are hidden, so Next.js never auto-prefetches them.
-  // Warm them on open to keep navigation client-side instead of a full reload.
-  const prefetchMoreItems = useCallback((): void => {
-    moreNavItems.forEach((item) => router.prefetch(item.href));
-  }, [moreNavItems, router]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -167,30 +159,16 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
             </div>
           ))}
 
-          <details
-            className={
-              isMoreActive
-                ? 'about-mobile-menu-more about-mobile-menu-more--active'
-                : 'about-mobile-menu-more'
-            }
-            onToggle={(event) => {
-              if (event.currentTarget.open) {
-                prefetchMoreItems();
-              }
-            }}
-          >
-            <summary>{homeCopy.navigation.moreLabel}</summary>
-            <div className="about-mobile-menu-more-list">
-              {moreNavItems.map((item) => (
-                <MobileMenuNavLink
-                  key={item.id}
-                  item={item}
-                  isActive={isNavLinkActive(item, pathname, currentHash)}
-                  onNavigate={onClose}
-                />
-              ))}
-            </div>
-          </details>
+          <div className="about-mobile-menu-more-list">
+            {moreNavItems.map((item) => (
+              <MobileMenuNavLink
+                key={item.id}
+                item={item}
+                isActive={isNavLinkActive(item, pathname, currentHash)}
+                onNavigate={onClose}
+              />
+            ))}
+          </div>
         </nav>
 
         <div
