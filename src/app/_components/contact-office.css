@@ -112,10 +112,6 @@
     font-size: calc(clamp(40px, 12vw, 56px) * var(--locale-font-scale));
   }
 
-  .contact-form {
-    grid-template-columns: 1fr;
-  }
-
   .contact-office-head {
     flex-direction: column;
   }

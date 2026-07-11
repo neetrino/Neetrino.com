@@ -1,6 +1,5 @@
 'use client';
 
-import { ContactForm } from './contact-form';
 import { ContactMap } from './contact-map';
 import { useHomeI18n } from './home-i18n-provider';
 import { NeetrinoPageShell } from './neetrino-page-shell';
@@ -181,7 +180,6 @@ export function ContactPage(): React.JSX.Element {
         <div className="contact-content">
           <div className="contact-hero-grid">
             <ContactIntroCard />
-            <ContactForm />
           </div>
           <ContactOfficeSection />
         </div>
