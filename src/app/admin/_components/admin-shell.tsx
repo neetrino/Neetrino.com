@@ -10,7 +10,6 @@ import { AdminNavIcon } from './admin-nav-icon';
 const ADMIN_NAV_ITEMS = [
   { href: '/admin/blog', labelKey: 'blog', icon: 'doc' },
   { href: '/admin/portfolio', labelKey: 'portfolio', icon: 'grid' },
-  { href: '/admin/contact', labelKey: 'messages', icon: 'message' },
   { href: '/admin/products', labelKey: 'products', icon: 'box' },
   { href: '/admin/orders', labelKey: 'orders', icon: 'cart' },
 ] as const;

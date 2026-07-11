@@ -206,16 +206,15 @@
 }
 
 .about-mobile-menu-more-list {
-  display: grid;
-  gap: 4px;
-  padding: 0 0 8px 12px;
+  display: block;
+  padding: 0;
 }
 
 .about-mobile-menu-more-list .about-mobile-menu-link {
-  padding: 10px 0;
-  font-size: calc(17px * var(--locale-font-scale));
-  font-weight: 700;
-  color: rgb(255 255 255 / 0.88);
+  padding: 16px 0;
+  font-size: calc(20px * var(--locale-font-scale));
+  font-weight: 800;
+  color: #fff;
 }
 
 .about-mobile-menu-languages {

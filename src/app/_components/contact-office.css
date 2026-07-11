@@ -83,6 +83,11 @@
 }
 
 @media (max-width: 899px) {
+  #contact-top.home-page .home-footer {
+    margin-top: 0;
+    padding-top: 32px;
+  }
+
   .contact-page {
     width: 100%;
     height: auto;
@@ -110,10 +115,6 @@
 
   .contact-title {
     font-size: calc(clamp(40px, 12vw, 56px) * var(--locale-font-scale));
-  }
-
-  .contact-form {
-    grid-template-columns: 1fr;
   }
 
   .contact-office-head {
