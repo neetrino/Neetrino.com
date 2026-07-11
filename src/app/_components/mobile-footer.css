@@ -166,4 +166,64 @@
     gap: 14px;
     margin-top: 8px;
   }
+
+  .home-page .home-footer-links-group > div:first-child .home-footer-column-title {
+    margin-top: 8px;
+    margin-bottom: 14px;
+  }
+
+  /* Home page keeps a hard footer edge (no top fade mask). */
+  #home.home-page .home-footer {
+    position: relative;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  #home.home-page .home-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    height: 88px;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgb(16 16 18 / 0.92) 0%,
+      rgb(18 22 38 / 0.62) 42%,
+      rgb(20 35 74 / 0.24) 76%,
+      rgb(20 35 74 / 0) 100%
+    );
+  }
+
+  #home.home-page .home-footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      rgb(106 146 255 / 0) 0%,
+      rgb(106 146 255 / 0.52) 22%,
+      rgb(176 212 255 / 0.78) 50%,
+      rgb(106 146 255 / 0.52) 78%,
+      rgb(106 146 255 / 0) 100%
+    );
+    box-shadow: 0 0 18px rgb(56 130 246 / 0.35);
+  }
+
+  #home.home-page .home-footer-links-group > div:first-child .home-footer-column-title {
+    margin-top: 0;
+    margin-bottom: 14px;
+  }
+
+  #home.home-page .home-footer-bg {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 }
