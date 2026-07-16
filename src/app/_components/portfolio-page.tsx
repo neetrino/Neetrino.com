@@ -60,6 +60,7 @@ function PortfolioCard({
   project: PortfolioProject;
   index: number;
 }): React.JSX.Element {
+  const { portfolioCopy } = useHomeI18n();
   const isAboveFold = index < PORTFOLIO_LCP_CARD_COUNT;
 
   return (
@@ -123,6 +124,17 @@ function PortfolioCard({
             />
             <span className="portfolio-card-title portfolio-card-title--zeppelin">{project.overlayTitle}</span>
           </>
+        ) : null}
+        {project.href ? (
+          <a
+            href={project.href}
+            className="portfolio-card-action"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${portfolioCopy.card.openProject}: ${project.title}`}
+          >
+            <span className="portfolio-card-action-arrow" aria-hidden />
+          </a>
         ) : null}
       </div>
     </article>
@@ -206,7 +218,7 @@ function PortfolioBody({ projects }: { projects: PortfolioProject[] }): React.JS
       </header>
       <div className="portfolio-list">
         {visibleProjects.map((project, index) => (
-          <PortfolioCard key={`${project.title}-${project.image}`} project={project} index={index} />
+          <PortfolioCard key={project.id} project={project} index={index} />
         ))}
       </div>
       <PortfolioPagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />

@@ -4,8 +4,11 @@ import {
   PORTFOLIO_ANRA_MOCKUP_SRC,
   PORTFOLIO_DVBS_BANNER_SRC,
 } from '@/app/_components/portfolio-constants';
-import type { PortfolioProject } from '@/app/_components/portfolio-data';
-import { portfolioProjects as staticPortfolioProjects } from '@/app/_components/portfolio-data';
+import {
+  portfolioProjectLiveHref,
+  portfolioProjects as staticPortfolioProjects,
+  type PortfolioProject,
+} from '@/app/_components/portfolio-data';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 
@@ -22,6 +25,7 @@ const HOME_PORTFOLIO_BOTTOM_TEMPLATES = [
 ] as const;
 
 type PublicPortfolioAsset = {
+  id: string;
   title: string;
   alt: string;
   url: string;
@@ -79,7 +83,7 @@ function resolvePortfolioVariant(title: string, alt: string): PortfolioProject['
   const normalizedAlt = normalizePortfolioText(alt);
   const combined = `${normalizedTitle} ${normalizedAlt}`;
 
-  if (combined.includes('tooon') || combined.includes('toon expo')) {
+  if (combined.includes('tooon') || combined.includes('toon expo') || combined.includes('toonexpo')) {
     return 'toon';
   }
 
@@ -91,7 +95,11 @@ function resolvePortfolioVariant(title: string, alt: string): PortfolioProject['
     return 'dvbs';
   }
 
-  if (combined.includes('digital implant')) {
+  if (
+    combined.includes('digital implant') ||
+    combined.includes('implant clinic') ||
+    combined.includes('implantclinic')
+  ) {
     return 'digital-implant';
   }
 
@@ -105,6 +113,10 @@ function resolvePortfolioVariant(title: string, alt: string): PortfolioProject['
 
   if (combined.includes('zeppelin')) {
     return 'zeppelin';
+  }
+
+  if (combined.includes('marco')) {
+    return 'marco';
   }
 
   return undefined;
@@ -123,9 +135,11 @@ function toPortfolioProject(asset: PublicPortfolioAsset): PortfolioProject {
   }
 
   return {
+    id: asset.id,
     title: asset.title,
     alt: asset.alt,
     image,
+    href: portfolioProjectLiveHref(variant),
     variant,
   };
 }
@@ -153,6 +167,7 @@ export async function getPublicPortfolioData(): Promise<PublicPortfolioData> {
       where: { status: 'ACTIVE' },
       orderBy: { sortOrder: 'asc' },
       select: {
+        id: true,
         alt: true,
         title: true,
         url: true,

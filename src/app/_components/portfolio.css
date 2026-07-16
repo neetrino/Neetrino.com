@@ -395,6 +395,54 @@
   line-height: calc(40px * var(--locale-font-scale));
 }
 
+.portfolio-card-action {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  z-index: 3;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #151515;
+  text-decoration: none;
+  transform: rotate(-36deg);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.portfolio-card-action-arrow {
+  position: relative;
+  width: 18px;
+  height: 18px;
+}
+
+.portfolio-card-action-arrow::before {
+  position: absolute;
+  top: 8px;
+  left: 3px;
+  width: 12px;
+  height: 2px;
+  content: '';
+  background: currentcolor;
+  border-radius: 999px;
+}
+
+.portfolio-card-action-arrow::after {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  content: '';
+  border-top: 2px solid currentcolor;
+  border-right: 2px solid currentcolor;
+  transform: rotate(45deg);
+}
+
 .portfolio-pagination {
   position: absolute;
   top: 1980px;
@@ -458,6 +506,12 @@
   .portfolio-card:hover .portfolio-card-image {
     will-change: transform;
     transform: scale(1.02);
+  }
+
+  .portfolio-card-action:hover,
+  .portfolio-card-action:focus-visible {
+    box-shadow: 0 8px 22px rgb(0 0 0 / 0.22);
+    transform: rotate(-36deg) scale(1.06);
   }
 }
 
@@ -644,6 +698,17 @@
 
   .portfolio-card--dvbs .portfolio-card-image {
     object-position: 50% 50%;
+  }
+
+  .portfolio-card-action {
+    top: 8px;
+    right: 8px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .portfolio-card-action-arrow {
+    transform: scale(0.72);
   }
 
   .portfolio-pagination {
