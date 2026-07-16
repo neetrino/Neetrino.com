@@ -70,7 +70,9 @@ export function CanvasScaler({
     const availableWidth = Math.min(wrap.clientWidth || viewportWidth, viewportWidth);
     const scale = availableWidth / canvasWidth;
     const contentHeight = measureContentHeight(inner, canvasHeight);
-    const scaledHeight = Math.max(contentHeight * scale, window.innerHeight);
+    // Height must stay content-driven. Flooring to 100vh pads short pages (e.g. /team,
+    // /services) with empty space below the footer after scale.
+    const scaledHeight = contentHeight * scale;
 
     if (
       Math.abs(lastAppliedRef.current.scale - scale) < SCALE_EPSILON &&

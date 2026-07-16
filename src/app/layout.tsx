@@ -35,9 +35,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${dmSans.variable} ${megatroxFont.variable} h-full antialiased`}
+      className={`${inter.variable} ${dmSans.variable} ${megatroxFont.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex flex-col">
         <AppProviders>{children}</AppProviders>
       </body>
     </html>
