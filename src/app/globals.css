@@ -1270,7 +1270,7 @@ html:lang(hy) {
   font-size: calc(20px * var(--home-ui-scale) * var(--locale-font-scale));
   font-weight: 200;
   line-height: calc(25px * var(--home-ui-scale) * var(--locale-font-scale));
-  text-align: right;
+  text-align: center;
 }
 
 .home-service-card-light {
@@ -1712,7 +1712,7 @@ html:lang(hy) {
 
 @media (min-width: 768px) {
   #home .home-footer {
-    padding-top: calc(220px * var(--home-footer-ui-scale));
+    padding-top: calc(48px * var(--home-footer-ui-scale));
   }
 }
 
