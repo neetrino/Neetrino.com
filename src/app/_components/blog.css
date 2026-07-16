@@ -292,7 +292,7 @@
   background: #122a48;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   .blog-page {
     width: 100%;
     padding: 132px 16px 72px;

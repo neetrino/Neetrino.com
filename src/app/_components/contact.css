@@ -1,11 +1,14 @@
 /* Contact page built on the shared 1440px Neetrino canvas. */
 
 .contact-page {
+  --contact-footer-reserve: 440px;
   position: relative;
   z-index: 12;
   width: 1440px;
-  height: 1116px;
+  min-height: max(1480px, calc((100dvh - 16px) / var(--home-canvas-scale, 1) - var(--contact-footer-reserve)));
+  height: auto;
   overflow: hidden;
+  padding-bottom: 96px;
   background: #151515;
   color: #fff;
   font-family: var(--font-inter), Inter, sans-serif;
@@ -40,15 +43,18 @@
 .contact-content {
   position: relative;
   z-index: 2;
-  width: 1060px;
-  padding-top: 118px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: min(1296px, calc(100% - 144px));
+  padding-top: 180px;
   margin-inline: auto;
 }
 
 .contact-hero-grid {
   display: grid;
-  grid-template-columns: repeat(2, 518px);
-  gap: 22px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
 }
 
 .contact-card,
@@ -60,16 +66,35 @@
 }
 
 .contact-card {
-  height: 382px;
-  padding: 26px 30px;
-  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  min-height: 460px;
+  padding: 40px 48px 36px;
+  border-radius: 28px;
+  text-align: center;
+}
+
+.contact-card .contact-copy,
+.contact-card .contact-methods,
+.contact-card .contact-social {
+  width: 100%;
+  margin-inline: auto;
+}
+
+.contact-card .contact-social-list {
+  justify-content: center;
 }
 
 .contact-kicker {
   display: inline-flex;
   align-items: center;
-  width: 428px;
-  height: 28px;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 28px;
+  height: auto;
   padding-inline: 14px;
   margin: 0;
   border: 1px solid rgb(255 255 255 / 0.2);
@@ -91,12 +116,12 @@
 }
 
 .contact-title {
-  margin: 18px 0 0;
+  margin: 22px 0 0;
   color: #fff;
   font-family: var(--font-megatrox), var(--font-inter), sans-serif;
-  font-size: calc(46px * var(--locale-font-scale));
+  font-size: calc(clamp(52px, 5.2vw, 72px) * var(--locale-font-scale));
   font-weight: 400;
-  line-height: 1.05;
+  line-height: 1.02;
   text-transform: uppercase;
 }
 
@@ -108,25 +133,28 @@
 }
 
 .contact-copy {
-  max-width: 438px;
-  margin: 14px 0 0;
-  font-size: calc(14px * var(--locale-font-scale));
+  max-width: 62ch;
+  margin: 18px 0 0;
+  font-size: calc(16px * var(--locale-font-scale));
 }
 
 .contact-methods {
   display: grid;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 28px;
+  max-width: 720px;
 }
 
 .contact-method {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 44px;
-  padding-inline: 16px;
+  gap: 16px;
+  min-height: 56px;
+  height: auto;
+  padding: 14px 20px;
   border: 1px solid rgb(255 255 255 / 0.14);
-  border-radius: 14px;
+  border-radius: 16px;
   background: rgb(255 255 255 / 0.04);
   color: #fff;
   text-decoration: none;
@@ -157,8 +185,9 @@
 }
 
 .contact-method-label svg {
-  width: 16px;
-  height: 16px;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -167,12 +196,15 @@
 }
 
 .contact-method-value {
-  font-size: calc(14px * var(--locale-font-scale));
+  min-width: 0;
+  font-size: calc(16px * var(--locale-font-scale));
   font-weight: 700;
+  text-align: right;
+  word-break: break-word;
 }
 
 .contact-social {
-  margin-top: 16px;
+  margin-top: 24px;
 }
 
 .contact-social p {
@@ -185,14 +217,16 @@
 
 .contact-social-list {
   display: flex;
-  gap: 9px;
-  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
 }
 
-.contact-social-list a {
+.contact-social-list a,
+.contact-social-list .contact-social-item {
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   place-items: center;
   border: 1px solid rgb(255 255 255 / 0.2);
   border-radius: 50%;
@@ -208,9 +242,13 @@
     transform 160ms ease;
 }
 
+.contact-social-list span.contact-social-item {
+  cursor: default;
+}
+
 .contact-social-list svg {
-  width: 17px;
-  height: 17px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
 }
 
@@ -233,7 +271,7 @@
 .contact-card-title {
   margin: 0;
   color: rgb(255 255 255 / 0.9);
-  font-size: calc(20px * var(--locale-font-scale));
+  font-size: calc(22px * var(--locale-font-scale));
   font-weight: 900;
   letter-spacing: 0.08em;
   line-height: 1.25;

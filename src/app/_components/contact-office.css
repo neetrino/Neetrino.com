@@ -1,7 +1,8 @@
 .contact-office {
-  margin-top: 40px;
-  padding: 16px;
-  border-radius: 22px;
+  width: 100%;
+  margin-top: 0;
+  padding: 24px;
+  border-radius: 24px;
   background: #181818;
   box-shadow: none;
 }
@@ -11,14 +12,14 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 18px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .contact-office-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .contact-office-tags span,
@@ -39,6 +40,7 @@
 
 .contact-office-head a {
   justify-content: center;
+  flex: 0 0 auto;
   padding-inline: 18px;
   color: #fff;
   font-weight: 700;
@@ -47,10 +49,12 @@
 
 .contact-map {
   position: relative;
-  height: 270px;
+  width: 100%;
+  height: clamp(340px, 42vw, 480px);
+  margin-inline: auto;
   overflow: hidden;
   border: 1px solid rgb(255 255 255 / 0.15);
-  border-radius: 16px;
+  border-radius: 18px;
 }
 
 .contact-map iframe {
@@ -70,7 +74,7 @@
 .contact-map span {
   position: absolute;
   top: 14px;
-  left: 14px;
+  left: 50%;
   padding: 7px 11px;
   border: 1px solid rgb(255 255 255 / 0.2);
   border-radius: 999px;
@@ -80,9 +84,10 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  transform: translateX(-50%);
 }
 
-@media (max-width: 899px) {
+@media (max-width: 767px) {
   #contact-top.home-page .home-footer {
     margin-top: 0;
     padding-top: 32px;
@@ -90,13 +95,14 @@
 
   .contact-page {
     width: 100%;
+    min-height: auto;
     height: auto;
-    min-height: 100vh;
-    padding: 112px 20px 48px;
+    padding: 128px 20px 48px;
   }
 
   .contact-content {
     width: 100%;
+    gap: 28px;
     padding-top: 0;
   }
 
@@ -105,19 +111,54 @@
   }
 
   .contact-card {
-    height: auto;
+    min-height: 0;
     padding: 28px 22px;
   }
 
   .contact-kicker {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
   }
 
   .contact-title {
-    font-size: calc(clamp(40px, 12vw, 56px) * var(--locale-font-scale));
+    font-size: calc(clamp(36px, 10vw, 48px) * var(--locale-font-scale));
+  }
+
+  .contact-copy {
+    max-width: none;
+    font-size: calc(15px * var(--locale-font-scale));
+  }
+
+  .contact-methods {
+    max-width: none;
+  }
+
+  .contact-method {
+    align-items: center;
+    flex-direction: column;
+    min-height: 0;
+    gap: 8px;
+  }
+
+  .contact-method-value {
+    text-align: center;
+  }
+
+  .contact-office {
+    padding: 18px;
   }
 
   .contact-office-head {
     flex-direction: column;
+  }
+
+  .contact-map {
+    width: 100%;
+    height: clamp(240px, 62vw, 340px);
+  }
+
+  .contact-map span {
+    left: 14px;
+    transform: none;
   }
 }

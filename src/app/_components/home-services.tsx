@@ -28,30 +28,32 @@ export function HomeServices(): React.JSX.Element {
           highlight={homeCopy.sections.services.highlight}
         />
         <div className="home-services-stage">
-          <div className="home-services-illustrations" aria-hidden>
-            {serviceIllustrations.map((illustration) => (
-              <div key={illustration.className} className={`home-services-deco ${illustration.className}`}>
-                <Image
-                  src={illustration.src}
-                  alt=""
-                  fill
-                  sizes="260px"
-                  quality={HOME_IMAGE_QUALITY}
-                  loading="lazy"
-                  unoptimized={'unoptimized' in illustration && illustration.unoptimized}
-                />
-              </div>
-            ))}
-          </div>
           <div className="home-services-grid">
-            {services.map((service) => (
-              <article key={service.id} className={`home-service-card ${ServiceToneClass(service.tone)}`}>
-                <h3>{service.title}</h3>
-                <div className="home-service-spacer" aria-hidden />
-                <p>{service.subtitle}</p>
-                <ContinueButton href="/services" label={homeCopy.actions.continue} />
-              </article>
-            ))}
+            {services.map((service, index) => {
+              const illustration = serviceIllustrations[index];
+
+              return (
+                <article key={service.id} className={`home-service-card ${ServiceToneClass(service.tone)}`}>
+                  <h3>{service.title}</h3>
+                  {illustration ? (
+                    <div className={`home-service-card-art ${illustration.className}`} aria-hidden>
+                      <Image
+                        src={illustration.src}
+                        alt=""
+                        fill
+                        sizes="220px"
+                        quality={HOME_IMAGE_QUALITY}
+                        loading="lazy"
+                        unoptimized={'unoptimized' in illustration && illustration.unoptimized}
+                      />
+                    </div>
+                  ) : null}
+                  <div className="home-service-spacer" aria-hidden />
+                  <p>{service.subtitle}</p>
+                  <ContinueButton href="/services" label={homeCopy.actions.continue} />
+                </article>
+              );
+            })}
           </div>
         </div>
         <div className="home-section-cta">

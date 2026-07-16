@@ -262,7 +262,7 @@
   background: var(--svc-base-bg);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   .team-page {
     width: 100%;
     padding: calc(132px * var(--home-ui-scale)) calc(16px * var(--home-ui-scale))

@@ -1,6 +1,6 @@
 /* Services mobile background — Figma node 1:911 (Light Rays Effect). */
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   .svc-mobile-bg-shell {
     position: relative;
     z-index: 1;
@@ -326,7 +326,7 @@
   }
 }
 
-@media (min-width: 901px) {
+@media (min-width: 768px) {
   .svc-mobile-bg-shell {
     display: contents;
   }

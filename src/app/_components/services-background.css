@@ -275,7 +275,7 @@
   transform: translate3d(-50%, -50%, 0) scale(var(--svc-ray-scale));
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   #services-top .neetrino-canvas-wrap--page {
     background: var(--svc-base-bg, #122a48);
   }

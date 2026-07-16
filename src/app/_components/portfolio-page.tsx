@@ -71,7 +71,7 @@ function PortfolioCard({
               src={project.image}
               alt={project.alt}
               fill
-              sizes="(max-width: 899px) 100vw, (max-width: 1440px) 44vw, 631px"
+              sizes="(max-width: 767px) 100vw, (max-width: 1440px) 44vw, 631px"
               quality={HOME_PORTFOLIO_IMAGE_QUALITY}
               priority={isAboveFold}
               loading={isAboveFold ? 'eager' : 'lazy'}
@@ -85,7 +85,7 @@ function PortfolioCard({
                 src={PORTFOLIO_ANRA_SCREEN_SRC}
                 alt=""
                 fill
-                sizes="(max-width: 899px) 21vw, 133px"
+                sizes="(max-width: 767px) 21vw, 133px"
                 quality={HOME_PORTFOLIO_IMAGE_QUALITY}
                 loading="lazy"
                 fetchPriority="low"
@@ -99,7 +99,7 @@ function PortfolioCard({
             src={project.image}
             alt={project.alt}
             fill
-            sizes="(max-width: 899px) 100vw, (max-width: 1440px) 44vw, 631px"
+            sizes="(max-width: 767px) 100vw, (max-width: 1440px) 44vw, 631px"
             quality={HOME_PORTFOLIO_IMAGE_QUALITY}
             priority={isAboveFold}
             loading={isAboveFold ? 'eager' : 'lazy'}
@@ -124,9 +124,6 @@ function PortfolioCard({
             <span className="portfolio-card-title portfolio-card-title--zeppelin">{project.overlayTitle}</span>
           </>
         ) : null}
-        <span className="portfolio-card-action" aria-hidden>
-          <span className="portfolio-card-action-arrow" />
-        </span>
       </div>
     </article>
   );

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { DM_Sans, Inter } from 'next/font/google';
 import { AppProviders } from './_components/app-providers';
 import { megatroxFont } from '@/lib/fonts/megatrox';
@@ -19,6 +19,12 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: 'Neetrino',
   description: 'Neetrino full stack web application',
+};
+
+/** Keep mobile at device width / 1:1 — no canvas or browser zoom-out. */
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({

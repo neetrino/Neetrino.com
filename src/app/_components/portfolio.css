@@ -395,50 +395,6 @@
   line-height: calc(40px * var(--locale-font-scale));
 }
 
-.portfolio-card-action {
-  position: absolute;
-  top: 8px;
-  right: 16px;
-  z-index: 2;
-  display: grid;
-  width: 56px;
-  height: 56px;
-  place-items: center;
-  border-radius: 50%;
-  background: #fff;
-  color: #151515;
-  transform: rotate(-36deg);
-}
-
-.portfolio-card-action-arrow {
-  position: relative;
-  width: 18px;
-  height: 18px;
-}
-
-.portfolio-card-action-arrow::before {
-  position: absolute;
-  top: 8px;
-  left: 3px;
-  width: 12px;
-  height: 2px;
-  content: '';
-  background: currentcolor;
-  border-radius: 999px;
-}
-
-.portfolio-card-action-arrow::after {
-  position: absolute;
-  top: 4px;
-  right: 2px;
-  width: 8px;
-  height: 8px;
-  content: '';
-  border-top: 2px solid currentcolor;
-  border-right: 2px solid currentcolor;
-  transform: rotate(45deg);
-}
-
 .portfolio-pagination {
   position: absolute;
   top: 1980px;
@@ -503,14 +459,9 @@
     will-change: transform;
     transform: scale(1.02);
   }
-
-  .portfolio-card:hover .portfolio-card-action {
-    will-change: transform;
-    transform: rotate(-36deg) scale(1.04);
-  }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   .neetrino-canvas-inner:has(.portfolio-body) {
     /* Unitless ratio: required for transform scale(). */
     --portfolio-mobile-bg-scale: calc(100vw / var(--home-design-width) / 1px);
@@ -695,17 +646,6 @@
     object-position: 50% 50%;
   }
 
-  .portfolio-card-action {
-    top: 8px;
-    right: 8px;
-    width: 34px;
-    height: 34px;
-  }
-
-  .portfolio-card-action-arrow {
-    transform: scale(0.72);
-  }
-
   .portfolio-pagination {
     position: relative;
     top: auto;
@@ -715,42 +655,10 @@
   }
 }
 
-@media (min-width: 901px) {
+@media (min-width: 768px) {
   .neetrino-canvas-inner:has(.portfolio-body) .home-footer {
     --home-footer-ui-scale: var(--home-ui-scale);
     padding-top: 116px;
     padding-bottom: 20px;
-  }
-
-  .neetrino-canvas-inner:has(.portfolio-body) .home-footer-grid {
-    flex-direction: row;
-    gap: 24px;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-
-  .neetrino-canvas-inner:has(.portfolio-body) .home-footer-links-group {
-    flex-flow: row nowrap;
-    gap: 94px;
-  }
-
-  .neetrino-canvas-inner:has(.portfolio-body) .home-footer-links-group > div:nth-child(1) {
-    flex: 0 0 114px;
-    width: 114px;
-  }
-
-  .neetrino-canvas-inner:has(.portfolio-body) .home-footer-links-group > div:nth-child(2) {
-    flex: 0 0 130px;
-    width: 130px;
-  }
-
-  .neetrino-canvas-inner:has(.portfolio-body) .home-footer-contact-column {
-    flex: 0 0 244px;
-    width: 244px;
-  }
-
-  .neetrino-canvas-inner:has(.portfolio-body) .home-footer-bottom {
-    flex-direction: row;
-    text-align: left;
   }
 }

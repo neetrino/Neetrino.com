@@ -127,9 +127,6 @@ export function HomeHeader(): React.JSX.Element {
             </div>
           </details>
         </nav>
-        <Link href="/#contact" className="home-header-quote">
-          {homeCopy.navigation.quoteLabel}
-        </Link>
         <div ref={languageMenuRef} className="home-header-language-wrap">
           <button
             type="button"

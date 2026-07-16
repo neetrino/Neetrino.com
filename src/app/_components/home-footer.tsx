@@ -2,7 +2,6 @@
 
 import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
-import Link from 'next/link';
 import { useHomeI18n } from './home-i18n-provider';
 import { FooterLinkColumn, HomeContainer } from './home-ui';
 
@@ -53,19 +52,32 @@ export function HomeFooter(): React.JSX.Element {
               <h3 className="home-footer-column-title">{homeCopy.footer.columns.contact}</h3>
               <ul className="home-footer-contact">
                 <li>
-                  <CdnImage src={staticAsset("/figma-home/vector4.svg")} alt="" width={14} height={18} aria-hidden />
+                  <span className="home-footer-contact-icon" aria-hidden>
+                    <CdnImage src={staticAsset('/figma-home/vector4.svg')} alt="" width={14} height={18} />
+                  </span>
                   <span>{contactInfo.address}</span>
                 </li>
                 <li>
-                  <CdnImage src={staticAsset("/figma-home/vector5.svg")} alt="" width={20} height={15} aria-hidden />
+                  <span className="home-footer-contact-icon" aria-hidden>
+                    <CdnImage src={staticAsset('/figma-home/vector5.svg')} alt="" width={20} height={15} />
+                  </span>
                   <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
                 </li>
                 <li>
-                  <CdnImage src={staticAsset("/figma-home/vector6.svg")} alt="" width={18} height={18} aria-hidden />
+                  <span className="home-footer-contact-icon" aria-hidden>
+                    <CdnImage src={staticAsset('/figma-home/vector6.svg')} alt="" width={18} height={18} />
+                  </span>
                   <a href={`tel:${contactInfo.phone.replace(/\s+/g, '')}`}>{contactInfo.phone}</a>
                 </li>
                 <li>
-                  <CdnImage src={staticAsset("/figma-home/group2087329580.svg")} alt="" width={22} height={21} aria-hidden />
+                  <span className="home-footer-contact-icon" aria-hidden>
+                    <CdnImage
+                      src={staticAsset('/figma-home/group2087329580.svg')}
+                      alt=""
+                      width={22}
+                      height={21}
+                    />
+                  </span>
                   <span className="home-footer-hours">{contactInfo.hours}</span>
                 </li>
               </ul>
@@ -75,11 +87,32 @@ export function HomeFooter(): React.JSX.Element {
         <div className="home-footer-bottom">
           <p>{homeCopy.footer.copyright}</p>
           <div className="home-footer-social">
-            {footerSocialIcons.map((icon) => (
-              <Link key={icon.alt} href="/#contact" aria-label={icon.alt}>
+            {footerSocialIcons.map((icon) => {
+              const image = (
                 <CdnImage src={icon.src} alt="" width={icon.width} height={icon.height} />
-              </Link>
-            ))}
+              );
+
+              if (!('href' in icon) || !icon.href) {
+                return (
+                  <span key={icon.alt} className="home-footer-social-item" aria-label={icon.alt} role="img">
+                    {image}
+                  </span>
+                );
+              }
+
+              return (
+                <a
+                  key={icon.alt}
+                  className="home-footer-social-item"
+                  href={icon.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={icon.alt}
+                >
+                  {image}
+                </a>
+              );
+            })}
           </div>
         </div>
       </HomeContainer>

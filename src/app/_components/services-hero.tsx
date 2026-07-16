@@ -16,7 +16,7 @@ export function ServicesHero(): React.JSX.Element {
           alt={servicesCopy.hero.title}
           width={597}
           height={64}
-          sizes="(max-width: 900px) 90vw, 597px"
+          sizes="(max-width: 767px) 90vw, 597px"
           priority
           fetchPriority="high"
           className="svc-title"

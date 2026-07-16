@@ -16,10 +16,7 @@
   --home-mobile-stats-panel-height: 249px;
   --home-mobile-stats-panel-offset: 95px;
   --home-mobile-hero-btn-height: 56px;
-  --home-mobile-hero-actions-gap: 12px;
-  --home-mobile-hero-actions-block-height: calc(
-    var(--home-mobile-hero-btn-height) * 2 + var(--home-mobile-hero-actions-gap)
-  );
+  --home-mobile-hero-actions-block-height: var(--home-mobile-hero-btn-height);
   --home-mobile-hero-stats-row-gap: 16px;
   --home-mobile-hero-stats-row-margin: calc(
     var(--home-mobile-hero-actions-block-height) - var(--home-mobile-stats-panel-offset) + 25px +
@@ -682,7 +679,7 @@
 
 /* ---------- Viewport switch ---------- */
 
-@media (max-width: 899px) {
+@media (max-width: 767px) {
   #home.home-page {
     overflow: visible;
     scroll-padding-top: calc(var(--about-mobile-header-top) + var(--about-mobile-header-height) + 12px);
@@ -773,7 +770,7 @@
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .home-mobile-wrap {
     display: none !important;
   }
