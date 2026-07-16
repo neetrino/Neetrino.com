@@ -51,7 +51,9 @@
   left: 0;
   z-index: 0;
   width: 1440px;
-  height: var(--svc-decor-bake-height, 2095px);
+  /* Span the full canvas so the blue grid continues behind the footer. */
+  height: 100%;
+  min-height: var(--svc-decor-bake-height, 2095px);
   pointer-events: none;
   overflow: hidden;
 }
@@ -60,6 +62,8 @@
   display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .svc-hero--baked {
@@ -75,6 +79,26 @@
 
 .neetrino-canvas-inner:has(.svc-hero--baked) {
   --svc-decor-bake-height: 2095px;
+}
+
+/*
+ * Shared footer on blue-canvas pages (/services, /team): no black plate.
+ * Page blue (--svc-base-bg + baked grid) stays visible behind footer content.
+ */
+.neetrino-canvas-inner:has(.svc-hero) .home-footer {
+  background: transparent;
+  padding-top: calc(96px * var(--home-footer-ui-scale));
+  padding-bottom: calc(20px * var(--home-footer-ui-scale));
+}
+
+.neetrino-canvas-inner:has(.svc-hero) .home-footer-bg-shape {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .neetrino-canvas-inner:has(.svc-hero) .home-footer {
+    padding-top: calc(116px * var(--home-footer-ui-scale));
+  }
 }
 
 .svc-decor .svc-page-glow {
@@ -283,6 +307,19 @@
   .neetrino-canvas-inner:has(.svc-hero) {
     --svc-base-bg: #122a48;
     background: var(--svc-base-bg);
+  }
+
+  /* No black footer plate/overlays on blue-canvas pages. */
+  .neetrino-canvas-inner:has(.svc-hero) .home-footer {
+    background: transparent;
+  }
+
+  .neetrino-canvas-inner:has(.svc-hero) .home-footer::before {
+    display: none;
+  }
+
+  .neetrino-canvas-inner:has(.svc-hero) .home-footer-bg-shape {
+    display: none;
   }
 
   .svc-baked-bg {

@@ -133,7 +133,6 @@ html:lang(hy) {
 
 .home-page {
   position: relative;
-  min-height: 100vh;
   max-width: 100%;
   overflow-x: clip;
   background: var(--home-bg);
@@ -1536,6 +1535,7 @@ html:lang(hy) {
   padding-top: calc(96px * var(--home-footer-ui-scale));
   padding-bottom: calc(20px * var(--home-footer-ui-scale));
   overflow: hidden;
+  background: transparent;
 }
 
 .home-footer-bg {
