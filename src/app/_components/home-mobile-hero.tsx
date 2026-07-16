@@ -45,9 +45,6 @@ export function HomeMobileHero(): React.JSX.Element {
           <div className="home-mobile-hero-stats-bg" aria-hidden />
 
           <div className="home-mobile-hero-actions">
-            <Link href="/#contact" className="home-mobile-hero-btn home-mobile-hero-btn--primary">
-              {hero.actions.quote}
-            </Link>
             <Link href="/#contact" className="home-mobile-hero-btn home-mobile-hero-btn--contact">
               {hero.actions.contact}
             </Link>

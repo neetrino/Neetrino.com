@@ -124,9 +124,6 @@ function PortfolioCard({
             <span className="portfolio-card-title portfolio-card-title--zeppelin">{project.overlayTitle}</span>
           </>
         ) : null}
-        <span className="portfolio-card-action" aria-hidden>
-          <span className="portfolio-card-action-arrow" />
-        </span>
       </div>
     </article>
   );

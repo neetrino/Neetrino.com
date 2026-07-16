@@ -664,21 +664,6 @@ html:lang(hy) {
   border-radius: calc(12px * var(--home-ui-scale));
 }
 
-.home-header-quote {
-  display: grid;
-  place-items: center;
-  min-width: calc(128px * var(--home-ui-scale));
-  min-height: calc(40px * var(--home-ui-scale));
-  margin-inline: calc(6px * var(--home-ui-scale));
-  border-radius: var(--home-radius-lg);
-  background: var(--home-purple);
-  color: #fff;
-  font-size: calc(16px * var(--home-ui-scale) * var(--locale-font-scale));
-  font-weight: 800;
-  line-height: calc(15.6px * var(--home-ui-scale) * var(--locale-font-scale));
-  text-decoration: none;
-}
-
 .home-header-language-wrap {
   position: relative;
 }
@@ -1571,20 +1556,24 @@ html:lang(hy) {
   .home-footer-bg-team {
     display: block;
     position: absolute;
-    right: calc(-164px * var(--home-footer-ui-scale));
-    bottom: calc(120px * var(--home-footer-ui-scale));
+    right: calc(-120px * var(--home-footer-ui-scale));
+    bottom: calc(40px * var(--home-footer-ui-scale));
     z-index: 0;
-    width: calc(820px * var(--home-footer-ui-scale));
-    height: calc(920px * var(--home-footer-ui-scale));
+    width: calc(780px * var(--home-footer-ui-scale));
+    height: calc(900px * var(--home-footer-ui-scale));
     mix-blend-mode: hard-light;
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
   }
 
   .home-footer-bg-team-img {
     object-fit: cover;
     object-position: top center;
+  }
+
+  .home-footer {
+    padding-top: calc(200px * var(--home-footer-ui-scale));
   }
 }
 
@@ -1723,14 +1712,7 @@ html:lang(hy) {
 
 @media (min-width: 768px) {
   #home .home-footer {
-    padding-top: calc(140px * var(--home-footer-ui-scale));
-  }
-
-  /* Keep the helmet crown inside the footer clip (overflow: hidden). */
-  #home .home-footer-bg-team {
-    right: calc(-140px * var(--home-footer-ui-scale));
-    bottom: calc(-260px * var(--home-footer-ui-scale));
-    height: calc(980px * var(--home-footer-ui-scale));
+    padding-top: calc(220px * var(--home-footer-ui-scale));
   }
 }
 
@@ -1743,13 +1725,18 @@ html:lang(hy) {
   gap: calc(18px * var(--home-footer-ui-scale));
 }
 
-.home-footer-social a {
+.home-footer-social a,
+.home-footer-social .home-footer-social-item {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
   width: calc(24px * var(--home-footer-ui-scale));
   height: calc(24px * var(--home-footer-ui-scale));
+}
+
+.home-footer-social span.home-footer-social-item {
+  cursor: default;
 }
 
 .home-footer-social img {
@@ -1908,7 +1895,6 @@ html:lang(hy) {
 }
 
 @media (max-width: 640px) {
-  .home-header-quote,
   .home-header-language-icon {
     display: none;
   }

@@ -222,7 +222,8 @@
   margin-top: 12px;
 }
 
-.contact-social-list a {
+.contact-social-list a,
+.contact-social-list .contact-social-item {
   display: grid;
   width: 40px;
   height: 40px;
@@ -239,6 +240,10 @@
     border-color 160ms ease,
     box-shadow 160ms ease,
     transform 160ms ease;
+}
+
+.contact-social-list span.contact-social-item {
+  cursor: default;
 }
 
 .contact-social-list svg {

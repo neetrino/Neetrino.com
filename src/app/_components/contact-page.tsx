@@ -11,13 +11,11 @@ type ContactMethodIcon = 'email' | 'phone';
 
 type SocialIconKey = 'facebook' | 'instagram' | 'linkedin' | 'telegram' | 'whatsapp' | 'viber';
 
-const SOCIAL_HREFS: Record<SocialIconKey, string> = {
-  facebook: 'https://www.facebook.com/Neetrino',
-  instagram: 'https://www.instagram.com/neetrino_it_agency/',
-  linkedin: 'https://www.linkedin.com/company/neetrino-it-agency/',
-  telegram: 'https://telegram.me/neetrino',
+const SOCIAL_HREFS: Partial<Record<SocialIconKey, string>> = {
+  facebook: 'https://www.facebook.com/Neetrino.it.company/',
+  instagram: 'https://www.instagram.com/neetrino_it_company/',
+  linkedin: 'https://www.linkedin.com/company/neetrino-it-company/',
   whatsapp: 'https://wa.me/37444343000',
-  viber: 'viber://chat?number=%2B37444343000',
 };
 
 const MAP_URL = 'https://www.google.com/maps?q=40.1684703,44.4458742&z=15&output=embed';
@@ -127,17 +125,31 @@ function ContactIntroCard(): React.JSX.Element {
       <div className="contact-social">
         <p>{intro.social.followUs}</p>
         <div className="contact-social-list">
-          {SOCIAL_ICON_KEYS.map((icon) => (
-            <a
-              key={icon}
-              href={SOCIAL_HREFS[icon]}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={intro.social[icon]}
-            >
-              <SocialIcon icon={icon} />
-            </a>
-          ))}
+          {SOCIAL_ICON_KEYS.map((icon) => {
+            const href = SOCIAL_HREFS[icon];
+            const label = intro.social[icon];
+
+            if (!href) {
+              return (
+                <span key={icon} className="contact-social-item" aria-label={label} role="img">
+                  <SocialIcon icon={icon} />
+                </span>
+              );
+            }
+
+            return (
+              <a
+                key={icon}
+                className="contact-social-item"
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+              >
+                <SocialIcon icon={icon} />
+              </a>
+            );
+          })}
         </div>
       </div>
     </article>

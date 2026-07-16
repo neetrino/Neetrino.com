@@ -182,7 +182,8 @@
     margin-top: 8px;
   }
 
-  .home-page .home-footer-social a {
+  .home-page .home-footer-social a,
+  .home-page .home-footer-social .home-footer-social-item {
     width: 40px;
     height: 40px;
   }

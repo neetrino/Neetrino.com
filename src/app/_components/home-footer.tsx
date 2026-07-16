@@ -2,7 +2,6 @@
 
 import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
-import Link from 'next/link';
 import { useHomeI18n } from './home-i18n-provider';
 import { FooterLinkColumn, HomeContainer } from './home-ui';
 
@@ -88,11 +87,32 @@ export function HomeFooter(): React.JSX.Element {
         <div className="home-footer-bottom">
           <p>{homeCopy.footer.copyright}</p>
           <div className="home-footer-social">
-            {footerSocialIcons.map((icon) => (
-              <Link key={icon.alt} href="/#contact" aria-label={icon.alt}>
+            {footerSocialIcons.map((icon) => {
+              const image = (
                 <CdnImage src={icon.src} alt="" width={icon.width} height={icon.height} />
-              </Link>
-            ))}
+              );
+
+              if (!('href' in icon) || !icon.href) {
+                return (
+                  <span key={icon.alt} className="home-footer-social-item" aria-label={icon.alt} role="img">
+                    {image}
+                  </span>
+                );
+              }
+
+              return (
+                <a
+                  key={icon.alt}
+                  className="home-footer-social-item"
+                  href={icon.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={icon.alt}
+                >
+                  {image}
+                </a>
+              );
+            })}
           </div>
         </div>
       </HomeContainer>
