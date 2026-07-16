@@ -133,7 +133,16 @@ function PortfolioCard({
             rel="noopener noreferrer"
             aria-label={`${portfolioCopy.card.openProject}: ${project.title}`}
           >
-            <span className="portfolio-card-action-arrow" aria-hidden />
+            <svg className="portfolio-card-action-arrow" viewBox="0 0 24 24" aria-hidden>
+              <path
+                d="M7 17L17 7M10 7h7v7"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </a>
         ) : null}
       </div>
