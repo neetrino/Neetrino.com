@@ -88,7 +88,7 @@ export function BlogPostPage({ post }: { post: PublicBlogPostBundle }): React.JS
                 src={post.coverImageUrl}
                 alt={coverAlt}
                 fill
-                sizes="(max-width: 900px) 90vw, 820px"
+                sizes="(max-width: 767px) 90vw, 820px"
                 priority
                 className="blog-article-cover-image"
               />

@@ -53,19 +53,32 @@ export function HomeFooter(): React.JSX.Element {
               <h3 className="home-footer-column-title">{homeCopy.footer.columns.contact}</h3>
               <ul className="home-footer-contact">
                 <li>
-                  <CdnImage src={staticAsset("/figma-home/vector4.svg")} alt="" width={14} height={18} aria-hidden />
+                  <span className="home-footer-contact-icon" aria-hidden>
+                    <CdnImage src={staticAsset('/figma-home/vector4.svg')} alt="" width={14} height={18} />
+                  </span>
                   <span>{contactInfo.address}</span>
                 </li>
                 <li>
-                  <CdnImage src={staticAsset("/figma-home/vector5.svg")} alt="" width={20} height={15} aria-hidden />
+                  <span className="home-footer-contact-icon" aria-hidden>
+                    <CdnImage src={staticAsset('/figma-home/vector5.svg')} alt="" width={20} height={15} />
+                  </span>
                   <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
                 </li>
                 <li>
-                  <CdnImage src={staticAsset("/figma-home/vector6.svg")} alt="" width={18} height={18} aria-hidden />
+                  <span className="home-footer-contact-icon" aria-hidden>
+                    <CdnImage src={staticAsset('/figma-home/vector6.svg')} alt="" width={18} height={18} />
+                  </span>
                   <a href={`tel:${contactInfo.phone.replace(/\s+/g, '')}`}>{contactInfo.phone}</a>
                 </li>
                 <li>
-                  <CdnImage src={staticAsset("/figma-home/group2087329580.svg")} alt="" width={22} height={21} aria-hidden />
+                  <span className="home-footer-contact-icon" aria-hidden>
+                    <CdnImage
+                      src={staticAsset('/figma-home/group2087329580.svg')}
+                      alt=""
+                      width={22}
+                      height={21}
+                    />
+                  </span>
                   <span className="home-footer-hours">{contactInfo.hours}</span>
                 </li>
               </ul>

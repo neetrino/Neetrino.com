@@ -682,7 +682,7 @@
 
 /* ---------- Viewport switch ---------- */
 
-@media (max-width: 899px) {
+@media (max-width: 767px) {
   #home.home-page {
     overflow: visible;
     scroll-padding-top: calc(var(--about-mobile-header-top) + var(--about-mobile-header-height) + 12px);
@@ -773,7 +773,7 @@
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .home-mobile-wrap {
     display: none !important;
   }

@@ -283,7 +283,7 @@
   height: 24px;
 }
 
-@media (max-width: 899px) {
+@media (max-width: 767px) {
   .home-page .home-header {
     display: none;
   }

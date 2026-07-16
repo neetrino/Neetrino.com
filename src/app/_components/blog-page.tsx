@@ -46,7 +46,7 @@ function BlogCard({ post }: { post: LocalizedBlogPost }): React.JSX.Element {
               src={post.coverImageUrl}
               alt={coverAlt}
               fill
-              sizes="(max-width: 900px) 90vw, 620px"
+              sizes="(max-width: 767px) 90vw, 620px"
               className="blog-card-image"
             />
           ) : (
@@ -109,7 +109,7 @@ export function BlogPage({ posts }: { posts: PublicBlogPostBundle[] }): React.JS
                 alt={hero.title}
                 width={BLOG_TITLE_WIDTH}
                 height={BLOG_TITLE_HEIGHT}
-                sizes="(max-width: 900px) 90vw, 268px"
+                sizes="(max-width: 767px) 90vw, 268px"
                 priority
                 fetchPriority="high"
                 className="svc-title"

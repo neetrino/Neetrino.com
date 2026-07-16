@@ -79,7 +79,7 @@ export function TeamPage(): React.JSX.Element {
                   src={TEAM_IMAGE_SRC}
                   alt={teamCopy.imageAlt}
                   fill
-                  sizes="(max-width: 900px) 90vw, 520px"
+                  sizes="(max-width: 767px) 90vw, 520px"
                   priority
                   fetchPriority="high"
                   className="team-showcase-image"

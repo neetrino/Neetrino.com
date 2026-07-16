@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { CanvasScaler } from './canvas-scaler';
 import { CriticalRouteImagePreloader } from './critical-route-image-preloader';
+import { HOME_DESKTOP_MIN_WIDTH } from './home-constants';
 import { HomeFooter } from './home-footer';
 import { HomeHeader } from './home-header';
 import { HomeScrollPerformance } from './home-scroll-performance';
@@ -24,7 +25,7 @@ export function NeetrinoPageShell({
   children,
   mainId,
   srOnlyTitle,
-  scaleOnMobile,
+  scaleOnMobile = false,
   canvasHeight,
 }: NeetrinoPageShellProps): React.JSX.Element {
   return (
@@ -35,7 +36,7 @@ export function NeetrinoPageShell({
         <HomeHeader />
         <CanvasScaler
           wrapClassName="neetrino-canvas-wrap--page"
-          minWidth={scaleOnMobile ? 0 : undefined}
+          minWidth={scaleOnMobile ? 0 : HOME_DESKTOP_MIN_WIDTH}
           canvasHeight={canvasHeight}
         >
           <h1 className="sr-only">{srOnlyTitle}</h1>

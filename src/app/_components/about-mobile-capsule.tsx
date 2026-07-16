@@ -4,7 +4,7 @@ import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 import { useEffect, useRef } from 'react';
 
-const MOBILE_MAX_WIDTH_PX = 899;
+const MOBILE_MAX_WIDTH_PX = 767;
 const ABOUT_MOBILE_HEADER_TOP_PX = 26;
 const ABOUT_MOBILE_HEADER_HEIGHT_PX = 60;
 const ABOUT_MOBILE_CAPSULE_GAP_PX = 12;

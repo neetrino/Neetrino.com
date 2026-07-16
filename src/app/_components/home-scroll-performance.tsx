@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, type ReactNode } from 'react';
+import { HOME_MOBILE_MAX_WIDTH } from './home-constants';
 
 const HERO_INTERSECTION_ROOT_MARGIN = '80px 0px';
 const HERO_PLAY_STATE_VAR = '--home-hero-play-state';
@@ -9,7 +10,7 @@ const HOME_MOBILE_WRAP_SELECTOR = '.home-mobile-wrap';
 const HOME_HERO_MOBILE_SELECTOR = '.home-mobile-hero';
 const HOME_HERO_DESKTOP_SELECTOR = '.home-desktop .home-hero';
 const ABOUT_BODY_SELECTOR = '.about-body, .about-mobile-page, .about-mobile-capsule-track';
-const MOBILE_LAYOUT_QUERY = '(max-width: 899px)';
+const MOBILE_LAYOUT_QUERY = `(max-width: ${HOME_MOBILE_MAX_WIDTH}px)`;
 
 type HomeScrollPerformanceProps = {
   children: ReactNode;
