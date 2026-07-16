@@ -13,6 +13,9 @@
     "nextPage": "Հաջորդ էջ",
     "goToPage": "Անցնել {page} էջ"
   },
+  "card": {
+    "openProject": "Բացել նախագիծը"
+  },
   "projects": {
     "tooonExpo": {
       "title": "Tooon Expo",

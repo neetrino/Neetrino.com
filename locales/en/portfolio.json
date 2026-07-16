@@ -13,6 +13,9 @@
     "nextPage": "Next page",
     "goToPage": "Go to page {page}"
   },
+  "card": {
+    "openProject": "Open project"
+  },
   "projects": {
     "tooonExpo": {
       "title": "Tooon Expo",

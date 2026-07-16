@@ -395,6 +395,31 @@
   line-height: calc(40px * var(--locale-font-scale));
 }
 
+.portfolio-card-action {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  z-index: 3;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #151515;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.12);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.portfolio-card-action-arrow {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
 .portfolio-pagination {
   position: absolute;
   top: 1980px;
@@ -458,6 +483,12 @@
   .portfolio-card:hover .portfolio-card-image {
     will-change: transform;
     transform: scale(1.02);
+  }
+
+  .portfolio-card-action:hover,
+  .portfolio-card-action:focus-visible {
+    box-shadow: 0 8px 22px rgb(0 0 0 / 0.22);
+    transform: scale(1.06);
   }
 }
 
@@ -644,6 +675,18 @@
 
   .portfolio-card--dvbs .portfolio-card-image {
     object-position: 50% 50%;
+  }
+
+  .portfolio-card-action {
+    top: 8px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .portfolio-card-action-arrow {
+    width: 16px;
+    height: 16px;
   }
 
   .portfolio-pagination {
