@@ -1,5 +1,6 @@
 import { NeetrinoPageShell } from './neetrino-page-shell';
 import { ServicesBakedBackground } from './services-baked-background';
+import { ServicesDetails } from './services-details';
 import { ServicesHero } from './services-hero';
 import { ServicesMobileBackground } from './services-mobile-background';
 import { servicesMessages } from './services-messages';
@@ -14,6 +15,7 @@ export function ServicesPage(): React.JSX.Element {
       <div className="svc-mobile-bg-shell">
         <ServicesMobileBackground />
         <ServicesHero />
+        <ServicesDetails />
       </div>
       <div className="svc-footer-ray-wrap svc-footer-ray-wrap--baked" aria-hidden />
     </NeetrinoPageShell>
