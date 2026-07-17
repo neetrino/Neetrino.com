@@ -1,14 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { CdnImage as Image } from '@/lib/cdn-image';
-import { staticAsset } from '@/lib/static-asset';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import type { NavItem } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
 
-const HEADER_LOGO_SRC = staticAsset('/figma-home/neetrino-logo.webp');
+/** Served from /public — avoids CDN breakage on mobile networks. */
+const HEADER_LOGO_SRC = '/figma-home/neetrino-logo.webp';
 const HEADER_LOGO_WIDTH = 1682;
 const HEADER_LOGO_HEIGHT = 477;
 
@@ -101,6 +101,8 @@ export function HomeHeader(): React.JSX.Element {
             width={HEADER_LOGO_WIDTH}
             height={HEADER_LOGO_HEIGHT}
             priority
+            unoptimized
+            sizes="96px"
             className="home-header-logo-img"
           />
         </Link>

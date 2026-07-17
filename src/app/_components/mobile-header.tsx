@@ -1,13 +1,13 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { CdnImage as Image } from '@/lib/cdn-image';
-import { staticAsset } from '@/lib/static-asset';
+import Image from 'next/image';
 import Link from 'next/link';
 import { AboutMobileMenu } from './about-mobile-menu';
 import { useHomeI18n } from './home-i18n-provider';
 
-const HEADER_LOGO_SRC = staticAsset('/figma-home/neetrino-logo.webp');
+/** Served from /public — avoids CDN breakage on mobile networks. */
+const HEADER_LOGO_SRC = '/figma-home/neetrino-logo.webp';
 const HEADER_LOGO_WIDTH = 1682;
 const HEADER_LOGO_HEIGHT = 477;
 
@@ -28,10 +28,12 @@ export function MobileHeader(): React.JSX.Element {
         <Link href="/" className="about-mobile-header-logo" aria-label={homeCopy.navigation.logoHomeAriaLabel}>
           <Image
             src={HEADER_LOGO_SRC}
-            alt=""
+            alt={homeCopy.navigation.logoAlt}
             width={HEADER_LOGO_WIDTH}
             height={HEADER_LOGO_HEIGHT}
             priority
+            unoptimized
+            sizes="108px"
             className="about-mobile-header-logo-img"
           />
         </Link>
