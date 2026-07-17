@@ -92,7 +92,7 @@ export function HomeFooter(): React.JSX.Element {
                 <CdnImage src={icon.src} alt="" width={icon.width} height={icon.height} />
               );
 
-              if (!('href' in icon) || !icon.href) {
+              if (!icon.href) {
                 return (
                   <span key={icon.alt} className="home-footer-social-item" aria-label={icon.alt} role="img">
                     {image}
