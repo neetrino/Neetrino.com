@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import { DM_Sans, Inter, Noto_Sans_Armenian } from 'next/font/google';
 import { AppProviders } from './_components/app-providers';
 import { megatroxFont } from '@/lib/fonts/megatrox';
@@ -45,6 +46,7 @@ export default function RootLayout({
     >
       <body className="flex flex-col">
         <AppProviders>{children}</AppProviders>
+        <Analytics />
       </body>
     </html>
   );
