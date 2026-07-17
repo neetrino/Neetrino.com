@@ -10,7 +10,6 @@ const CRITICAL_ROUTE_IMAGES = [
   staticAsset('/portfolio/decor-stack.webp'),
   staticAsset('/blog/blog-title.webp'),
   staticAsset('/services/decor-stack.webp'),
-  staticAsset('/services/services-title.webp'),
 ] as const;
 
 function preloadImage(src: string): void {

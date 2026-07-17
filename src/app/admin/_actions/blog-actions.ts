@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { BLOG_LOCALES, BLOG_LOCALE_LABELS, type BlogLocale } from '@/lib/blog-locales';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-import { deleteR2Object, R2ConfigurationError, uploadR2Object } from '@/lib/r2/storage';
+import { deleteR2Object, R2ConfigurationError, uploadR2ImageAsWebp } from '@/lib/r2/storage';
 import { requireAdminSession } from '@/lib/admin-session';
 
 const DEFAULT_BLOG_STATUS = 'DRAFT';
@@ -93,13 +93,12 @@ function readOptionalCoverImage(formData: FormData): File | undefined {
   return file;
 }
 
-function createCoverObjectKey(file: File): string {
-  const extension = file.name.split('.').pop()?.toLowerCase() ?? 'webp';
+function createCoverObjectKey(): string {
   const now = new Date();
   const year = now.getUTCFullYear();
   const month = String(now.getUTCMonth() + 1).padStart(2, '0');
 
-  return `${BLOG_UPLOAD_PREFIX}/${year}/${month}/${randomUUID()}.${extension}`;
+  return `${BLOG_UPLOAD_PREFIX}/${year}/${month}/${randomUUID()}.webp`;
 }
 
 function readLocaleTranslation(formData: FormData, locale: BlogLocale): BlogTranslationInput | null {
@@ -154,10 +153,9 @@ function readTranslations(formData: FormData): BlogTranslationInput[] {
 
 async function uploadCoverImage(file: File): Promise<{ coverImageKey: string; coverImageUrl: string }> {
   const body = Buffer.from(await file.arrayBuffer());
-  const uploaded = await uploadR2Object({
-    key: createCoverObjectKey(file),
+  const uploaded = await uploadR2ImageAsWebp({
+    key: createCoverObjectKey(),
     body,
-    contentType: file.type,
   });
 
   return {

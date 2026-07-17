@@ -1,43 +1,84 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 import type { PortfolioDeleteState } from '../_actions/portfolio-actions';
+import { AdminConfirmDialog } from './admin-confirm-dialog';
 import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
-
-const INITIAL_DELETE_STATE: PortfolioDeleteState = {
-  status: 'idle',
-  message: '',
-};
+import { useAdminToast } from './admin-toast';
 
 type PortfolioDeleteButtonProps = {
   action: (state: PortfolioDeleteState, formData: FormData) => Promise<PortfolioDeleteState>;
   assetId: string;
   assetTitle: string;
+  confirmMessage?: string;
+  onDeleted?: () => void;
 };
 
 export function PortfolioDeleteButton({
   action,
   assetId,
   assetTitle,
+  confirmMessage,
+  onDeleted,
 }: PortfolioDeleteButtonProps): React.JSX.Element {
-  const [state, formAction, isPending] = useActionState(action, INITIAL_DELETE_STATE);
+  const router = useRouter();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isPending, startTransition] = useTransition();
   const { copy } = useAdminI18n();
+  const { showSuccessToast } = useAdminToast();
+  const description =
+    confirmMessage ?? formatAdminMessage(copy.portfolio.deleteConfirm, { title: assetTitle });
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>): void {
-    const confirmed = window.confirm(formatAdminMessage(copy.portfolio.deleteConfirm, { title: assetTitle }));
+  function handleConfirm(): void {
+    setErrorMessage('');
+    const formData = new FormData();
+    formData.set('assetId', assetId);
 
-    if (!confirmed) {
-      event.preventDefault();
-    }
+    startTransition(async () => {
+      const result = await action({ status: 'idle', message: '' }, formData);
+
+      if (result.status === 'success') {
+        setIsDialogOpen(false);
+        showSuccessToast(copy.portfolio.deleteSuccess);
+        onDeleted?.();
+        router.refresh();
+        return;
+      }
+
+      setErrorMessage(result.message);
+    });
   }
 
   return (
-    <form action={formAction} className="admin-portfolio-delete-form" onSubmit={handleSubmit}>
-      <input name="assetId" type="hidden" value={assetId} />
-      <button type="submit" className="admin-danger-button" disabled={isPending}>
+    <div className="admin-portfolio-delete-form">
+      <button
+        type="button"
+        className="admin-danger-button"
+        disabled={isPending}
+        onClick={() => setIsDialogOpen(true)}
+      >
         {isPending ? copy.common.deleting : copy.common.delete}
       </button>
-      {state.status === 'error' ? <p className="admin-card-error">{state.message}</p> : null}
-    </form>
+      {errorMessage && !isDialogOpen ? <p className="admin-card-error">{errorMessage}</p> : null}
+      {isDialogOpen ? (
+        <AdminConfirmDialog
+          title={copy.portfolio.deleteDialogTitle}
+          description={errorMessage || description}
+          confirmText={assetTitle}
+          confirmInputLabel={formatAdminMessage(copy.portfolio.deleteTypeLabel, { title: assetTitle })}
+          confirmInputPlaceholder={assetTitle}
+          isConfirming={isPending}
+          onCancel={() => {
+            if (!isPending) {
+              setIsDialogOpen(false);
+              setErrorMessage('');
+            }
+          }}
+          onConfirm={handleConfirm}
+        />
+      ) : null}
+    </div>
   );
 }

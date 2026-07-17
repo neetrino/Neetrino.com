@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useMemo, useState, type FormEvent } from 'react';
+import { useMemo, useState, type FormEvent, type KeyboardEvent } from 'react';
 import {
   createPaymentProduct,
   deactivatePaymentProduct,
@@ -13,10 +13,11 @@ import {
   EMPTY_PRODUCT_FORM,
   getProductUrl,
   ProductFormFields,
-  ProductUrlBox,
   type ProductFormValues,
 } from './product-form-fields';
 import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
+import { useAdminToast } from './admin-toast';
+import { ProductSheet } from './product-sheet';
 
 const AMD_FORMATTER = new Intl.NumberFormat('en-US');
 
@@ -29,6 +30,7 @@ export function ProductManager({
 }): React.JSX.Element {
   const router = useRouter();
   const { copy } = useAdminI18n();
+  const { showSuccessToast } = useAdminToast();
   const [products, setProducts] = useState(initialProducts);
   const [selectedProduct, setSelectedProduct] = useState<AdminProduct | null>(null);
   const [createValues, setCreateValues] = useState<ProductFormValues>(EMPTY_PRODUCT_FORM);
@@ -49,6 +51,12 @@ export function ProductManager({
     setErrorMessage('');
   }
 
+  function closeEdit(): void {
+    setSelectedProduct(null);
+    setCreatedProductId(null);
+    setErrorMessage('');
+  }
+
   async function handleCreate(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
     setIsSubmitting(true);
@@ -59,6 +67,7 @@ export function ProductManager({
       setProducts((current) => [product, ...current]);
       setCreateValues(EMPTY_PRODUCT_FORM);
       setIsCreateOpen(false);
+      showSuccessToast(copy.products.createSuccess);
       openEdit(product, true);
       router.refresh();
     } catch (error) {
@@ -84,6 +93,7 @@ export function ProductManager({
       const product = await updatePaymentProduct(formData);
       setProducts((current) => current.map((item) => (item.id === product.id ? product : item)));
       openEdit(product);
+      showSuccessToast(copy.products.updateSuccess);
       router.refresh();
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : copy.products.updateError);
@@ -106,6 +116,7 @@ export function ProductManager({
       const product = await deactivatePaymentProduct(formData);
       setProducts((current) => current.map((item) => (item.id === product.id ? product : item)));
       openEdit(product);
+      showSuccessToast(copy.products.deactivateSuccess);
       router.refresh();
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : copy.products.deactivateError);
@@ -114,10 +125,24 @@ export function ProductManager({
     }
   }
 
+  function handleCardKeyDown(product: AdminProduct, event: KeyboardEvent<HTMLElement>): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openEdit(product);
+    }
+  }
+
   return (
     <div className="admin-products">
       <div className="admin-products-toolbar">
-        <button type="button" className="admin-primary-button" onClick={() => setIsCreateOpen(true)}>
+        <button
+          type="button"
+          className="admin-primary-button"
+          onClick={() => {
+            setErrorMessage('');
+            setIsCreateOpen(true);
+          }}
+        >
           {copy.products.newProduct}
         </button>
       </div>
@@ -157,7 +182,15 @@ export function ProductManager({
       <section className="admin-list" aria-label={copy.products.listAria}>
         {products.length > 0 ? (
           products.map((product) => (
-            <article key={product.id} className="admin-card admin-product-card">
+            <article
+              key={product.id}
+              className="admin-card admin-product-card"
+              role="button"
+              tabIndex={0}
+              aria-label={formatAdminMessage(copy.products.openAria, { name: product.name })}
+              onClick={() => openEdit(product)}
+              onKeyDown={(event) => handleCardKeyDown(product, event)}
+            >
               <span className="admin-card-icon" aria-hidden>
                 P
               </span>
@@ -170,14 +203,9 @@ export function ProductManager({
                 <span className={product.status === 'ACTIVE' ? 'admin-status admin-status--published' : 'admin-status'}>
                   {product.status}
                 </span>
-                <button
-                  type="button"
-                  className="admin-icon-button"
-                  aria-label={formatAdminMessage(copy.products.editAria, { name: product.name })}
-                  onClick={() => openEdit(product)}
-                >
-                  <span className="admin-icon admin-icon--edit" aria-hidden />
-                </button>
+                <span className="admin-icon-button" aria-hidden>
+                  <span className="admin-icon admin-icon--edit" />
+                </span>
               </div>
             </article>
           ))
@@ -186,43 +214,18 @@ export function ProductManager({
         )}
       </section>
       {selectedProduct ? (
-        <div className="admin-drawer-layer" role="presentation">
-          <button type="button" className="admin-drawer-backdrop" onClick={() => setSelectedProduct(null)} />
-          <section className="admin-drawer admin-product-drawer" aria-label={`Edit ${selectedProduct.name}`}>
-            <div className="admin-product-detail-header">
-              <span className="admin-card-icon" aria-hidden>
-                P
-              </span>
-              <div>
-                <h2>{selectedProduct.name}</h2>
-                <p>{AMD_FORMATTER.format(selectedProduct.priceAmd)} AMD</p>
-              </div>
-              <span className="admin-status admin-status--published">{selectedProduct.status}</span>
-              <button type="button" className="admin-drawer-close" onClick={() => setSelectedProduct(null)}>
-                x
-              </button>
-            </div>
-            {createdProductId === selectedProduct.id ? (
-              <ProductUrlBox label={copy.products.createdUrlLabel} url={selectedProductUrl} />
-            ) : null}
-            <form onSubmit={handleUpdate} className="admin-form admin-product-edit-form">
-              <input type="hidden" name="productId" value={selectedProduct.id} />
-              <ProductFormFields values={editValues} isEditing isSubmitting={isSubmitting} onChange={setEditValues} />
-              <ProductUrlBox label={copy.products.publicUrlLabel} url={selectedProductUrl} />
-              {errorMessage ? <p className="admin-card-error">{errorMessage}</p> : null}
-              <div className="admin-form-actions">
-                <button type="submit" className="admin-primary-button" disabled={isSubmitting}>
-                  {copy.common.save}
-                </button>
-              </div>
-            </form>
-            {selectedProduct.status === 'ACTIVE' ? (
-              <button type="button" className="admin-product-deactivate" disabled={isSubmitting} onClick={handleDeactivate}>
-                {copy.products.deactivate}
-              </button>
-            ) : null}
-          </section>
-        </div>
+        <ProductSheet
+          product={selectedProduct}
+          productUrl={selectedProductUrl}
+          values={editValues}
+          showCreatedUrl={createdProductId === selectedProduct.id}
+          errorMessage={errorMessage}
+          isSubmitting={isSubmitting}
+          onValuesChange={setEditValues}
+          onClose={closeEdit}
+          onSubmit={handleUpdate}
+          onDeactivate={handleDeactivate}
+        />
       ) : null}
     </div>
   );

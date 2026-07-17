@@ -81,6 +81,11 @@
   --svc-decor-bake-height: 2095px;
 }
 
+/* Services detail sections need a taller baked grid; Team keeps the original height. */
+.neetrino-canvas-inner:has(.svc-details) {
+  --svc-decor-bake-height: 4600px;
+}
+
 /*
  * Shared footer on blue-canvas pages (/services, /team): no black plate.
  * Page blue (--svc-base-bg + baked grid) stays visible behind footer content.

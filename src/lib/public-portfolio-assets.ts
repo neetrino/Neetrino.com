@@ -5,8 +5,9 @@ import {
   PORTFOLIO_DVBS_BANNER_SRC,
 } from '@/app/_components/portfolio-constants';
 import {
-  portfolioProjectLiveHref,
   portfolioProjects as staticPortfolioProjects,
+  resolvePortfolioProjectHref,
+  resolvePortfolioVariant,
   type PortfolioProject,
 } from '@/app/_components/portfolio-data';
 import { logger } from '@/lib/logger';
@@ -29,6 +30,7 @@ type PublicPortfolioAsset = {
   title: string;
   alt: string;
   url: string;
+  projectUrl: string | null;
 };
 type HomePortfolioTemplate = Pick<ProjectCard, 'height' | 'radius' | 'width'>;
 
@@ -74,54 +76,6 @@ function getStaticPortfolioData(): PublicPortfolioData {
   };
 }
 
-function normalizePortfolioText(value: string | null | undefined): string {
-  return typeof value === 'string' ? value.trim().toLowerCase() : '';
-}
-
-function resolvePortfolioVariant(title: string, alt: string): PortfolioProject['variant'] {
-  const normalizedTitle = normalizePortfolioText(title);
-  const normalizedAlt = normalizePortfolioText(alt);
-  const combined = `${normalizedTitle} ${normalizedAlt}`;
-
-  if (combined.includes('tooon') || combined.includes('toon expo') || combined.includes('toonexpo')) {
-    return 'toon';
-  }
-
-  if (combined.includes('degusto')) {
-    return 'degusto';
-  }
-
-  if (combined.includes('dvbs') || combined.includes('borbor')) {
-    return 'dvbs';
-  }
-
-  if (
-    combined.includes('digital implant') ||
-    combined.includes('implant clinic') ||
-    combined.includes('implantclinic')
-  ) {
-    return 'digital-implant';
-  }
-
-  if (combined.includes('ncie')) {
-    return 'ncie';
-  }
-
-  if (combined.includes('anra') || combined.includes('nuclear regulatory')) {
-    return 'anra';
-  }
-
-  if (combined.includes('zeppelin')) {
-    return 'zeppelin';
-  }
-
-  if (combined.includes('marco')) {
-    return 'marco';
-  }
-
-  return undefined;
-}
-
 function toPortfolioProject(asset: PublicPortfolioAsset): PortfolioProject {
   const variant = resolvePortfolioVariant(asset.title, asset.alt);
   let image = asset.url;
@@ -139,7 +93,7 @@ function toPortfolioProject(asset: PublicPortfolioAsset): PortfolioProject {
     title: asset.title,
     alt: asset.alt,
     image,
-    href: portfolioProjectLiveHref(variant),
+    href: resolvePortfolioProjectHref(asset.title, asset.alt, asset.projectUrl),
     variant,
   };
 }
@@ -171,6 +125,7 @@ export async function getPublicPortfolioData(): Promise<PublicPortfolioData> {
         alt: true,
         title: true,
         url: true,
+        projectUrl: true,
       },
     });
     const rows = splitHomeRows(assets);

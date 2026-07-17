@@ -1,0 +1,164 @@
+/* Mobile home — swipeable portfolio (scroll-snap coverflow). */
+
+.home-mobile-portfolio {
+  --home-mobile-portfolio-card-width: min(78vw, 300px);
+  --home-mobile-portfolio-card-height: min(58vw, 228px);
+  --home-mobile-portfolio-gap: 14px;
+  --home-mobile-portfolio-side-pad: max(
+    24px,
+    calc((100% - var(--home-mobile-portfolio-card-width)) / 2)
+  );
+
+  position: relative;
+  z-index: 1;
+  margin-top: 1.25rem;
+  overflow: visible;
+}
+
+.home-mobile-portfolio-heading-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 0;
+  width: 448px;
+  height: 185px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.home-mobile-portfolio .home-section-heading {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 1.25rem;
+}
+
+.home-mobile-portfolio .home-eyebrow {
+  margin: 0 0 4px 6px;
+  font-size: calc(16px * var(--locale-font-scale));
+  font-weight: 500;
+  line-height: calc(35px * var(--locale-font-scale));
+}
+
+.home-mobile-portfolio .home-section-title {
+  margin: 0;
+  font-size: calc(35px * var(--locale-font-scale));
+  font-weight: 900;
+  font-style: italic;
+  line-height: calc(35px * var(--locale-font-scale));
+}
+
+.home-mobile-portfolio-track {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: var(--home-mobile-portfolio-gap);
+  width: calc(100% + 48px);
+  margin-inline: -24px;
+  padding-inline: var(--home-mobile-portfolio-side-pad);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--home-mobile-portfolio-side-pad);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  outline: none;
+}
+
+.home-mobile-portfolio-track::-webkit-scrollbar {
+  display: none;
+}
+
+.home-mobile-portfolio-card {
+  position: relative;
+  flex: 0 0 var(--home-mobile-portfolio-card-width);
+  width: var(--home-mobile-portfolio-card-width);
+  height: var(--home-mobile-portfolio-card-height);
+  overflow: hidden;
+  border-radius: 22px;
+  background: #1c1c1c;
+  box-shadow: 0 18px 40px rgb(0 0 0 / 0.35);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  transform: scale(0.9) translateZ(0);
+  opacity: 0.62;
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 320ms ease,
+    box-shadow 320ms ease;
+}
+
+.home-mobile-portfolio-card.is-active {
+  transform: scale(1) translateZ(0);
+  opacity: 1;
+  box-shadow:
+    0 22px 48px rgb(0 0 0 / 0.45),
+    0 0 0 1px rgb(255 255 255 / 0.08);
+}
+
+.home-mobile-portfolio-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-mobile-portfolio-dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.1rem;
+}
+
+.home-mobile-portfolio-dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.28);
+  transition:
+    width 240ms ease,
+    background-color 240ms ease;
+}
+
+.home-mobile-portfolio-dot.is-active {
+  width: 22px;
+  background: #fff;
+}
+
+.home-mobile-portfolio-cta {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.35rem;
+  overflow: visible;
+}
+
+.home-mobile-portfolio-cta .home-btn-explore-wrap {
+  width: auto;
+}
+
+.home-mobile-portfolio-cta .home-btn-explore-flare {
+  width: 220px;
+  height: 96px;
+}
+
+.home-mobile-portfolio-cta .home-btn-explore {
+  width: auto;
+  min-width: 134px;
+  height: 52px;
+  min-height: 52px;
+  padding: 12px 22px;
+  font-size: calc(17px * var(--locale-font-scale));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-mobile-portfolio-card,
+  .home-mobile-portfolio-dot {
+    transition: none;
+  }
+
+  .home-mobile-portfolio-card {
+    transform: none;
+    opacity: 1;
+  }
+}

@@ -525,19 +525,19 @@
 .about-mobile-hero-intro--primary {
   max-width: 198px;
   margin-top: 14px;
-  font-size: calc(14px * var(--locale-font-scale));
+  font-size: 15px;
   font-weight: 400;
-  line-height: calc(22.75px * var(--locale-font-scale));
-  letter-spacing: -0.1504px;
+  line-height: 23px;
+  letter-spacing: 0.01em;
 }
 
 .about-mobile-hero-intro--secondary {
   max-width: 254px;
   margin-top: 19px;
-  font-size: calc(16px * var(--locale-font-scale));
-  font-weight: 200;
-  line-height: calc(24px * var(--locale-font-scale));
-  letter-spacing: 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0.01em;
   color: #fff;
 }
 
@@ -641,12 +641,12 @@
 }
 
 .about-mobile-lead-copy {
-  max-width: 362px;
+  max-width: 340px;
   margin: 0;
-  font-size: calc(16px * var(--locale-font-scale));
+  font-size: 14px;
   font-weight: 400;
-  line-height: calc(26px * var(--locale-font-scale));
-  letter-spacing: -0.3125px;
+  line-height: 22px;
+  letter-spacing: 0.01em;
   color: #fff;
   white-space: pre-line;
 }
@@ -1488,6 +1488,23 @@
   object-position: bottom right;
   transform: translate(200px, 120px) scaleX(-1) scale(1.45);
   transform-origin: center bottom;
+}
+
+/* Longer locales on mobile: keep type readable without crowding the robot stage. */
+html:lang(hy) .about-mobile-hero-headline,
+html:lang(ru) .about-mobile-hero-headline {
+  font-size: calc(clamp(32px, 8.8vw, 40px) * var(--locale-font-scale));
+  line-height: calc(36px * var(--locale-font-scale));
+  letter-spacing: 0.4px;
+}
+
+html:lang(hy) .about-mobile-hero-intro--primary,
+html:lang(hy) .about-mobile-hero-intro--secondary,
+html:lang(ru) .about-mobile-hero-intro--primary,
+html:lang(ru) .about-mobile-hero-intro--secondary,
+html:lang(hy) .about-mobile-lead-copy,
+html:lang(ru) .about-mobile-lead-copy {
+  font-family: var(--font-locale-body);
 }
 
 /* ---------- Viewport switch ---------- */

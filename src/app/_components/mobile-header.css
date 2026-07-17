@@ -24,12 +24,18 @@
 
 .about-mobile-header-logo {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
+  max-width: calc(100% - 100px);
 }
 
 .about-mobile-header-logo-img {
-  width: 96px;
-  height: auto;
+  display: block;
+  width: 108px !important;
+  height: auto !important;
+  max-height: 36px;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .about-mobile-header-menu {

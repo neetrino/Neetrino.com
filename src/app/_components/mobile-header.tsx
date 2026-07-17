@@ -1,11 +1,15 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { staticAsset } from '@/lib/static-asset';
-import { CdnImage as Image } from '@/lib/cdn-image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { AboutMobileMenu } from './about-mobile-menu';
 import { useHomeI18n } from './home-i18n-provider';
+
+/** Served from /public — avoids CDN breakage on mobile networks. */
+const HEADER_LOGO_SRC = '/figma-home/neetrino-logo.webp';
+const HEADER_LOGO_WIDTH = 1682;
+const HEADER_LOGO_HEIGHT = 477;
 
 /** Compact mobile header bar (logo + Menu) shared across all marketing pages. */
 export function MobileHeader(): React.JSX.Element {
@@ -23,11 +27,13 @@ export function MobileHeader(): React.JSX.Element {
       >
         <Link href="/" className="about-mobile-header-logo" aria-label={homeCopy.navigation.logoHomeAriaLabel}>
           <Image
-            src={staticAsset('/figma-home/neetrino-logo.png')}
-            alt=""
-            width={460}
-            height={93}
+            src={HEADER_LOGO_SRC}
+            alt={homeCopy.navigation.logoAlt}
+            width={HEADER_LOGO_WIDTH}
+            height={HEADER_LOGO_HEIGHT}
             priority
+            unoptimized
+            sizes="108px"
             className="about-mobile-header-logo-img"
           />
         </Link>

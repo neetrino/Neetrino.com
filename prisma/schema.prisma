@@ -59,6 +59,8 @@ model PortfolioAsset {
   sortOrder   Int      @default(0) @map("sort_order")
   key         String   @unique
   url         String
+  /** Optional Slack / live project URL opened from the portfolio card action. */
+  projectUrl  String?  @map("project_url")
   contentType String   @map("content_type")
   sizeBytes   Int      @map("size_bytes")
   createdAt   DateTime @default(now()) @map("created_at")

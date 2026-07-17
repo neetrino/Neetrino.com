@@ -1,5 +1,10 @@
 import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
+import {
+  convertImageBufferToWebp,
+  replaceKeyExtensionWithWebp,
+} from '@/lib/images/convert-to-webp';
+
 const R2_ENDPOINT_HOST_SUFFIX = '.r2.cloudflarestorage.com';
 
 type R2Config = {
@@ -19,6 +24,8 @@ type UploadR2ObjectInput = {
 type UploadR2ObjectResult = {
   key: string;
   url: string;
+  contentType: string;
+  sizeBytes: number;
 };
 
 type DeleteR2ObjectInput = {
@@ -80,7 +87,27 @@ export async function uploadR2Object(input: UploadR2ObjectInput): Promise<Upload
   return {
     key: input.key,
     url: `${config.publicUrl}/${input.key}`,
+    contentType: input.contentType,
+    sizeBytes: input.body.byteLength,
   };
+}
+
+/**
+ * Converts a raster image to WebP, then uploads it to R2.
+ * The object key extension is forced to `.webp`.
+ */
+export async function uploadR2ImageAsWebp(input: {
+  key: string;
+  body: Buffer;
+}): Promise<UploadR2ObjectResult> {
+  const webp = await convertImageBufferToWebp(input.body);
+  const key = replaceKeyExtensionWithWebp(input.key);
+
+  return uploadR2Object({
+    key,
+    body: webp.body,
+    contentType: webp.contentType,
+  });
 }
 
 export async function deleteR2Object(input: DeleteR2ObjectInput): Promise<void> {
