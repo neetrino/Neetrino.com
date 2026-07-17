@@ -192,8 +192,8 @@ export function ContactPage(): React.JSX.Element {
         <div className="contact-content">
           <div className="contact-hero-grid">
             <ContactIntroCard />
+            <ContactOfficeSection />
           </div>
-          <ContactOfficeSection />
         </div>
       </section>
     </NeetrinoPageShell>
