@@ -1,6 +1,5 @@
 'use client';
 
-import { CdnImage as Image } from '@/lib/cdn-image';
 import { useEffect, useRef, useState, useTransition } from 'react';
 import type { PortfolioDeleteState } from '../_actions/portfolio-actions';
 import { reorderPortfolioAssets } from '../_actions/portfolio-actions';
@@ -9,15 +8,11 @@ import {
   getInsertIndexFromPointer,
   getVisualRank,
   moveAsset,
-  PORTFOLIO_DRAG_TOP_TRANSITION,
   resolveOverIndex,
 } from './portfolio-asset-list-drag';
-import { PortfolioDeleteButton } from './portfolio-delete-button';
-import { PortfolioStatusToggle } from './portfolio-status-toggle';
-import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
-import { formatPortfolioSlotMeta } from '@/lib/portfolio-slots';
-import { getPortfolioVisibilityLabel } from '@/lib/portfolio-asset-status';
-import { isRemoteImageUrl } from '@/lib/image-url';
+import { PortfolioAssetSheet } from './portfolio-asset-sheet';
+import { PortfolioRow } from './portfolio-asset-row';
+import { useAdminI18n } from './admin-i18n-provider';
 
 const DEFAULT_PORTFOLIO_ROW_HEIGHT = 109;
 
@@ -26,99 +21,10 @@ type PortfolioAssetListProps = {
   deleteAction: (state: PortfolioDeleteState, formData: FormData) => Promise<PortfolioDeleteState>;
 };
 
-type PortfolioRowProps = {
-  asset: AdminPortfolioAsset;
-  index: number;
-  deleteAction: PortfolioAssetListProps['deleteAction'];
-  isDragging: boolean;
-  isDraggedRow: boolean;
-  rowTop: number;
-  animatePositions: boolean;
-  onHandlePointerDown: (index: number, event: React.PointerEvent<HTMLSpanElement>) => void;
-  onHandlePointerMove: (event: React.PointerEvent<HTMLSpanElement>) => void;
-  onHandlePointerUp: (event: React.PointerEvent<HTMLSpanElement>) => void;
-  onHandlePointerCancel: (event: React.PointerEvent<HTMLSpanElement>) => void;
-};
-
-function PortfolioRow({
-  asset,
-  index,
-  deleteAction,
-  isDragging,
-  isDraggedRow,
-  rowTop,
-  animatePositions,
-  onHandlePointerDown,
-  onHandlePointerMove,
-  onHandlePointerUp,
-  onHandlePointerCancel,
-}: PortfolioRowProps): React.JSX.Element {
-  const { copy } = useAdminI18n();
-
-  return (
-    <li
-      data-portfolio-row
-      data-portfolio-index={index}
-      className={
-        isDraggedRow
-          ? 'admin-portfolio-row admin-portfolio-row--floating'
-          : isDragging
-            ? 'admin-portfolio-row admin-portfolio-row--animated'
-            : 'admin-portfolio-row'
-      }
-      style={
-        isDragging
-          ? {
-              top: rowTop,
-              transition: animatePositions ? PORTFOLIO_DRAG_TOP_TRANSITION : 'none',
-            }
-          : undefined
-      }
-    >
-      <span
-        role="button"
-        tabIndex={0}
-        className="admin-portfolio-drag-handle"
-        aria-label={formatAdminMessage(copy.portfolio.reorderAria, { title: asset.title })}
-        onPointerDown={(event) => onHandlePointerDown(index, event)}
-        onPointerMove={onHandlePointerMove}
-        onPointerUp={onHandlePointerUp}
-        onPointerCancel={onHandlePointerCancel}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-          }
-        }}
-      >
-        <span className="admin-portfolio-drag-grip" aria-hidden />
-      </span>
-      <div className="admin-portfolio-thumb-wrap">
-        <Image
-          src={asset.url}
-          alt={asset.alt}
-          width={72}
-          height={72}
-          sizes="72px"
-          unoptimized={isRemoteImageUrl(asset.url)}
-          className="admin-portfolio-thumb"
-        />
-      </div>
-      <div className="admin-portfolio-copy">
-        <h2>{asset.title}</h2>
-        <p>{formatPortfolioSlotMeta(index, asset.assetType)}</p>
-        <p className="admin-portfolio-visibility">{getPortfolioVisibilityLabel(asset.status)}</p>
-      </div>
-      <div className="admin-portfolio-actions">
-        <PortfolioStatusToggle assetId={asset.id} status={asset.status} />
-        <PortfolioDeleteButton action={deleteAction} assetId={asset.id} assetTitle={asset.title} />
-      </div>
-    </li>
-  );
-}
-
 export function PortfolioAssetList({ assets: initialAssets, deleteAction }: PortfolioAssetListProps): React.JSX.Element {
   const listRef = useRef<HTMLUListElement>(null);
   const [assets, setAssets] = useState(initialAssets);
+  const [selectedAssetId, setSelectedAssetId] = useState<string | null>(null);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [overIndex, setOverIndex] = useState<number | null>(null);
   const [rowHeight, setRowHeight] = useState(DEFAULT_PORTFOLIO_ROW_HEIGHT);
@@ -236,6 +142,8 @@ export function PortfolioAssetList({ assets: initialAssets, deleteAction }: Port
   const isDragging = draggedIndex !== null && overIndex !== null;
   const listHeight = isDragging ? assets.length * rowHeight : undefined;
   const gapTop = isDragging ? overIndex * rowHeight : 0;
+  const selectedIndex = selectedAssetId ? assets.findIndex((asset) => asset.id === selectedAssetId) : -1;
+  const selectedAsset = selectedIndex >= 0 ? assets[selectedIndex] : null;
 
   return (
     <section className="admin-portfolio-list" aria-label={copy.portfolio.listAria}>
@@ -269,6 +177,7 @@ export function PortfolioAssetList({ assets: initialAssets, deleteAction }: Port
                 : 0
             }
             animatePositions={animatePositions}
+            onOpen={setSelectedAssetId}
             onHandlePointerDown={handleHandlePointerDown}
             onHandlePointerMove={handleHandlePointerMove}
             onHandlePointerUp={handleHandlePointerUp}
@@ -276,6 +185,19 @@ export function PortfolioAssetList({ assets: initialAssets, deleteAction }: Port
           />
         ))}
       </ul>
+      {selectedAsset ? (
+        <PortfolioAssetSheet
+          asset={selectedAsset}
+          index={selectedIndex}
+          deleteAction={deleteAction}
+          onClose={() => setSelectedAssetId(null)}
+          onUpdated={(updatedAsset) => {
+            setAssets((current) =>
+              current.map((item) => (item.id === updatedAsset.id ? updatedAsset : item)),
+            );
+          }}
+        />
+      ) : null}
     </section>
   );
 }

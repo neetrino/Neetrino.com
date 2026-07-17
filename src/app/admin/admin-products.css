@@ -25,7 +25,10 @@
   position: absolute;
   inset: 0;
   border: 0;
-  background: rgb(10 10 12 / 0.34);
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 30%, rgb(255 117 0 / 0.1), transparent 55%),
+    rgb(16 18 28 / 0.34);
+  backdrop-filter: blur(6px);
   cursor: pointer;
 }
 
@@ -34,10 +37,12 @@
   z-index: 1;
   width: min(460px, 100%);
   border: 1px solid var(--admin-border);
-  border-radius: 20px;
-  background: #fff;
-  box-shadow: 0 28px 90px rgb(16 24 40 / 0.22);
-  padding: 22px;
+  border-radius: var(--admin-radius-lg);
+  background:
+    linear-gradient(165deg, rgb(255 117 0 / 0.04), transparent 45%),
+    #fff;
+  box-shadow: 0 28px 90px rgb(16 24 40 / 0.18);
+  padding: 24px;
 }
 
 .admin-product-modal-header,
@@ -55,7 +60,7 @@
 .admin-product-modal-header h2,
 .admin-product-detail-header h2 {
   margin: 0;
-  color: #111;
+  color: #16171c;
   font-size: 18px;
   font-weight: 900;
 }
@@ -75,7 +80,7 @@
 
 .admin-secondary-button {
   border: 1px solid var(--admin-border);
-  border-radius: 999px;
+  border-radius: var(--admin-radius-pill);
   background: #fff;
   color: #333840;
   cursor: pointer;
@@ -83,9 +88,13 @@
   font-size: 13px;
   font-weight: 800;
   padding: 12px 18px;
+  transition:
+    background var(--admin-transition),
+    border-color var(--admin-transition);
 }
 
 .admin-secondary-button:hover {
+  border-color: var(--admin-border-strong);
   background: #f7f7f9;
 }
 
@@ -106,9 +115,9 @@
   display: grid;
   gap: 10px;
   border: 1px solid #b7f0d3;
-  border-radius: 20px;
-  background: #effdf6;
-  color: #164f35;
+  border-radius: var(--admin-radius);
+  background: var(--admin-success-soft);
+  color: var(--admin-success);
   margin-bottom: 22px;
   padding: 18px;
 }
@@ -130,13 +139,18 @@
 .admin-product-deactivate {
   border: 0;
   background: transparent;
-  color: #b42318;
+  color: var(--admin-danger);
   cursor: pointer;
   font: inherit;
   font-size: 16px;
   font-weight: 800;
   margin-top: 72px;
   padding: 0;
+  transition: opacity var(--admin-transition);
+}
+
+.admin-product-deactivate:hover {
+  opacity: 0.85;
 }
 
 .admin-product-deactivate:disabled {

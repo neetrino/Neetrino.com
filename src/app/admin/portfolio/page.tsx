@@ -3,7 +3,7 @@ import { AdminText } from '../_components/admin-text';
 import { serializeAdminPortfolioAsset } from '../_components/admin-portfolio-asset';
 import { PortfolioAssetList } from '../_components/portfolio-asset-list';
 import { PortfolioUploadButton } from '../_components/portfolio-upload-button';
-import { deletePortfolioImage, uploadPortfolioImage } from '../_actions/portfolio-actions';
+import { deletePortfolioImage } from '../_actions/portfolio-actions';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 
@@ -27,11 +27,7 @@ export default async function AdminPortfolioPage(): Promise<React.JSX.Element> {
       <AdminPageHeader sectionKey="portfolio" />
       <div className="admin-portfolio-toolbar">
         <div className="admin-header-actions">
-          <PortfolioUploadButton
-            action={uploadPortfolioImage}
-            assetType="IMAGE"
-            labelPath="portfolio.upload"
-          />
+          <PortfolioUploadButton labelPath="portfolio.upload" />
         </div>
       </div>
       {adminAssets.length > 0 ? (

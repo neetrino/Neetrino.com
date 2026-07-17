@@ -22,6 +22,12 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_R2_PUBLIC_URL:
       process.env.NEXT_PUBLIC_R2_PUBLIC_URL ?? process.env.R2_PUBLIC_URL ?? '',
   },
+  // Portfolio uploads allow up to 10MB; leave headroom for multipart form fields.
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '12mb',
+    },
+  },
   async headers() {
     return PUBLIC_ASSET_FOLDERS.map((folder) => ({
       source: `/${folder}/:path*`,

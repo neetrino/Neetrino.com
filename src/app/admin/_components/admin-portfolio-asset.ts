@@ -8,6 +8,10 @@ export type AdminPortfolioAsset = {
   assetType: string;
   status: string;
   sortOrder: number;
+  contentType: string;
+  sizeBytes: number;
+  createdAt: string;
+  projectUrl: string | null;
 };
 
 export function serializeAdminPortfolioAsset(asset: PortfolioAsset): AdminPortfolioAsset {
@@ -19,5 +23,9 @@ export function serializeAdminPortfolioAsset(asset: PortfolioAsset): AdminPortfo
     assetType: asset.assetType,
     status: asset.status,
     sortOrder: asset.sortOrder,
+    contentType: asset.contentType,
+    sizeBytes: asset.sizeBytes,
+    createdAt: asset.createdAt.toISOString(),
+    projectUrl: asset.projectUrl,
   };
 }

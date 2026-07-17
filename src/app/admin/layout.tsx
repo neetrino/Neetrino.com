@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { requireAdminSession } from '@/lib/admin-session';
 import { AdminI18nProvider } from './_components/admin-i18n-provider';
 import { AdminShell } from './_components/admin-shell';
+import { AdminToastProvider } from './_components/admin-toast';
 import './admin.css';
 import './admin-drawer.css';
 import './admin-forms.css';
@@ -17,7 +18,9 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
   return (
     <AdminI18nProvider>
-      <AdminShell>{children}</AdminShell>
+      <AdminToastProvider>
+        <AdminShell>{children}</AdminShell>
+      </AdminToastProvider>
     </AdminI18nProvider>
   );
 }

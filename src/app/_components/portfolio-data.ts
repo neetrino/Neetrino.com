@@ -13,7 +13,7 @@ export type PortfolioProject = {
   title: string;
   alt: string;
   image: string;
-  /** Live project website when known; otherwise the card action is hidden. */
+  /** Slack / live project URL from admin; falls back to known variant sites. */
   href: string | null;
   variant?: PortfolioProjectVariant;
   overlayTitle?: string;
@@ -37,6 +37,55 @@ export const PORTFOLIO_LIVE_HREFS: Record<PortfolioProjectVariant, string> = {
   zeppelin: 'https://www.zeppelin.am/am',
 };
 
+function normalizePortfolioText(value: string | null | undefined): string {
+  return typeof value === 'string' ? value.trim().toLowerCase() : '';
+}
+
+/** Infers a known project variant from title/alt for live URL fallbacks. */
+export function resolvePortfolioVariant(title: string, alt: string): PortfolioProjectVariant | undefined {
+  const normalizedTitle = normalizePortfolioText(title);
+  const normalizedAlt = normalizePortfolioText(alt);
+  const combined = `${normalizedTitle} ${normalizedAlt}`;
+
+  if (combined.includes('tooon') || combined.includes('toon expo') || combined.includes('toonexpo')) {
+    return 'toon';
+  }
+
+  if (combined.includes('degusto')) {
+    return 'degusto';
+  }
+
+  if (combined.includes('dvbs') || combined.includes('borbor')) {
+    return 'dvbs';
+  }
+
+  if (
+    combined.includes('digital implant') ||
+    combined.includes('implant clinic') ||
+    combined.includes('implantclinic')
+  ) {
+    return 'digital-implant';
+  }
+
+  if (combined.includes('ncie')) {
+    return 'ncie';
+  }
+
+  if (combined.includes('anra') || combined.includes('nuclear regulatory')) {
+    return 'anra';
+  }
+
+  if (combined.includes('zeppelin')) {
+    return 'zeppelin';
+  }
+
+  if (combined.includes('marco')) {
+    return 'marco';
+  }
+
+  return undefined;
+}
+
 /** Resolves the public live URL for a known portfolio project variant. */
 export function portfolioProjectLiveHref(variant: PortfolioProjectVariant | undefined): string | null {
   if (!variant) {
@@ -44,4 +93,21 @@ export function portfolioProjectLiveHref(variant: PortfolioProjectVariant | unde
   }
 
   return PORTFOLIO_LIVE_HREFS[variant];
+}
+
+/**
+ * Prefers an admin-saved project URL, otherwise the known live site for the variant.
+ */
+export function resolvePortfolioProjectHref(
+  title: string,
+  alt: string,
+  projectUrl?: string | null,
+): string | null {
+  const customUrl = typeof projectUrl === 'string' ? projectUrl.trim() : '';
+
+  if (customUrl.length > 0) {
+    return customUrl;
+  }
+
+  return portfolioProjectLiveHref(resolvePortfolioVariant(title, alt));
 }

@@ -2,6 +2,7 @@
 
 import { randomUUID } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
+import type { PortfolioAsset } from '@prisma/client';
 import { getNextPortfolioAssetStatus } from '@/lib/portfolio-asset-status';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
@@ -35,13 +36,51 @@ function readOptionalText(formData: FormData, fieldName: string): string | undef
   return typeof value === 'string' && value.trim().length > 0 ? value.trim() : undefined;
 }
 
-function readImageFile(formData: FormData): File {
-  const file = formData.get('image');
+function readRequiredText(formData: FormData, fieldName: string, label: string): string {
+  const value = readOptionalText(formData, fieldName);
 
-  if (!(file instanceof File) || file.size === 0) {
-    throw new Error('Portfolio image is required.');
+  if (!value) {
+    throw new Error(`${label} is required.`);
   }
 
+  return value;
+}
+
+function readPortfolioStatus(formData: FormData): 'ACTIVE' | 'DRAFT' {
+  const value = formData.get('status');
+
+  if (value === 'ACTIVE' || value === 'DRAFT') {
+    return value;
+  }
+
+  throw new Error('Portfolio status must be ACTIVE or DRAFT.');
+}
+
+function readOptionalProjectUrl(formData: FormData): string | null {
+  const value = readOptionalText(formData, 'projectUrl');
+
+  if (!value) {
+    return null;
+  }
+
+  try {
+    const parsed = new URL(value);
+
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+      throw new Error('Project link must use http or https.');
+    }
+
+    return parsed.toString();
+  } catch (error) {
+    if (error instanceof Error && error.message.startsWith('Project link')) {
+      throw error;
+    }
+
+    throw new Error('Project link must be a valid URL.');
+  }
+}
+
+function validateImageFile(file: File): File {
   if (file.size > MAX_IMAGE_BYTES) {
     throw new Error('Portfolio image must be smaller than 10MB.');
   }
@@ -51,6 +90,26 @@ function readImageFile(formData: FormData): File {
   }
 
   return file;
+}
+
+function readImageFile(formData: FormData): File {
+  const file = formData.get('image');
+
+  if (!(file instanceof File) || file.size === 0) {
+    throw new Error('Portfolio image is required.');
+  }
+
+  return validateImageFile(file);
+}
+
+function readOptionalImageFile(formData: FormData): File | null {
+  const file = formData.get('image');
+
+  if (!(file instanceof File) || file.size === 0) {
+    return null;
+  }
+
+  return validateImageFile(file);
 }
 
 function createObjectKey(file: File): string {
@@ -152,6 +211,8 @@ export async function uploadPortfolioImage(
         title,
         alt,
         assetType: readAssetType(formData),
+        status: readPortfolioStatus(formData),
+        projectUrl: readOptionalProjectUrl(formData),
         sortOrder: await getNextPortfolioSortOrder(),
         key: uploaded.key,
         url: uploaded.url,
@@ -265,5 +326,77 @@ export async function togglePortfolioAssetStatus(formData: FormData): Promise<Po
       status: 'error',
       message: error instanceof Error ? error.message : 'Portfolio visibility update failed.',
     };
+  }
+}
+
+export async function updatePortfolioAsset(formData: FormData): Promise<PortfolioAsset> {
+  await requireAdminSession();
+
+  const assetId = readPortfolioAssetId(formData);
+  const title = readRequiredText(formData, 'title', 'Title');
+  const alt = readRequiredText(formData, 'alt', 'Alt text');
+  const assetType = readAssetType(formData);
+  const status = readPortfolioStatus(formData);
+  const projectUrl = readOptionalProjectUrl(formData);
+  const image = readOptionalImageFile(formData);
+
+  try {
+    const existing = await prisma.portfolioAsset.findUnique({ where: { id: assetId } });
+
+    if (!existing) {
+      throw new Error('Portfolio asset was not found.');
+    }
+
+    let mediaData: {
+      key?: string;
+      url?: string;
+      contentType?: string;
+      sizeBytes?: number;
+    } = {};
+
+    if (image) {
+      const body = Buffer.from(await image.arrayBuffer());
+      const uploaded = await uploadR2Object({
+        key: createObjectKey(image),
+        body,
+        contentType: image.type,
+      });
+
+      try {
+        await deleteR2Object({ key: existing.key });
+      } catch (error) {
+        logger.error('Failed to delete previous portfolio image from R2.', {
+          error,
+          assetId,
+          key: existing.key,
+        });
+      }
+
+      mediaData = {
+        key: uploaded.key,
+        url: uploaded.url,
+        contentType: image.type,
+        sizeBytes: image.size,
+      };
+    }
+
+    const updated = await prisma.portfolioAsset.update({
+      where: { id: assetId },
+      data: {
+        title,
+        alt,
+        assetType,
+        status,
+        projectUrl,
+        ...mediaData,
+      },
+    });
+
+    revalidatePortfolioPaths();
+
+    return updated;
+  } catch (error) {
+    logger.error('Failed to update portfolio asset.', { error, assetId });
+    throw error instanceof Error ? error : new Error('Portfolio asset update failed.');
   }
 }

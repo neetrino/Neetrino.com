@@ -7,27 +7,29 @@ import { AdminConfirmDialog } from './admin-confirm-dialog';
 import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
 import { useAdminToast } from './admin-toast';
 
-type PortfolioDeleteButtonProps = {
+type PortfolioDeleteIconButtonProps = {
   action: (state: PortfolioDeleteState, formData: FormData) => Promise<PortfolioDeleteState>;
   assetId: string;
   assetTitle: string;
   confirmMessage?: string;
+  disabled?: boolean;
   onDeleted?: () => void;
 };
 
-export function PortfolioDeleteButton({
+export function PortfolioDeleteIconButton({
   action,
   assetId,
   assetTitle,
   confirmMessage,
+  disabled = false,
   onDeleted,
-}: PortfolioDeleteButtonProps): React.JSX.Element {
+}: PortfolioDeleteIconButtonProps): React.JSX.Element {
   const router = useRouter();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isPending, startTransition] = useTransition();
   const { copy } = useAdminI18n();
   const { showSuccessToast } = useAdminToast();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const [errorMessage, setErrorMessage] = useState('');
   const description =
     confirmMessage ?? formatAdminMessage(copy.portfolio.deleteConfirm, { title: assetTitle });
 
@@ -52,16 +54,16 @@ export function PortfolioDeleteButton({
   }
 
   return (
-    <div className="admin-portfolio-delete-form">
+    <>
       <button
         type="button"
-        className="admin-danger-button"
-        disabled={isPending}
+        className="admin-portfolio-sheet-delete-x"
+        aria-label={formatAdminMessage(copy.portfolio.deleteAria, { title: assetTitle })}
+        disabled={disabled || isPending}
         onClick={() => setIsDialogOpen(true)}
       >
-        {isPending ? copy.common.deleting : copy.common.delete}
+        <span aria-hidden>×</span>
       </button>
-      {errorMessage && !isDialogOpen ? <p className="admin-card-error">{errorMessage}</p> : null}
       {isDialogOpen ? (
         <AdminConfirmDialog
           title={copy.portfolio.deleteDialogTitle}
@@ -79,6 +81,6 @@ export function PortfolioDeleteButton({
           onConfirm={handleConfirm}
         />
       ) : null}
-    </div>
+    </>
   );
 }
