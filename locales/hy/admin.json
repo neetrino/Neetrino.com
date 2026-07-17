@@ -170,6 +170,18 @@
     "description": "Թաքնված վճարման հղումներից ստացված պատվերներ։",
     "listAria": "Վճարման պատվերների ցուցակ",
     "empty": "Վճարման պատվերներ դեռ չկան։ Վճարված և սպասվող վճարումները կհայտնվեն այստեղ։",
-    "noCustomer": "Հաճախորդ չկա"
+    "noCustomer": "Հաճախորդ չկա",
+    "openAria": "Բացել {orderNumber}-ի մանրամասները",
+    "sheetDescription": "Դիտել այս պատվերի վճարման մանրամասները։",
+    "metaProduct": "Ապրանք",
+    "metaCustomer": "Հաճախորդ",
+    "metaProvider": "Պրովայդեր",
+    "metaTransactionId": "Transaction ID",
+    "metaCreated": "Ստեղծված",
+    "metaPaid": "Վճարված",
+    "metaUpdated": "Թարմացված",
+    "metaFailure": "Սխալի պատճառ",
+    "notAvailable": "Հասանելի չէ",
+    "notPaidYet": "Դեռ չի վճարվել"
   }
 }

@@ -170,6 +170,18 @@
     "description": "Заказы из скрытых платежных ссылок.",
     "listAria": "Список платежных заказов",
     "empty": "Платежных заказов пока нет. Оплаченные и ожидающие платежи появятся здесь.",
-    "noCustomer": "Нет клиента"
+    "noCustomer": "Нет клиента",
+    "openAria": "Открыть детали {orderNumber}",
+    "sheetDescription": "Просмотр деталей платежа для этого заказа.",
+    "metaProduct": "Продукт",
+    "metaCustomer": "Клиент",
+    "metaProvider": "Провайдер",
+    "metaTransactionId": "ID транзакции",
+    "metaCreated": "Создан",
+    "metaPaid": "Оплачен",
+    "metaUpdated": "Обновлён",
+    "metaFailure": "Причина ошибки",
+    "notAvailable": "Недоступно",
+    "notPaidYet": "Ещё не оплачен"
   }
 }

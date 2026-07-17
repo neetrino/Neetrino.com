@@ -170,6 +170,18 @@
     "description": "Orders from hidden product payment links.",
     "listAria": "Payment order list",
     "empty": "No payment orders yet. Paid and pending hidden product payments will appear here.",
-    "noCustomer": "No customer"
+    "noCustomer": "No customer",
+    "openAria": "Open details for {orderNumber}",
+    "sheetDescription": "Review payment attempt details for this order.",
+    "metaProduct": "Product",
+    "metaCustomer": "Customer",
+    "metaProvider": "Provider",
+    "metaTransactionId": "Transaction ID",
+    "metaCreated": "Created",
+    "metaPaid": "Paid",
+    "metaUpdated": "Updated",
+    "metaFailure": "Failure reason",
+    "notAvailable": "Not available",
+    "notPaidYet": "Not paid yet"
   }
 }
