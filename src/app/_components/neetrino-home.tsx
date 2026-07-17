@@ -16,6 +16,8 @@ export function NeetrinoHome({
   portfolioBottomRow,
   portfolioTopRow,
 }: NeetrinoHomeProps): React.JSX.Element {
+  const mobilePortfolioProjects = [...portfolioTopRow, ...portfolioBottomRow];
+
   return (
     <NeetrinoPageShell mainId="home" srOnlyTitle={homeCopy.meta.pageTitle}>
       <div className="home-desktop">
@@ -29,7 +31,7 @@ export function NeetrinoHome({
       </div>
 
       <div className="home-mobile-wrap">
-        <HomeMobile />
+        <HomeMobile portfolioProjects={mobilePortfolioProjects} />
       </div>
     </NeetrinoPageShell>
   );
