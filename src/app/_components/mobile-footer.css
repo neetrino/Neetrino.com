@@ -183,14 +183,14 @@
   .home-page .home-footer-social {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 14px;
+    gap: 10px;
     margin-top: 8px;
   }
 
   .home-page .home-footer-social a,
   .home-page .home-footer-social .home-footer-social-item {
-    width: 40px;
-    height: 40px;
+    width: 22px;
+    height: 22px;
   }
 
   .home-page .home-footer-contact-icon {
