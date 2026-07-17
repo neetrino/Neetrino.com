@@ -68,7 +68,8 @@
   flex-direction: column;
   gap: calc(30px * var(--home-ui-scale));
   width: calc(369px * var(--home-ui-scale));
-  height: calc(463px * var(--home-ui-scale));
+  min-height: calc(463px * var(--home-ui-scale));
+  height: auto;
   padding: calc(60px * var(--home-ui-scale)) calc(40px * var(--home-ui-scale));
   border-radius: calc(38px * var(--home-ui-scale));
   overflow: hidden;
@@ -111,6 +112,7 @@
   position: relative;
   z-index: 2;
   display: flex;
+  flex-shrink: 0;
   width: calc(40px * var(--home-ui-scale));
   height: calc(40px * var(--home-ui-scale));
   color: #ededf2;
@@ -125,11 +127,13 @@
   position: relative;
   z-index: 2;
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   gap: calc(16px * var(--home-ui-scale));
 }
 
 .svc-card-title {
+  flex-shrink: 0;
   margin: 0;
   max-width: calc(282px * var(--home-ui-scale));
   font-weight: 900;
@@ -159,6 +163,7 @@
   position: relative;
   z-index: 2;
   display: inline-flex;
+  flex-shrink: 0;
   gap: calc(4px * var(--home-ui-scale));
   align-items: center;
   align-self: flex-start;
