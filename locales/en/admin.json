@@ -7,6 +7,7 @@
     "statusOn": "Status: on",
     "logout": "Logout",
     "collapse": "Collapse",
+    "expand": "Expand",
     "languageLabel": "Language",
     "nav": {
       "blog": "Blog",

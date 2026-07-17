@@ -7,6 +7,7 @@
     "statusOn": "Статус: включен",
     "logout": "Выйти",
     "collapse": "Свернуть",
+    "expand": "Развернуть",
     "languageLabel": "Язык",
     "nav": {
       "blog": "Блог",
