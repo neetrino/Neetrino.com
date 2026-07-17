@@ -1,12 +1,15 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { staticAsset } from '@/lib/static-asset';
 import { CdnImage as Image } from '@/lib/cdn-image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import type { NavItem } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
+
+const HEADER_LOGO_SRC = '/figma-home/neetrino-logo.png';
+const HEADER_LOGO_WIDTH = 1682;
+const HEADER_LOGO_HEIGHT = 477;
 
 function useCurrentHash(pathname: string): string {
   const [hash, setHash] = useState('');
@@ -90,13 +93,14 @@ export function HomeHeader(): React.JSX.Element {
   return (
     <header className="home-header">
       <div className="home-header-inner">
-        <Link href="/" className="home-header-logo">
+        <Link href="/" className="home-header-logo" aria-label={homeCopy.navigation.logoHomeAriaLabel}>
           <Image
-            src={staticAsset('/figma-home/neetrino-logo.png')}
+            src={HEADER_LOGO_SRC}
             alt={homeCopy.navigation.logoAlt}
-            width={460}
-            height={93}
+            width={HEADER_LOGO_WIDTH}
+            height={HEADER_LOGO_HEIGHT}
             priority
+            className="home-header-logo-img"
           />
         </Link>
         <nav className="home-header-nav" aria-label={homeCopy.navigation.mainAriaLabel}>

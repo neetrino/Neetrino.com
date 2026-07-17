@@ -524,12 +524,13 @@ html:lang(ru) {
 
 .home-header-logo {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   padding-inline: calc(8px * var(--home-ui-scale));
 }
 
-.home-header-logo img {
-  width: calc(72px * var(--home-ui-scale)) !important;
+.home-header-logo-img {
+  width: calc(96px * var(--home-ui-scale)) !important;
   height: auto !important;
 }
 
