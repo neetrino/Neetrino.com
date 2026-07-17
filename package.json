@@ -17,7 +17,8 @@
     "bake:portfolio-decor": "node scripts/bake-portfolio-decor.mjs",
     "bake:services-decor": "node scripts/bake-services-decor.mjs",
     "bake:decor": "node scripts/bake-portfolio-decor.mjs && node scripts/bake-services-decor.mjs",
-    "assets:upload-r2": "node scripts/upload-static-assets.mjs"
+    "assets:upload-r2": "node scripts/upload-local-rasters-to-r2.mjs",
+    "convert:webp": "node scripts/convert-to-webp.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1075.0",
@@ -25,6 +26,7 @@
     "next": "16.2.9",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "sharp": "^0.34.5",
     "three": "^0.184.0"
   },
   "devDependencies": {
@@ -37,7 +39,6 @@
     "eslint-config-next": "16.2.9",
     "playwright": "^1.58.2",
     "prisma": "^6.19.0",
-    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

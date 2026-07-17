@@ -1,11 +1,12 @@
 import type { ServiceIconKey } from './services-data';
+import { staticAsset } from '@/lib/static-asset';
 
-/** Local service detail visuals (generated art under /public/services). */
+/** Service detail visuals on R2 CDN (`static/services/*.webp`). */
 export const SERVICE_DETAIL_IMAGES: Record<ServiceIconKey, string> = {
-  saas: '/services/detail-saas.png',
-  crm: '/services/detail-crm.png',
-  website: '/services/detail-website.png',
-  mobile: '/services/detail-mobile.png',
-  ai: '/services/detail-ai.png',
-  erp: '/services/detail-erp.png',
+  saas: staticAsset('/services/detail-saas.webp'),
+  crm: staticAsset('/services/detail-crm.webp'),
+  website: staticAsset('/services/detail-website.webp'),
+  mobile: staticAsset('/services/detail-mobile.webp'),
+  ai: staticAsset('/services/detail-ai.webp'),
+  erp: staticAsset('/services/detail-erp.webp'),
 };

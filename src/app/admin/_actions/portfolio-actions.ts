@@ -6,7 +6,7 @@ import type { PortfolioAsset } from '@prisma/client';
 import { getNextPortfolioAssetStatus } from '@/lib/portfolio-asset-status';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
-import { R2ConfigurationError, deleteR2Object, uploadR2Object } from '@/lib/r2/storage';
+import { R2ConfigurationError, deleteR2Object, uploadR2ImageAsWebp } from '@/lib/r2/storage';
 import { requireAdminSession } from '@/lib/admin-session';
 
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
@@ -112,13 +112,12 @@ function readOptionalImageFile(formData: FormData): File | null {
   return validateImageFile(file);
 }
 
-function createObjectKey(file: File): string {
-  const extension = file.name.split('.').pop()?.toLowerCase() ?? 'webp';
+function createObjectKey(): string {
   const now = new Date();
   const year = now.getUTCFullYear();
   const month = String(now.getUTCMonth() + 1).padStart(2, '0');
 
-  return `${PORTFOLIO_UPLOAD_PREFIX}/${year}/${month}/${randomUUID()}.${extension}`;
+  return `${PORTFOLIO_UPLOAD_PREFIX}/${year}/${month}/${randomUUID()}.webp`;
 }
 
 function createTitleFromFile(file: File): string {
@@ -200,10 +199,9 @@ export async function uploadPortfolioImage(
     const title = readOptionalText(formData, 'title') ?? createTitleFromFile(image);
     const alt = readOptionalText(formData, 'alt') ?? `${title} portfolio image`;
     const body = Buffer.from(await image.arrayBuffer());
-    const uploaded = await uploadR2Object({
-      key: createObjectKey(image),
+    const uploaded = await uploadR2ImageAsWebp({
+      key: createObjectKey(),
       body,
-      contentType: image.type,
     });
 
     await prisma.portfolioAsset.create({
@@ -216,8 +214,8 @@ export async function uploadPortfolioImage(
         sortOrder: await getNextPortfolioSortOrder(),
         key: uploaded.key,
         url: uploaded.url,
-        contentType: image.type,
-        sizeBytes: image.size,
+        contentType: uploaded.contentType,
+        sizeBytes: uploaded.sizeBytes,
       },
     });
 
@@ -356,10 +354,9 @@ export async function updatePortfolioAsset(formData: FormData): Promise<Portfoli
 
     if (image) {
       const body = Buffer.from(await image.arrayBuffer());
-      const uploaded = await uploadR2Object({
-        key: createObjectKey(image),
+      const uploaded = await uploadR2ImageAsWebp({
+        key: createObjectKey(),
         body,
-        contentType: image.type,
       });
 
       try {
@@ -375,8 +372,8 @@ export async function updatePortfolioAsset(formData: FormData): Promise<Portfoli
       mediaData = {
         key: uploaded.key,
         url: uploaded.url,
-        contentType: image.type,
-        sizeBytes: image.size,
+        contentType: uploaded.contentType,
+        sizeBytes: uploaded.sizeBytes,
       };
     }
 
