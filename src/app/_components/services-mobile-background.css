@@ -309,7 +309,8 @@
   }
 
   .svc-mobile-bg-shell .svc-title-wrap,
-  .svc-mobile-bg-shell .svc-grid {
+  .svc-mobile-bg-shell .svc-grid,
+  .svc-mobile-bg-shell .svc-details {
     position: relative;
     z-index: 2;
   }

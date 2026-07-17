@@ -8,7 +8,11 @@
     "srOnlyTitle": "Neetrino Services"
   },
   "actions": {
-    "continue": "Continue"
+    "continue": "Continue",
+    "talkToUs": "Talk to us"
+  },
+  "details": {
+    "sectionAria": "Service details"
   },
   "cards": {
     "saas": {
@@ -16,30 +20,85 @@
       "description": [
         "Scalable SaaS platforms built for growth",
         "Secure, flexible, and ready to evolve with your product"
+      ],
+      "detailHeadline": "SaaS platforms that scale with you",
+      "detailBody": [
+        "We design and build multi-tenant SaaS products from architecture to launch — billing, roles, analytics, and the integrations your customers expect.",
+        "Every platform is engineered for reliability, security, and clean iteration so your roadmap stays fast without rewriting the foundation."
+      ],
+      "detailPoints": [
+        "Multi-tenant architecture with clear isolation",
+        "Subscription, usage, and seat-based billing flows",
+        "Admin tooling, audit trails, and role-based access",
+        "API-first integrations for CRM, payments, and analytics"
       ]
     },
     "crm": {
       "title": ["CRM", "Systems"],
       "description": [
         "Powerful customer relationship management solutions to streamline your sales process and boost customer satisfaction."
+      ],
+      "detailHeadline": "CRM that matches how your team sells",
+      "detailBody": [
+        "We implement and customize CRM systems around your pipelines — from lead capture to renewal — so sales and support share one reliable source of truth.",
+        "Automations, dashboards, and integrations cut manual work and keep every customer touchpoint visible."
+      ],
+      "detailPoints": [
+        "Pipeline design tailored to your sales stages",
+        "Automation for follow-ups, tasks, and handoffs",
+        "Dashboards for revenue, conversion, and retention",
+        "Sync with email, messaging, and marketing tools"
       ]
     },
     "website": {
       "title": ["Website Development"],
       "description": [
         "Cutting-edge web solutions built with modern technologies, optimized for performance and designed to convert visitors into customers."
+      ],
+      "detailHeadline": "Websites built to perform and convert",
+      "detailBody": [
+        "From marketing sites to complex product experiences, we ship fast, accessible frontends with clear information architecture and measurable conversion paths.",
+        "Performance, SEO foundations, and CMS workflows are part of delivery — not afterthoughts."
+      ],
+      "detailPoints": [
+        "Modern stack with strong Core Web Vitals focus",
+        "Responsive layouts and accessible UI patterns",
+        "CMS and content workflows for your team",
+        "Analytics-ready funnels and clear CTAs"
       ]
     },
     "mobile": {
       "title": ["Mobile App Development"],
       "description": [
         "Native and cross-platform mobile applications that deliver exceptional user experiences on iOS and Android devices."
+      ],
+      "detailHeadline": "Mobile apps with production-grade UX",
+      "detailBody": [
+        "We build native and cross-platform apps with polished interaction design, offline-friendly flows, and the push/notification patterns users expect.",
+        "Backend APIs, store release pipelines, and monitoring are included so launches stay predictable."
+      ],
+      "detailPoints": [
+        "iOS and Android delivery with shared design systems",
+        "Secure auth, payments, and device-native features",
+        "App Store / Play Console release support",
+        "Crash reporting and iteration-ready analytics"
       ]
     },
     "ai": {
       "title": ["AI Product Development"],
       "description": [
         "Intelligent automation powered by machine learning and natural language processing to transform your business operations."
+      ],
+      "detailHeadline": "AI products grounded in real workflows",
+      "detailBody": [
+        "We turn AI into usable product surfaces — assistants, document pipelines, classification, and automation — wired into the systems your team already uses.",
+        "Safety, evaluation, and cost controls are designed in so models stay useful in production."
+      ],
+      "detailPoints": [
+        "Use-case discovery and measurable success criteria",
+        "LLM / ML pipelines with retrieval and tooling",
+        "Human-in-the-loop review where it matters",
+        "Monitoring for quality, latency, and spend"
       ]
     },
     "erp": {
@@ -47,6 +106,17 @@
       "description": [
         "All-in-one systems for managing business operations",
         "Control data, processes, and resources in one place"
+      ],
+      "detailHeadline": "ERP that unifies operations",
+      "detailBody": [
+        "We implement ERP systems that connect finance, inventory, HR, and operations into one coherent process model — with roles and reporting your managers can trust.",
+        "Migration, training, and phased rollout keep disruption low while visibility goes up."
+      ],
+      "detailPoints": [
+        "Process mapping across departments",
+        "Modules for inventory, finance, and operations",
+        "Role-based access and approval workflows",
+        "Reporting that leadership can act on"
       ]
     }
   }

@@ -9,7 +9,24 @@ export type ServiceDetailCard = {
   title: readonly string[];
   /** Description lines (each entry renders on its own line, matching Figma). */
   description: readonly string[];
+  detailHeadline: string;
+  detailBody: readonly string[];
+  detailPoints: readonly string[];
 };
+
+type ServiceCardMessages = ServicesMessages['cards'][ServiceIconKey];
+
+function createCard(id: ServiceIconKey, card: ServiceCardMessages): ServiceDetailCard {
+  return {
+    id,
+    icon: id,
+    title: card.title,
+    description: card.description,
+    detailHeadline: card.detailHeadline,
+    detailBody: card.detailBody,
+    detailPoints: card.detailPoints,
+  };
+}
 
 /**
  * Service cards in grid order (row-major: 3 columns, 2 rows).
@@ -19,42 +36,12 @@ export function createServiceDetailCards(messages: ServicesMessages): readonly S
   const { cards } = messages;
 
   return [
-    {
-      id: 'saas',
-      icon: 'saas',
-      title: cards.saas.title,
-      description: cards.saas.description,
-    },
-    {
-      id: 'crm',
-      icon: 'crm',
-      title: cards.crm.title,
-      description: cards.crm.description,
-    },
-    {
-      id: 'website',
-      icon: 'website',
-      title: cards.website.title,
-      description: cards.website.description,
-    },
-    {
-      id: 'mobile',
-      icon: 'mobile',
-      title: cards.mobile.title,
-      description: cards.mobile.description,
-    },
-    {
-      id: 'ai',
-      icon: 'ai',
-      title: cards.ai.title,
-      description: cards.ai.description,
-    },
-    {
-      id: 'erp',
-      icon: 'erp',
-      title: cards.erp.title,
-      description: cards.erp.description,
-    },
+    createCard('saas', cards.saas),
+    createCard('crm', cards.crm),
+    createCard('website', cards.website),
+    createCard('mobile', cards.mobile),
+    createCard('ai', cards.ai),
+    createCard('erp', cards.erp),
   ];
 }
 

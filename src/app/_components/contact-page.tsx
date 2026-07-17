@@ -15,7 +15,8 @@ const SOCIAL_HREFS: Partial<Record<SocialIconKey, string>> = {
   facebook: 'https://www.facebook.com/Neetrino.it.company/',
   instagram: 'https://www.instagram.com/neetrino_it_company/',
   linkedin: 'https://www.linkedin.com/company/neetrino-it-company/',
-  whatsapp: 'https://wa.me/37444343000',
+  telegram: 'https://telegram.me/neetrino',
+  whatsapp: 'https://api.whatsapp.com/send?phone=37444343000',
 };
 
 const MAP_URL = 'https://www.google.com/maps?q=40.1684703,44.4458742&z=15&output=embed';
@@ -26,7 +27,8 @@ const SOCIAL_ICON_PATHS: Record<SocialIconKey, string> = {
   facebook: 'M13.7 20v-7.1h2.4l.4-2.8h-2.8V8.3c0-.8.2-1.4 1.4-1.4h1.5V4.4c-.7-.1-1.5-.2-2.2-.2-2.2 0-3.7 1.3-3.7 3.8v2.1H8.2v2.8h2.5V20h3z',
   instagram: 'M7.2 2.8h9.6a4.4 4.4 0 0 1 4.4 4.4v9.6a4.4 4.4 0 0 1-4.4 4.4H7.2a4.4 4.4 0 0 1-4.4-4.4V7.2a4.4 4.4 0 0 1 4.4-4.4Zm4.8 4.7a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Zm5.1-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z',
   linkedin: 'M5.1 8.8h3.2V20H5.1V8.8Zm1.6-4.9a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6ZM10.3 8.8h3v1.5h.1c.4-.8 1.5-1.8 3.1-1.8 3.3 0 3.9 2.2 3.9 5V20h-3.2v-5.8c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V20h-3.2V8.8h.4Z',
-  telegram: 'M21.4 4.5 18.5 19c-.2 1-.8 1.2-1.6.8l-4.4-3.3-2.1 2c-.2.2-.4.4-.9.4l.3-4.5 8.2-7.4c.4-.3-.1-.5-.5-.2L7.4 13.2 3 11.8c-1-.3-1-1  .2-1.4L20.4 3.8c.8-.3 1.5.2 1  .7Z',
+  telegram:
+    'M21.5 3.2 2.7 11.05c-.95.4-.9 1.75.1 2.05l4.85 1.5 1.85 5.7c.3.95 1.5 1.15 2.15.35l2.55-3.05 4.7 3.45c.85.6 2 .15 2.2-.95L22.9 4.7c.25-1.15-.85-2.05-1.4-1.5ZM9.55 14.35l.2 3.55.05.1.95-1.2 7.45-8.15c.25-.3-.05-.45-.35-.25L8.2 13.6l1.35.75Z',
   whatsapp: 'M12 3.3a8.4 8.4 0 0 1 7.1 12.9l1.1 4-4.1-1.1A8.4 8.4 0 1 1 12 3.3Zm-3.2 4.5c-.2 0-.6.1-.9.5s-1.2 1.2-1.2 2.9 1.3 3.4 1.5 3.6c.2.3 2.5 3.9 6.1 5.3 3 .1 3.6-2 3.7-2.2s.1-1.4-.2-1.5l-2.4-1.2c-.3-.1-.6-.2-.8.2l-1.1 1.3c-.2.3-.4.3-.8.1-.4-.2-1.5-.6-2.9-1.8-1.1-1-1.8-2.1-2-2.5s0-.6.2-.8l.6-.7c.2-.2.2-.4.3-.6.1-.2 0-.5 0-.7L9.8 8c-.2-.5-.5-.5-.7-.5h-.3Z',
   viber: 'M8.7 3.8h6.6a4.9 4.9 0 0 1 4.9 4.9v4.1a4.9 4.9 0 0 1-4.9 4.9h-2.6L9 20.4v-2.7h-.3a4.9 4.9 0 0 1-4.9-4.9V8.7a4.9 4.9 0 0 1 4.9-4.9Zm-.4 4.1c-.3.1-.6.7-.6 1 .3 3.6 2.6 6 6.2 6.4.4 0 .9-.3 1-.7l.4-1.2c.1-.3 0-.6-.3-.8l-1.6-.9c-.3-.2-.6-.1-.8.2l-.5.7c-1-.5-1.8-1.3-2.2-2.3l.7-.5c.3-.2.4-.5.2-.8L9.9 7.5c-.2-.3-.5-.4-.8-.3l-.8.7Z',
 };
@@ -192,8 +194,8 @@ export function ContactPage(): React.JSX.Element {
         <div className="contact-content">
           <div className="contact-hero-grid">
             <ContactIntroCard />
+            <ContactOfficeSection />
           </div>
-          <ContactOfficeSection />
         </div>
       </section>
     </NeetrinoPageShell>

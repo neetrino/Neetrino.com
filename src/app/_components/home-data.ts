@@ -31,6 +31,14 @@ export type NavItem = {
   href: string;
 };
 
+export type FooterSocialIcon = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  href?: string;
+};
+
 export type RichTextPart = {
   text: string;
   bold: boolean | 'extrabold';
@@ -194,7 +202,7 @@ export function createHomeData(messages: HomeMessages) {
     hours: footer.contact.hours,
   } as const;
 
-  const footerSocialIcons = [
+  const footerSocialIcons: readonly FooterSocialIcon[] = [
     {
       src: staticAsset('/figma-home/social-media-icon-square-facebook.svg'),
       alt: messages.social.facebook,
@@ -216,7 +224,13 @@ export function createHomeData(messages: HomeMessages) {
       height: 18,
       href: 'https://www.linkedin.com/company/neetrino-it-company/',
     },
-    { src: staticAsset('/figma-home/group.svg'), alt: messages.social.behance, width: 24, height: 15 },
+    {
+      src: staticAsset('/figma-home/group.svg'),
+      alt: messages.social.behance,
+      width: 24,
+      height: 15,
+      href: 'https://www.behance.net/NeetrinoITcompany',
+    },
     {
       src: staticAsset('/figma-home/group74.svg'),
       alt: messages.social.youtube,
@@ -224,9 +238,21 @@ export function createHomeData(messages: HomeMessages) {
       height: 15,
       href: 'https://www.youtube.com/@NeetrinoITCompany',
     },
-    { src: staticAsset('/figma-home/vector7.svg'), alt: messages.social.twitter, width: 20, height: 20 },
-    { src: staticAsset('/figma-home/group221.svg'), alt: messages.social.dribbble, width: 19, height: 20 },
-  ] as const;
+    {
+      src: staticAsset('/figma-home/vector7.svg'),
+      alt: messages.social.whatsapp,
+      width: 20,
+      height: 20,
+      href: 'https://api.whatsapp.com/send?phone=37444343000',
+    },
+    {
+      src: '/figma-home/telegram.svg',
+      alt: messages.social.telegram,
+      width: 20,
+      height: 20,
+      href: 'https://telegram.me/neetrino',
+    },
+  ];
 
   const homeCopy = {
     actions,
