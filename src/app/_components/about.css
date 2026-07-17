@@ -247,16 +247,19 @@
 .about-stat {
   position: relative;
   display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 170px;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .about-stat-value {
   position: relative;
-  font-size: calc(56px * var(--locale-font-scale));
+  font-size: 46px;
   font-weight: 900;
-  line-height: calc(56px * var(--locale-font-scale));
+  line-height: 46px;
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
@@ -274,11 +277,13 @@
 }
 
 .about-stat-label {
-  font-size: calc(16px * var(--locale-font-scale));
+  font-size: 13px;
   font-weight: 300;
-  line-height: calc(24px * var(--locale-font-scale));
+  line-height: 18px;
   color: #99a1af;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  overflow-wrap: break-word;
 }
 
 .about-grad-purple {
@@ -376,23 +381,24 @@
 
 .about-intro {
   position: absolute;
-  top: 694px;
+  top: 635px;
   margin: 0;
-  font-size: calc(16px * var(--locale-font-scale));
-  font-weight: 200;
-  line-height: calc(24px * var(--locale-font-scale));
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0.01em;
   color: #fff;
 }
 
 .about-intro-right {
   left: 227px;
-  width: 367px;
+  width: 360px;
   text-align: right;
 }
 
 .about-intro-left {
   left: 621px;
-  width: 246px;
+  width: 280px;
   text-align: left;
 }
 
@@ -407,21 +413,23 @@
 .about-hero-stats {
   position: absolute;
   top: 985px;
-  left: 859px;
+  left: 860px;
   display: flex;
-  gap: 64px;
+  gap: 40px;
   align-items: flex-start;
+  max-width: 570px;
 }
 
 .about-lead {
   position: absolute;
-  top: 991px;
+  top: 955px;
   left: 49px;
-  width: 653px;
+  width: 560px;
   margin: 0;
-  font-size: calc(20px * var(--locale-font-scale));
-  font-weight: 200;
-  line-height: calc(28px * var(--locale-font-scale));
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0.01em;
   color: #fff;
 }
 
@@ -656,5 +664,54 @@
 .about-team-img {
   object-fit: contain;
   object-position: bottom center;
+}
+
+/* Longer locales: tighter hero type so lines and stats stay inside the stage. */
+html:lang(hy) .about-headline,
+html:lang(ru) .about-headline {
+  font-size: calc(78px * var(--locale-font-scale));
+  line-height: calc(72px * var(--locale-font-scale));
+  letter-spacing: 0.6px;
+}
+
+html:lang(hy) .about-headline-1,
+html:lang(ru) .about-headline-1 {
+  top: 292px;
+}
+
+html:lang(hy) .about-headline-2,
+html:lang(ru) .about-headline-2 {
+  top: 370px;
+  left: 210px;
+}
+
+html:lang(hy) .about-headline-3,
+html:lang(ru) .about-headline-3 {
+  top: 452px;
+}
+
+html:lang(hy) .about-headline-4,
+html:lang(ru) .about-headline-4 {
+  top: 534px;
+}
+
+html:lang(hy) .about-hero-line,
+html:lang(ru) .about-hero-line {
+  top: 392px;
+}
+
+html:lang(hy) .about-intro,
+html:lang(ru) .about-intro {
+  font-family: var(--font-locale-body);
+}
+
+html:lang(hy) .about-lead,
+html:lang(ru) .about-lead {
+  font-family: var(--font-locale-body);
+}
+
+html:lang(hy) .about-stat-label,
+html:lang(ru) .about-stat-label {
+  font-family: var(--font-locale-body);
 }
 

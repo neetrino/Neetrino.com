@@ -116,7 +116,13 @@ html {
 }
 
 html:lang(hy) {
-  --locale-font-scale: 0.9;
+  --locale-font-scale: 0.82;
+  --font-locale-body: var(--font-noto-armenian), var(--font-inter), Inter, sans-serif;
+}
+
+html:lang(ru) {
+  --locale-font-scale: 0.86;
+  --font-locale-body: var(--font-inter), Inter, sans-serif;
 }
 
 .sr-only {
