@@ -301,12 +301,13 @@ body:has(.admin-page) {
 }
 
 .admin-nav-item.is-active {
-  background:
-    linear-gradient(135deg, var(--admin-accent-soft), var(--admin-purple-soft));
-  color: #16171c;
-  box-shadow:
-    inset 0 0 0 1px rgb(255 117 0 / 0.22),
-    0 10px 24px rgb(255 117 0 / 0.1);
+  background: linear-gradient(135deg, var(--admin-accent) 0%, #ff9a3d 42%, var(--admin-purple) 100%);
+  color: #fff;
+  box-shadow: 0 12px 28px var(--admin-accent-glow);
+}
+
+.admin-nav-item.is-active .admin-nav-icon {
+  opacity: 1;
 }
 
 .admin-nav-icon {
