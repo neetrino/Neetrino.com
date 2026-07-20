@@ -409,7 +409,7 @@ html:lang(ru) {
   align-items: center;
   justify-content: center;
   gap: calc(6px * var(--home-ui-scale));
-  width: var(--home-btn-explore-width);
+  width: auto;
   min-width: var(--home-btn-explore-width);
   height: var(--home-btn-explore-height);
   min-height: var(--home-btn-explore-height);
@@ -447,6 +447,7 @@ html:lang(ru) {
 .home-btn-explore-label {
   position: relative;
   z-index: 2;
+  white-space: nowrap;
 }
 
 .home-btn-explore > img {
@@ -1509,30 +1510,67 @@ html:lang(ru) {
 }
 
 .home-partners {
-  padding-block: calc(24px * var(--home-ui-scale));
+  --home-partners-gap: calc(48px * var(--home-ui-scale));
+  --home-partners-scroll-duration: 42s;
+  padding-block: calc(40px * var(--home-ui-scale));
+  overflow: hidden;
+}
+
+.home-partners-viewport {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
 }
 
 .home-partners-track {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-between;
-  gap: calc(24px * var(--home-ui-scale));
+  gap: var(--home-partners-gap);
+  width: max-content;
   min-height: calc(96px * var(--home-ui-scale));
-  opacity: 0.85;
-  overflow-x: auto;
+  padding-inline: var(--home-partners-gap);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+  animation: home-partners-scroll var(--home-partners-scroll-duration) linear infinite;
 }
 
 .home-partner-logo {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(96px * var(--home-ui-scale));
 }
 
 .home-partner-logo img {
-  width: auto;
+  width: 100%;
   height: auto;
   max-height: calc(96px * var(--home-ui-scale));
   object-fit: contain;
-  filter: brightness(0) invert(1);
+}
+
+@keyframes home-partners-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-50% - var(--home-partners-gap) / 2), 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-partners-track {
+    animation: none;
+  }
 }
 
 .home-footer {
@@ -1885,9 +1923,20 @@ html:lang(ru) {
     height: calc(280px * var(--home-ui-scale)) !important;
   }
 
-  .home-partners-track {
-    flex-wrap: wrap;
-    justify-content: center;
+  .home-partners {
+    --home-partners-gap: calc(32px * var(--home-ui-scale));
+    --home-partners-scroll-duration: 28s;
+    padding-block: calc(28px * var(--home-ui-scale));
+  }
+
+  .home-partners-viewport {
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 4%,
+      #000 96%,
+      transparent 100%
+    );
   }
 
   .home-about-stage {

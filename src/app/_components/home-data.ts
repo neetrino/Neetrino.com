@@ -91,11 +91,13 @@ export const serviceIllustrations = [
   },
 ] as const;
 
+/** Partner logos from Figma PARTNERS (node 1:565), left-to-right order. */
 export const partnerLogos = [
-  { src: staticAsset('/figma-home/group70643.svg'), width: 136, height: 79 },
-  { src: staticAsset('/figma-home/group221.svg'), width: 175, height: 53 },
-  { src: staticAsset('/figma-home/group70643.svg'), width: 136, height: 79 },
-  { src: staticAsset('/figma-home/group221.svg'), width: 175, height: 53 },
+  { src: staticAsset('/figma-home/partners/marco-group.webp'), width: 136, height: 79, alt: 'Marco Group' },
+  { src: staticAsset('/figma-home/partners/borbor-aqua.webp'), width: 175, height: 53, alt: 'Borbor Aqua' },
+  { src: staticAsset('/figma-home/partners/mika-kids.webp'), width: 78, height: 73, alt: 'Mika Kids Dental Clinic' },
+  { src: staticAsset('/figma-home/partners/alatis.webp'), width: 157, height: 71, alt: 'Avetis' },
+  { src: staticAsset('/figma-home/partners/hay-masters.webp'), width: 67, height: 96, alt: 'Hay Masters' },
 ] as const;
 
 function normalizeRichTextPart(part: MessageRichTextPart): RichTextPart {
