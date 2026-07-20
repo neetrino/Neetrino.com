@@ -724,6 +724,18 @@ body:has(.admin-page) {
   transition: background var(--admin-transition);
 }
 
+.admin-portfolio-row--logo-only {
+  grid-template-columns: 1fr auto;
+}
+
+.admin-portfolio-row--logo-only .admin-portfolio-thumb-wrap {
+  justify-self: start;
+}
+
+.admin-portfolio-row--logo-only .admin-portfolio-actions {
+  justify-self: end;
+}
+
 .admin-portfolio-row:first-child {
   border-top: 0;
 }
@@ -1217,6 +1229,11 @@ body:has(.admin-page) {
     grid-template-areas:
       'handle thumb copy'
       'actions actions actions';
+  }
+
+  .admin-portfolio-row--logo-only {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 'thumb actions';
   }
 
   .admin-portfolio-drag-handle {

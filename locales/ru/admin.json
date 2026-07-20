@@ -12,6 +12,7 @@
     "nav": {
       "blog": "Блог",
       "portfolio": "Портфолио",
+      "partners": "Партнёры",
       "messages": "Сообщения",
       "products": "Продукты",
       "orders": "Заказы"
@@ -123,6 +124,31 @@
     "updateSuccess": "Материал портфолио успешно сохранён.",
     "uploadSuccess": "Материал портфолио успешно загружен.",
     "deleteSuccess": "Материал портфолио успешно удалён."
+  },
+  "partners": {
+    "title": "Партнёры",
+    "description": "Управляйте логотипами партнёров в бегущей строке на главной. Загружайте изображение (до 10 MB) и удаляйте ненужных партнёров.",
+    "upload": "Добавить партнёра",
+    "uploading": "Загрузка...",
+    "uploadSubmit": "Загрузить",
+    "uploadSheetTitle": "Новый партнёр",
+    "uploadSheetDescription": "Загрузите логотип партнёра.",
+    "uploadImageLabel": "Логотип",
+    "uploadAltPlaceholder": "Необязательно — по умолчанию из названия",
+    "metaName": "Название",
+    "metaAlt": "Alt-текст",
+    "empty": "Партнёров пока нет. Добавьте первый логотип кнопкой выше.",
+    "listAria": "Логотипы партнёров",
+    "deleteConfirm": "Удалить «{name}» и логотип?",
+    "deleteDialogTitle": "Удалить этого партнёра?",
+    "deleteTypeLabel": "Введите «{name}» для подтверждения",
+    "uploadSuccess": "Партнёр успешно загружен.",
+    "updateSuccess": "Логотип партнёра успешно обновлён.",
+    "deleteSuccess": "Партнёр успешно удалён.",
+    "editSheetTitle": "Редактировать партнёра",
+    "editSheetDescription": "Замените логотип партнёра.",
+    "editSubmit": "Сохранить",
+    "editAria": "Редактировать {name}"
   },
   "messages": {
     "title": "Сообщения",
