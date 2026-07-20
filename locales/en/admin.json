@@ -12,6 +12,7 @@
     "nav": {
       "blog": "Blog",
       "portfolio": "Portfolio",
+      "partners": "Partners",
       "messages": "Messages",
       "products": "Products",
       "orders": "Orders"
@@ -123,6 +124,31 @@
     "updateSuccess": "Portfolio asset saved successfully.",
     "uploadSuccess": "Portfolio asset uploaded successfully.",
     "deleteSuccess": "Portfolio asset deleted successfully."
+  },
+  "partners": {
+    "title": "Partners",
+    "description": "Manage partner logos shown in the home page marquee. Upload a logo image (max 10 MB) and delete partners you no longer need.",
+    "upload": "Add partner",
+    "uploading": "Uploading...",
+    "uploadSubmit": "Upload",
+    "uploadSheetTitle": "New partner",
+    "uploadSheetDescription": "Upload a partner logo image.",
+    "uploadImageLabel": "Logo image",
+    "uploadAltPlaceholder": "Optional — defaults from the name",
+    "metaName": "Name",
+    "metaAlt": "Alt text",
+    "empty": "No partners yet. Add the first logo from the button above.",
+    "listAria": "Partner logos",
+    "deleteConfirm": "Delete \"{name}\" and its logo?",
+    "deleteDialogTitle": "Delete this partner?",
+    "deleteTypeLabel": "Type \"{name}\" to confirm",
+    "uploadSuccess": "Partner uploaded successfully.",
+    "updateSuccess": "Partner logo updated successfully.",
+    "deleteSuccess": "Partner deleted successfully.",
+    "editSheetTitle": "Edit partner",
+    "editSheetDescription": "Replace the partner logo image.",
+    "editSubmit": "Save",
+    "editAria": "Edit {name}"
   },
   "messages": {
     "title": "Messages",

@@ -24,7 +24,7 @@
       "home": "Home",
       "services": "Services",
       "portfolio": "Portfolio",
-      "about": "About",
+      "about": "About Us",
       "contact": "Contact",
       "blog": "Blog",
       "team": "Team"
@@ -39,8 +39,8 @@
     },
     "tagline": {
       "prefix": "We build ",
-      "accent": "high-performance websites",
-      "suffix": " and digital solutions that help businesses grow, scale, and stand out online."
+      "accent": "fast, stable, and effective websites",
+      "suffix": " and digital solutions that help businesses grow, scale, and build a stronger presence online."
     },
     "actions": {
       "quote": "Get a Quote",
@@ -49,55 +49,55 @@
     "stats": {
       "experience": {
         "value": "8+",
-        "label": "Years of experience",
-        "labelLines": ["Years of", "experience"],
-        "mobileLabelLines": ["Years of ", "experience"]
+        "label": "Years of Experience",
+        "labelLines": ["Years of", "Experience"],
+        "mobileLabelLines": ["Years of ", "Experience"]
       },
       "clients": {
         "value": "97%",
-        "label": "Satisfied clients"
+        "label": "Satisfied Clients"
       },
       "creations": {
         "value": "450+",
-        "label": "Creations"
+        "label": "Delivered Solutions"
       }
     }
   },
   "sections": {
     "services": {
       "eyebrow": "SERVICES",
-      "title": "WHAT WE",
-      "highlight": "DO"
+      "title": "DIGITAL SOLUTIONS",
+      "highlight": "FOR BUSINESS GROWTH"
     },
     "portfolio": {
       "eyebrow": "PORTFOLIO",
-      "title": "OUR",
+      "title": "DELIVERED",
       "highlight": " PROJECTS"
     },
     "about": {
       "eyebrow": "BUILD WITH PURPOSE",
-      "title": "WHO",
-      "highlight": "WE",
-      "suffix": "ARE"
+      "title": "WHY",
+      "highlight": "CHOOSE",
+      "suffix": "US"
     }
   },
   "actions": {
     "continue": "Continue",
-    "explore": "Explore"
+    "explore": "Learn More"
   },
   "services": {
     "cards": {
       "website": {
-        "title": "WEBSITE",
+        "title": "WEBSITES",
         "subtitle": "Custom Development"
       },
       "mobileApp": {
-        "title": "MOBILE APP",
-        "subtitle": "App Development"
+        "title": "MOBILE APPS",
+        "subtitle": "iOS and Android Solutions"
       },
       "saasPlatforms": {
         "title": "SAAS PLATFORMS",
-        "subtitle": "Cloud Solutions"
+        "subtitle": "Cloud Business Solutions"
       },
       "crmSystems": {
         "title": "CRM SYSTEMS",
@@ -105,7 +105,7 @@
       },
       "aiIntegrations": {
         "title": "AI INTEGRATIONS",
-        "subtitle": "AI Automation"
+        "subtitle": "Smart Automation"
       }
     }
   },
@@ -121,33 +121,25 @@
     "paragraphs": [
       [
         {
-          "text": "Over the past 8 years, ",
+          "text": "With ",
           "bold": false
         },
         {
-          "text": "Neetrino IT",
+          "text": "Neetrino",
           "bold": true
         },
         {
-          "text": " has developed more than ",
-          "bold": false
-        },
-        {
-          "text": "400 online resources",
-          "bold": "extrabold"
-        },
-        {
-          "text": ", ranging from simple websites to large-scale internet portals and e-commerce platforms",
+          "text": ", businesses get professional digital solutions without large upfront investments. We help companies build their digital infrastructure faster, automate operations, strengthen their market presence, and scale through predictable, flexible financial models.",
           "bold": false
         }
       ],
       [
         {
-          "text": "We specialize in website development, AI and bot solutions, CRM system integration, mobile app development, as well as SEO and SMM optimization—",
+          "text": "From websites and mobile apps to CRM systems, SaaS platforms, and AI integrations, we create a ",
           "bold": false
         },
         {
-          "text": "delivering a comprehensive digital presence for your business.",
+          "text": "complete technology ecosystem.",
           "bold": "extrabold"
         }
       ]

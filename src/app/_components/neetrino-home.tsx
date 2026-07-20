@@ -6,13 +6,16 @@ import { HomePortfolio } from './home-portfolio';
 import { HomeServices } from './home-services';
 import { homeCopy, type ProjectCard } from './home-data';
 import { NeetrinoPageShell } from './neetrino-page-shell';
+import type { PublicPartnerLogo } from '@/lib/public-partner-logos';
 
 type NeetrinoHomeProps = {
+  partnerLogos: readonly PublicPartnerLogo[];
   portfolioBottomRow: ProjectCard[];
   portfolioTopRow: ProjectCard[];
 };
 
 export function NeetrinoHome({
+  partnerLogos,
   portfolioBottomRow,
   portfolioTopRow,
 }: NeetrinoHomeProps): React.JSX.Element {
@@ -22,12 +25,11 @@ export function NeetrinoHome({
     <NeetrinoPageShell mainId="home" srOnlyTitle={homeCopy.meta.pageTitle}>
       <div className="home-desktop">
         <div className="home-page-glow" aria-hidden />
-        <div className="home-page-center-beam" aria-hidden data-name="Rectangle 17418" />
         <HomeHero />
         <HomeServices />
         <HomePortfolio bottomRow={portfolioBottomRow} topRow={portfolioTopRow} />
         <HomeAbout />
-        <HomePartners />
+        <HomePartners logos={partnerLogos} />
       </div>
 
       <div className="home-mobile-wrap">

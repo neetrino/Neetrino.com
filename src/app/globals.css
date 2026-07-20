@@ -89,9 +89,6 @@
   --home-header-clearance: calc((27px + 52px + 16px) * var(--home-ui-scale));
   --home-services-section-padding-top: calc(48px * var(--home-ui-scale));
   --home-page-glow-top: calc(633px * var(--home-ui-scale));
-  --home-page-center-beam-top: calc(1783px * var(--home-ui-scale));
-  --home-page-center-beam-width: calc(88px * var(--home-ui-scale));
-  --home-page-center-beam-height: calc(2793px * var(--home-ui-scale));
   --home-canvas-scale: 1;
 }
 
@@ -211,40 +208,8 @@ html:lang(ru) {
   );
 }
 
-.home-page-center-beam {
-  position: absolute;
-  top: var(--home-page-center-beam-top);
-  left: 50%;
-  z-index: 11;
-  width: var(--home-page-center-beam-width);
-  height: var(--home-page-center-beam-height);
-  pointer-events: none;
-  background-color: rgb(160 160 180 / 0.25);
-  background-image:
-    linear-gradient(
-      to right,
-      rgb(255 255 255 / 0.72) 0,
-      rgb(255 255 255 / 0.14) calc(1px * var(--home-ui-scale)),
-      rgb(255 255 255 / 0.04) calc(4px * var(--home-ui-scale)),
-      rgb(255 255 255 / 0.01) calc(9px * var(--home-ui-scale)),
-      transparent calc(18px * var(--home-ui-scale))
-    ),
-    linear-gradient(
-      to left,
-      rgb(0 0 0 / 0.5) 0,
-      rgb(0 0 0 / 0.12) calc(5px * var(--home-ui-scale)),
-      rgb(0 0 0 / 0.03) calc(11px * var(--home-ui-scale)),
-      transparent calc(20px * var(--home-ui-scale))
-    );
-  transform: translateX(-50%);
-}
-
 .home-page-scale-root[data-has-home-hero='false'] {
   --home-page-glow-top: 0;
-}
-
-.home-page-scale-root[data-has-about-body='true'] .home-page-center-beam {
-  display: none !important;
 }
 
 .home-page-scale-root[data-has-home-hero='false'] .home-services {
@@ -409,7 +374,7 @@ html:lang(ru) {
   align-items: center;
   justify-content: center;
   gap: calc(6px * var(--home-ui-scale));
-  width: var(--home-btn-explore-width);
+  width: auto;
   min-width: var(--home-btn-explore-width);
   height: var(--home-btn-explore-height);
   min-height: var(--home-btn-explore-height);
@@ -447,6 +412,7 @@ html:lang(ru) {
 .home-btn-explore-label {
   position: relative;
   z-index: 2;
+  white-space: nowrap;
 }
 
 .home-btn-explore > img {
@@ -1509,30 +1475,73 @@ html:lang(ru) {
 }
 
 .home-partners {
-  padding-block: calc(24px * var(--home-ui-scale));
+  --home-partners-gap: calc(48px * var(--home-ui-scale));
+  --home-partners-scroll-duration: 120s;
+  padding-block: calc(40px * var(--home-ui-scale));
+  overflow: hidden;
+}
+
+.home-partners-viewport {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
 }
 
 .home-partners-track {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-between;
-  gap: calc(24px * var(--home-ui-scale));
+  width: max-content;
   min-height: calc(96px * var(--home-ui-scale));
-  opacity: 0.85;
-  overflow-x: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+  animation: home-partners-scroll var(--home-partners-scroll-duration) linear infinite;
+}
+
+.home-partners-group {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--home-partners-gap);
+  padding-inline-end: var(--home-partners-gap);
 }
 
 .home-partner-logo {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(96px * var(--home-ui-scale));
 }
 
 .home-partner-logo img {
-  width: auto;
+  width: 100%;
   height: auto;
   max-height: calc(96px * var(--home-ui-scale));
   object-fit: contain;
-  filter: brightness(0) invert(1);
+}
+
+@keyframes home-partners-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-partners-track {
+    animation: none;
+  }
 }
 
 .home-footer {
@@ -1885,9 +1894,20 @@ html:lang(ru) {
     height: calc(280px * var(--home-ui-scale)) !important;
   }
 
-  .home-partners-track {
-    flex-wrap: wrap;
-    justify-content: center;
+  .home-partners {
+    --home-partners-gap: calc(32px * var(--home-ui-scale));
+    --home-partners-scroll-duration: 90s;
+    padding-block: calc(28px * var(--home-ui-scale));
+  }
+
+  .home-partners-viewport {
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 4%,
+      #000 96%,
+      transparent 100%
+    );
   }
 
   .home-about-stage {

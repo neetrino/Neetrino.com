@@ -10,7 +10,6 @@ export function AboutPage(): React.JSX.Element {
   return (
     <NeetrinoPageShell mainId="about-top" srOnlyTitle={aboutMessages.hero.srOnlyTitle}>
       <div className="about-desktop">
-        <div className="home-page-center-beam" aria-hidden data-name="Rectangle 17418" />
         <div className="about-body">
           <AboutDeferredDecor />
           <AboutHero />
