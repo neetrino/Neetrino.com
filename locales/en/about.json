@@ -1,80 +1,102 @@
 {
   "meta": {
     "pageTitle": "About | Neetrino",
-    "description": "About Neetrino — a digital product company building websites, mobile apps, CRM systems, SaaS platforms, and AI integrations."
+    "description": "About Neetrino — digital solutions for business growth: websites, mobile apps, CRM, SaaS, and AI integrations with a flexible payment model."
   },
   "hero": {
     "srOnlyTitle": "About Neetrino"
   },
   "headline": {
-    "line1Plain": "WITH",
-    "line1Accent": "US",
-    "line2": "EVERY IDEA",
-    "line3": "BECOMES",
-    "line4": "POSSIBLE"
+    "line1Plain": "WE",
+    "line1Accent": "BUILD",
+    "line2": "TECHNOLOGY",
+    "line3": "FOR BUSINESS",
+    "line4": "GROWTH"
   },
   "intro": {
-    "right": "Over the past 7 years, Neetrino IT has developed more than 400 online resources, ranging from simple websites to large-scale internet portals and e-commerce platforms.",
-    "left": "We specialize in website development, AI and bot solutions, CRM system integration, mobile app development, as well as SEO and SMM optimization—delivering a comprehensive digital presence for your business.",
-    "mobile": "Over the past 7 years, Neetrino IT has developed more than 400 online resources, ranging from simple websites to large-scale internet portals and e-commerce platforms.\n\nWe specialize in website development, AI and bot solutions, CRM system integration, mobile app development, as well as SEO and SMM optimization—delivering a comprehensive digital presence for your business."
+    "right": "Neetrino creates digital solutions for businesses that want to grow on a clear technological foundation.",
+    "left": "We develop websites, mobile apps, CRM, SaaS, and AI solutions that automate processes, improve customer experience, and help businesses work more efficiently.",
+    "mobile": "Neetrino creates digital solutions for businesses that want to grow on a clear technological foundation.\n\nWe develop websites, mobile apps, CRM, SaaS, and AI solutions that automate processes, improve customer experience, and help businesses work more efficiently."
   },
   "lead": {
     "parts": [
       { "text": "Neetrino", "bold": true },
-      { "text": " is the first company to", "bold": false },
-      { "text": " offer website sales", "bold": true },
-      { "text": " through a Platform that provides access to ", "bold": false },
-      { "text": "over 100,000", "bold": true },
       {
-        "text": " professional designs. Our Platform enables businesses to quickly and affordably create fully functional websites, perfectly tailored to",
+        "text": " helps businesses build modern digital infrastructure: websites, mobile apps, CRM systems, SaaS platforms, and AI integrations. We create solutions that automate work, improve customer experience, and help companies grow faster with better control over their processes. With a ",
         "bold": false
       },
-      { "text": " modern business needs", "bold": true },
+      { "text": "flexible payment model", "bold": true },
       {
-        "text": ". We not only save you time and resources but also guarantee high quality, advanced functionality, and ongoing support—maximizing the efficiency and competitiveness of ",
+        "text": ", businesses can access professional IT solutions ",
         "bold": false
       },
-      { "text": "your online presence", "bold": true },
+      { "text": "without large upfront investments", "bold": true },
       { "text": ".", "bold": false }
     ]
   },
   "stats": {
     "hero": [
-      { "value": "450+", "label": "Projects Delivered", "tone": "purple" },
-      { "value": "6+", "label": "Core Services", "tone": "orange" },
-      { "value": "24/7", "label": "Support Available", "tone": "green" }
+      { "value": "450+", "label": "Digital Solutions Built", "tone": "purple" },
+      { "value": "6+", "label": "Technology Directions", "tone": "orange" },
+      { "value": "3", "label": "Flexible Payment Models", "tone": "green" }
     ],
     "impact": [
-      { "value": "380+", "label": "Active Users", "tone": "purple" },
-      { "value": "400+", "label": "Projects Done", "tone": "orange" },
-      { "value": "25+", "label": "Members", "tone": "peach" },
-      { "value": "8", "label": "Years of Experience", "tone": "cyan" }
+      { "value": "380+", "label": "Active Partners", "tone": "purple" },
+      { "value": "400+", "label": "Digital Solutions Built", "tone": "orange" },
+      { "value": "25+", "label": "Experienced Specialists", "tone": "peach" },
+      { "value": "8+", "label": "Years of Tech Experience", "tone": "cyan" }
     ]
   },
   "mission": {
-    "title": { "plain": "THE ", "accent": "MISSION" },
-    "text": "Our goal is to deliver fast, affordable, and high-quality digital solutions, empowering businesses to effortlessly build and expand their online presence, no matter how complex the project.",
-    "textMobile": "Our goal is to deliver fast, \naffordable, and high-quality \ndigital solutions, \nempowering businesses to \neffortlessly build and \nexpand their online \npresence, no matter how \ncomplex the project."
+    "title": { "plain": "OUR ", "accent": "MISSION" },
+    "text": "Our mission is to give businesses access to flexible, affordable, and high-quality technology solutions that help digitize operations, automate processes, and grow without large upfront investments. We build websites, apps, CRM, SaaS, and AI solutions that are not only visually strong, but also useful, stable, and designed to support business growth.",
+    "textMobile": "Our mission is to give businesses access\nto flexible, affordable, and high-quality\ntechnology solutions that help digitize\noperations, automate processes, and grow\nwithout large upfront investments."
   },
   "vision": {
-    "title": { "plain": "THE ", "accent": "VISION" },
-    "text": "We envision a world where businesses of all sizes can effortlessly establish a strong digital presence using our fast, cutting-edge technological solutions. Our aim is to lead the transformation of website and app development, making these tools accessible to everyone, everywhere.",
-    "textMobile": "We envision a world \nwhere businesses of all \nsizes can effortlessly \nestablish a strong digital \npresence using our fast,\n cutting-edge \ntechnological solutions. \nOur aim is to lead the \ntransformation of website \nand app development, \nmaking these tools \naccessible to everyone, \neverywhere."
+    "title": { "plain": "OUR ", "accent": "VISION" },
+    "text": "We envision a business environment where every company can have its own digital infrastructure, regardless of size, industry, or technical experience. Our goal is to become the technology partner that helps businesses quickly create, develop, and scale their digital systems in a clear, reliable, and predictable way.",
+    "textMobile": "We envision a business environment\nwhere every company can have its own\ndigital infrastructure, regardless of size,\nindustry, or technical experience.\nOur goal is to become the technology\npartner that helps businesses quickly\ncreate, develop, and scale their\ndigital systems."
   },
   "why": {
-    "title": { "plain": "WHY ", "accent": "CHOOSE", "trailing": " US?" },
+    "title": { "plain": "WHY CHOOSE ", "accent": "NEETRINO", "trailing": "" },
     "features": [
-      { "lead": "Fast and premium", "rest": "execution delivered in record time" },
-      { "lead": "A selection of over", "rest": "100,000 design options" },
-      { "lead": "Websites created 10 times", "rest": "faster than traditional methods" },
-      { "lead": "24/7 technical support", "rest": "and free consultations" }
+      {
+        "lead": "One Team for Your Full IT Ecosystem",
+        "rest": "Website, app, CRM, SaaS, and AI solutions delivered through one technology partner."
+      },
+      {
+        "lead": "No Large Upfront Investment",
+        "rest": "Start your project with a flexible payment model and grow it with predictable costs."
+      },
+      {
+        "lead": "Built Around Real Business Needs",
+        "rest": "We do not just write code. We build systems that solve practical business problems."
+      },
+      {
+        "lead": "Growth After Launch",
+        "rest": "After launch, we continue to support, improve, and develop your digital system."
+      }
     ],
     "illustrationAlts": ["Rocket", "Palette", "Lightning", "Helmet"],
     "mobileRows": [
-      { "lead": "Fast and premium", "rest": "execution delivered in record time", "restLines": ["execution delivered in", "record time"] },
-      { "lead": "A selection of over", "rest": "100,000 design options" },
-      { "lead": "Websites created", "rest": "", "restLines": ["10 times faster than", "traditional methods"] },
-      { "lead": "24/7 technical support", "rest": "and free consultations" }
+      {
+        "lead": "One Team for Your Full IT Ecosystem",
+        "rest": "Website, app, CRM, SaaS, and AI through one partner.",
+        "restLines": ["Website, app, CRM, SaaS, and AI", "through one partner."]
+      },
+      {
+        "lead": "No Large Upfront Investment",
+        "rest": "Flexible payment model with predictable costs."
+      },
+      {
+        "lead": "Built Around Real Business Needs",
+        "rest": "",
+        "restLines": ["Systems that solve practical", "business problems."]
+      },
+      {
+        "lead": "Growth After Launch",
+        "rest": "Support, improve, and develop after launch."
+      }
     ]
   },
   "countries": {
@@ -89,15 +111,15 @@
   },
   "team": {
     "title": { "plain": "MEET OUR ", "accent": "TEAM" },
-    "text": "We envision a world where businesses of all sizes can effortlessly establish a strong digital presence using our fast, cutting-edge technological solutions. Our aim is to lead the transformation of website and app development, making these tools accessible to everyone, everywhere.",
+    "text": "The Neetrino team brings together developers, designers, project managers, and technology specialists working toward one goal: creating digital solutions that deliver real value for businesses. We approach projects not only from a technical perspective, but also by understanding the business goal, customer journey, and the result the system should deliver after launch. Our strength is a team-based approach: from idea to development, testing, and long-term growth, we work to make every solution clear, stable, and ready for real use.",
     "imageAlt": "Neetrino team"
   },
   "actions": {
-    "explore": "Explore"
+    "explore": "Learn More"
   },
   "aria": {
     "missionVision": "Mission and vision",
-    "lead": "About Neetrino platform",
+    "lead": "About Neetrino",
     "impact": "Company impact"
   }
 }

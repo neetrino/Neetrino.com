@@ -1,15 +1,15 @@
 {
   "meta": {
     "pageTitle": "Services | Neetrino",
-    "description": "Neetrino services — SaaS, CRM, websites, mobile apps, AI products and ERP systems built end to end."
+    "description": "Neetrino services — SaaS, CRM, websites, mobile apps, AI solutions, and ERP systems built end to end."
   },
   "hero": {
     "title": "SERVICES",
     "srOnlyTitle": "Neetrino Services"
   },
   "actions": {
-    "continue": "Continue",
-    "talkToUs": "Talk to us"
+    "continue": "Learn More",
+    "talkToUs": "Discuss a Project"
   },
   "details": {
     "sectionAria": "Service details"
@@ -18,105 +18,115 @@
     "saas": {
       "title": ["SaaS Development"],
       "description": [
-        "Scalable SaaS platforms built for growth",
-        "Secure, flexible, and ready to evolve with your product"
+        "Scalable SaaS platforms for business growth, process automation, and launching new digital products."
       ],
-      "detailHeadline": "SaaS platforms that scale with you",
+      "detailHeadline": "Scalable SaaS platforms for business growth, automation, and long-term development.",
       "detailBody": [
-        "We design and build multi-tenant SaaS products from architecture to launch — billing, roles, analytics, and the integrations your customers expect.",
-        "Every platform is engineered for reliability, security, and clean iteration so your roadmap stays fast without rewriting the foundation."
+        "We build SaaS platforms that help businesses sell, manage, automate, and scale their services through one digital system.",
+        "We do not just develop a set of features. We create a complete product with a clear structure, smooth UX, secure access, payment capabilities, and architecture ready for future growth.",
+        "Product Foundation — We start by analyzing the business model, user roles, and key workflows, so the SaaS platform is built around real usage scenarios. This approach helps create a stable MVP, collect feedback faster, and grow the platform step by step without rebuilding the system every time a new feature is added.",
+        "Scaling and Growth — We design the platform so it can grow with the business through new modules, subscriptions, API integrations, analytics, and automated processes. As a result, you get not a one-time technical solution, but a long-term SaaS product that can be developed, sold, and used as a core digital asset for your business."
       ],
       "detailPoints": [
-        "Multi-tenant architecture with clear isolation",
-        "Subscription, usage, and seat-based billing flows",
-        "Admin tooling, audit trails, and role-based access",
-        "API-first integrations for CRM, payments, and analytics"
+        "Product foundation built around real usage scenarios",
+        "Stable MVP with step-by-step growth",
+        "Modules, subscriptions, API integrations, and analytics",
+        "Long-term SaaS product as a core digital asset"
       ]
     },
     "crm": {
-      "title": ["CRM", "Systems"],
+      "title": ["CRM Systems"],
       "description": [
-        "Powerful customer relationship management solutions to streamline your sales process and boost customer satisfaction."
+        "CRM solutions that help manage sales, customers, and business processes in one connected platform."
       ],
-      "detailHeadline": "CRM that matches how your team sells",
+      "detailHeadline": "CRM solutions that give businesses full control over sales, customers, and internal workflows.",
       "detailBody": [
-        "We implement and customize CRM systems around your pipelines — from lead capture to renewal — so sales and support share one reliable source of truth.",
-        "Automations, dashboards, and integrations cut manual work and keep every customer touchpoint visible."
+        "We build CRM systems that help businesses manage sales, customers, tasks, and internal processes in one platform.",
+        "Our CRM solutions are built around the real logic of your workflow: sales funnels, customer database, team workflows, notifications, reports, and integrations. As a result, your team gets not just a place to store data, but a practical tool for faster work, better process control, and stronger sales performance.",
+        "Sales Management — CRM helps control the full sales journey, from the first contact to closing the deal. Leads, opportunities, funnels, tasks, and reminders are organized in one system, so the team does not lose important clients or next steps.",
+        "Transparency and Reporting — Dashboards and reports help management see the real picture: sales progress, team performance, customer activity, and key business metrics."
       ],
       "detailPoints": [
-        "Pipeline design tailored to your sales stages",
-        "Automation for follow-ups, tasks, and handoffs",
-        "Dashboards for revenue, conversion, and retention",
-        "Sync with email, messaging, and marketing tools"
+        "Full sales journey from lead to closed deal",
+        "Funnels, tasks, and reminders in one system",
+        "Dashboards and reports for management",
+        "Team workflows, notifications, and integrations"
       ]
     },
     "website": {
       "title": ["Website Development"],
       "description": [
-        "Cutting-edge web solutions built with modern technologies, optimized for performance and designed to convert visitors into customers."
+        "Modern web solutions with fast loading, stable performance, and a clear focus on conversion."
       ],
-      "detailHeadline": "Websites built to perform and convert",
+      "detailHeadline": "Modern websites with fast performance, smooth UX, a solid SEO foundation, and a clear focus on conversion.",
       "detailBody": [
-        "From marketing sites to complex product experiences, we ship fast, accessible frontends with clear information architecture and measurable conversion paths.",
-        "Performance, SEO foundations, and CMS workflows are part of delivery — not afterthoughts."
+        "We build modern websites that do more than look good. They help businesses present themselves with confidence, attract customers, and sell more effectively.",
+        "Every website is developed with fast loading, smooth UX, proper SEO structure, and a stable technical foundation, so it is ready not only for launch, but also for long-term growth.",
+        "Performance and UX — A website should load fast, work reliably, and guide users without confusion toward the right action: contacting you, submitting a request, or making a purchase. We design websites with smooth UX, responsive structure, and Core Web Vitals optimization.",
+        "Content and SEO — We create SEO-ready pages, clear headings, proper internal structure, and CMS-friendly management, so your team can update content, add new pages, and grow the website without constant technical dependency."
       ],
       "detailPoints": [
-        "Modern stack with strong Core Web Vitals focus",
-        "Responsive layouts and accessible UI patterns",
-        "CMS and content workflows for your team",
-        "Analytics-ready funnels and clear CTAs"
+        "Fast loading and stable performance",
+        "Smooth UX and responsive structure",
+        "SEO-ready pages and clear information architecture",
+        "CMS-friendly content management"
       ]
     },
     "mobile": {
       "title": ["Mobile App Development"],
       "description": [
-        "Native and cross-platform mobile applications that deliver exceptional user experiences on iOS and Android devices."
+        "iOS and Android apps with smooth UX, stable performance, and architecture built around business goals."
       ],
-      "detailHeadline": "Mobile apps with production-grade UX",
+      "detailHeadline": "Mobile apps that work reliably, feel easy to use, and can grow together with your business.",
       "detailBody": [
-        "We build native and cross-platform apps with polished interaction design, offline-friendly flows, and the push/notification patterns users expect.",
-        "Backend APIs, store release pipelines, and monitoring are included so launches stay predictable."
+        "We build iOS and Android apps that help businesses stay closer to their customers, speed up service delivery, and create a smooth digital experience.",
+        "We develop apps with clear UX, stable performance, secure access, push notifications, API integrations, and a release-ready structure.",
+        "Platforms — We develop native and cross-platform mobile apps for iOS and Android, choosing the right technology based on business goals, budget, and future growth plans.",
+        "Quality and Launch — Before launch, we test key scenarios, performance, crash risks, and release readiness, so the app can be confidently published on the App Store and Google Play."
       ],
       "detailPoints": [
-        "iOS and Android delivery with shared design systems",
-        "Secure auth, payments, and device-native features",
-        "App Store / Play Console release support",
-        "Crash reporting and iteration-ready analytics"
+        "Native and cross-platform iOS / Android apps",
+        "Secure access, push notifications, and API integrations",
+        "Scalable architecture from the first release",
+        "App Store and Google Play launch readiness"
       ]
     },
     "ai": {
-      "title": ["AI Product Development"],
+      "title": ["AI Solution Development"],
       "description": [
-        "Intelligent automation powered by machine learning and natural language processing to transform your business operations."
+        "AI solutions for process automation, data processing, and improving business efficiency."
       ],
-      "detailHeadline": "AI products grounded in real workflows",
+      "detailHeadline": "AI solutions that automate work, speed up decisions, and improve business efficiency in a controlled and secure way.",
       "detailBody": [
-        "We turn AI into usable product surfaces — assistants, document pipelines, classification, and automation — wired into the systems your team already uses.",
-        "Safety, evaluation, and cost controls are designed in so models stay useful in production."
+        "We build AI solutions that help businesses automate repetitive tasks, process data faster, and organize internal workflows more efficiently.",
+        "We integrate AI where it creates real value: customer support, sales, content processing, data analysis, CRM/SaaS systems, and operational workflows.",
+        "Applied AI — Our solutions are built around your existing systems, including CRM, SaaS, websites, databases, or external APIs, so AI becomes part of the workflow instead of a separate experimental tool.",
+        "Security and Control — AI solutions are designed with controlled logic: access permissions, data protection rules, action logging, and clear operational boundaries."
       ],
       "detailPoints": [
-        "Use-case discovery and measurable success criteria",
-        "LLM / ML pipelines with retrieval and tooling",
-        "Human-in-the-loop review where it matters",
-        "Monitoring for quality, latency, and spend"
+        "AI integrated around existing systems",
+        "Automation for support, sales, and operations",
+        "Data analysis and content processing",
+        "Controlled logic, logging, and data protection"
       ]
     },
     "erp": {
-      "title": ["ERP", "System"],
+      "title": ["ERP Systems"],
       "description": [
-        "All-in-one systems for managing business operations",
-        "Control data, processes, and resources in one place"
+        "Unified ERP solutions for efficient management of operations, resources, and internal business processes."
       ],
-      "detailHeadline": "ERP that unifies operations",
+      "detailHeadline": "ERP solutions that help businesses manage resources, processes, and data in one unified system.",
       "detailBody": [
-        "We implement ERP systems that connect finance, inventory, HR, and operations into one coherent process model — with roles and reporting your managers can trust.",
-        "Migration, training, and phased rollout keep disruption low while visibility goes up."
+        "We build ERP systems that unite core business processes in one platform: finance, inventory, procurement, HR, sales, operations, and reporting.",
+        "ERP helps teams work in a more structured way, reduce repetitive manual work, and gives management a clear real-time view of what is happening inside the business.",
+        "Operational Control — Every action becomes visible and manageable: who is responsible, which stage the process is in, what is waiting for approval, and where delays appear.",
+        "Integrations — ERP can connect with your existing systems, including accounting software, CRM, e-commerce, payment systems, inventory tools, and external APIs."
       ],
       "detailPoints": [
-        "Process mapping across departments",
-        "Modules for inventory, finance, and operations",
-        "Role-based access and approval workflows",
-        "Reporting that leadership can act on"
+        "Finance, inventory, procurement, HR, and sales in one platform",
+        "Operational control and approval workflows",
+        "Integrations with CRM, e-commerce, and payments",
+        "Real-time reporting for leadership"
       ]
     }
   }
