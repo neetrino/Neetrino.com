@@ -22,7 +22,6 @@ export function NeetrinoHome({
     <NeetrinoPageShell mainId="home" srOnlyTitle={homeCopy.meta.pageTitle}>
       <div className="home-desktop">
         <div className="home-page-glow" aria-hidden />
-        <div className="home-page-center-beam" aria-hidden data-name="Rectangle 17418" />
         <HomeHero />
         <HomeServices />
         <HomePortfolio bottomRow={portfolioBottomRow} topRow={portfolioTopRow} />

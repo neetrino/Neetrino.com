@@ -89,9 +89,6 @@
   --home-header-clearance: calc((27px + 52px + 16px) * var(--home-ui-scale));
   --home-services-section-padding-top: calc(48px * var(--home-ui-scale));
   --home-page-glow-top: calc(633px * var(--home-ui-scale));
-  --home-page-center-beam-top: calc(1783px * var(--home-ui-scale));
-  --home-page-center-beam-width: calc(88px * var(--home-ui-scale));
-  --home-page-center-beam-height: calc(2793px * var(--home-ui-scale));
   --home-canvas-scale: 1;
 }
 
@@ -211,40 +208,8 @@ html:lang(ru) {
   );
 }
 
-.home-page-center-beam {
-  position: absolute;
-  top: var(--home-page-center-beam-top);
-  left: 50%;
-  z-index: 11;
-  width: var(--home-page-center-beam-width);
-  height: var(--home-page-center-beam-height);
-  pointer-events: none;
-  background-color: rgb(160 160 180 / 0.25);
-  background-image:
-    linear-gradient(
-      to right,
-      rgb(255 255 255 / 0.72) 0,
-      rgb(255 255 255 / 0.14) calc(1px * var(--home-ui-scale)),
-      rgb(255 255 255 / 0.04) calc(4px * var(--home-ui-scale)),
-      rgb(255 255 255 / 0.01) calc(9px * var(--home-ui-scale)),
-      transparent calc(18px * var(--home-ui-scale))
-    ),
-    linear-gradient(
-      to left,
-      rgb(0 0 0 / 0.5) 0,
-      rgb(0 0 0 / 0.12) calc(5px * var(--home-ui-scale)),
-      rgb(0 0 0 / 0.03) calc(11px * var(--home-ui-scale)),
-      transparent calc(20px * var(--home-ui-scale))
-    );
-  transform: translateX(-50%);
-}
-
 .home-page-scale-root[data-has-home-hero='false'] {
   --home-page-glow-top: 0;
-}
-
-.home-page-scale-root[data-has-about-body='true'] .home-page-center-beam {
-  display: none !important;
 }
 
 .home-page-scale-root[data-has-home-hero='false'] .home-services {
