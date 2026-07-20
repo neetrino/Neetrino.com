@@ -1,7 +1,7 @@
 'use client';
 
 import { HomeHeroBgCore } from './home-hero-bg-core';
-import { HomeHeroDeferredDecor } from './home-hero-deferred-decor';
+import { HomeHeroBottomPanel } from './home-hero-bottom-panel';
 import { HomeHeroHandLayer } from './home-hero-hand-layer';
 import { HomeHeroRobot } from './home-hero-robot';
 import { useHomeI18n } from './home-i18n-provider';
@@ -19,7 +19,7 @@ export function HomeHero(): React.JSX.Element {
       <div className="home-hero-bg-shell" aria-hidden>
         <HomeHeroBgCore philippPriority brandPriority />
         <HomeHeroRobot priority />
-        <HomeHeroDeferredDecor />
+        <HomeHeroBottomPanel />
       </div>
 
       <div className="home-hero-stage">

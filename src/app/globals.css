@@ -154,6 +154,7 @@ html:lang(ru) {
   position: relative;
   width: 1440px;
   overflow: hidden;
+  transform: scale(var(--home-canvas-scale, 1));
   transform-origin: 0 0;
   background: var(--home-bg);
 }
@@ -1393,7 +1394,7 @@ html:lang(ru) {
   position: relative;
   flex: 0 0 auto;
   overflow: hidden;
-  background: #222;
+  background: transparent;
 }
 
 .home-project-image {
@@ -1511,6 +1512,7 @@ html:lang(ru) {
 .home-partners {
   --home-partners-gap: calc(48px * var(--home-ui-scale));
   --home-partners-scroll-duration: 120s;
+  --home-partners-play-state: running;
   padding-block: calc(40px * var(--home-ui-scale));
   overflow: hidden;
 }
@@ -1537,6 +1539,7 @@ html:lang(ru) {
   backface-visibility: hidden;
   will-change: transform;
   animation: home-partners-scroll var(--home-partners-scroll-duration) linear infinite;
+  animation-play-state: var(--home-partners-play-state);
 }
 
 .home-partners-group {
