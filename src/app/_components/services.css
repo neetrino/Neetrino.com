@@ -172,6 +172,8 @@
   align-self: flex-start;
   margin-top: auto;
   padding: calc(16px * var(--home-ui-scale)) calc(24px * var(--home-ui-scale));
+  overflow: hidden;
+  isolation: isolate;
   border-radius: calc(40px * var(--home-ui-scale));
   background: #fff;
   color: #252525;
@@ -179,40 +181,76 @@
   font-weight: 500;
   line-height: calc(24px * var(--home-ui-scale) * var(--locale-font-scale));
   text-decoration: none;
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease;
+  /* Figma Button 16 — project colors, not card accent fill */
+  --svc-cta-glow: #46fff4;
+  --svc-cta-hover-bg: #fff;
+  --svc-cta-hover-color: #252525;
+  --svc-cta-text-start: var(--home-accent);
+  --svc-cta-text-end: var(--home-purple);
+  transition: none;
 }
 
-.svc-card-cta span {
+.svc-card-cta-glow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 64px;
+  bottom: -98px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 60px 60px 0 0;
+  background: var(--svc-cta-glow, #46fff4);
+  filter: blur(7.5px);
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  transition: none;
+}
+
+.svc-card-cta-label {
+  position: relative;
+  z-index: 1;
   display: inline-block;
 }
 
-.svc-card-cta:hover {
-  background: var(--svc-cta-hover-bg, var(--svc-accent));
-  color: var(--svc-cta-hover-color, #fff);
-  transform: translateY(-1px);
-  box-shadow: 0 calc(10px * var(--home-ui-scale)) calc(26px * var(--home-ui-scale)) rgba(0, 0, 0, 0.35);
+.svc-card-cta:hover,
+.svc-card-cta:focus-visible {
+  background: var(--svc-cta-hover-bg, #fff);
+  color: var(--svc-cta-hover-color, #252525);
+  transform: translateY(-2px);
+  box-shadow: 0 calc(8px * var(--home-ui-scale)) calc(22px * var(--home-ui-scale))
+    rgb(70 255 244 / 0.28);
 }
 
-.svc-card-cta:hover span,
-.svc-card-cta:focus-visible span {
+.svc-card-cta:hover .svc-card-cta-glow,
+.svc-card-cta:focus-visible .svc-card-cta-glow {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.svc-card-cta:hover .svc-card-cta-label,
+.svc-card-cta:focus-visible .svc-card-cta-label {
   background-image: linear-gradient(
     90deg,
-    var(--svc-cta-text-start, #fff) 0%,
-    var(--svc-cta-text-end, #dbe7ff) 100%
+    var(--svc-cta-text-start, var(--home-accent)) 0%,
+    var(--svc-cta-text-end, var(--home-purple)) 100%
   );
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
 
+.svc-card-cta:hover .svc-card-cta-icon,
+.svc-card-cta:focus-visible .svc-card-cta-icon {
+  transform: translateX(calc(3px * var(--home-ui-scale)));
+}
+
 .svc-card-cta-icon {
+  position: relative;
+  z-index: 1;
   width: calc(20px * var(--home-ui-scale)) !important;
   height: calc(20px * var(--home-ui-scale)) !important;
   flex: 0 0 auto;
+  transition: none;
 }
 
 /* --------------------------------------------------------- Per-card accents */
@@ -221,10 +259,6 @@
   --svc-from: #100b16;
   --svc-to: #0f0220;
   --svc-accent: #ff28d0;
-  --svc-cta-hover-bg: #8f1e78;
-  --svc-cta-hover-color: #fff;
-  --svc-cta-text-start: #ffd6f5;
-  --svc-cta-text-end: #f3d9ff;
   --svc-glow: inset 0 -1px 10.8px 0 rgba(255, 54, 242, 0.2), inset 0 -23px 12px -1px rgba(255, 27, 244, 0.17),
     inset 0 -47px 16px -33px rgba(255, 255, 255, 0.7), inset 0 -30px 26.7px -27px rgba(46, 9, 43, 0.5),
     inset 0 -40px 46.3px -30px #ff0890;
@@ -234,10 +268,6 @@
   --svc-from: #100b16;
   --svc-to: #0f0220;
   --svc-accent: #46fff4;
-  --svc-cta-hover-bg: #1c7f8d;
-  --svc-cta-hover-color: #fff;
-  --svc-cta-text-start: #d8fffc;
-  --svc-cta-text-end: #d7e9ff;
   --svc-glow: inset 0 -1px 10.8px 0 rgba(54, 158, 255, 0.2), inset 0 -23px 12px -1px rgba(27, 255, 221, 0.17),
     inset 0 -47px 16px -33px rgba(255, 255, 255, 0.7), inset 0 -30px 26.7px -27px rgba(48, 183, 207, 0.5),
     inset 0 -40px 46.3px -30px #30ccc4;
@@ -247,10 +277,6 @@
   --svc-from: #0d0c12;
   --svc-to: #0d111d;
   --svc-accent: #6694ff;
-  --svc-cta-hover-bg: #2d4f99;
-  --svc-cta-hover-color: #fff;
-  --svc-cta-text-start: #e4ecff;
-  --svc-cta-text-end: #cbe8ff;
   --svc-glow: inset 0 -1px 10.8px 0 rgba(102, 148, 255, 0.2), inset 0 -30px 12px -1px rgba(35, 101, 255, 0.15),
     inset 0 -24px 16.7px -9px rgba(255, 255, 255, 0.64), inset 0 -34px 26.7px -10px rgba(102, 148, 255, 0.5),
     inset 0 -30px 46.8px -33px #144ccd;
@@ -260,10 +286,6 @@
   --svc-from: #100b16;
   --svc-to: #0f0220;
   --svc-accent: #9a6bff;
-  --svc-cta-hover-bg: #4a3b9a;
-  --svc-cta-hover-color: #fff;
-  --svc-cta-text-start: #efe2ff;
-  --svc-cta-text-end: #d7e4ff;
   --svc-glow: inset 0 -1px 10.8px 0 rgba(238, 54, 255, 0.2), inset 0 -23px 12px -1px rgba(111, 27, 255, 0.17),
     inset 0 -47px 16px -33px rgba(255, 255, 255, 0.7), inset 0 -30px 26.7px -27px rgba(72, 48, 207, 0.5),
     inset 0 -40px 46.3px -30px #305fcc;
@@ -273,10 +295,6 @@
   --svc-from: #100b16;
   --svc-to: #0f0220;
   --svc-accent: #46ff62;
-  --svc-cta-hover-bg: #207e34;
-  --svc-cta-hover-color: #fff;
-  --svc-cta-text-start: #dcffe1;
-  --svc-cta-text-end: #d5fff5;
   --svc-glow: inset 0 -1px 10.8px 0 rgba(54, 255, 208, 0.2), inset 0 -23px 12px -1px rgba(27, 255, 65, 0.17),
     inset 0 -47px 16px -33px rgba(255, 255, 255, 0.7), inset 0 -30px 26.7px -27px rgba(9, 46, 21, 0.5),
     inset 0 -40px 46.3px -30px #00dc28;
@@ -286,10 +304,6 @@
   --svc-from: #120a0b;
   --svc-to: #1b0a03;
   --svc-accent: #ffb056;
-  --svc-cta-hover-bg: #995b23;
-  --svc-cta-hover-color: #fff;
-  --svc-cta-text-start: #fff2da;
-  --svc-cta-text-end: #ffe2bf;
   --svc-glow: inset 0 -1px 10.8px 0 rgba(255, 237, 102, 0.2), inset 0 -30px 12px -1px rgba(255, 233, 177, 0.17),
     inset 0 -37px 16px -36px rgba(255, 255, 255, 0.25), inset 0 -34px 26.7px -15px rgba(255, 240, 126, 0.5),
     inset 0 -40px 46.8px -30px #e63e28;

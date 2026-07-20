@@ -35,7 +35,8 @@ function ServiceDetailCardView({
         </p>
       </div>
       <a className="svc-card-cta" href={`#service-${card.id}`}>
-        <span>{continueLabel}</span>
+        <span className="svc-card-cta-glow" aria-hidden />
+        <span className="svc-card-cta-label">{continueLabel}</span>
         <svg className="svc-card-cta-icon" viewBox="0 0 17 17" fill="none" aria-hidden="true">
           <path
             d="M10.83 2.5 15.83 8.33 10.83 14.17M15.83 8.33H.83"
