@@ -1,41 +1,48 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import type { Application } from '@splinetool/runtime';
 
-import { useDeferredMount } from './use-deferred-mount';
+const ABOUT_SPLINE_SCENE =
+  'https://prod.spline.design/g3KMDb3YnYqBx4eK/scene.splinecode';
 
-const ABOUT_VISUAL_GEOMETRY_RADIUS = 1.45;
-const ABOUT_VISUAL_CAMERA_DISTANCE = 2.6;
-const ABOUT_VISUAL_IDLE_TIMEOUT_MS = 1800;
-const ABOUT_VISUAL_ROOT_MARGIN = '320px 0px';
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: false,
+  loading: () => <div className="home-about-visual-placeholder" aria-hidden />,
+});
 
-const GenerativeArtScene = dynamic(
-  () =>
-    import('@/components/ui/anomalous-matter-hero').then((module) => module.GenerativeArtScene),
-  {
-    ssr: false,
-    loading: () => <div className="home-about-visual-placeholder" aria-hidden />,
-  },
-);
+type SplineApplicationInternals = {
+  _renderer?: {
+    pipeline?: {
+      setWatermark?: (texture: null) => void;
+      disableHelpers?: () => void;
+    };
+  };
+  requestRender?: () => void;
+};
+
+function cleanSplineOverlays(app: Application): void {
+  const internals = app as Application & SplineApplicationInternals;
+  const pipeline = internals._renderer?.pipeline;
+  pipeline?.setWatermark?.(null);
+  pipeline?.disableHelpers?.();
+  internals.requestRender?.();
+}
+
+function handleSplineLoad(app: Application): void {
+  app.setBackgroundColor('transparent');
+  cleanSplineOverlays(app);
+  app.setZoom(1.28);
+}
 
 export function HomeAboutVisual(): React.JSX.Element {
-  const { isReady, sentinelRef } = useDeferredMount({
-    idleTimeoutMs: ABOUT_VISUAL_IDLE_TIMEOUT_MS,
-    rootMargin: ABOUT_VISUAL_ROOT_MARGIN,
-  });
-
   return (
     <div className="home-about-visual">
-      <span ref={sentinelRef} aria-hidden />
-      {isReady ? (
-        <GenerativeArtScene
-          className="home-about-visual-canvas"
-          geometryRadius={ABOUT_VISUAL_GEOMETRY_RADIUS}
-          cameraDistance={ABOUT_VISUAL_CAMERA_DISTANCE}
-        />
-      ) : (
-        <div className="home-about-visual-placeholder" aria-hidden />
-      )}
+      <Spline
+        scene={ABOUT_SPLINE_SCENE}
+        className="home-about-visual-canvas"
+        onLoad={handleSplineLoad}
+      />
     </div>
   );
 }
