@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { staticAsset } from '@/lib/static-asset';
 
 const CRITICAL_ROUTE_IMAGES = [
-  staticAsset('/about/hero-streak.svg'),
+  '/figma-home/home-hero-streak.svg',
   staticAsset('/about/robot.webp'),
   staticAsset('/portfolio/decor-stack.webp'),
   staticAsset('/blog/blog-title.webp'),

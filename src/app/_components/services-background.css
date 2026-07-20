@@ -1,4 +1,4 @@
-/* Services page background — mirrors /portfolio decor system. */
+/* Services page background — About-style dark canvas on /services; Team keeps blue bake. */
 
 .svc-hero {
   --svc-ray-width: 1437px;
@@ -45,6 +45,149 @@
   background: var(--svc-base-bg);
 }
 
+/* Services page: match About (#151515 + about decor), leave Team on blue. */
+#services-top.home-page,
+#services-top .neetrino-canvas-wrap--page,
+#services-top .neetrino-canvas-inner,
+#services-top .neetrino-canvas-inner:has(.svc-hero) {
+  --svc-base-bg: #151515;
+  background: #151515;
+}
+
+/* Stretch decor across services content (not the shared footer). */
+.svc-page-main {
+  position: relative;
+  z-index: 0;
+}
+
+.svc-about-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  /* Soft fade into the footer so the grid/glow does not end as a hard seam. */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 78%,
+    rgb(0 0 0 / 0.55) 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 78%,
+    rgb(0 0 0 / 0.55) 90%,
+    transparent 100%
+  );
+}
+
+.svc-about-bg .about-decor {
+  inset: 0;
+}
+
+/* Full-height tiling grid — Figma SVG frame is only ~4462px tall. */
+#services-top .svc-about-bg .home-page-glow {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1722px;
+  height: auto;
+  opacity: 0.32;
+  mix-blend-mode: normal;
+  transform: translateX(-50%);
+  background-image:
+    linear-gradient(
+      to right,
+      rgb(156 163 175 / 0.45) var(--home-page-grid-line-width),
+      transparent var(--home-page-grid-line-width)
+    ),
+    linear-gradient(
+      to bottom,
+      rgb(156 163 175 / 0.45) var(--home-page-grid-line-width),
+      transparent var(--home-page-grid-line-width)
+    );
+  background-size: var(--home-page-grid-step-x) var(--home-page-grid-step-y);
+  /* Soften left/right so the grid slab never reads as a hard vertical cut. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+#services-top .svc-about-bg .home-page-glow::before {
+  content: none;
+  display: none;
+}
+
+#services-top .svc-about-bg .about-beam {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+}
+
+/* Footer ray: blend side edges so the glow does not terminate as a hard wall. */
+#services-top .home-footer-bg-shape {
+  left: -4%;
+  width: 108%;
+  object-fit: cover;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+#services-top .home-footer-bg {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 100%);
+}
+
+/* Keep atmospheric rays covering the long details section. */
+#services-top .svc-about-bg .about-ray-6,
+#services-top .svc-about-bg .about-ray-7 {
+  position: absolute;
+  left: 50%;
+  width: 1437px;
+  height: 560px;
+  transform: translateX(-50%) scale(1.2);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+#services-top .svc-about-bg .about-ray-6 {
+  top: 4200px;
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17416.svg');
+}
+
+#services-top .svc-about-bg .about-ray-7 {
+  top: 5100px;
+  background-image: url('https://cdn.neetrino.com/static/about/hero-ray.svg');
+}
+
 .svc-baked-bg {
   position: absolute;
   top: 0;
@@ -73,6 +216,11 @@
   background-image: none;
 }
 
+#services-top .svc-hero {
+  background-color: transparent;
+  background-image: none;
+}
+
 .svc-footer-ray-wrap--baked {
   pointer-events: none;
 }
@@ -87,22 +235,27 @@
 }
 
 /*
- * Shared footer on blue-canvas pages (/services, /team): no black plate.
- * Page blue (--svc-base-bg + baked grid) stays visible behind footer content.
+ * Team keeps the blue-canvas footer (no plate / no ray shape).
+ * Services matches About: full footer glow + helmet.
  */
-.neetrino-canvas-inner:has(.svc-hero) .home-footer {
+.neetrino-canvas-inner:has(.team-page) .home-footer {
   background: transparent;
   padding-top: calc(96px * var(--home-footer-ui-scale));
   padding-bottom: calc(20px * var(--home-footer-ui-scale));
 }
 
-.neetrino-canvas-inner:has(.svc-hero) .home-footer-bg-shape {
+.neetrino-canvas-inner:has(.team-page) .home-footer-bg-shape {
   display: none;
 }
 
 @media (min-width: 768px) {
-  .neetrino-canvas-inner:has(.svc-hero) .home-footer {
+  .neetrino-canvas-inner:has(.team-page) .home-footer {
     padding-top: calc(116px * var(--home-footer-ui-scale));
+  }
+
+  /* Services: same desktop footer spacing as About / default home footer. */
+  #services-top .home-footer {
+    padding-top: calc(200px * var(--home-footer-ui-scale));
   }
 }
 
@@ -115,6 +268,7 @@
   background-image:
     linear-gradient(to right, rgb(168 230 255 / 0.58) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width)),
     linear-gradient(to bottom, rgb(168 230 255 / 0.58) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width));
+  background-size: var(--home-page-grid-step-x) var(--home-page-grid-step-y);
   -webkit-mask-image: radial-gradient(
     ellipse 150% 96% at 50% 24%,
     #000 0%,
@@ -129,6 +283,11 @@
     rgb(0 0 0 / 0.42) 76%,
     transparent 92%
   );
+}
+
+.svc-decor .svc-page-glow::before {
+  content: none;
+  display: none;
 }
 
 .svc-page-glow {
@@ -305,8 +464,11 @@
 }
 
 @media (max-width: 767px) {
-  #services-top .neetrino-canvas-wrap--page {
-    background: var(--svc-base-bg, #122a48);
+  #services-top .neetrino-canvas-wrap--page,
+  #services-top .neetrino-canvas-inner,
+  #services-top .neetrino-canvas-inner:has(.svc-hero) {
+    --svc-base-bg: #151515;
+    background: #151515;
   }
 
   .neetrino-canvas-inner:has(.svc-hero) {
@@ -314,20 +476,26 @@
     background: var(--svc-base-bg);
   }
 
-  /* No black footer plate/overlays on blue-canvas pages. */
-  .neetrino-canvas-inner:has(.svc-hero) .home-footer {
+  #services-top .neetrino-canvas-inner:has(.svc-hero) {
+    --svc-base-bg: #151515;
+    background: #151515;
+  }
+
+  /* No black footer plate/overlays on Team blue-canvas only. */
+  .neetrino-canvas-inner:has(.team-page) .home-footer {
     background: transparent;
   }
 
-  .neetrino-canvas-inner:has(.svc-hero) .home-footer::before {
+  .neetrino-canvas-inner:has(.team-page) .home-footer::before {
     display: none;
   }
 
-  .neetrino-canvas-inner:has(.svc-hero) .home-footer-bg-shape {
+  .neetrino-canvas-inner:has(.team-page) .home-footer-bg-shape {
     display: none;
   }
 
-  .svc-baked-bg {
+  .svc-baked-bg,
+  .svc-about-bg {
     display: none;
   }
 

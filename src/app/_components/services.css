@@ -19,7 +19,8 @@
 .svc-title-wrap {
   position: relative;
   z-index: 5;
-  width: 646px;
+  width: var(--page-display-title-max-width);
+  max-width: calc(1440px - 144px);
 }
 
 .svc-title {
@@ -34,14 +35,16 @@
   position: relative;
   z-index: 1;
   display: inline-block;
-  width: 646px;
+  width: auto;
+  max-width: 100%;
   min-height: 117px;
   margin: 0;
   color: #fffcfc;
-  font-family: var(--font-megatrox), var(--font-inter), sans-serif;
-  font-size: calc(90px * var(--locale-font-scale));
+  font-family: var(--font-display);
+  font-size: var(--page-display-title-size);
   font-weight: 400;
   line-height: 1;
+  letter-spacing: var(--locale-letter-spacing);
   text-align: left;
   text-transform: uppercase;
   white-space: nowrap;
@@ -626,7 +629,7 @@
     width: 100%;
     max-width: 100%;
     min-height: auto;
-    font-size: clamp(26px, 7.5vw, 36px);
+    font-size: calc(clamp(26px, 7.5vw, 36px) * var(--locale-display-scale));
     line-height: 1;
     text-align: center;
     white-space: nowrap;
@@ -635,7 +638,6 @@
       drop-shadow(0 0 18px rgb(56 176 255 / 0.28))
       drop-shadow(0 2px 6px rgb(0 0 0 / 0.4));
   }
-
   .svc-grid {
     grid-template-columns: 1fr;
     gap: 10px;

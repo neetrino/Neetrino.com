@@ -8,7 +8,32 @@
   --home-purple: #473dff;
   --home-blue: #6a92ff;
   --home-muted: rgba(255, 255, 255, 0.72);
+
+  /*
+   * Multilingual typography tokens
+   * -----------------------------
+   * --font-body:    default readable UI copy
+   * --font-ui:      buttons, nav, compact controls
+   * --font-brand:   Latin Megatrox wordmarks (NEETRINO, card logos)
+   * --font-display: translated page hero titles (script-aware)
+   * --locale-font-scale / --locale-display-scale: size compensation
+   * --locale-letter-spacing / --locale-line-height-factor: compact tuning
+   * --locale-font-wdth: Noto Armenian variable width (100 = normal)
+   */
+  --font-body: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
+  --font-ui: var(--font-dm-sans), 'DM Sans', var(--font-inter), Inter, sans-serif;
+  --font-brand: var(--font-megatrox), var(--font-body);
+  --font-display: var(--font-megatrox), var(--font-body);
+  --font-locale-body: var(--font-body);
   --locale-font-scale: 1;
+  --locale-display-scale: 1;
+  --locale-letter-spacing: 0;
+  --locale-line-height-factor: 1;
+  --locale-font-wdth: 100;
+  /* Shared page hero titles (Services / Portfolio) — Figma 646px @ 90px. */
+  --page-display-title-size: calc(90px * var(--locale-font-scale) * var(--locale-display-scale));
+  --page-display-title-max-width: 646px;
+
   --home-ui-scale: 1;
   --home-design-width: 1440;
   --home-container: 1340px;
@@ -26,7 +51,9 @@
   --home-hero-tagline-top: calc(718px * var(--home-ui-scale));
   --home-hero-tagline-width: calc(516px * var(--home-hero-panel-ui-scale));
   --home-hero-tagline-size: calc(24px * var(--home-hero-panel-ui-scale) * var(--locale-font-scale));
-  --home-hero-tagline-line-height: calc(35px * var(--home-hero-panel-ui-scale) * var(--locale-font-scale));
+  --home-hero-tagline-line-height: calc(
+    35px * var(--home-hero-panel-ui-scale) * var(--locale-font-scale) * var(--locale-line-height-factor)
+  );
   --home-hero-stats-top: calc(868px * var(--home-ui-scale));
   --home-hero-stats-width: calc(1320px * var(--home-ui-scale));
   --home-hero-stats-gap: calc(200px * var(--home-ui-scale));
@@ -36,9 +63,13 @@
   --home-hero-stat-wide-width: calc(517px * var(--home-hero-panel-ui-scale));
   --home-hero-stat-radius: calc(39px * var(--home-hero-panel-ui-scale));
   --home-hero-stat-value-size: calc(56px * var(--home-hero-panel-ui-scale) * var(--locale-font-scale));
-  --home-hero-stat-value-line-height: calc(36px * var(--home-hero-panel-ui-scale) * var(--locale-font-scale));
+  --home-hero-stat-value-line-height: calc(
+    36px * var(--home-hero-panel-ui-scale) * var(--locale-font-scale) * var(--locale-line-height-factor)
+  );
   --home-hero-stat-label-size: calc(20px * var(--home-hero-panel-ui-scale) * var(--locale-font-scale));
-  --home-hero-stat-label-line-height: calc(25px * var(--home-hero-panel-ui-scale) * var(--locale-font-scale));
+  --home-hero-stat-label-line-height: calc(
+    25px * var(--home-hero-panel-ui-scale) * var(--locale-font-scale) * var(--locale-line-height-factor)
+  );
   --home-hero-hand-top: calc(691px * var(--home-ui-scale));
   --home-hero-hand-right: calc(112px * var(--home-ui-scale));
   --home-hero-hand-width: calc(880px * var(--home-ui-scale));
@@ -80,7 +111,7 @@
   --home-service-dark: #292929;
   --home-portfolio-card-gap: 12px;
   --home-portfolio-row-gap: 45px;
-  --home-portfolio-scroll-duration: 10s;
+  --home-portfolio-scroll-duration: 14s;
   --home-portfolio-play-state: running;
   --home-portfolio-accent-bg-height: calc(236px * var(--home-ui-scale));
   --home-page-grid-step-x: calc(91.5px * var(--home-ui-scale));
@@ -95,13 +126,14 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-body);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  letter-spacing: var(--locale-letter-spacing);
   /* Allows browser to begin scrolling immediately without waiting for
      horizontal/pinch gesture disambiguation on touch and trackpad. */
   touch-action: pan-y;
@@ -112,14 +144,57 @@ html {
   scroll-padding-top: var(--home-header-clearance);
 }
 
+/*
+ * Locale typography
+ * Armenian: Noto Sans Armenian (variable) with semi-condensed wdth so glyph
+ * width stays close to Inter; Inter remains the Latin/Cyrillic companion.
+ * Russian: Inter already covers Cyrillic — swap DM Sans UI to Inter so
+ * controls do not fall back to a system Cyrillic face.
+ */
 html:lang(hy) {
-  --locale-font-scale: 0.82;
-  --font-locale-body: var(--font-noto-armenian), var(--font-inter), Inter, sans-serif;
+  /*
+   * Noto first for Armenian UI + translated display titles so wdth/stretch
+   * applies to real glyphs. --font-brand keeps Megatrox for Latin wordmarks.
+   */
+  --font-body: var(--font-noto-armenian), var(--font-inter), Inter, sans-serif;
+  --font-ui: var(--font-noto-armenian), var(--font-inter), Inter, sans-serif;
+  --font-brand: var(--font-megatrox), var(--font-noto-armenian), var(--font-inter), sans-serif;
+  --font-display: var(--font-noto-armenian), var(--font-inter), Inter, sans-serif;
+  --font-locale-body: var(--font-body);
+  /* Body/UI near English size; display titles use --locale-display-scale. */
+  --locale-font-scale: 1;
+  --locale-display-scale: 0.86;
+  --locale-letter-spacing: -0.01em;
+  --locale-line-height-factor: 0.98;
+  --locale-font-wdth: 90;
+  --page-display-title-max-width: 1320px;
+  /* Mild condensation for body; hero titles override below. */
+  font-stretch: 90%;
+}
+
+html:lang(hy) .portfolio-title,
+html:lang(hy) .contact-title,
+html:lang(hy) .blog-article-title {
+  font-stretch: 70%;
+  letter-spacing: -0.02em;
 }
 
 html:lang(ru) {
-  --locale-font-scale: 0.86;
-  --font-locale-body: var(--font-inter), Inter, sans-serif;
+  --font-body: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
+  --font-ui: var(--font-inter), Inter, sans-serif;
+  --font-brand: var(--font-megatrox), var(--font-inter), sans-serif;
+  --font-display: var(--font-inter), var(--font-megatrox), sans-serif;
+  --font-locale-body: var(--font-body);
+  --locale-font-scale: 1;
+  --locale-display-scale: 0.94;
+  --locale-letter-spacing: -0.006em;
+  --locale-line-height-factor: 0.98;
+  --page-display-title-max-width: 1100px;
+}
+
+html:lang(hy) body,
+html:lang(ru) body {
+  font-family: var(--font-body);
 }
 
 .sr-only {
@@ -154,6 +229,7 @@ html:lang(ru) {
   position: relative;
   width: 1440px;
   overflow: hidden;
+  transform: scale(var(--home-canvas-scale, 1));
   transform-origin: 0 0;
   background: var(--home-bg);
 }
@@ -175,37 +251,38 @@ html:lang(ru) {
   position: relative;
 }
 
+/* Figma HOME node 1:501 — rotated grid SVG + mix-blend overlay */
 .home-page-glow {
+  --home-page-grid-asset-width: 4462px;
+  --home-page-grid-asset-height: 1722px;
+  --home-page-grid-frame-width: 1722px;
+  --home-page-grid-frame-height: 4462px;
+  --home-page-grid-url: url('/figma-home/home-page-grid.svg');
+
   position: absolute;
   top: var(--home-page-glow-top);
-  bottom: 0;
   left: 50%;
   z-index: 0;
-  width: 1722px;
+  width: var(--home-page-grid-frame-width);
+  height: var(--home-page-grid-frame-height);
   overflow: hidden;
   pointer-events: none;
   mix-blend-mode: overlay;
-  opacity: 0.72;
+  opacity: 1;
   transform: translateX(-50%);
   contain: layout paint style;
-  background-image:
-    linear-gradient(to right, rgb(156 163 175 / 0.62) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width)),
-    linear-gradient(to bottom, rgb(156 163 175 / 0.62) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width));
-  background-size: var(--home-page-grid-step-x) var(--home-page-grid-step-y);
-  -webkit-mask-image: radial-gradient(
-    ellipse 130% 88% at 50% 36%,
-    #000 0%,
-    #000 38%,
-    rgb(0 0 0 / 0.55) 58%,
-    transparent 78%
-  );
-  mask-image: radial-gradient(
-    ellipse 130% 88% at 50% 36%,
-    #000 0%,
-    #000 38%,
-    rgb(0 0 0 / 0.55) 58%,
-    transparent 78%
-  );
+  background: none;
+}
+
+.home-page-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--home-page-grid-asset-width);
+  height: var(--home-page-grid-asset-height);
+  background: var(--home-page-grid-url) center / 100% 100% no-repeat;
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 
 .home-page-scale-root[data-has-home-hero='false'] {
@@ -387,7 +464,7 @@ html:lang(ru) {
     radial-gradient(120% 110% at 50% -20%, rgb(255 255 255 / 0.2) 0%, rgb(255 255 255 / 0) 62%),
     linear-gradient(155deg, #1b3ea8 0%, #091838 62%, #030814 100%);
   color: #fff;
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-family: var(--font-ui);
   font-size: calc(18px * var(--home-ui-scale) * var(--locale-font-scale));
   font-weight: 500;
   line-height: calc(24px * var(--home-ui-scale) * var(--locale-font-scale));
@@ -1393,7 +1470,7 @@ html:lang(ru) {
   position: relative;
   flex: 0 0 auto;
   overflow: hidden;
-  background: #222;
+  background: transparent;
 }
 
 .home-project-image {
@@ -1439,39 +1516,31 @@ html:lang(ru) {
   max-width: calc(640px * var(--home-ui-scale));
   min-height: calc(540px * var(--home-ui-scale));
   margin-inline: auto;
-  overflow: visible;
+  /* Clip Spline bloom so warm glow does not spill into partners/footer */
+  overflow: hidden;
   background: transparent;
-  /* Drop the rectangular plate: dark canvas pixels vanish, only the glow remains */
   mix-blend-mode: screen;
   pointer-events: none;
-  /* Soft circular falloff — keep most of the blob fully visible */
-  -webkit-mask-image: radial-gradient(
-    closest-side,
-    #000 0%,
-    #000 72%,
-    rgb(0 0 0 / 0.8) 88%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    closest-side,
-    #000 0%,
-    #000 72%,
-    rgb(0 0 0 / 0.8) 88%,
-    transparent 100%
-  );
+  -webkit-mask-image:
+    radial-gradient(closest-side at 50% 42%, #000 0%, #000 58%, rgb(0 0 0 / 0.75) 78%, transparent 100%),
+    linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+  mask-image:
+    radial-gradient(closest-side at 50% 42%, #000 0%, #000 58%, rgb(0 0 0 / 0.75) 78%, transparent 100%),
+    linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
 .home-about-visual-canvas,
 .home-about-visual-placeholder {
   position: absolute;
-  /* Large WebGL buffer so bloom softens before the canvas edge */
-  top: -20% !important;
-  left: -20% !important;
-  width: 140% !important;
-  height: 140% !important;
+  top: -12% !important;
+  left: -12% !important;
+  width: 124% !important;
+  height: 124% !important;
   right: auto !important;
   bottom: auto !important;
-  overflow: visible !important;
+  overflow: hidden !important;
   background: transparent !important;
 }
 
@@ -1511,6 +1580,7 @@ html:lang(ru) {
 .home-partners {
   --home-partners-gap: calc(48px * var(--home-ui-scale));
   --home-partners-scroll-duration: 120s;
+  --home-partners-play-state: running;
   padding-block: calc(40px * var(--home-ui-scale));
   overflow: hidden;
 }
@@ -1537,6 +1607,7 @@ html:lang(ru) {
   backface-visibility: hidden;
   will-change: transform;
   animation: home-partners-scroll var(--home-partners-scroll-duration) linear infinite;
+  animation-play-state: var(--home-partners-play-state);
 }
 
 .home-partners-group {
@@ -1663,7 +1734,7 @@ html:lang(ru) {
 
 .home-footer-column-title {
   margin-bottom: calc(32px * var(--home-footer-ui-scale));
-  font-family: var(--font-dm-sans), sans-serif;
+  font-family: var(--font-ui);
   font-size: calc(18px * var(--home-footer-ui-scale) * var(--locale-font-scale));
   font-weight: 700;
   line-height: calc(22px * var(--home-footer-ui-scale) * var(--locale-font-scale));
@@ -1682,7 +1753,7 @@ html:lang(ru) {
 .home-footer-contact a,
 .home-footer-contact span {
   color: #fff;
-  font-family: var(--font-dm-sans), sans-serif;
+  font-family: var(--font-ui);
   font-size: calc(16px * var(--home-footer-ui-scale) * var(--locale-font-scale));
   font-weight: 400;
   line-height: calc(20px * var(--home-footer-ui-scale) * var(--locale-font-scale));
@@ -1745,7 +1816,7 @@ html:lang(ru) {
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   color: #dcd5d5;
-  font-family: var(--font-dm-sans), sans-serif;
+  font-family: var(--font-ui);
   font-size: calc(16px * var(--home-footer-ui-scale) * var(--locale-font-scale));
   line-height: calc(20px * var(--home-footer-ui-scale) * var(--locale-font-scale));
 }

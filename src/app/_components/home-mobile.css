@@ -51,7 +51,7 @@
   min-width: 0;
   background: #151515;
   color: #fff;
-  font-family: var(--font-inter), Inter, sans-serif;
+  font-family: var(--font-body);
 }
 
 .home-mobile-page {
@@ -227,7 +227,7 @@
   gap: 0;
   margin: 0;
   color: #fffcfc;
-  font-family: var(--font-megatrox), var(--font-inter), sans-serif;
+  font-family: var(--font-brand);
   font-size: calc(clamp(74px, 21.2vw, 91px) * var(--locale-font-scale));
   font-weight: 400;
   line-height: calc(clamp(64px, 18.1vw, 78px) * var(--locale-font-scale));
@@ -722,11 +722,17 @@
     top: var(--home-mobile-page-glow-top);
     left: 0;
     width: 100%;
+    height: auto;
+    bottom: 0;
     transform: none;
     opacity: 0.82;
     --home-page-grid-step-x: var(--home-mobile-page-grid-step-x);
     --home-page-grid-step-y: var(--home-mobile-page-grid-step-y);
     --home-page-grid-line-width: var(--home-mobile-page-grid-line-width);
+    background-image:
+      linear-gradient(to right, rgb(156 163 175 / 0.62) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width)),
+      linear-gradient(to bottom, rgb(156 163 175 / 0.62) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width));
+    background-size: var(--home-page-grid-step-x) var(--home-page-grid-step-y);
     -webkit-mask-image: radial-gradient(
       ellipse 140% 120% at 50% 0%,
       #000 0%,
@@ -741,6 +747,11 @@
       rgb(0 0 0 / 0.5) 70%,
       transparent 92%
     );
+  }
+
+  .home-mobile-page-glow::before {
+    content: none;
+    display: none;
   }
 
   #home .home-mobile-services {

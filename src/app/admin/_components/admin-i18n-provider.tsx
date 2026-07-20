@@ -48,6 +48,8 @@ export function AdminI18nProvider({ children }: { children: ReactNode }): React.
   }, []);
 
   useEffect(() => {
+    document.documentElement.lang = locale;
+
     if (!hasRestoredLocaleRef.current) {
       return;
     }

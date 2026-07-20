@@ -6,6 +6,9 @@ import { HOME_DESIGN_WIDTH, HOME_DESKTOP_MIN_WIDTH } from './home-constants';
 const SCALE_EPSILON = 0.0001;
 const HEIGHT_EPSILON = 0.5;
 const DEFAULT_MIN_WIDTH = HOME_DESKTOP_MIN_WIDTH;
+/** Avoid fighting the scroll thread with layout reads/writes mid-gesture. */
+const SCROLL_IDLE_MS = 160;
+const RESIZE_DEBOUNCE_MS = 120;
 
 type CanvasScalerProps = {
   children: ReactNode;
@@ -32,6 +35,7 @@ function measureContentHeight(inner: HTMLElement, canvasHeight?: number): number
 
 /**
  * Scales a fixed-width design canvas to fit the viewport, matching production neetrino.com behavior.
+ * Transform comes from `--home-canvas-scale` (set early by an inline boot script, then kept in sync here).
  */
 export function CanvasScaler({
   children,
@@ -58,20 +62,15 @@ export function CanvasScaler({
     const shouldScale = viewportWidth >= resolvedMinWidth;
 
     if (!shouldScale) {
-      // Always reset — mobile must stay 1:1 (no leftover transform / zoom).
-      inner.style.transform = 'none';
       wrap.style.height = '';
       scaleHost.style.setProperty('--home-canvas-scale', '1');
       lastAppliedRef.current = { scale: 0, height: 0 };
       return;
     }
 
-    // Prefer viewport width — an unscaled 1440px canvas can inflate layout measurements.
     const availableWidth = Math.min(wrap.clientWidth || viewportWidth, viewportWidth);
     const scale = availableWidth / canvasWidth;
     const contentHeight = measureContentHeight(inner, canvasHeight);
-    // Height must stay content-driven. Flooring to 100vh pads short pages (e.g. /team,
-    // /services) with empty space below the footer after scale.
     const scaledHeight = contentHeight * scale;
 
     if (
@@ -81,7 +80,6 @@ export function CanvasScaler({
       return;
     }
 
-    inner.style.transform = `scale(${scale})`;
     wrap.style.height = `${scaledHeight}px`;
     scaleHost.style.setProperty('--home-canvas-scale', String(scale));
     lastAppliedRef.current = { scale, height: scaledHeight };
@@ -89,10 +87,27 @@ export function CanvasScaler({
 
   useLayoutEffect(() => {
     let frame = 0;
+    let resizeTimer = 0;
+    let scrollIdleTimer = 0;
+    let isScrolling = false;
+    let needsUpdateAfterScroll = false;
 
-    const scheduleUpdate = (): void => {
+    const runUpdate = (): void => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(updateScale);
+    };
+
+    const scheduleUpdate = (): void => {
+      if (isScrolling) {
+        needsUpdateAfterScroll = true;
+        return;
+      }
+      runUpdate();
+    };
+
+    const scheduleDebouncedUpdate = (): void => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(scheduleUpdate, RESIZE_DEBOUNCE_MS);
     };
 
     updateScale();
@@ -103,21 +118,39 @@ export function CanvasScaler({
       return () => cancelAnimationFrame(frame);
     }
 
-    const resizeObserver = new ResizeObserver(scheduleUpdate);
+    // Watch wrap (width) and inner (content height). Updates are debounced and
+    // deferred while the user is scrolling so scale work never hits the scroll thread.
+    const resizeObserver = new ResizeObserver(scheduleDebouncedUpdate);
     resizeObserver.observe(wrap);
     if (canvasHeight === undefined) {
       resizeObserver.observe(inner);
     }
 
+    const handleScroll = (): void => {
+      isScrolling = true;
+      window.clearTimeout(scrollIdleTimer);
+      scrollIdleTimer = window.setTimeout(() => {
+        isScrolling = false;
+        if (needsUpdateAfterScroll) {
+          needsUpdateAfterScroll = false;
+          runUpdate();
+        }
+      }, SCROLL_IDLE_MS);
+    };
+
     const resizeOptions: AddEventListenerOptions = { passive: true };
-    window.addEventListener('resize', scheduleUpdate, resizeOptions);
+    window.addEventListener('resize', scheduleDebouncedUpdate, resizeOptions);
     window.addEventListener('load', scheduleUpdate, resizeOptions);
+    window.addEventListener('scroll', handleScroll, resizeOptions);
 
     return () => {
       cancelAnimationFrame(frame);
+      window.clearTimeout(resizeTimer);
+      window.clearTimeout(scrollIdleTimer);
       resizeObserver.disconnect();
-      window.removeEventListener('resize', scheduleUpdate, resizeOptions);
+      window.removeEventListener('resize', scheduleDebouncedUpdate, resizeOptions);
       window.removeEventListener('load', scheduleUpdate, resizeOptions);
+      window.removeEventListener('scroll', handleScroll, resizeOptions);
     };
   }, [canvasHeight, updateScale]);
 
