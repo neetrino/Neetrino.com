@@ -1,10 +1,13 @@
 'use client';
 
-import { HomeAboutVisual } from './home-about-visual';
 import { useHomeI18n } from './home-i18n-provider';
 import { ExploreButton, HomeContainer } from './home-ui';
 
-export function HomeAbout(): React.JSX.Element {
+type HomeAboutProps = {
+  visual: React.ReactNode;
+};
+
+export function HomeAbout({ visual }: HomeAboutProps): React.JSX.Element {
   const { aboutParagraphs, homeCopy } = useHomeI18n();
   const { about } = homeCopy.sections;
 
@@ -46,7 +49,7 @@ export function HomeAbout(): React.JSX.Element {
             </div>
             <ExploreButton href="/contact" label={homeCopy.actions.explore} />
           </div>
-          <HomeAboutVisual />
+          {visual}
         </div>
       </HomeContainer>
     </section>

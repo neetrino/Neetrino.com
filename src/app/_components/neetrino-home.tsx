@@ -1,4 +1,5 @@
 import { HomeAbout } from './home-about';
+import { HomeAboutVisual } from './home-about-visual';
 import { HomeHero } from './home-hero';
 import { HomeMobile } from './home-mobile';
 import { HomePartners } from './home-partners';
@@ -28,7 +29,7 @@ export function NeetrinoHome({
         <HomeHero />
         <HomeServices />
         <HomePortfolio bottomRow={portfolioBottomRow} topRow={portfolioTopRow} />
-        <HomeAbout />
+        <HomeAbout visual={<HomeAboutVisual />} />
         <HomePartners logos={partnerLogos} />
       </div>
 
