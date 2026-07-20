@@ -1,29 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
-import { DM_Sans, Inter, Noto_Sans_Armenian } from 'next/font/google';
 import { AppProviders } from './_components/app-providers';
 import { HOME_DESIGN_WIDTH, HOME_DESKTOP_MIN_WIDTH } from './_components/home-constants';
-import { megatroxFont } from '@/lib/fonts/megatrox';
+import { siteFontVariablesClassName } from '@/lib/fonts/site-fonts';
 import './globals.css';
-
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin', 'cyrillic'],
-  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
-});
-
-const dmSans = DM_Sans({
-  variable: '--font-dm-sans',
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-});
-
-const notoArmenian = Noto_Sans_Armenian({
-  variable: '--font-noto-armenian',
-  subsets: ['armenian'],
-  weight: ['300', '400', '500', '600', '700'],
-});
 
 export const metadata: Metadata = {
   title: 'Neetrino',
@@ -42,19 +23,26 @@ export const viewport: Viewport = {
  */
 const CANVAS_SCALE_BOOT_SCRIPT = `(function(){var m=${HOME_DESKTOP_MIN_WIDTH},d=${HOME_DESIGN_WIDTH},w=window.innerWidth,s=w>=m?String(w/d):'1';if(document.querySelector('style[data-canvas-scale-boot]'))return;var el=document.createElement('style');el.setAttribute('data-canvas-scale-boot','');el.textContent=':root{--home-canvas-scale:'+s+'}';document.head.appendChild(el);})();`;
 
+/**
+ * Applies stored locale to <html lang> before paint so hy/ru typography tokens
+ * activate without a flash of Inter fallback for Armenian glyphs.
+ */
+const LOCALE_LANG_BOOT_SCRIPT = `(function(){try{var p=location.pathname;var admin=p==='/admin'||p.indexOf('/admin/')===0||p.indexOf('/admin-login')===0;var k=admin?'neetrino.admin.locale':'neetrino.home.locale';var v=localStorage.getItem(k);if(v==='hy'||v==='ru'||v==='en')document.documentElement.lang=v;}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>): React.JSX.Element {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${dmSans.variable} ${notoArmenian.variable} ${megatroxFont.variable} antialiased`}
-    >
+    // Boot script may set lang from localStorage before hydrate; mismatch is intentional.
+    <html lang="en" className={`${siteFontVariablesClassName} antialiased`} suppressHydrationWarning>
       <body className="flex flex-col">
         <Script id="canvas-scale-boot" strategy="beforeInteractive">
           {CANVAS_SCALE_BOOT_SCRIPT}
+        </Script>
+        <Script id="locale-lang-boot" strategy="beforeInteractive">
+          {LOCALE_LANG_BOOT_SCRIPT}
         </Script>
         <AppProviders>{children}</AppProviders>
         <Analytics />

@@ -9,7 +9,7 @@
   padding: calc(152px * var(--home-ui-scale)) calc(72px * var(--home-ui-scale))
     calc(108px * var(--home-ui-scale));
   color: #fff;
-  font-family: var(--font-inter), Inter, sans-serif;
+  font-family: var(--font-body);
 }
 
 .team-page-inner {

@@ -28,7 +28,7 @@
   min-width: 0;
   background: #151515;
   color: #fff;
-  font-family: var(--font-inter), Inter, sans-serif;
+  font-family: var(--font-body);
 }
 
 /* ---------- Full-page background (Figma 1:2152) ---------- */

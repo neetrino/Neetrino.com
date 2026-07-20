@@ -21,7 +21,7 @@
   background-size: 100% 100%, 100% 100%;
   background-position: center;
   color: #fff;
-  font-family: var(--font-inter), Inter, sans-serif;
+  font-family: var(--font-body);
 }
 
 .portfolio-decor {
@@ -290,21 +290,24 @@
 .portfolio-title-wrap {
   position: relative;
   z-index: 5;
-  width: 646px;
+  width: var(--page-display-title-max-width);
+  max-width: calc(1440px - 144px);
 }
 
 .portfolio-title {
   position: relative;
   z-index: 1;
   display: inline-block;
-  width: 646px;
+  width: auto;
+  max-width: 100%;
   min-height: 117px;
   margin: 0;
   color: #fffcfc;
-  font-family: var(--font-megatrox), var(--font-inter), sans-serif;
-  font-size: calc(90px * var(--locale-font-scale));
+  font-family: var(--font-display);
+  font-size: var(--page-display-title-size);
   font-weight: 400;
   line-height: 1;
+  letter-spacing: var(--locale-letter-spacing);
   text-align: left;
   text-transform: uppercase;
   white-space: nowrap;
@@ -395,7 +398,7 @@
   right: 36px;
   bottom: 20px;
   color: #f6ff00;
-  font-family: Orbitron, var(--font-inter), sans-serif;
+  font-family: var(--font-brand);
   font-size: calc(55px * var(--locale-font-scale));
   font-weight: 900;
   line-height: calc(40px * var(--locale-font-scale));
@@ -436,7 +439,7 @@
   align-items: flex-start;
   justify-content: center;
   color: #4e5d78;
-  font-family: Poppins, var(--font-inter), sans-serif;
+  font-family: var(--font-ui);
   font-size: calc(14px * var(--locale-font-scale));
   transform: translate3d(-50%, 0, 0);
 }
@@ -564,7 +567,7 @@
     width: 100%;
     max-width: 100%;
     min-height: auto;
-    font-size: clamp(26px, 7.5vw, 36px);
+    font-size: calc(clamp(26px, 7.5vw, 36px) * var(--locale-display-scale));
     line-height: 1;
     text-align: center;
     white-space: nowrap;
