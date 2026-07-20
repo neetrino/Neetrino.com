@@ -1,9 +1,5 @@
 'use client';
 
-import { CdnImage } from '@/lib/cdn-image';
-import { staticAsset } from '@/lib/static-asset';
-
-import { HOME_IMAGE_QUALITY } from './home-constants';
 import { useDeferredMount } from './use-deferred-mount';
 
 const ABOUT_DECOR_HEAVY_IDLE_MS = 800;
@@ -16,46 +12,15 @@ function AboutDecorBase(): React.JSX.Element {
       <div className="home-page-glow" />
       <span className="about-glow-blue-1" />
       <span className="about-radial" />
-
-      <div className="about-hero-streak">
-        <CdnImage
-          src={staticAsset("/about/hero-streak.svg")}
-          alt=""
-          fill
-          sizes="1318px"
-          priority
-          loading="eager"
-          fetchPriority="high"
-          className="about-hero-streak-img"
-        />
-      </div>
-
       <span className="about-ray about-ray-1" />
     </>
   );
 }
 
-/** GPU-heavy decor — blurs, mesh, lower rays, glass panels. */
+/** GPU-heavy decor — blurs, lower rays, glass panels. */
 function AboutDecorHeavy(): React.JSX.Element {
   return (
     <>
-      <div className="home-hero-bg-mesh">
-        <div className="home-hero-bg-mesh-scroll">
-          <div className="home-hero-bg-mesh-rotate">
-            <CdnImage
-              src={staticAsset("/about/hero-streak.svg")}
-              alt=""
-              fill
-              sizes="1722px"
-              quality={HOME_IMAGE_QUALITY}
-              loading="lazy"
-              fetchPriority="low"
-              className="home-hero-bg-mesh-image"
-            />
-          </div>
-        </div>
-      </div>
-
       <span className="about-glow-blue-2" />
       <span className="about-glow-spectrum" />
       <span className="about-ray about-ray-2" />

@@ -1,5 +1,7 @@
 /* About page — 1:1 rebuild of Figma node 1:1578 on the shared 1440 canvas. */
 
+@import './about-decor.css';
+
 .about-body {
   position: relative;
   width: 1440px;
@@ -9,144 +11,6 @@
   color: #fff;
   font-family: var(--font-inter), Inter, sans-serif;
   contain: layout style;
-}
-
-/* ---------- Decorative background layer ---------- */
-
-.about-decor {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-  contain: layout style paint;
-  transform: translateZ(0);
-}
-
-.about-decor .home-page-glow {
-  top: 0;
-  opacity: 0.32;
-  mix-blend-mode: normal;
-}
-
-.about-glow-blue-1,
-.about-glow-blue-2 {
-  position: absolute;
-  width: 1047px;
-  height: 943px;
-  background: center / contain no-repeat;
-  contain: layout paint style;
-  transform: translateZ(0);
-}
-
-.about-glow-blue-1 {
-  top: -360px;
-  left: 250px;
-  z-index: 2;
-  background-image: url('https://cdn.neetrino.com/static/about/ellipse-27.svg');
-}
-
-.about-glow-blue-2 {
-  top: -220px;
-  left: 980px;
-  z-index: 2;
-  width: 1047px;
-  height: 943.3px;
-  filter: blur(512.7px);
-  border-radius: 50%;
-  background-color: #70b9ee;
-}
-
-.about-glow-spectrum {
-  position: absolute;
-  top: 130px;
-  left: 96px;
-  z-index: 0;
-  width: 341.88px;
-  height: 645.92px;
-  border-radius: 999px;
-  mix-blend-mode: plus-lighter;
-  background:
-    radial-gradient(60% 35% at 49% 78%, rgb(255 255 255 / 0.96), transparent 75%),
-    radial-gradient(54% 28% at 50% 56%, rgb(255 154 95 / 0.92), transparent 80%),
-    radial-gradient(66% 30% at 50% 35%, rgb(122 190 255 / 0.88), transparent 82%),
-    linear-gradient(90deg, rgb(11 13 18 / 0.97), transparent 35%, transparent 65%, rgb(11 13 18 / 0.97)),
-    linear-gradient(180deg, #0b0d12, #0c1017 50%, #0a0d13);
-  filter: blur(36px);
-  opacity: 0.9;
-}
-
-.about-radial {
-  position: absolute;
-  top: -420px;
-  left: 50%;
-  z-index: 1;
-  width: 1700px;
-  height: 1300px;
-  transform: translateX(-50%);
-  background: radial-gradient(
-    ellipse 42% 42% at 50% 50%,
-    rgb(100 170 255 / 0.28),
-    rgb(80 140 255 / 0.12) 42%,
-    rgb(120 170 255 / 0) 68%
-  );
-}
-
-.about-hero-streak {
-  position: absolute;
-  top: 170px;
-  left: 168px;
-  z-index: 3;
-  width: 1318px;
-  height: 436px;
-  mix-blend-mode: plus-lighter;
-}
-
-.about-hero-streak-img {
-  object-fit: fill;
-}
-
-.about-ray {
-  position: absolute;
-  left: 50%;
-  width: 1437px;
-  transform: translateX(-50%) scale(1.2);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  mix-blend-mode: screen;
-  opacity: 0.85;
-  contain: layout paint style;
-}
-
-.about-ray-1 {
-  top: 455px;
-  height: 405px;
-  background-image: url('https://cdn.neetrino.com/static/about/hero-ray.svg');
-}
-
-.about-ray-2 {
-  top: 985px;
-  height: 405px;
-  background-image: url('https://cdn.neetrino.com/static/about/ray-17414.svg');
-}
-
-.about-ray-3 {
-  top: 1585px;
-  height: 490px;
-  background-image: url('https://cdn.neetrino.com/static/about/ray-17415.svg');
-}
-
-.about-ray-4 {
-  top: 2250px;
-  height: 490px;
-  background-image: url('https://cdn.neetrino.com/static/about/ray-17418.svg');
-}
-
-.about-ray-5 {
-  top: 3290px;
-  height: 560px;
-  background-image: url('https://cdn.neetrino.com/static/about/ray-17416.svg');
 }
 
 .about-frost {
@@ -164,44 +28,6 @@
   clip-path: path(
     'M826 160.482C826 113.748 788.272 75.7803 741.539 75.4838L367.509 73.1103C342.403 72.951 319.461 58.8693 307.953 36.5559C296.375 14.1056 273.229 0 247.969 0H85C38.0558 0 0 38.0558 0 85V253C0 299.944 38.0558 338 85 338H741C787.944 338 826 299.944 826 253V160.482Z'
   );
-}
-
-.about-beam {
-  position: absolute;
-  top: 1285px;
-  left: 591px;
-  z-index: 0;
-  width: 206px;
-  height: 2135px;
-  overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 0.12);
-  border-radius: 151px;
-  background:
-    radial-gradient(ellipse 72% 16% at 52% 8%, rgb(74 105 165 / 0.16), transparent 72%),
-    radial-gradient(ellipse 74% 14% at 50% 90%, rgb(54 84 145 / 0.1), transparent 74%),
-    linear-gradient(90deg, transparent 0%, rgb(63 94 158 / 0.09) 47%, rgb(104 132 190 / 0.12) 52%, transparent 61%),
-    linear-gradient(180deg, rgb(16 17 19 / 0.58), rgb(11 12 14 / 0.5) 52%, rgb(17 18 21 / 0.62)),
-    linear-gradient(90deg, rgb(255 255 255 / 0.07), transparent 22% 76%, rgb(0 0 0 / 0.18));
-  box-shadow:
-    inset 18px 0 42px rgb(255 255 255 / 0.025),
-    inset -20px 0 48px rgb(0 0 0 / 0.34),
-    inset 0 0 72px rgb(0 0 0 / 0.46),
-    0 0 28px rgb(57 86 148 / 0.12);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
-}
-
-.about-beam::after {
-  content: '';
-  position: absolute;
-  bottom: -46px;
-  left: 50%;
-  width: 293px;
-  height: 280px;
-  background: center / contain no-repeat url('https://cdn.neetrino.com/static/about/beam-bottom-glow.svg');
-  mix-blend-mode: overlay;
-  transform: translateX(-50%);
-  pointer-events: none;
 }
 
 /* ---------- Shared text primitives ---------- */
@@ -381,7 +207,7 @@
 
 .about-intro {
   position: absolute;
-  top: 635px;
+  top: 694px;
   margin: 0;
   font-size: 16px;
   font-weight: 400;
@@ -527,7 +353,7 @@
   top: 1680px;
   left: 111px;
   width: 1195px;
-  height: 460px;
+  height: 530px;
   border: 1px solid rgb(255 255 255 / 0.05);
   border-radius: 75px;
   background: rgb(217 217 217 / 0.05);
@@ -544,44 +370,40 @@
 
 .about-why-illustration {
   position: absolute;
+  top: 1796px;
+  width: 200px;
+  height: 200px;
 }
 
 .about-why-img {
   object-fit: contain;
+  object-position: center bottom;
 }
 
 .about-why-rocket {
-  top: 1807px;
-  left: 186px;
-  width: 217px;
-  height: 216px;
-  transform: rotate(-1.37deg);
+  left: 197px;
 }
 
 .about-why-palette {
-  top: 1789px;
-  left: 466px;
-  width: 249px;
-  height: 249px;
+  left: 471px;
 }
 
 .about-why-lightning {
-  top: 1822px;
-  left: 750px;
-  width: 209px;
-  height: 191px;
+  left: 746px;
 }
 
 .about-why-helmet {
-  top: 1830px;
-  left: 1033px;
-  width: 216px;
-  height: 175px;
+  left: 1020px;
+}
+
+.about-why-helmet .about-why-img {
+  transform: scale(1.12);
+  transform-origin: center bottom;
 }
 
 .about-why-features {
   position: absolute;
-  top: 2023px;
+  top: 2010px;
   left: 186px;
   display: flex;
   gap: 53px;
@@ -591,13 +413,20 @@
 
 .about-why-feature {
   display: flex;
-  flex: 1;
+  flex: 1 1 0;
   flex-direction: column;
+  gap: 8px;
   margin: 0;
-  font-size: calc(16px * var(--locale-font-scale));
+  min-width: 0;
+  font-size: calc(15px * var(--locale-font-scale));
   font-weight: 800;
-  line-height: calc(22px * var(--locale-font-scale));
+  line-height: calc(20px * var(--locale-font-scale));
   color: #f5f5f5;
+}
+
+.about-why-feature span:last-child {
+  font-weight: 500;
+  opacity: 0.92;
 }
 
 /* ---------- Countries / map ---------- */

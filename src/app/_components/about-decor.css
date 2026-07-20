@@ -1,0 +1,161 @@
+/* Shared About-style dark page decor (grid, glows, rays, beam). */
+
+.about-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout style paint;
+  transform: translateZ(0);
+}
+
+.about-decor .home-page-glow {
+  top: 0;
+  height: 100%;
+  opacity: 0.32;
+  mix-blend-mode: normal;
+}
+
+.about-glow-blue-1,
+.about-glow-blue-2 {
+  position: absolute;
+  width: 1047px;
+  height: 943px;
+  background: center / contain no-repeat;
+  contain: layout paint style;
+  transform: translateZ(0);
+}
+
+.about-glow-blue-1 {
+  top: -360px;
+  left: 250px;
+  z-index: 2;
+  background-image: url('https://cdn.neetrino.com/static/about/ellipse-27.svg');
+}
+
+.about-glow-blue-2 {
+  top: -220px;
+  left: 980px;
+  z-index: 2;
+  width: 1047px;
+  height: 943.3px;
+  filter: blur(512.7px);
+  border-radius: 50%;
+  background-color: #70b9ee;
+}
+
+.about-glow-spectrum {
+  position: absolute;
+  top: 130px;
+  left: 96px;
+  z-index: 0;
+  width: 341.88px;
+  height: 645.92px;
+  border-radius: 999px;
+  mix-blend-mode: plus-lighter;
+  background:
+    radial-gradient(60% 35% at 49% 78%, rgb(255 255 255 / 0.96), transparent 75%),
+    radial-gradient(66% 30% at 50% 35%, rgb(122 190 255 / 0.88), transparent 82%),
+    linear-gradient(90deg, rgb(11 13 18 / 0.97), transparent 35%, transparent 65%, rgb(11 13 18 / 0.97)),
+    linear-gradient(180deg, #0b0d12, #0c1017 50%, #0a0d13);
+  filter: blur(36px);
+  opacity: 0.9;
+}
+
+.about-radial {
+  position: absolute;
+  top: -420px;
+  left: 50%;
+  z-index: 1;
+  width: 1700px;
+  height: 1300px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse 42% 42% at 50% 50%,
+    rgb(100 170 255 / 0.28),
+    rgb(80 140 255 / 0.12) 42%,
+    rgb(120 170 255 / 0) 68%
+  );
+}
+
+.about-ray {
+  position: absolute;
+  left: 50%;
+  width: 1437px;
+  transform: translateX(-50%) scale(1.2);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  contain: layout paint style;
+}
+
+.about-ray-1 {
+  top: 455px;
+  height: 405px;
+  background-image: url('https://cdn.neetrino.com/static/about/hero-ray.svg');
+}
+
+.about-ray-2 {
+  top: 985px;
+  height: 405px;
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17414.svg');
+}
+
+.about-ray-3 {
+  top: 1585px;
+  height: 490px;
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17415.svg');
+}
+
+.about-ray-4 {
+  top: 2250px;
+  height: 490px;
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17418.svg');
+}
+
+.about-ray-5 {
+  top: 3290px;
+  height: 560px;
+  background-image: url('https://cdn.neetrino.com/static/about/ray-17416.svg');
+}
+
+.about-beam {
+  position: absolute;
+  top: 1285px;
+  left: 591px;
+  z-index: 0;
+  width: 206px;
+  height: 2135px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 151px;
+  background:
+    radial-gradient(ellipse 72% 16% at 52% 8%, rgb(74 105 165 / 0.16), transparent 72%),
+    radial-gradient(ellipse 74% 14% at 50% 90%, rgb(54 84 145 / 0.1), transparent 74%),
+    linear-gradient(90deg, transparent 0%, rgb(63 94 158 / 0.09) 47%, rgb(104 132 190 / 0.12) 52%, transparent 61%),
+    linear-gradient(180deg, rgb(16 17 19 / 0.58), rgb(11 12 14 / 0.5) 52%, rgb(17 18 21 / 0.62)),
+    linear-gradient(90deg, rgb(255 255 255 / 0.07), transparent 22% 76%, rgb(0 0 0 / 0.18));
+  box-shadow:
+    inset 18px 0 42px rgb(255 255 255 / 0.025),
+    inset -20px 0 48px rgb(0 0 0 / 0.34),
+    inset 0 0 72px rgb(0 0 0 / 0.46),
+    0 0 28px rgb(57 86 148 / 0.12);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+.about-beam::after {
+  content: '';
+  position: absolute;
+  bottom: -46px;
+  left: 50%;
+  width: 293px;
+  height: 280px;
+  background: center / contain no-repeat url('https://cdn.neetrino.com/static/about/beam-bottom-glow.svg');
+  mix-blend-mode: overlay;
+  transform: translateX(-50%);
+  pointer-events: none;
+}

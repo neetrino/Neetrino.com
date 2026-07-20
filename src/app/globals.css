@@ -176,37 +176,38 @@ html:lang(ru) {
   position: relative;
 }
 
+/* Figma HOME node 1:501 — rotated grid SVG + mix-blend overlay */
 .home-page-glow {
+  --home-page-grid-asset-width: 4462px;
+  --home-page-grid-asset-height: 1722px;
+  --home-page-grid-frame-width: 1722px;
+  --home-page-grid-frame-height: 4462px;
+  --home-page-grid-url: url('/figma-home/home-page-grid.svg');
+
   position: absolute;
   top: var(--home-page-glow-top);
-  bottom: 0;
   left: 50%;
   z-index: 0;
-  width: 1722px;
+  width: var(--home-page-grid-frame-width);
+  height: var(--home-page-grid-frame-height);
   overflow: hidden;
   pointer-events: none;
   mix-blend-mode: overlay;
-  opacity: 0.72;
+  opacity: 1;
   transform: translateX(-50%);
   contain: layout paint style;
-  background-image:
-    linear-gradient(to right, rgb(156 163 175 / 0.62) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width)),
-    linear-gradient(to bottom, rgb(156 163 175 / 0.62) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width));
-  background-size: var(--home-page-grid-step-x) var(--home-page-grid-step-y);
-  -webkit-mask-image: radial-gradient(
-    ellipse 130% 88% at 50% 36%,
-    #000 0%,
-    #000 38%,
-    rgb(0 0 0 / 0.55) 58%,
-    transparent 78%
-  );
-  mask-image: radial-gradient(
-    ellipse 130% 88% at 50% 36%,
-    #000 0%,
-    #000 38%,
-    rgb(0 0 0 / 0.55) 58%,
-    transparent 78%
-  );
+  background: none;
+}
+
+.home-page-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--home-page-grid-asset-width);
+  height: var(--home-page-grid-asset-height);
+  background: var(--home-page-grid-url) center / 100% 100% no-repeat;
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 
 .home-page-scale-root[data-has-home-hero='false'] {
@@ -1440,39 +1441,31 @@ html:lang(ru) {
   max-width: calc(640px * var(--home-ui-scale));
   min-height: calc(540px * var(--home-ui-scale));
   margin-inline: auto;
-  overflow: visible;
+  /* Clip Spline bloom so warm glow does not spill into partners/footer */
+  overflow: hidden;
   background: transparent;
-  /* Drop the rectangular plate: dark canvas pixels vanish, only the glow remains */
   mix-blend-mode: screen;
   pointer-events: none;
-  /* Soft circular falloff — keep most of the blob fully visible */
-  -webkit-mask-image: radial-gradient(
-    closest-side,
-    #000 0%,
-    #000 72%,
-    rgb(0 0 0 / 0.8) 88%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    closest-side,
-    #000 0%,
-    #000 72%,
-    rgb(0 0 0 / 0.8) 88%,
-    transparent 100%
-  );
+  -webkit-mask-image:
+    radial-gradient(closest-side at 50% 42%, #000 0%, #000 58%, rgb(0 0 0 / 0.75) 78%, transparent 100%),
+    linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+  mask-image:
+    radial-gradient(closest-side at 50% 42%, #000 0%, #000 58%, rgb(0 0 0 / 0.75) 78%, transparent 100%),
+    linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
 .home-about-visual-canvas,
 .home-about-visual-placeholder {
   position: absolute;
-  /* Large WebGL buffer so bloom softens before the canvas edge */
-  top: -20% !important;
-  left: -20% !important;
-  width: 140% !important;
-  height: 140% !important;
+  top: -12% !important;
+  left: -12% !important;
+  width: 124% !important;
+  height: 124% !important;
   right: auto !important;
   bottom: auto !important;
-  overflow: visible !important;
+  overflow: hidden !important;
   background: transparent !important;
 }
 

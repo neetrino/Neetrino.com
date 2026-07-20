@@ -93,6 +93,7 @@
   background-image:
     linear-gradient(to right, rgb(168 230 255 / 0.58) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width)),
     linear-gradient(to bottom, rgb(168 230 255 / 0.58) var(--home-page-grid-line-width), transparent var(--home-page-grid-line-width));
+  background-size: var(--home-page-grid-step-x) var(--home-page-grid-step-y);
   -webkit-mask-image: radial-gradient(
     ellipse 150% 96% at 50% 24%,
     #000 0%,
@@ -107,6 +108,11 @@
     rgb(0 0 0 / 0.42) 76%,
     transparent 92%
   );
+}
+
+.portfolio-decor .portfolio-page-glow::before {
+  content: none;
+  display: none;
 }
 
 .portfolio-page-glow {

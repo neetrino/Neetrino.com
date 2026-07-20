@@ -19,7 +19,7 @@ export function HomeHeroBgCore({
         <div className="home-hero-bg-mesh-scroll">
           <div className="home-hero-bg-mesh-rotate">
             <CdnImage
-              src={staticAsset("/about/hero-streak.svg")}
+              src={staticAsset("/figma-home/home-hero-streak.svg")}
               alt=""
               fill
               sizes="1722px"
