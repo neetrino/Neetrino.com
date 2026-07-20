@@ -14,7 +14,7 @@ export const HOME_HERO_BRAND_SIZE = 180;
 
 export const HOME_PORTFOLIO_CARD_GAP = 12;
 export const HOME_PORTFOLIO_ROW_GAP = 45;
-export const HOME_PORTFOLIO_SCROLL_DURATION_S = 10;
+export const HOME_PORTFOLIO_SCROLL_DURATION_S = 14;
 
 /** Lower quality keeps decorative/home images fast without visible loss at display size. */
 export const HOME_IMAGE_QUALITY = 60;
