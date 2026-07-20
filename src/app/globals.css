@@ -366,16 +366,46 @@ html:lang(ru) body {
 }
 
 .home-btn-continue {
+  overflow: hidden;
+  isolation: isolate;
   background: #fff;
   color: #252525;
-  transition:
-    transform 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease;
+  /* Figma Button 16 — project cyan glow + brand text, not card fill (node 1:739) */
+  --home-continue-glow: #46fff4;
+  --home-continue-hover-bg: #fff;
+  --home-continue-hover-color: #252525;
+  --home-continue-text-start: var(--home-accent);
+  --home-continue-text-end: var(--home-purple);
+  transition: none;
 }
 
-.home-btn-continue span {
+.home-btn-continue-glow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 64px;
+  bottom: -98px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 60px 60px 0 0;
+  background: var(--home-continue-glow, #46fff4);
+  filter: blur(7.5px);
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  transition: none;
+}
+
+.home-btn-continue-label {
+  position: relative;
+  z-index: 1;
   display: inline-block;
+  transition: none;
+}
+
+.home-btn-continue > img {
+  position: relative;
+  z-index: 1;
+  transition: none;
 }
 
 .home-btn-explore-wrap {
@@ -514,14 +544,23 @@ html:lang(ru) body {
   transform: translateY(calc(-2px * var(--home-ui-scale)));
 }
 
-.home-btn-continue:hover {
+.home-btn-continue:hover,
+.home-btn-continue:focus-visible {
   background: var(--home-continue-hover-bg, #fff);
   color: var(--home-continue-hover-color, #252525);
   transform: translateY(calc(-2px * var(--home-ui-scale)));
+  box-shadow: 0 calc(8px * var(--home-ui-scale)) calc(22px * var(--home-ui-scale))
+    rgb(70 255 244 / 0.28);
 }
 
-.home-btn-continue:hover span,
-.home-btn-continue:focus-visible span {
+.home-btn-continue:hover .home-btn-continue-glow,
+.home-btn-continue:focus-visible .home-btn-continue-glow {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.home-btn-continue:hover .home-btn-continue-label,
+.home-btn-continue:focus-visible .home-btn-continue-label {
   background-image: linear-gradient(
     90deg,
     var(--home-continue-text-start, #ff7500) 0%,
@@ -530,6 +569,11 @@ html:lang(ru) body {
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+.home-btn-continue:hover > img,
+.home-btn-continue:focus-visible > img {
+  transform: translateX(calc(3px * var(--home-ui-scale)));
 }
 
 .home-header {
@@ -1324,10 +1368,6 @@ html:lang(ru) body {
 }
 
 .home-service-card-light {
-  --home-continue-hover-bg: var(--home-service-light);
-  --home-continue-hover-color: #000;
-  --home-continue-text-start: #473dff;
-  --home-continue-text-end: #ff7500;
   background: var(--home-service-light);
   color: #000;
 }
@@ -1337,37 +1377,21 @@ html:lang(ru) body {
 }
 
 .home-service-card-orange {
-  --home-continue-hover-bg: var(--home-accent);
-  --home-continue-hover-color: #fff;
-  --home-continue-text-start: #fff6e8;
-  --home-continue-text-end: #d3e4ff;
   background: var(--home-accent);
   color: #fff;
 }
 
 .home-service-card-dark {
-  --home-continue-hover-bg: var(--home-service-dark);
-  --home-continue-hover-color: #fff;
-  --home-continue-text-start: #ffb06a;
-  --home-continue-text-end: #8aa8ff;
   background: var(--home-service-dark);
   color: #fff;
 }
 
 .home-service-card-blue {
-  --home-continue-hover-bg: var(--home-purple);
-  --home-continue-hover-color: #fff;
-  --home-continue-text-start: #ffd29c;
-  --home-continue-text-end: #d6e5ff;
   background: var(--home-purple);
   color: #fff;
 }
 
 .home-service-card-ice {
-  --home-continue-hover-bg: var(--home-service-ice);
-  --home-continue-hover-color: #0f0f0f;
-  --home-continue-text-start: #473dff;
-  --home-continue-text-end: #0d266c;
   background: var(--home-service-ice);
   color: #0f0f0f;
 }

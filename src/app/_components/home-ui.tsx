@@ -51,7 +51,8 @@ export function SectionHeading({
 export function ContinueButton({ href, label }: ActionButtonProps): React.JSX.Element {
   return (
     <Link href={href} className="home-btn home-btn-continue">
-      <span>{label}</span>
+      <span className="home-btn-continue-glow" aria-hidden />
+      <span className="home-btn-continue-label">{label}</span>
       <Image src={staticAsset("/figma-home/safearea.svg")} alt="" width={20} height={20} aria-hidden />
     </Link>
   );
