@@ -38,26 +38,26 @@
   );
 }
 
-#privacy-top .home-footer-bg,
-#terms-top .home-footer-bg,
-#refund-top .home-footer-bg {
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgb(0 0 0 / 0.28) 10%,
-    #000 26%,
-    #000 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgb(0 0 0 / 0.28) 10%,
-    #000 26%,
-    #000 100%
-  );
-}
-
 @media (min-width: 768px) {
+  #privacy-top .home-footer-bg,
+  #terms-top .home-footer-bg,
+  #refund-top .home-footer-bg {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(0 0 0 / 0.28) 10%,
+      #000 26%,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(0 0 0 / 0.28) 10%,
+      #000 26%,
+      #000 100%
+    );
+  }
+
   #privacy-top .home-footer,
   #terms-top .home-footer,
   #refund-top .home-footer {
