@@ -48,6 +48,7 @@
   text-align: left;
   text-transform: uppercase;
   white-space: nowrap;
+  scroll-margin-top: calc(120px * var(--home-ui-scale));
 }
 
 /* --------------------------------------------------------------- Card grid */

@@ -1,13 +1,36 @@
 /* Blog listing and article pages on the shared 1440px Neetrino canvas. */
 
+#blog-top,
+#blog-post-top,
+.blog-page,
+.blog-article {
+  --blog-footer-reserve: 520px;
+  --blog-page-bg: #122a48;
+}
+
+#blog-top.home-page,
+#blog-post-top.home-page {
+  min-height: 100dvh;
+  background: var(--blog-page-bg);
+}
+
+#blog-top .neetrino-canvas-wrap--page,
+#blog-post-top .neetrino-canvas-wrap--page {
+  min-height: 100%;
+  background: var(--blog-page-bg);
+}
+
 .blog-page {
   position: relative;
   z-index: 12;
   width: 1440px;
-  min-height: 900px;
+  min-height: max(
+    900px,
+    calc((100dvh - 16px) / var(--home-canvas-scale, 1) - var(--blog-footer-reserve))
+  );
   overflow: hidden;
   padding: 152px 72px 120px;
-  background: #122a48;
+  background: var(--blog-page-bg);
   color: #fff;
   font-family: var(--font-body);
 }
@@ -182,10 +205,13 @@
   position: relative;
   z-index: 12;
   width: 1440px;
-  min-height: 900px;
+  min-height: max(
+    900px,
+    calc((100dvh - 16px) / var(--home-canvas-scale, 1) - var(--blog-footer-reserve))
+  );
   overflow: hidden;
   padding: 152px 72px 120px;
-  background: #122a48;
+  background: var(--blog-page-bg);
   color: #fff;
   font-family: var(--font-body);
 }
@@ -290,7 +316,7 @@
 
 .neetrino-canvas-inner:has(.blog-page),
 .neetrino-canvas-inner:has(.blog-article) {
-  background: #122a48;
+  background: var(--blog-page-bg, #122a48);
 }
 
 @media (max-width: 767px) {

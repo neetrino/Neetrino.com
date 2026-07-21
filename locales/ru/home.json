@@ -166,7 +166,8 @@
       "crmSystems": "CRM-системы",
       "saasPlatforms": "SAAS-платформы",
       "aiIntegration": "AI-интеграция",
-      "all": "Все"
+      "all": "Все",
+      "privacyPolicy": "Политика конфиденциальности"
     },
     "contact": {
       "address": "ул. Андраника Зоравара 108/10",

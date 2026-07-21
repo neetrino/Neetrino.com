@@ -166,7 +166,8 @@
       "crmSystems": "CRM Systems",
       "saasPlatforms": "SAAS Platforms",
       "aiIntegration": "AI integration",
-      "all": "All"
+      "all": "All",
+      "privacyPolicy": "Privacy Policy"
     },
     "contact": {
       "address": "108/10 Andranik Zoravar St.",

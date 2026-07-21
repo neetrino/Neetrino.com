@@ -68,7 +68,8 @@ type FooterLinkId =
   | 'crmSystems'
   | 'saasPlatforms'
   | 'aiIntegration'
-  | 'all';
+  | 'all'
+  | 'privacyPolicy';
 
 type MessageRichTextPart = {
   text: string;
@@ -182,14 +183,15 @@ export function createHomeData(messages: HomeMessages) {
       { id: 'portfolio', label: footer.links.portfolio, href: '/portfolio' },
       { id: 'services', label: footer.links.services, href: '/services' },
       { id: 'blog', label: footer.links.blog, href: '/blog' },
+      { id: 'privacyPolicy', label: footer.links.privacyPolicy, href: '/privacy-policy' },
     ],
     services: [
-      { id: 'website', label: footer.links.website, href: '/services' },
-      { id: 'mobileApp', label: footer.links.mobileApp, href: '/services' },
-      { id: 'crmSystems', label: footer.links.crmSystems, href: '/services' },
-      { id: 'saasPlatforms', label: footer.links.saasPlatforms, href: '/services' },
-      { id: 'aiIntegration', label: footer.links.aiIntegration, href: '/services' },
-      { id: 'all', label: footer.links.all, href: '/services' },
+      { id: 'website', label: footer.links.website, href: '/services#service-website' },
+      { id: 'mobileApp', label: footer.links.mobileApp, href: '/services#service-mobile' },
+      { id: 'crmSystems', label: footer.links.crmSystems, href: '/services#service-crm' },
+      { id: 'saasPlatforms', label: footer.links.saasPlatforms, href: '/services#service-saas' },
+      { id: 'aiIntegration', label: footer.links.aiIntegration, href: '/services#service-ai' },
+      { id: 'all', label: footer.links.all, href: '/services#services-heading' },
     ],
   } satisfies Record<'company' | 'services', FooterLink[]>;
 
