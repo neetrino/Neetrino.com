@@ -115,9 +115,11 @@ function AboutTeam(): React.JSX.Element {
         plain={aboutData.teamTitle.plain}
         accent={aboutData.teamTitle.accent}
       />
-      <p className="about-copy about-copy-team">{aboutData.teamText}</p>
-      <div className="about-team-cta">
-        <ExploreButton href="/services" label={aboutData.exploreCta} />
+      <div className="about-team-copy-block">
+        <p className="about-copy about-copy-team">{aboutData.teamText}</p>
+        <div className="about-team-cta">
+          <ExploreButton href="/services" label={aboutData.exploreCta} />
+        </div>
       </div>
       <div className="about-team-image">
         <CdnImage

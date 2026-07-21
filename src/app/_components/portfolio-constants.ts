@@ -1,10 +1,16 @@
 import { staticAsset } from '@/lib/static-asset';
 
-/** Fixed desktop portfolio body height in design pixels (Figma). */
-export const PORTFOLIO_BODY_HEIGHT = 2226;
+/** Minimum desktop portfolio body height in design pixels (Figma baseline). */
+export const PORTFOLIO_BODY_MIN_HEIGHT = 2226;
 
-/** Portfolio body + footer — stabilizes CanvasScaler height during scroll. */
-export const PORTFOLIO_CANVAS_HEIGHT = 2737;
+/** @deprecated Use PORTFOLIO_BODY_MIN_HEIGHT — body height is content-driven. */
+export const PORTFOLIO_BODY_HEIGHT = PORTFOLIO_BODY_MIN_HEIGHT;
+
+/**
+ * Approximate canvas lock for scaler (body + footer chrome).
+ * Kept as a floor; CanvasScaler may measure taller content when unlocked.
+ */
+export const PORTFOLIO_CANVAS_HEIGHT = 3100;
 
 /** Portfolio card media box in design pixels (Figma). */
 export const PORTFOLIO_CARD_MEDIA_WIDTH = 631;

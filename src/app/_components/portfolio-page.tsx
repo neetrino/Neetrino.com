@@ -9,7 +9,6 @@ import { NeetrinoPageShell } from './neetrino-page-shell';
 import { PortfolioBakedBackground } from './portfolio-baked-background';
 import {
   PORTFOLIO_ANRA_SCREEN_SRC,
-  PORTFOLIO_CANVAS_HEIGHT,
   PORTFOLIO_ITEMS_PER_PAGE,
   PORTFOLIO_LCP_CARD_COUNT,
 } from './portfolio-constants';
@@ -41,7 +40,14 @@ function usePortfolioPagination(projects: PortfolioProject[]): PortfolioPaginati
   const visibleProjects = projects.slice(visibleStart, visibleStart + itemsPerPage);
 
   const goToPage = (nextPage: number): void => {
-    setPage(Math.min(Math.max(nextPage, 1), totalPages));
+    const clampedPage = Math.min(Math.max(nextPage, 1), totalPages);
+
+    if (clampedPage === currentPage) {
+      return;
+    }
+
+    setPage(clampedPage);
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   };
 
   return {
@@ -240,7 +246,6 @@ export function PortfolioPage({ projects }: { projects: PortfolioProject[] }): R
     <NeetrinoPageShell
       mainId="portfolio-top"
       srOnlyTitle={portfolioMessages.hero.srOnlyTitle}
-      canvasHeight={PORTFOLIO_CANVAS_HEIGHT}
     >
       <PortfolioBakedBackground />
       <PortfolioBody projects={projects} />
