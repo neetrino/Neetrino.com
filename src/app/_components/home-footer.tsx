@@ -48,6 +48,10 @@ export function HomeFooter(): React.JSX.Element {
           <div className="home-footer-links-group">
             <FooterLinkColumn title={homeCopy.footer.columns.company} links={footerLinks.company} />
             <FooterLinkColumn title={homeCopy.footer.columns.services} links={footerLinks.services} />
+            <FooterLinkColumn
+              title={homeCopy.footer.columns.important}
+              links={footerLinks.important}
+            />
             <div className="home-footer-contact-column">
               <h3 className="home-footer-column-title">{homeCopy.footer.columns.contact}</h3>
               <ul className="home-footer-contact">

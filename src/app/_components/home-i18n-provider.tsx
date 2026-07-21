@@ -25,6 +25,8 @@ import { portfolioMessagesByLocale, type PortfolioMessages } from './portfolio-m
 import { createServiceDetailCards, type ServiceDetailCard } from './services-data';
 import { blogMessagesByLocale, type BlogMessages } from './blog-messages';
 import { privacyMessagesByLocale, type PrivacyMessages } from './privacy-messages';
+import { termsMessagesByLocale, type TermsMessages } from './terms-messages';
+import { refundMessagesByLocale, type RefundMessages } from './refund-messages';
 import { servicesMessagesByLocale, type ServicesMessages } from './services-messages';
 import { teamMessagesByLocale, type TeamMessages } from './team-messages';
 
@@ -35,6 +37,8 @@ type HomeI18nContextValue = ReturnType<typeof createHomeData> & {
   blogCopy: BlogMessages;
   contactCopy: ContactMessages;
   privacyCopy: PrivacyMessages;
+  termsCopy: TermsMessages;
+  refundCopy: RefundMessages;
   teamCopy: TeamMessages;
   languageOptions: readonly HomeLanguageOption[];
   locale: HomeLocale;
@@ -89,6 +93,8 @@ export function HomeI18nProvider({ children }: { children: ReactNode }): React.J
     const aboutCopy = aboutMessagesByLocale[locale];
     const blogCopy = blogMessagesByLocale[locale];
     const privacyCopy = privacyMessagesByLocale[locale];
+    const termsCopy = termsMessagesByLocale[locale];
+    const refundCopy = refundMessagesByLocale[locale];
     const teamCopy = teamMessagesByLocale[locale];
 
     return {
@@ -99,6 +105,8 @@ export function HomeI18nProvider({ children }: { children: ReactNode }): React.J
       blogCopy,
       contactCopy,
       privacyCopy,
+      termsCopy,
+      refundCopy,
       teamCopy,
       languageOptions: HOME_LANGUAGE_OPTIONS,
       locale,

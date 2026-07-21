@@ -3,6 +3,7 @@
 import { useHomeI18n } from './home-i18n-provider';
 import { NeetrinoPageShell } from './neetrino-page-shell';
 import type { PrivacyMessages } from './privacy-messages';
+import './legal-pages.css';
 import './privacy.css';
 
 type PrivacySection = PrivacyMessages['sections'][number];
@@ -39,6 +40,7 @@ export function PrivacyPage(): React.JSX.Element {
   return (
     <NeetrinoPageShell mainId="privacy-top" srOnlyTitle={hero.srOnlyTitle}>
       <article className="privacy-page" aria-labelledby="privacy-heading">
+        <div className="home-page-glow" aria-hidden />
         <div className="privacy-page-inner">
           <header className="privacy-hero">
             <p className="privacy-hero-kicker">{hero.kicker}</p>

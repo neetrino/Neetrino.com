@@ -1,28 +1,28 @@
-/* Privacy policy page on the shared 1440px Neetrino canvas. */
+/* Refund policy page on the shared 1440px Neetrino canvas. */
 
-#privacy-top {
-  --privacy-footer-reserve: 520px;
+#refund-top {
+  --refund-footer-reserve: 520px;
   --home-page-glow-top: 0;
 }
 
-#privacy-top.home-page {
+#refund-top.home-page {
   min-height: 100dvh;
   background: var(--home-bg);
 }
 
-#privacy-top .neetrino-canvas-wrap--page,
-.neetrino-canvas-inner:has(.privacy-page) {
+#refund-top .neetrino-canvas-wrap--page,
+.neetrino-canvas-inner:has(.refund-page) {
   min-height: 100%;
   background: var(--home-bg);
 }
 
-.privacy-page {
+.refund-page {
   position: relative;
   z-index: 12;
   width: 1440px;
   min-height: max(
     900px,
-    calc((100dvh - 16px) / var(--home-canvas-scale, 1) - var(--privacy-footer-reserve))
+    calc((100dvh - 16px) / var(--home-canvas-scale, 1) - var(--refund-footer-reserve))
   );
   overflow: hidden;
   padding: 152px 72px 120px;
@@ -31,7 +31,7 @@
   font-family: var(--font-body);
 }
 
-.privacy-page-inner {
+.refund-page-inner {
   position: relative;
   z-index: 1;
   display: flex;
@@ -41,13 +41,13 @@
   gap: 40px;
 }
 
-.privacy-hero {
+.refund-hero {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.privacy-hero-kicker {
+.refund-hero-kicker {
   display: inline-flex;
   align-items: center;
   width: fit-content;
@@ -65,18 +65,19 @@
   text-transform: uppercase;
 }
 
-.privacy-hero-title {
+.refund-hero-title {
   margin: 0;
   color: #fffcfc;
   font-family: var(--font-display);
-  font-size: calc(52px * var(--locale-display-scale, 1) * var(--locale-font-scale));
+  font-size: calc(42px * var(--locale-display-scale, 1) * var(--locale-font-scale));
   font-weight: 400;
   letter-spacing: var(--locale-letter-spacing);
-  line-height: 1.05;
+  line-height: 1.1;
   text-transform: uppercase;
+  white-space: normal;
 }
 
-.privacy-updated {
+.refund-updated {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -88,12 +89,12 @@
   letter-spacing: 0.04em;
 }
 
-.privacy-updated time {
+.refund-updated time {
   color: #7dd3fc;
   font-weight: 500;
 }
 
-.privacy-legal {
+.refund-legal {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -105,8 +106,8 @@
     rgb(8 24 44 / 0.55);
 }
 
-.privacy-legal-title,
-.privacy-section-title {
+.refund-legal-title,
+.refund-section-title {
   margin: 0;
   color: #fff;
   font-family: var(--font-ui);
@@ -115,25 +116,25 @@
   line-height: 1.3;
 }
 
-.privacy-legal-list {
+.refund-legal-list {
   display: grid;
   gap: 14px;
   margin: 0;
 }
 
-.privacy-legal-item {
+.refund-legal-item {
   display: grid;
   gap: 4px;
   padding-bottom: 12px;
   border-bottom: 1px solid rgb(255 255 255 / 0.08);
 }
 
-.privacy-legal-item:last-child {
+.refund-legal-item:last-child {
   padding-bottom: 0;
   border-bottom: 0;
 }
 
-.privacy-legal-item dt {
+.refund-legal-item dt {
   color: rgb(255 255 255 / 0.55);
   font-size: calc(12px * var(--locale-font-scale));
   font-weight: 600;
@@ -141,7 +142,7 @@
   text-transform: uppercase;
 }
 
-.privacy-legal-item dd {
+.refund-legal-item dd {
   margin: 0;
   color: #fff;
   font-size: calc(15px * var(--locale-font-scale));
@@ -149,7 +150,7 @@
   line-height: 1.45;
 }
 
-.privacy-legal-note {
+.refund-legal-note {
   margin: 0;
   color: rgb(255 255 255 / 0.58);
   font-size: calc(13px * var(--locale-font-scale));
@@ -157,15 +158,15 @@
   line-height: 1.5;
 }
 
-.privacy-sections,
-.privacy-contact {
+.refund-sections,
+.refund-contact {
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
 
-.privacy-section,
-.privacy-contact {
+.refund-section,
+.refund-contact {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -175,13 +176,13 @@
   background: rgb(8 24 44 / 0.42);
 }
 
-.privacy-subsection {
+.refund-subsection {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.privacy-subsection-title {
+.refund-subsection-title {
   margin: 0;
   color: #a8e6ff;
   font-family: var(--font-ui);
@@ -190,7 +191,7 @@
   line-height: 1.4;
 }
 
-.privacy-paragraph {
+.refund-paragraph {
   margin: 0;
   color: rgb(255 255 255 / 0.78);
   font-size: calc(15px * var(--locale-font-scale));
@@ -198,7 +199,7 @@
   line-height: 1.65;
 }
 
-.privacy-list {
+.refund-list {
   display: grid;
   gap: 10px;
   margin: 0;
@@ -206,7 +207,7 @@
   list-style: none;
 }
 
-.privacy-list li {
+.refund-list li {
   position: relative;
   padding-left: 18px;
   color: rgb(255 255 255 / 0.78);
@@ -215,7 +216,7 @@
   line-height: 1.65;
 }
 
-.privacy-list li::before {
+.refund-list li::before {
   position: absolute;
   top: 0.7em;
   left: 0;
@@ -226,13 +227,13 @@
   content: '';
 }
 
-.privacy-contact-actions {
+.refund-contact-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
 
-.privacy-contact-link {
+.refund-contact-link {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -251,37 +252,52 @@
     color 0.15s ease;
 }
 
-.privacy-contact-link:hover,
-.privacy-contact-link:focus-visible {
+.refund-contact-link:hover,
+.refund-contact-link:focus-visible {
   border-color: rgb(70 255 244 / 0.55);
   background: rgb(255 255 255 / 0.08);
   color: #fff;
   outline: none;
 }
 
+.refund-closing {
+  margin: 0;
+  padding: 28px 32px;
+  border: 1px solid rgb(168 230 255 / 0.16);
+  border-radius: 24px;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02)),
+    rgb(8 24 44 / 0.55);
+  color: rgb(255 255 255 / 0.82);
+  font-size: calc(15px * var(--locale-font-scale));
+  font-weight: 300;
+  line-height: 1.65;
+}
+
 @media (max-width: 767px) {
-  .privacy-page {
+  .refund-page {
     width: 100%;
     padding: 132px 16px 72px;
   }
 
-  .privacy-hero-title {
+  .refund-hero-title {
     font-size: calc(34px * var(--locale-display-scale, 1) * var(--locale-font-scale));
     white-space: normal;
   }
 
-  .privacy-legal,
-  .privacy-section,
-  .privacy-contact {
+  .refund-legal,
+  .refund-section,
+  .refund-contact,
+  .refund-closing {
     padding: 22px 18px;
     border-radius: 18px;
   }
 
-  .privacy-contact-actions {
+  .refund-contact-actions {
     flex-direction: column;
   }
 
-  .privacy-contact-link {
+  .refund-contact-link {
     justify-content: center;
   }
 }

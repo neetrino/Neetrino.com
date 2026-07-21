@@ -152,6 +152,7 @@
     "columns": {
       "company": "Company",
       "services": "Services",
+      "important": "Important",
       "contact": "Contact"
     },
     "links": {
@@ -167,7 +168,9 @@
       "saasPlatforms": "SAAS Platforms",
       "aiIntegration": "AI integration",
       "all": "All",
-      "privacyPolicy": "Privacy Policy"
+      "privacyPolicy": "Privacy Policy",
+      "termsAndConditions": "Terms and Conditions",
+      "refundPolicy": "Refund Policy"
     },
     "contact": {
       "address": "108/10 Andranik Zoravar St.",
