@@ -1603,7 +1603,7 @@ html:lang(ru) body {
 
 .home-partners {
   --home-partners-gap: calc(48px * var(--home-ui-scale));
-  --home-partners-scroll-duration: 120s;
+  --home-partners-scroll-duration: 45s;
   --home-partners-play-state: running;
   padding-block: calc(40px * var(--home-ui-scale));
   overflow: hidden;
@@ -2030,7 +2030,7 @@ html:lang(ru) body {
 
   .home-partners {
     --home-partners-gap: calc(32px * var(--home-ui-scale));
-    --home-partners-scroll-duration: 90s;
+    --home-partners-scroll-duration: 35s;
     padding-block: calc(28px * var(--home-ui-scale));
   }
 

@@ -9,7 +9,6 @@ import { useHomeI18n } from './home-i18n-provider';
 const SETS_PER_GROUP = 4;
 const PLAY_STATE_VAR = '--home-partners-play-state';
 const INTERSECTION_ROOT_MARGIN = '240px 0px';
-const SCROLL_IDLE_MS = 150;
 
 type HomePartnersProps = {
   logos: readonly PublicPartnerLogo[];
@@ -46,6 +45,10 @@ function PartnerLogoGroup({
   );
 }
 
+/**
+ * Partners marquee keeps moving while visible (including during page scroll).
+ * Pauses only when the section is off-screen.
+ */
 export function HomePartners({ logos }: HomePartnersProps): React.JSX.Element | null {
   const { homeCopy } = useHomeI18n();
   const sectionRef = useRef<HTMLElement>(null);
@@ -56,45 +59,18 @@ export function HomePartners({ logos }: HomePartnersProps): React.JSX.Element | 
       return;
     }
 
-    let isVisible = false;
-    let isScrolling = false;
-    let scrollIdleTimer = 0;
-
-    const syncPlayState = (): void => {
-      section.style.setProperty(PLAY_STATE_VAR, isVisible && !isScrolling ? 'running' : 'paused');
-    };
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        isVisible = entry?.isIntersecting ?? false;
-        syncPlayState();
+        const isVisible = entry?.isIntersecting ?? false;
+        section.style.setProperty(PLAY_STATE_VAR, isVisible ? 'running' : 'paused');
       },
       { rootMargin: INTERSECTION_ROOT_MARGIN, threshold: 0 },
     );
 
-    const handleScroll = (): void => {
-      if (!isScrolling) {
-        isScrolling = true;
-        syncPlayState();
-      }
-
-      window.clearTimeout(scrollIdleTimer);
-      scrollIdleTimer = window.setTimeout(() => {
-        isScrolling = false;
-        syncPlayState();
-      }, SCROLL_IDLE_MS);
-    };
-
-    const scrollOptions: AddEventListenerOptions = { passive: true };
     observer.observe(section);
-    window.addEventListener('scroll', handleScroll, scrollOptions);
-    syncPlayState();
+    section.style.setProperty(PLAY_STATE_VAR, 'running');
 
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll, scrollOptions);
-      window.clearTimeout(scrollIdleTimer);
-    };
+    return () => observer.disconnect();
   }, []);
 
   if (logos.length === 0) {
