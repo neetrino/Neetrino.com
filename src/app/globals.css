@@ -150,16 +150,36 @@ html {
  * width stays close to Inter; Inter remains the Latin/Cyrillic companion.
  * Russian: Inter already covers Cyrillic — swap DM Sans UI to Inter so
  * controls do not fall back to a system Cyrillic face.
+ * hy/ru display titles: Mirage Expanded (exact Framer stack names).
  */
+
+@font-face {
+  font-family: mirageExpandedFont;
+  src: url('/fonts/Mirage-Expanded.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'mirageExpandedFont Fallback';
+  src: local('Inter'), local('Arial'), local('Helvetica');
+  size-adjust: 100%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
 html:lang(hy) {
   /*
-   * Noto first for Armenian UI + translated display titles so wdth/stretch
-   * applies to real glyphs. --font-brand keeps Megatrox for Latin wordmarks.
+   * Noto first for Armenian UI so wdth/stretch applies to real glyphs.
+   * --font-brand keeps Megatrox for Latin wordmarks.
+   * --font-display uses Mirage Expanded for page hero titles.
    */
   --font-body: var(--font-noto-armenian), var(--font-inter), Inter, sans-serif;
   --font-ui: var(--font-noto-armenian), var(--font-inter), Inter, sans-serif;
   --font-brand: var(--font-megatrox), var(--font-noto-armenian), var(--font-inter), sans-serif;
-  --font-display: var(--font-noto-armenian), var(--font-inter), Inter, sans-serif;
+  --font-display: mirageExpandedFont, 'mirageExpandedFont Fallback';
   --font-locale-body: var(--font-body);
   /* Body/UI near English size; display titles use --locale-display-scale. */
   --locale-font-scale: 1;
@@ -174,8 +194,27 @@ html:lang(hy) {
 
 html:lang(hy) .portfolio-title,
 html:lang(hy) .contact-title,
-html:lang(hy) .blog-article-title {
-  font-stretch: 70%;
+html:lang(hy) .blog-article-title,
+html:lang(hy) .privacy-hero-title,
+html:lang(hy) .terms-hero-title,
+html:lang(hy) .refund-hero-title,
+html:lang(hy) .about-title,
+html:lang(hy) .about-headline {
+  font-family: mirageExpandedFont, 'mirageExpandedFont Fallback';
+  font-stretch: normal;
+  letter-spacing: -0.02em;
+}
+
+html:lang(ru) .portfolio-title,
+html:lang(ru) .contact-title,
+html:lang(ru) .blog-article-title,
+html:lang(ru) .privacy-hero-title,
+html:lang(ru) .terms-hero-title,
+html:lang(ru) .refund-hero-title,
+html:lang(ru) .about-title,
+html:lang(ru) .about-headline {
+  font-family: mirageExpandedFont, 'mirageExpandedFont Fallback';
+  font-stretch: normal;
   letter-spacing: -0.02em;
 }
 
@@ -183,7 +222,7 @@ html:lang(ru) {
   --font-body: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
   --font-ui: var(--font-inter), Inter, sans-serif;
   --font-brand: var(--font-megatrox), var(--font-inter), sans-serif;
-  --font-display: var(--font-inter), var(--font-megatrox), sans-serif;
+  --font-display: mirageExpandedFont, 'mirageExpandedFont Fallback';
   --font-locale-body: var(--font-body);
   --locale-font-scale: 1;
   --locale-display-scale: 0.94;
