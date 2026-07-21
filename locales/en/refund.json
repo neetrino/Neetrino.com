@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "pageTitle": "Refund Policy",
+    "description": "Refund Policy for Neetrino.com services and purchases."
+  },
+  "hero": {
+    "srOnlyTitle": "Refund Policy",
+    "kicker": "Legal",
+    "title": "Refund Policy for Neetrino.com"
+  },
+  "updatedLabel": "Last Updated",
+  "updatedAt": "28.11.2023",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "paragraphs": [
+        "At Neetrino, we are committed to the highest level of customer satisfaction. We understand that sometimes our services may not meet your expectations. In such cases, we offer the following refund policy."
+      ],
+      "subsections": []
+    },
+    {
+      "id": "refund-terms",
+      "title": "Refund Terms",
+      "paragraphs": [],
+      "subsections": [
+        {
+          "title": "Refund Before Work Commences:",
+          "bullets": [
+            "If the order is canceled before the commencement of work, we are ready to refund the full cost of the service."
+          ]
+        },
+        {
+          "title": "Partial Refund:",
+          "bullets": [
+            "If work has already started but is not completed, the client is entitled to a partial refund. The refund amount will be calculated based on the volume of work completed."
+          ]
+        },
+        {
+          "title": "Refund After Completion of Work:",
+          "bullets": [
+            "Refunds after the completion of work are not provided, except in cases where the service does not meet the described quality standards."
+          ]
+        },
+        {
+          "title": "Exceptions:",
+          "bullets": [
+            "Refunds do not apply to additional services that have already been purchased and activated, such as SEO packages, advanced payment gateways, etc."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "refund-process",
+      "title": "Refund Process",
+      "paragraphs": [],
+      "subsections": [
+        {
+          "title": "Refund Request:",
+          "bullets": [
+            "A refund request must be sent via email to info@neetrino.com within 30 days from the date of purchase."
+          ]
+        },
+        {
+          "title": "Condition Verification:",
+          "bullets": [
+            "Our team will conduct a review to determine if the refund request meets the established conditions."
+          ]
+        },
+        {
+          "title": "Refund Processing:",
+          "bullets": [
+            "In case of approval, the refund will be processed within 7 working days from the date of approval."
+          ]
+        }
+      ]
+    }
+  ],
+  "contact": {
+    "title": "Contact Information",
+    "text": "For any questions related to the refund policy, please contact us via email at info@neetrino.com or by phone at +374 343 000.",
+    "email": "info@neetrino.com",
+    "phone": "+374 343 000"
+  },
+  "closing": "At Neetrino, we value each of our clients and are committed to providing high-quality services. Our goal is your success and satisfaction."
+}

@@ -1751,6 +1751,11 @@ html:lang(ru) body {
   width: calc(130px * var(--home-footer-ui-scale));
 }
 
+.home-footer-links-group > div:nth-child(3) {
+  flex: 0 0 calc(180px * var(--home-footer-ui-scale));
+  width: calc(180px * var(--home-footer-ui-scale));
+}
+
 .home-footer-contact-column {
   flex: 0 0 calc(244px * var(--home-footer-ui-scale));
   width: calc(244px * var(--home-footer-ui-scale));

@@ -127,6 +127,7 @@
 
   .home-page .home-footer-links-group > div:nth-child(1),
   .home-page .home-footer-links-group > div:nth-child(2),
+  .home-page .home-footer-links-group > div:nth-child(3),
   .home-page .home-footer-contact-column {
     position: relative;
     z-index: 5;

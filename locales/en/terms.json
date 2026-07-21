@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "pageTitle": "Terms and Conditions",
+    "description": "Terms and Conditions for using Neetrino.com services and platform."
+  },
+  "hero": {
+    "srOnlyTitle": "Terms and Conditions",
+    "kicker": "Legal",
+    "title": "Terms and Conditions for Neetrino.com"
+  },
+  "updatedLabel": "Last Updated",
+  "updatedAt": "28.11.2023",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "paragraphs": [
+        "Welcome to Neetrino.com, a platform offering solutions in technology and business, including website sales, maintenance, and development. By using our website and services, you agree to comply with these Terms and Conditions. If you do not agree with these Terms, please refrain from using our site."
+      ],
+      "subsections": []
+    },
+    {
+      "id": "general-provisions",
+      "title": "General Provisions",
+      "paragraphs": [],
+      "subsections": [
+        {
+          "title": "Definitions:",
+          "bullets": [
+            "\"Platform\" refers to the Neetrino.com website and all related services.",
+            "\"User\" means any individual or organization utilizing the Platform.",
+            "\"Services\" include all products, services, content, and features offered via the Platform."
+          ]
+        },
+        {
+          "title": "Use of the Platform:",
+          "bullets": [
+            "Users must provide accurate and current information during registration and use of the Platform.",
+            "The Platform must not be used for illegal purposes or in a way that infringes on the rights and freedoms of others."
+          ]
+        },
+        {
+          "title": "Intellectual Property:",
+          "bullets": [
+            "All materials on the Platform, including design, text, graphics, and logos, are owned by Neetrino or licensed to Neetrino.",
+            "Users are not permitted to copy, modify, distribute, sell, or lease any part of our Services or the included software."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "services-transactions",
+      "title": "Services and Transactions",
+      "paragraphs": [],
+      "subsections": [
+        {
+          "title": "Description of Services:",
+          "bullets": [
+            "Neetrino provides various services, including but not limited to website sales, technical maintenance, and website development.",
+            "Details and pricing of services are listed on the Platform."
+          ]
+        },
+        {
+          "title": "Transactions:",
+          "bullets": [
+            "When purchasing services via the Platform, users agree to the terms of payment and transaction processing as outlined on the site.",
+            "Neetrino reserves the right to change service prices and terms without prior notice."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "limitations",
+      "title": "Limitations of Liability",
+      "paragraphs": [],
+      "subsections": [
+        {
+          "title": "Disclaimer of Liability:",
+          "bullets": [
+            "Neetrino provides the Platform and Services on an \"as is\" and \"as available\" basis, without any warranties.",
+            "Neetrino is not liable for any direct, indirect, incidental, special, or consequential damages arising from the use or inability to use the Services."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "changes",
+      "title": "Changes to Terms",
+      "paragraphs": [
+        "Neetrino reserves the right to modify or update these Terms and Conditions at any time. Changes become effective immediately upon their posting on the site."
+      ],
+      "subsections": []
+    }
+  ],
+  "contact": {
+    "title": "Contact Information",
+    "text": "For questions regarding these Terms and Conditions, please contact us via email at info@neetrino.com or by phone at +374 44 343 000.",
+    "email": "info@neetrino.com",
+    "phone": "+374 44 343 000"
+  },
+  "legal": {
+    "title": "Legal Information",
+    "lead": "This website is operated by Neetrino. The following are the legal identifiers of our company:",
+    "items": [
+      { "label": "VAT Number", "value": "27978929" },
+      { "label": "Legal Representative", "value": "Sipan Babajanyan" },
+      { "label": "Registered Address", "value": "Yerevan, Andranik St. 73" }
+    ],
+    "note": "These details are provided in compliance with the regulatory requirements."
+  }
+}

@@ -148,6 +148,7 @@
     "columns": {
       "company": "Ընկերություն",
       "services": "Ծառայություններ",
+      "important": "Կարևոր",
       "contact": "Կապ"
     },
     "links": {
@@ -163,7 +164,9 @@
       "saasPlatforms": "SAAS հարթակներ",
       "aiIntegration": "AI ինտեգրացիա",
       "all": "Բոլորը",
-      "privacyPolicy": "Գաղտնիության քաղաքականություն"
+      "privacyPolicy": "Գաղտնիության քաղաքականություն",
+      "termsAndConditions": "Պայմաններ և դրույթներ",
+      "refundPolicy": "Վերադարձի քաղաքականություն"
     },
     "contact": {
       "address": "Անդրանիկ Զորավարի փ. 108/10",

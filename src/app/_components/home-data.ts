@@ -69,7 +69,9 @@ type FooterLinkId =
   | 'saasPlatforms'
   | 'aiIntegration'
   | 'all'
-  | 'privacyPolicy';
+  | 'privacyPolicy'
+  | 'termsAndConditions'
+  | 'refundPolicy';
 
 type MessageRichTextPart = {
   text: string;
@@ -183,7 +185,6 @@ export function createHomeData(messages: HomeMessages) {
       { id: 'portfolio', label: footer.links.portfolio, href: '/portfolio' },
       { id: 'services', label: footer.links.services, href: '/services' },
       { id: 'blog', label: footer.links.blog, href: '/blog' },
-      { id: 'privacyPolicy', label: footer.links.privacyPolicy, href: '/privacy-policy' },
     ],
     services: [
       { id: 'website', label: footer.links.website, href: '/services#service-website' },
@@ -193,7 +194,16 @@ export function createHomeData(messages: HomeMessages) {
       { id: 'aiIntegration', label: footer.links.aiIntegration, href: '/services#service-ai' },
       { id: 'all', label: footer.links.all, href: '/services#services-heading' },
     ],
-  } satisfies Record<'company' | 'services', FooterLink[]>;
+    important: [
+      { id: 'privacyPolicy', label: footer.links.privacyPolicy, href: '/privacy-policy' },
+      {
+        id: 'termsAndConditions',
+        label: footer.links.termsAndConditions,
+        href: '/terms-and-conditions',
+      },
+      { id: 'refundPolicy', label: footer.links.refundPolicy, href: '/refund-policy' },
+    ],
+  } satisfies Record<'company' | 'services' | 'important', FooterLink[]>;
 
   const aboutParagraphs: AboutParagraph[] = messages.about.paragraphs.map((parts) => ({
     parts: parts.map(normalizeRichTextPart),
