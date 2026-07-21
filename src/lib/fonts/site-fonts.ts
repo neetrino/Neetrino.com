@@ -1,5 +1,6 @@
 import { DM_Sans, Inter, Noto_Sans_Armenian } from 'next/font/google';
 import { megatroxFont } from '@/lib/fonts/megatrox';
+import { mirageExpandedFont } from '@/lib/fonts/mirage-expanded';
 
 /**
  * Site font stack (next/font).
@@ -9,6 +10,7 @@ import { megatroxFont } from '@/lib/fonts/megatrox';
  *   matches Inter’s compact metrics more closely than the default full width
  * - DM Sans: Latin-only accent UI (en); hy/ru fall back to --font-ui tokens
  * - Megatrox: brand display (Latin); script fallbacks via --font-display
+ * - Mirage Expanded: hy/ru page hero titles
  */
 export const interFont = Inter({
   variable: '--font-inter',
@@ -35,4 +37,5 @@ export const siteFontVariablesClassName = [
   dmSansFont.variable,
   notoArmenianFont.variable,
   megatroxFont.variable,
+  mirageExpandedFont.variable,
 ].join(' ');
