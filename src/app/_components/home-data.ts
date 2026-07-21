@@ -68,7 +68,8 @@ type FooterLinkId =
   | 'crmSystems'
   | 'saasPlatforms'
   | 'aiIntegration'
-  | 'all';
+  | 'all'
+  | 'privacyPolicy';
 
 type MessageRichTextPart = {
   text: string;
@@ -182,6 +183,7 @@ export function createHomeData(messages: HomeMessages) {
       { id: 'portfolio', label: footer.links.portfolio, href: '/portfolio' },
       { id: 'services', label: footer.links.services, href: '/services' },
       { id: 'blog', label: footer.links.blog, href: '/blog' },
+      { id: 'privacyPolicy', label: footer.links.privacyPolicy, href: '/privacy-policy' },
     ],
     services: [
       { id: 'website', label: footer.links.website, href: '/services#service-website' },

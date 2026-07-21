@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "pageTitle": "Privacy Policy",
+    "description": "How Neetrino collects, uses, stores, and protects your information."
+  },
+  "hero": {
+    "srOnlyTitle": "Privacy Policy",
+    "kicker": "Legal",
+    "title": "Privacy Policy"
+  },
+  "updatedLabel": "Last updated",
+  "updatedAt": "28.08.2024",
+  "legal": {
+    "title": "Legal Details",
+    "lead": "This website is operated by Neetrino. The following are the legal identifiers of our company:",
+    "items": [
+      { "label": "VAT Number", "value": "27978929" },
+      { "label": "Legal Representative", "value": "Sipan Babajanyan" },
+      { "label": "Registered Address", "value": "Yerevan, Andranik St. 73" }
+    ],
+    "note": "These details are provided in compliance with the regulatory requirements."
+  },
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "paragraphs": [
+        "Welcome to Neetrino.com. We are committed to protecting the privacy and security of our users' information. This Privacy Policy outlines how we collect, use, store, and protect the information you provide while using our services."
+      ],
+      "subsections": []
+    },
+    {
+      "id": "collection",
+      "title": "Information Collection and Use",
+      "paragraphs": [],
+      "subsections": [
+        {
+          "title": "1. Personal Information",
+          "bullets": [
+            "We collect personal information when you register, make a purchase, or interact with our services. This may include your name, email address, phone number, and payment details.",
+            "Personal information is used to process transactions, provide customer support, and enhance your experience on our platform."
+          ]
+        },
+        {
+          "title": "2. Non-Personal Information",
+          "bullets": [
+            "We may collect non-personal information such as browser type, operating system, and website usage data. This information helps us understand how our platform is used and improve our services."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "title": "Data Security",
+      "paragraphs": [],
+      "subsections": [
+        {
+          "title": "1. Protection Measures",
+          "bullets": [
+            "We implement a variety of security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction.",
+            "Secure socket layer (SSL) technology is used for all transactions to ensure the safety of your data."
+          ]
+        },
+        {
+          "title": "2. Data Retention",
+          "bullets": [
+            "Personal information is retained as long as necessary to provide requested services, comply with legal obligations, and resolve disputes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sharing",
+      "title": "Sharing of Information",
+      "paragraphs": [],
+      "subsections": [
+        {
+          "title": "1. Third Parties",
+          "bullets": [
+            "We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties, except for trusted third parties who assist us in operating our website, conducting our business, or servicing you, so long as those parties agree to keep this information confidential.",
+            "Non-personally identifiable visitor information may be provided to other parties for marketing, advertising, or other uses."
+          ]
+        },
+        {
+          "title": "2. Legal Requirements",
+          "bullets": [
+            "We may disclose your information when we believe release is appropriate to comply with the law, enforce our site policies, or protect ours or others' rights, property, or safety."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rights",
+      "title": "User Rights",
+      "paragraphs": [],
+      "subsections": [
+        {
+          "title": "1. Access and Control",
+          "bullets": [
+            "You may request access to, correction, or deletion of your personal information.",
+            "You have the right to opt-out of marketing communications at any time."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "children",
+      "title": "Children's Privacy",
+      "paragraphs": [
+        "Our services are not intended for use by children under the age of 18, and we do not knowingly collect personal information from children under this age."
+      ],
+      "subsections": []
+    },
+    {
+      "id": "changes",
+      "title": "Changes to This Privacy Policy",
+      "paragraphs": [
+        "We reserve the right to update or change our Privacy Policy at any time. Any changes will be posted on this page."
+      ],
+      "subsections": []
+    }
+  ],
+  "contact": {
+    "title": "Contact Us",
+    "text": "If you have any questions about this Privacy Policy, please contact us via email or by phone.",
+    "email": "info@neetrino.com",
+    "phone": "+374 44 343 000"
+  }
+}
