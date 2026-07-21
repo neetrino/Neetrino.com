@@ -9,11 +9,12 @@
   --portfolio-ray-scale: 1.2;
   position: relative;
   width: 1440px;
-  height: 2226px;
-  overflow: hidden;
-  padding: 152px 72px 0;
+  min-height: 2226px;
+  height: auto;
+  overflow: visible;
+  padding: 152px 72px 96px;
   isolation: isolate;
-  contain: layout style;
+  contain: style;
   background-color: var(--portfolio-base-bg);
   background-image:
     radial-gradient(ellipse 62% 48% at 62% 16%, rgb(56 176 255 / 0.54) 0%, transparent 66%),
@@ -58,7 +59,8 @@
   left: 0;
   z-index: 0;
   width: 1440px;
-  height: var(--portfolio-decor-bake-height, 2737px);
+  height: 100%;
+  min-height: var(--portfolio-decor-bake-height, 3100px);
   pointer-events: none;
   overflow: hidden;
 }
@@ -67,6 +69,8 @@
   display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .portfolio-body--baked {
@@ -81,7 +85,7 @@
 }
 
 .neetrino-canvas-inner:has(.portfolio-body--baked) {
-  --portfolio-decor-bake-height: 2737px;
+  --portfolio-decor-bake-height: 3100px;
 }
 
 .portfolio-decor .portfolio-page-glow {
@@ -430,18 +434,18 @@
 }
 
 .portfolio-pagination {
-  position: absolute;
-  top: 1980px;
-  left: 50%;
+  position: relative;
   z-index: 4;
   display: flex;
   gap: 6px;
   align-items: flex-start;
   justify-content: center;
+  width: max-content;
+  max-width: 100%;
+  margin: 56px auto 0;
   color: #4e5d78;
   font-family: var(--font-ui);
   font-size: calc(14px * var(--locale-font-scale));
-  transform: translate3d(-50%, 0, 0);
 }
 
 .portfolio-pagination-item {
@@ -513,7 +517,7 @@
     bottom: auto;
     left: 50%;
     width: 1440px;
-    height: var(--portfolio-decor-bake-height, 2737px);
+    height: var(--portfolio-decor-bake-height, 3100px);
     transform: translate3d(-50%, 0, 0) scale(var(--portfolio-mobile-bg-scale));
     transform-origin: top center;
   }
@@ -523,7 +527,7 @@
     height: auto;
     min-height: 100vh;
     padding: 132px 16px 72px;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .portfolio-body.portfolio-body--baked {

@@ -1,10 +1,14 @@
 export type PortfolioProjectVariant =
   | 'anra'
+  | 'avetis'
   | 'degusto'
   | 'digital-implant'
   | 'dvbs'
+  | 'hay-masters'
+  | 'lilis'
   | 'marco'
   | 'ncie'
+  | 'qualitech'
   | 'toon'
   | 'zeppelin';
 
@@ -26,13 +30,17 @@ export type PortfolioProject = {
 export const portfolioProjects: PortfolioProject[] = [];
 
 /** Live client sites linked from portfolio card actions. */
-export const PORTFOLIO_LIVE_HREFS: Record<PortfolioProjectVariant, string> = {
+export const PORTFOLIO_LIVE_HREFS: Partial<Record<PortfolioProjectVariant, string>> = {
   anra: 'https://anra.am/',
+  avetis: 'https://avetis.am/',
   degusto: 'https://degusto.am/',
   'digital-implant': 'https://www.implantclinic.am/hy',
   dvbs: 'https://borboraqua.am/',
+  'hay-masters': 'https://haymasters.am/',
+  lilis: 'https://lilisflowers.am/',
   marco: 'https://marco.am/',
   ncie: 'https://ncie.am/en/',
+  qualitech: 'https://www.instrument.am/',
   toon: 'https://toonexpo.com/',
   zeppelin: 'https://www.zeppelin.am/am',
 };
@@ -83,6 +91,22 @@ export function resolvePortfolioVariant(title: string, alt: string): PortfolioPr
     return 'marco';
   }
 
+  if (combined.includes('avetis')) {
+    return 'avetis';
+  }
+
+  if (combined.includes('hay masters') || combined.includes('haymasters')) {
+    return 'hay-masters';
+  }
+
+  if (combined.includes('lilis')) {
+    return 'lilis';
+  }
+
+  if (combined.includes('qualitech')) {
+    return 'qualitech';
+  }
+
   return undefined;
 }
 
@@ -92,7 +116,7 @@ export function portfolioProjectLiveHref(variant: PortfolioProjectVariant | unde
     return null;
   }
 
-  return PORTFOLIO_LIVE_HREFS[variant];
+  return PORTFOLIO_LIVE_HREFS[variant] ?? null;
 }
 
 /**
