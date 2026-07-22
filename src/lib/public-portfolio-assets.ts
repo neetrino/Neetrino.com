@@ -13,17 +13,8 @@ import {
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 
-const HOME_PORTFOLIO_TOP_TEMPLATES = [
-  { width: 505, height: 378, radius: 43 },
-  { width: 505, height: 378, radius: 45 },
-  { width: 592, height: 383, radius: 35 },
-] as const;
-const HOME_PORTFOLIO_BOTTOM_TEMPLATES = [
-  { width: 379, height: 378, radius: 32 },
-  { width: 505, height: 378, radius: 43 },
-  { width: 505, height: 378, radius: 45 },
-  { width: 592, height: 383, radius: 35 },
-] as const;
+/** Uniform home marquee card size (matches the former Lilits Flowers slot). */
+const HOME_PORTFOLIO_CARD_TEMPLATE = { width: 600, height: 390, radius: 55  } as const;
 
 type PublicPortfolioAsset = {
   id: string;
@@ -32,7 +23,6 @@ type PublicPortfolioAsset = {
   url: string;
   projectUrl: string | null;
 };
-type HomePortfolioTemplate = Pick<ProjectCard, 'height' | 'radius' | 'width'>;
 
 export type PublicPortfolioData = {
   homeBottomRow: ProjectCard[];
@@ -40,17 +30,13 @@ export type PublicPortfolioData = {
   portfolioProjects: PortfolioProject[];
 };
 
-function getTemplate<T>(templates: readonly T[], index: number): T {
-  return templates[index % templates.length];
-}
-
-function toProjectCard(asset: PublicPortfolioAsset, template: HomePortfolioTemplate): ProjectCard {
+function toProjectCard(asset: PublicPortfolioAsset): ProjectCard {
   return {
     title: asset.alt || asset.title,
     image: asset.url,
-    width: template.width,
-    height: template.height,
-    radius: template.radius,
+    width: HOME_PORTFOLIO_CARD_TEMPLATE.width,
+    height: HOME_PORTFOLIO_CARD_TEMPLATE.height,
+    radius: HOME_PORTFOLIO_CARD_TEMPLATE.radius,
   };
 }
 
@@ -59,12 +45,8 @@ function splitHomeRows(assets: PublicPortfolioAsset[]): Pick<PublicPortfolioData
   const bottomAssets = assets.filter((_, index) => index % 2 === 1);
 
   return {
-    homeTopRow: topAssets.map((asset, index) =>
-      toProjectCard(asset, getTemplate(HOME_PORTFOLIO_TOP_TEMPLATES, index)),
-    ),
-    homeBottomRow: bottomAssets.map((asset, index) =>
-      toProjectCard(asset, getTemplate(HOME_PORTFOLIO_BOTTOM_TEMPLATES, index)),
-    ),
+    homeTopRow: topAssets.map(toProjectCard),
+    homeBottomRow: bottomAssets.map(toProjectCard),
   };
 }
 
