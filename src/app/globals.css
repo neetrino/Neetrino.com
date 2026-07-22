@@ -111,14 +111,14 @@
   --home-service-dark: #292929;
   --home-portfolio-card-gap: 12px;
   --home-portfolio-row-gap: 45px;
-  --home-portfolio-scroll-duration: 14s;
+  --home-portfolio-scroll-duration: 28s;
   --home-portfolio-play-state: running;
   --home-portfolio-accent-bg-height: calc(236px * var(--home-ui-scale));
   --home-page-grid-step-x: calc(91.5px * var(--home-ui-scale));
   --home-page-grid-step-y: calc(101.4px * var(--home-ui-scale));
   --home-page-grid-line-width: calc(1.745px * var(--home-ui-scale));
   --home-header-clearance: calc((27px + 52px + 16px) * var(--home-ui-scale));
-  --home-services-section-padding-top: calc(48px * var(--home-ui-scale));
+  --home-services-section-padding-top: calc(96px * var(--home-ui-scale));
   --home-page-glow-top: calc(633px * var(--home-ui-scale));
   --home-canvas-scale: 1;
 }
@@ -346,7 +346,7 @@ html:lang(ru) body {
 }
 
 .home-eyebrow {
-  margin: 0 0 calc(6px * var(--home-ui-scale));
+  margin: 0 0 calc(14px * var(--home-ui-scale));
   font-size: calc(16px * var(--home-ui-scale) * var(--locale-font-scale));
   font-weight: 500;
   line-height: calc(35px * var(--home-ui-scale) * var(--locale-font-scale));

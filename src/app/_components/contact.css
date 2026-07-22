@@ -109,13 +109,6 @@
   text-transform: uppercase;
 }
 
-.contact-kicker::before {
-  content: '+';
-  margin-right: 9px;
-  color: rgb(255 255 255 / 0.72);
-  font-size: calc(13px * var(--locale-font-scale));
-}
-
 .contact-title {
   margin: 22px 0 0;
   color: #fff;

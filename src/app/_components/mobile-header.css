@@ -42,19 +42,20 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 71px;
-  height: 36px;
-  padding: 0 16px;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0;
   border: 0;
   border-radius: 999px;
   background: #473dff;
   color: #fff;
-  font-family: inherit;
-  font-size: calc(14px * var(--locale-font-scale));
-  font-weight: 800;
-  line-height: calc(20px * var(--locale-font-scale));
-  letter-spacing: -0.15px;
   cursor: pointer;
+}
+
+.about-mobile-header-menu svg {
+  width: 20px;
+  height: 20px;
 }
 
 .about-mobile-header--menu-open {

@@ -30,7 +30,7 @@
   --home-mobile-stat-hand-width: 550px;
   --home-mobile-stat-hand-height: 456px;
   --home-mobile-stat-hand-overhang: 2.5rem;
-  --home-mobile-services-offset-top: 0.75rem;
+  --home-mobile-services-offset-top: 2rem;
   --home-mobile-stat-wide-block-height: 183px;
   --home-mobile-hero-scene-fade-height: 96px;
   --home-mobile-hero-seam-fade-height: 44px;
@@ -504,7 +504,7 @@
 }
 
 .home-mobile-services .home-eyebrow {
-  margin: 0 0 4px 6px;
+  margin: 0 0 12px 6px;
   font-size: calc(16px * var(--locale-font-scale));
   font-weight: 500;
   line-height: calc(35px * var(--locale-font-scale));

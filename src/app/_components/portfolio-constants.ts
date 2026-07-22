@@ -19,8 +19,9 @@ export const PORTFOLIO_CARD_MEDIA_HEIGHT = 364;
 /** Above-the-fold cards — eager load avoids decode jank while scrolling. */
 export const PORTFOLIO_LCP_CARD_COUNT = 4;
 
-/** Portfolio pagination — same count on mobile and desktop. */
-export const PORTFOLIO_ITEMS_PER_PAGE = 10;
+/** Portfolio infinite scroll — initial batch, then load-more increments. */
+export const PORTFOLIO_INITIAL_VISIBLE = 12;
+export const PORTFOLIO_LOAD_MORE_COUNT = 6;
 
 /** Baked decor stack (body gradients + decor + footer ray) in design pixels. */
 export const PORTFOLIO_DECOR_BAKE_WIDTH = 1440;

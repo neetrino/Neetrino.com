@@ -7,12 +7,6 @@
     "title": "ՊՈՐՏՖՈԼԻՈ",
     "srOnlyTitle": "Neetrino Պորտֆոլիո"
   },
-  "pagination": {
-    "ariaLabel": "Պորտֆոլիոյի էջավորում",
-    "previousPage": "Նախորդ էջ",
-    "nextPage": "Հաջորդ էջ",
-    "goToPage": "Անցնել {page} էջ"
-  },
   "card": {
     "openProject": "Բացել նախագիծը"
   },

@@ -33,7 +33,7 @@
 }
 
 .home-mobile-portfolio .home-eyebrow {
-  margin: 0 0 4px 6px;
+  margin: 0 0 12px 6px;
   font-size: calc(16px * var(--locale-font-scale));
   font-weight: 500;
   line-height: calc(35px * var(--locale-font-scale));
