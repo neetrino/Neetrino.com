@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CdnImage as Image } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
 import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
@@ -9,8 +9,9 @@ import { NeetrinoPageShell } from './neetrino-page-shell';
 import { PortfolioBakedBackground } from './portfolio-baked-background';
 import {
   PORTFOLIO_ANRA_SCREEN_SRC,
-  PORTFOLIO_ITEMS_PER_PAGE,
+  PORTFOLIO_INITIAL_VISIBLE,
   PORTFOLIO_LCP_CARD_COUNT,
+  PORTFOLIO_LOAD_MORE_COUNT,
 } from './portfolio-constants';
 import type { PortfolioProject } from './portfolio-data';
 import { portfolioMessages } from './portfolio-messages';
@@ -18,44 +19,55 @@ import { isRemoteImageUrl } from '@/lib/image-url';
 import './portfolio.css';
 import './services.css';
 
-type PortfolioPaginationState = {
-  currentPage: number;
-  itemsPerPage: number;
-  totalPages: number;
+const LOAD_MORE_ROOT_MARGIN = '280px 0px';
+
+type PortfolioInfiniteScrollState = {
+  hasMore: boolean;
+  sentinelRef: (node: HTMLDivElement | null) => void;
   visibleProjects: PortfolioProject[];
-  goToPage: (page: number) => void;
 };
 
-function formatPortfolioPageLabel(template: string, page: number): string {
-  return template.replace('{page}', String(page));
-}
+function usePortfolioInfiniteScroll(projects: PortfolioProject[]): PortfolioInfiniteScrollState {
+  const projectCount = projects.length;
+  const [visibleCount, setVisibleCount] = useState(() =>
+    Math.min(PORTFOLIO_INITIAL_VISIBLE, projectCount),
+  );
+  const [trackedProjectCount, setTrackedProjectCount] = useState(projectCount);
+  const [sentinelNode, setSentinelNode] = useState<HTMLDivElement | null>(null);
 
-function usePortfolioPagination(projects: PortfolioProject[]): PortfolioPaginationState {
-  const [page, setPage] = useState(1);
-  const itemsPerPage = PORTFOLIO_ITEMS_PER_PAGE;
+  if (projectCount !== trackedProjectCount) {
+    setTrackedProjectCount(projectCount);
+    setVisibleCount(Math.min(PORTFOLIO_INITIAL_VISIBLE, projectCount));
+  }
 
-  const totalPages = Math.max(1, Math.ceil(projects.length / itemsPerPage));
-  const currentPage = Math.min(page, totalPages);
-  const visibleStart = (currentPage - 1) * itemsPerPage;
-  const visibleProjects = projects.slice(visibleStart, visibleStart + itemsPerPage);
+  const hasMore = visibleCount < projectCount;
 
-  const goToPage = (nextPage: number): void => {
-    const clampedPage = Math.min(Math.max(nextPage, 1), totalPages);
-
-    if (clampedPage === currentPage) {
+  useEffect(() => {
+    if (!sentinelNode || !hasMore) {
       return;
     }
 
-    setPage(clampedPage);
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-  };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) {
+          return;
+        }
+
+        setVisibleCount((current) =>
+          Math.min(current + PORTFOLIO_LOAD_MORE_COUNT, projectCount),
+        );
+      },
+      { rootMargin: LOAD_MORE_ROOT_MARGIN, threshold: 0 },
+    );
+
+    observer.observe(sentinelNode);
+    return () => observer.disconnect();
+  }, [hasMore, projectCount, sentinelNode, visibleCount]);
 
   return {
-    currentPage,
-    itemsPerPage,
-    totalPages,
-    visibleProjects,
-    goToPage,
+    hasMore,
+    sentinelRef: setSentinelNode,
+    visibleProjects: projects.slice(0, visibleCount),
   };
 }
 
@@ -156,71 +168,9 @@ function PortfolioCard({
   );
 }
 
-function PortfolioPagination({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}): React.JSX.Element | null {
-  const { portfolioCopy } = useHomeI18n();
-
-  if (totalPages <= 1) {
-    return null;
-  }
-
-  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
-
-  return (
-    <nav className="portfolio-pagination" aria-label={portfolioCopy.pagination.ariaLabel}>
-      <button
-        type="button"
-        className="portfolio-pagination-item portfolio-pagination-arrow"
-        aria-label={portfolioCopy.pagination.previousPage}
-        disabled={currentPage <= 1}
-        onClick={() => onPageChange(currentPage - 1)}
-      >
-        ‹
-      </button>
-      {pages.map((page) => {
-        const isActive = page === currentPage;
-
-        return (
-          <button
-            key={page}
-            type="button"
-            className={
-              isActive
-                ? 'portfolio-pagination-item portfolio-pagination-item--active'
-                : 'portfolio-pagination-item'
-            }
-            aria-label={formatPortfolioPageLabel(portfolioCopy.pagination.goToPage, page)}
-            aria-current={isActive ? 'page' : undefined}
-            disabled={isActive}
-            onClick={() => onPageChange(page)}
-          >
-            {page}
-          </button>
-        );
-      })}
-      <button
-        type="button"
-        className="portfolio-pagination-item portfolio-pagination-arrow"
-        aria-label={portfolioCopy.pagination.nextPage}
-        disabled={currentPage >= totalPages}
-        onClick={() => onPageChange(currentPage + 1)}
-      >
-        ›
-      </button>
-    </nav>
-  );
-}
-
 function PortfolioBody({ projects }: { projects: PortfolioProject[] }): React.JSX.Element {
   const { portfolioCopy } = useHomeI18n();
-  const { currentPage, totalPages, visibleProjects, goToPage } = usePortfolioPagination(projects);
+  const { hasMore, sentinelRef, visibleProjects } = usePortfolioInfiniteScroll(projects);
 
   return (
     <section className="portfolio-body portfolio-body--baked" aria-labelledby="portfolio-heading">
@@ -236,7 +186,7 @@ function PortfolioBody({ projects }: { projects: PortfolioProject[] }): React.JS
           <PortfolioCard key={project.id} project={project} index={index} />
         ))}
       </div>
-      <PortfolioPagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
+      {hasMore ? <div ref={sentinelRef} className="portfolio-load-sentinel" aria-hidden /> : null}
     </section>
   );
 }
