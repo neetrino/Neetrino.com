@@ -1,4 +1,5 @@
 import type { AboutStat, GradientTone } from './about-data';
+import { isBrandAccentText } from './about-ui';
 
 type MobileReflectTitleProps = {
   className?: string;
@@ -40,14 +41,19 @@ export function MobileReflectTitle({
     : 'about-mobile-reflect-title-line';
 
   const renderLines = (): React.ReactNode =>
-    lines.map((line) => (
-      <span
-        key={line.text}
-        className={`${lineClass}${line.accent ? ' about-mobile-reflect-title-accent' : ''}`}
-      >
-        {line.text}
-      </span>
-    ));
+    lines.map((line) => {
+      const accentClass = line.accent
+        ? isBrandAccentText(line.text)
+          ? ' about-mobile-reflect-title-accent about-mobile-reflect-title-accent--brand'
+          : ' about-mobile-reflect-title-accent'
+        : '';
+
+      return (
+        <span key={line.text} className={`${lineClass}${accentClass}`}>
+          {line.text}
+        </span>
+      );
+    });
 
   return (
     <div className={`about-mobile-reflect-title ${alignClass} ${className}`.trim()}>
