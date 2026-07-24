@@ -1,20 +1,11 @@
 {
   "meta": {
     "pageTitle": "Blog",
-    "description": "Insights, updates, and articles from the Neetrino team."
+    "description": "Neetrino blog is under construction."
   },
-  "hero": {
-    "srOnlyTitle": "Neetrino blog",
-    "kicker": "Insights",
-    "title": "BLOG"
-  },
-  "list": {
-    "ariaLabel": "Published blog posts",
-    "empty": "No published posts yet. Check back soon.",
-    "readMore": "Read article",
-    "coverFallbackAlt": "Blog post cover"
-  },
-  "post": {
-    "backLabel": "Back to blog"
+  "srOnlyTitle": "Neetrino blog",
+  "comingSoon": {
+    "line1": "Under",
+    "line2": "construction"
   }
 }
