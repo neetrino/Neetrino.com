@@ -1,6 +1,6 @@
 'use client';
 
-import { ContactMap } from './contact-map';
+import { ContactMap, OFFICE_MAP_EMBED_URL, OFFICE_MAP_LINK } from './contact-map';
 import { useHomeI18n } from './home-i18n-provider';
 import { NeetrinoPageShell } from './neetrino-page-shell';
 import { contactMessages } from './contact-messages';
@@ -18,10 +18,6 @@ const SOCIAL_HREFS: Partial<Record<SocialIconKey, string>> = {
   telegram: 'https://telegram.me/neetrino',
   whatsapp: 'https://api.whatsapp.com/send?phone=37444343000',
 };
-
-const MAP_URL = 'https://www.google.com/maps?q=40.1684703,44.4458742&z=15&output=embed';
-const MAP_LINK =
-  'https://www.google.com/maps/place/Neetrino+IT+Company/@40.1684411,44.3634731,12z/data=!4m6!3m5!1s0x6a7d86fee77d7891:0x1a931845d2acd1e2!8m2!3d40.1684703!4d44.4458742!16s%2Fg%2F11tjg95w_6?entry=tts';
 
 const SOCIAL_ICON_PATHS: Record<SocialIconKey, string> = {
   facebook: 'M13.7 20v-7.1h2.4l.4-2.8h-2.8V8.3c0-.8.2-1.4 1.4-1.4h1.5V4.4c-.7-.1-1.5-.2-2.2-.2-2.2 0-3.7 1.3-3.7 3.8v2.1H8.2v2.8h2.5V20h3z',
@@ -175,12 +171,12 @@ function ContactOfficeSection(): React.JSX.Element {
             <span>{office.hours}</span>
           </div>
         </div>
-        <a href={MAP_LINK} target="_blank" rel="noopener noreferrer">
+        <a href={OFFICE_MAP_LINK} target="_blank" rel="noopener noreferrer">
           {office.openInMaps}
         </a>
       </div>
 
-      <ContactMap mapUrl={MAP_URL} />
+      <ContactMap mapUrl={OFFICE_MAP_EMBED_URL} />
     </section>
   );
 }

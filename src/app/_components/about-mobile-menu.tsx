@@ -37,24 +37,6 @@ function isNavLinkActive(item: NavItem, pathname: string, hash: string): boolean
   return pathname === routePath && hash === '';
 }
 
-function GlobeIcon(): React.JSX.Element {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-      <path d="M2 12h20" />
-    </svg>
-  );
-}
-
 function MenuToggleIcon(): React.JSX.Element {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -92,7 +74,7 @@ function MobileMenuNavLink({
 
 /** Full-screen mobile navigation panel opened from the header Menu button. */
 export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.Element {
-  const { homeCopy, languageOptions, locale, moreNavItems, navItems, setLocale } = useHomeI18n();
+  const { homeCopy, moreNavItems, navItems } = useHomeI18n();
   const menuId = useId();
   const pathname = usePathname();
   const currentHash = useCurrentHash(pathname);
@@ -170,34 +152,6 @@ export function AboutMobileMenu({ onClose }: AboutMobileMenuProps): React.JSX.El
             ))}
           </div>
         </nav>
-
-        <div
-          className="about-mobile-menu-languages"
-          role="group"
-          aria-label={homeCopy.navigation.languageGroupAriaLabel}
-        >
-          {languageOptions.map((language) => {
-            const isActive = locale === language.locale;
-            return (
-              <button
-                key={language.locale}
-                type="button"
-                className={
-                  isActive
-                    ? 'about-mobile-menu-lang about-mobile-menu-lang--active'
-                    : 'about-mobile-menu-lang'
-                }
-                aria-pressed={isActive}
-                onClick={() => setLocale(language.locale)}
-              >
-                <span className="about-mobile-menu-lang-icon">
-                  <GlobeIcon />
-                </span>
-                {language.codeLabel}
-              </button>
-            );
-          })}
-        </div>
       </div>
 
       <button

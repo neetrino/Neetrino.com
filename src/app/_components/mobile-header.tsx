@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AboutMobileMenu } from './about-mobile-menu';
@@ -30,12 +30,66 @@ function MobileMenuIcon({ open }: { open: boolean }): React.JSX.Element {
   );
 }
 
-/** Compact mobile header bar (logo + menu) shared across all marketing pages. */
+function GlobeIcon(): React.JSX.Element {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+      <path d="M2 12h20" />
+    </svg>
+  );
+}
+
+/** Compact mobile header bar (logo + language + menu) shared across marketing pages. */
 export function MobileHeader(): React.JSX.Element {
-  const { homeCopy } = useHomeI18n();
+  const { homeCopy, languageOptions, locale, setLocale } = useHomeI18n();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const languageMenuRef = useRef<HTMLDivElement>(null);
+
   const closeMenu = useCallback((): void => setIsMenuOpen(false), []);
-  const toggleMenu = useCallback((): void => setIsMenuOpen((open) => !open), []);
+  const toggleMenu = useCallback((): void => {
+    setIsLanguageOpen(false);
+    setIsMenuOpen((open) => !open);
+  }, []);
+  const toggleLanguage = useCallback((): void => {
+    setIsMenuOpen(false);
+    setIsLanguageOpen((open) => !open);
+  }, []);
+
+  useEffect(() => {
+    if (!isLanguageOpen) {
+      return;
+    }
+
+    function handlePointerDown(event: PointerEvent): void {
+      if (!languageMenuRef.current?.contains(event.target as Node)) {
+        setIsLanguageOpen(false);
+      }
+    }
+
+    function handleKeyDown(event: KeyboardEvent): void {
+      if (event.key === 'Escape') {
+        setIsLanguageOpen(false);
+      }
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isLanguageOpen]);
 
   return (
     <>
@@ -56,20 +110,65 @@ export function MobileHeader(): React.JSX.Element {
             className="about-mobile-header-logo-img"
           />
         </Link>
-        <button
-          type="button"
-          className="about-mobile-header-menu"
-          aria-label={
-            isMenuOpen
-              ? homeCopy.navigation.mobileMenuCloseAriaLabel
-              : homeCopy.navigation.mobileMenuOpenAriaLabel
-          }
-          aria-expanded={isMenuOpen}
-          aria-haspopup="dialog"
-          onClick={toggleMenu}
-        >
-          <MobileMenuIcon open={isMenuOpen} />
-        </button>
+
+        <div className="about-mobile-header-actions">
+          <div ref={languageMenuRef} className="about-mobile-header-language-wrap">
+            <button
+              type="button"
+              className="about-mobile-header-language"
+              aria-expanded={isLanguageOpen}
+              aria-haspopup="menu"
+              aria-label={homeCopy.navigation.changeLanguageAriaLabel}
+              onClick={toggleLanguage}
+            >
+              <GlobeIcon />
+            </button>
+
+            {isLanguageOpen ? (
+              <div className="about-mobile-header-language-menu" role="menu">
+                {languageOptions.map((language) => {
+                  const isActive = language.locale === locale;
+
+                  return (
+                    <button
+                      key={language.locale}
+                      type="button"
+                      className={
+                        isActive
+                          ? 'about-mobile-header-language-option about-mobile-header-language-option--active'
+                          : 'about-mobile-header-language-option'
+                      }
+                      role="menuitemradio"
+                      aria-checked={isActive}
+                      onClick={() => {
+                        setLocale(language.locale);
+                        setIsLanguageOpen(false);
+                      }}
+                    >
+                      <span className="about-mobile-header-language-option-code">{language.codeLabel}</span>
+                      <span className="about-mobile-header-language-option-name">{language.nativeLabel}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+          </div>
+
+          <button
+            type="button"
+            className="about-mobile-header-menu"
+            aria-label={
+              isMenuOpen
+                ? homeCopy.navigation.mobileMenuCloseAriaLabel
+                : homeCopy.navigation.mobileMenuOpenAriaLabel
+            }
+            aria-expanded={isMenuOpen}
+            aria-haspopup="dialog"
+            onClick={toggleMenu}
+          >
+            <MobileMenuIcon open={isMenuOpen} />
+          </button>
+        </div>
       </header>
 
       {isMenuOpen ? <AboutMobileMenu onClose={closeMenu} /> : null}

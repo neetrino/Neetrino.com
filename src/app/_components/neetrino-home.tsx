@@ -34,7 +34,7 @@ export function NeetrinoHome({
       </div>
 
       <div className="home-mobile-wrap">
-        <HomeMobile portfolioProjects={mobilePortfolioProjects} />
+        <HomeMobile partnerLogos={partnerLogos} portfolioProjects={mobilePortfolioProjects} />
       </div>
     </NeetrinoPageShell>
   );

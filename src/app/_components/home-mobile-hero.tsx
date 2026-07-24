@@ -2,11 +2,17 @@
 
 import Link from 'next/link';
 
+import { CdnImage } from '@/lib/cdn-image';
+import { staticAsset } from '@/lib/static-asset';
+
+import { HOME_IMAGE_QUALITY } from './home-constants';
 import { HomeHeroBgCore } from './home-hero-bg-core';
 import { HomeHeroRobot } from './home-hero-robot';
 import { useHomeI18n } from './home-i18n-provider';
 import { AnimatedStatValue } from './animated-stat-value';
 import { HeroStatToneClass } from './home-ui';
+
+const HAND_ASSET_SRC = staticAsset('/figma-home/28-a.webp');
 
 /** Mobile hero — Figma node 1:1478 flow layout; background matches desktop. */
 export function HomeMobileHero(): React.JSX.Element {
@@ -80,6 +86,25 @@ export function HomeMobileHero(): React.JSX.Element {
           ) : null}
         </div>
       </div>
+
+      {thirdStat ? (
+        <div className="home-mobile-hero-hand-layer" aria-hidden>
+          <div className="home-mobile-hero-hand">
+            <div className="home-mobile-hero-hand-motion">
+              <CdnImage
+                src={HAND_ASSET_SRC}
+                alt=""
+                fill
+                sizes="550px"
+                quality={HOME_IMAGE_QUALITY}
+                loading="lazy"
+                fetchPriority="low"
+                className="home-mobile-hero-stat-hand-img"
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }

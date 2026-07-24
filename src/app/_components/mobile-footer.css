@@ -203,6 +203,9 @@
   /* Home page: soft top mask fade instead of a hard seam / hairline. */
   #home.home-page .home-footer {
     position: relative;
+    z-index: 1;
+    /* Keep partners carousel fully visible — do not pull footer over it. */
+    margin-top: 0;
     -webkit-mask-image: none;
     mask-image: none;
   }
@@ -214,13 +217,12 @@
     right: 0;
     left: 0;
     z-index: 0;
-    height: 148px;
+    height: 96px;
     pointer-events: none;
     background: linear-gradient(
       to bottom,
       var(--home-bg, #151515) 0%,
-      rgb(21 21 21 / 0.72) 28%,
-      rgb(21 21 21 / 0.28) 62%,
+      rgb(21 21 21 / 0.55) 40%,
       transparent 100%
     );
   }
