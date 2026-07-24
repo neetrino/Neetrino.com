@@ -39,8 +39,8 @@
   --home-mobile-stats-glass-top-radius: 20px;
   --home-mobile-stats-glass-bottom-radius: 56px;
   --home-mobile-stats-panel-lift: 24px;
-  --home-mobile-stat-hand-bottom: calc(3.375rem - 52px);
-  --home-mobile-stat-hand-offset-right: 8.75rem;
+  --home-mobile-stat-hand-bottom: calc(3.375rem - 150px);
+  --home-mobile-stat-hand-offset-right: 5.5rem;
   --home-mobile-page-glow-top: 1180px;
   --home-mobile-page-grid-step-x: 25px;
   --home-mobile-page-grid-step-y: 27px;
@@ -405,8 +405,21 @@
   position: absolute;
   inset: 0;
   overflow: visible;
-  transform: scaleY(-1) rotate(180deg);
-  transform-origin: 88% 72%;
+  transform-origin: var(--home-hero-hand-point-origin-x) var(--home-hero-hand-point-origin-y);
+  animation: home-hero-hand-point var(--home-hero-hand-point-duration) ease-in-out infinite;
+  animation-play-state: var(--home-hero-play-state);
+  transition: none;
+  backface-visibility: hidden;
+  transform: scaleY(-1) rotate(180deg) rotate(var(--home-hero-hand-point-rotate-rest))
+    translate3d(var(--home-hero-hand-point-shift-x-rest), var(--home-hero-hand-point-shift-y-rest), 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-mobile-hero-hand-motion {
+    animation: none;
+    transform: scaleY(-1) rotate(180deg) rotate(var(--home-hero-hand-point-rotate-aim))
+      translate3d(var(--home-hero-hand-point-shift-x-aim), var(--home-hero-hand-point-shift-y-aim), 0);
+  }
 }
 
 .home-mobile-hero-stat-orange {
@@ -759,29 +772,31 @@
   }
 
   #home .home-mobile-portfolio {
-    padding-bottom: 56px;
+    padding-bottom: 24px;
   }
 
-  #home .home-mobile-portfolio::after {
-    content: '';
-    position: absolute;
-    bottom: -56px;
-    left: 50%;
-    z-index: 2;
-    width: 100vw;
-    height: 88px;
-    transform: translateX(-50%);
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      rgb(21 21 21 / 0.5) 24%,
-      rgb(71 61 255 / 0.12) 50%,
-      rgb(28 30 72 / 0.4) 78%,
-      rgb(28 30 72 / 0.16) 100%
-    );
-    -webkit-backdrop-filter: blur(40px) saturate(1.5);
-    backdrop-filter: blur(40px) saturate(1.5);
-    pointer-events: none;
+  #home .home-mobile .home-partners {
+    --home-partners-gap: 28px;
+    --home-partners-scroll-duration: 32s;
+    position: relative;
+    z-index: 4;
+    isolation: isolate;
+    width: 100%;
+    margin-top: 24px;
+    padding-block: 28px 32px;
+    background: #151515;
+  }
+
+  #home .home-mobile .home-partners-track {
+    min-height: 72px;
+  }
+
+  #home .home-mobile .home-partner-logo {
+    height: 72px;
+  }
+
+  #home .home-mobile .home-partner-logo img {
+    max-height: 72px;
   }
 }
 

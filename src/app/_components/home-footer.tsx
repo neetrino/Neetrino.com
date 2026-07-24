@@ -2,6 +2,7 @@
 
 import { CdnImage } from '@/lib/cdn-image';
 import { staticAsset } from '@/lib/static-asset';
+import { OFFICE_MAP_LINK } from './contact-map';
 import { useHomeI18n } from './home-i18n-provider';
 import { FooterLinkColumn, HomeContainer } from './home-ui';
 
@@ -59,7 +60,9 @@ export function HomeFooter(): React.JSX.Element {
                   <span className="home-footer-contact-icon" aria-hidden>
                     <CdnImage src={staticAsset('/figma-home/vector4.svg')} alt="" width={14} height={18} />
                   </span>
-                  <span>{contactInfo.address}</span>
+                  <a href={OFFICE_MAP_LINK} target="_blank" rel="noopener noreferrer">
+                    {contactInfo.address}
+                  </a>
                 </li>
                 <li>
                   <span className="home-footer-contact-icon" aria-hidden>

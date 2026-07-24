@@ -3,14 +3,20 @@ import { HomeMobileBackground } from './home-mobile-background';
 import { HomeMobileHero } from './home-mobile-hero';
 import { HomeMobilePortfolio } from './home-mobile-portfolio';
 import { HomeMobileServices } from './home-mobile-services';
+import { HomePartners } from './home-partners';
+import type { PublicPartnerLogo } from '@/lib/public-partner-logos';
 import './home-mobile.css';
 
 type HomeMobileProps = {
+  partnerLogos: readonly PublicPartnerLogo[];
   portfolioProjects: ProjectCard[];
 };
 
 /** Mobile home page — flow layout matching Figma node 1:1478. */
-export function HomeMobile({ portfolioProjects }: HomeMobileProps): React.JSX.Element {
+export function HomeMobile({
+  partnerLogos,
+  portfolioProjects,
+}: HomeMobileProps): React.JSX.Element {
   return (
     <div className="home-mobile">
       <HomeMobileBackground />
@@ -22,6 +28,7 @@ export function HomeMobile({ portfolioProjects }: HomeMobileProps): React.JSX.El
           <HomeMobileServices />
           <HomeMobilePortfolio projects={portfolioProjects} />
         </div>
+        <HomePartners logos={partnerLogos} />
       </div>
     </div>
   );
