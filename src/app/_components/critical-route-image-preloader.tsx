@@ -8,7 +8,6 @@ const CRITICAL_ROUTE_IMAGES = [
   '/figma-home/home-hero-streak.svg',
   staticAsset('/about/robot.webp'),
   staticAsset('/portfolio/decor-stack.webp'),
-  staticAsset('/blog/blog-title.webp'),
   staticAsset('/services/decor-stack.webp'),
 ] as const;
 

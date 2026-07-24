@@ -1,20 +1,11 @@
 {
   "meta": {
     "pageTitle": "Блог",
-    "description": "Статьи, новости и идеи от команды Neetrino."
+    "description": "Блог Neetrino находится в разработке."
   },
-  "hero": {
-    "srOnlyTitle": "Блог Neetrino",
-    "kicker": "Идеи",
-    "title": "БЛОГ"
-  },
-  "list": {
-    "ariaLabel": "Опубликованные записи блога",
-    "empty": "Пока нет опубликованных записей. Загляните позже.",
-    "readMore": "Читать статью",
-    "coverFallbackAlt": "Обложка записи блога"
-  },
-  "post": {
-    "backLabel": "Назад в блог"
+  "srOnlyTitle": "Блог Neetrino",
+  "comingSoon": {
+    "line1": "В",
+    "line2": "разработке"
   }
 }
