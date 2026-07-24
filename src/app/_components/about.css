@@ -51,6 +51,15 @@
   color: #ff7500;
 }
 
+/* Keep the Latin brand wordmark on Megatrox in every locale (not Mirage). */
+.about-accent--brand {
+  font-family: var(--font-megatrox), var(--font-brand);
+  font-stretch: normal;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
 .about-title-reflection {
   position: absolute;
   top: 100%;
@@ -323,13 +332,13 @@
 }
 
 .about-title-vision {
-  top: 1436px;
+  top: 1380px;
   left: 855px;
   width: 211px;
 }
 
 .about-copy-vision {
-  top: 1524px;
+  top: 1468px;
   left: 869px;
   width: 371px;
 }
@@ -514,6 +523,16 @@ html:lang(ru) .about-headline {
   font-size: calc(78px * var(--locale-font-scale));
   line-height: calc(72px * var(--locale-font-scale));
   letter-spacing: 0.6px;
+}
+
+/* Armenian accents: Mirage is weight-400 only and weak for hy glyphs — use Noto Black. */
+html:lang(hy) .about-headline-line em {
+  font-family: var(--font-noto-armenian), var(--font-inter), Inter, sans-serif;
+  font-style: italic;
+  font-weight: 900;
+  font-variation-settings: 'wght' 900, 'wdth' var(--locale-font-wdth);
+  -webkit-text-stroke: 0.6px currentColor;
+  paint-order: stroke fill;
 }
 
 html:lang(hy) .about-headline-1,

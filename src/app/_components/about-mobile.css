@@ -345,6 +345,14 @@
   color: #ff7500;
 }
 
+.about-mobile-reflect-title-accent--brand {
+  font-family: var(--font-megatrox), var(--font-brand);
+  font-stretch: normal;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
 .about-mobile-reflect-title-mirror {
   display: flex;
   padding-top: 5px;
@@ -740,7 +748,7 @@
   align-items: start;
   gap: 0;
   max-width: 100%;
-  padding: calc(137 / var(--about-mobile-design-width) * 100%) 0 2.5rem;
+  padding: calc(137 / var(--about-mobile-design-width) * 100%) 0 3.75rem;
 }
 
 .about-mobile-mv-article {
@@ -1496,6 +1504,16 @@ html:lang(ru) .about-mobile-hero-headline {
   font-size: calc(clamp(32px, 8.8vw, 40px) * var(--locale-font-scale));
   line-height: calc(36px * var(--locale-font-scale));
   letter-spacing: 0.4px;
+}
+
+html:lang(hy) .about-mobile-hero-headline-line--accent,
+html:lang(hy) .about-mobile-hero-headline-line em {
+  font-family: var(--font-noto-armenian), var(--font-inter), Inter, sans-serif;
+  font-style: italic;
+  font-weight: 900;
+  font-variation-settings: 'wght' 900, 'wdth' var(--locale-font-wdth);
+  -webkit-text-stroke: 0.45px currentColor;
+  paint-order: stroke fill;
 }
 
 html:lang(hy) .about-mobile-hero-intro--primary,
