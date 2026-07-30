@@ -1,0 +1,298 @@
+/* Single blog article surface — richer reading layout on the Neetrino canvas. */
+
+.blog-page--article {
+  padding-bottom: 96px;
+}
+
+.blog-article-page {
+  max-width: 980px;
+  gap: 0;
+  margin-inline: auto;
+  animation: blog-article-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes blog-article-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blog-article-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin: 0 0 36px;
+  color: rgb(255 255 255 / 0.78);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 160ms ease;
+}
+
+.blog-article-back:hover,
+.blog-article-back:focus-visible {
+  color: var(--blog-accent);
+}
+
+.blog-article-back-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.blog-article-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.blog-article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  color: var(--blog-text-muted);
+  font-size: 13px;
+}
+
+.blog-article-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 4px 12px;
+  border: 1px solid rgb(56 176 255 / 0.35);
+  border-radius: 999px;
+  background: rgb(56 176 255 / 0.12);
+  color: #b7e7ff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.blog-article-chip--soft {
+  border-color: var(--blog-border);
+  background: var(--blog-surface);
+  color: rgb(255 255 255 / 0.82);
+}
+
+.blog-article-reading {
+  color: rgb(255 255 255 / 0.55);
+}
+
+.blog-article-title {
+  max-width: 20rem;
+  margin: 22px 0 0;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.blog-article-excerpt {
+  max-width: 42rem;
+  margin: 22px 0 0;
+  color: rgb(255 255 255 / 0.88);
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.blog-article-cover {
+  position: relative;
+  width: 100%;
+  margin-top: 40px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 28px;
+  aspect-ratio: 16 / 9;
+  background: var(--blog-surface);
+  box-shadow:
+    0 28px 80px rgb(0 20 40 / 0.45),
+    inset 0 1px 0 rgb(255 255 255 / 0.08);
+  animation: blog-article-cover-enter 700ms 80ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes blog-article-cover-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.blog-article-cover-image {
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.blog-article-cover:hover .blog-article-cover-image {
+  transform: scale(1.05);
+}
+
+.blog-article-cover-glow {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 42%;
+  pointer-events: none;
+  background: linear-gradient(to top, rgb(18 42 72 / 0.72), transparent);
+}
+
+.blog-article-body {
+  max-width: 42rem;
+  margin: 48px auto 0;
+  animation: blog-article-enter 640ms 120ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.blog-article-rule {
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin-bottom: 32px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--blog-accent), transparent);
+}
+
+.blog-article-paragraph {
+  margin: 0 0 1.35em;
+  color: rgb(255 255 255 / 0.94);
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+.blog-article-paragraph:first-of-type::first-letter {
+  float: left;
+  padding-right: 10px;
+  color: var(--blog-accent);
+  font-family: var(--font-body);
+  font-size: 3.2em;
+  font-weight: 700;
+  line-height: 0.9;
+}
+
+.blog-article-end {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 28px;
+  align-items: end;
+  margin-top: 64px;
+  padding: 36px 40px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 28px;
+  background:
+    radial-gradient(ellipse 70% 90% at 100% 0%, rgb(56 176 255 / 0.22), transparent 55%),
+    linear-gradient(145deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.03));
+  box-shadow: 0 20px 56px rgb(0 18 36 / 0.35);
+}
+
+.blog-article-end-title {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.blog-article-end-subtitle {
+  margin: 12px 0 0;
+  max-width: 34rem;
+  color: rgb(255 255 255 / 0.78);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.blog-article-end-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.blog-article-end-actions .blog-article-back {
+  margin: 0;
+}
+
+.blog-article-missing {
+  margin: 0 0 24px;
+  color: var(--blog-text-muted);
+  font-size: 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-article-page,
+  .blog-article-cover,
+  .blog-article-body,
+  .blog-article-cover-image {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .blog-article-title {
+    max-width: none;
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .blog-article-excerpt {
+    font-size: 17px;
+  }
+
+  .blog-article-cover {
+    margin-top: 28px;
+    border-radius: 20px;
+  }
+
+  .blog-article-body {
+    margin-top: 36px;
+  }
+
+  .blog-article-paragraph {
+    font-size: 17px;
+  }
+
+  .blog-article-paragraph:first-of-type::first-letter {
+    font-size: 2.8em;
+  }
+
+  .blog-article-end {
+    grid-template-columns: 1fr;
+    padding: 28px 22px;
+  }
+
+  .blog-article-end-actions {
+    align-items: flex-start;
+  }
+
+  .blog-article-end-title {
+    font-size: 26px;
+  }
+}

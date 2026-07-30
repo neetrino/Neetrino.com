@@ -1,11 +1,79 @@
 {
   "meta": {
-    "pageTitle": "Blog",
-    "description": "Neetrino blog is under construction."
+    "pageTitle": "Blog | Neetrino",
+    "description": "Insights on product, engineering, and digital growth from the Neetrino team."
   },
   "srOnlyTitle": "Neetrino blog",
-  "comingSoon": {
-    "line1": "Under",
-    "line2": "construction"
+  "hero": {
+    "eyebrow": "Neetrino Journal",
+    "title": "Ideas that ship",
+    "subtitle": "Practical notes on product, engineering, and building digital experiences that last."
+  },
+  "categories": {
+    "all": "All",
+    "insights": "Insights",
+    "product": "Product",
+    "engineering": "Engineering",
+    "design": "Design",
+    "company": "Company"
+  },
+  "contentTypes": {
+    "all": "All types",
+    "article": "Article",
+    "guide": "Guide",
+    "news": "News"
+  },
+  "toolbar": {
+    "searchLabel": "Search articles",
+    "searchPlaceholder": "Search by title or topic",
+    "categoryLabel": "Category",
+    "contentTypeLabel": "Content type",
+    "sortLabel": "Sort",
+    "sortNewest": "Newest",
+    "sortOldest": "Oldest",
+    "sortTitle": "Title A–Z"
+  },
+  "featured": {
+    "eyebrow": "Featured",
+    "readMore": "Read article"
+  },
+  "grid": {
+    "title": "All articles",
+    "empty": "No articles match your filters.",
+    "emptyReset": "Clear filters"
+  },
+  "card": {
+    "readMore": "Read more"
+  },
+  "pagination": {
+    "loadMore": "Load more",
+    "showing": "Showing {visible} of {total}"
+  },
+  "popular": {
+    "title": "Popular reads",
+    "subtitle": "Most recent pieces from the team."
+  },
+  "newsletter": {
+    "eyebrow": "Stay in the loop",
+    "title": "Get new articles in your inbox",
+    "subtitle": "Occasional notes on product and engineering — no spam.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@company.com",
+    "submit": "Subscribe",
+    "success": "Thanks — we will be in touch soon.",
+    "invalidEmail": "Enter a valid email address."
+  },
+  "footerCta": {
+    "title": "Ready to build with us?",
+    "subtitle": "Tell us about your product — we will reply on business days.",
+    "cta": "Contact us"
+  },
+  "article": {
+    "backToBlog": "Back to blog",
+    "unpublished": "This article is not available.",
+    "readingTime": "{minutes} min read",
+    "endTitle": "Want something built this carefully?",
+    "endSubtitle": "Tell us about your product — we reply on business days.",
+    "endCta": "Start a project"
   }
 }

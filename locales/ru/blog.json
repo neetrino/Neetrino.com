@@ -1,11 +1,79 @@
 {
   "meta": {
-    "pageTitle": "Блог",
-    "description": "Блог Neetrino находится в разработке."
+    "pageTitle": "Блог | Neetrino",
+    "description": "Материалы команды Neetrino о продукте, инженерии и цифровом росте."
   },
   "srOnlyTitle": "Блог Neetrino",
-  "comingSoon": {
-    "line1": "В",
-    "line2": "разработке"
+  "hero": {
+    "eyebrow": "Neetrino Journal",
+    "title": "Идеи, которые работают",
+    "subtitle": "Практические заметки о продукте, инженерии и цифровом опыте, который остаётся."
+  },
+  "categories": {
+    "all": "Все",
+    "insights": "Insights",
+    "product": "Product",
+    "engineering": "Engineering",
+    "design": "Design",
+    "company": "Company"
+  },
+  "contentTypes": {
+    "all": "Все типы",
+    "article": "Статья",
+    "guide": "Гайд",
+    "news": "Новости"
+  },
+  "toolbar": {
+    "searchLabel": "Поиск статей",
+    "searchPlaceholder": "Поиск по названию или теме",
+    "categoryLabel": "Категория",
+    "contentTypeLabel": "Тип",
+    "sortLabel": "Сортировка",
+    "sortNewest": "Сначала новые",
+    "sortOldest": "Сначала старые",
+    "sortTitle": "По названию А–Я"
+  },
+  "featured": {
+    "eyebrow": "Избранное",
+    "readMore": "Читать статью"
+  },
+  "grid": {
+    "title": "Все статьи",
+    "empty": "Нет статей по выбранным фильтрам.",
+    "emptyReset": "Сбросить фильтры"
+  },
+  "card": {
+    "readMore": "Читать далее"
+  },
+  "pagination": {
+    "loadMore": "Показать ещё",
+    "showing": "Показано {visible} из {total}"
+  },
+  "popular": {
+    "title": "Популярное",
+    "subtitle": "Свежие материалы команды."
+  },
+  "newsletter": {
+    "eyebrow": "Будьте в курсе",
+    "title": "Новые статьи на почту",
+    "subtitle": "Редкие заметки о продукте и инженерии — без спама.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@company.com",
+    "submit": "Подписаться",
+    "success": "Спасибо — мы скоро свяжемся.",
+    "invalidEmail": "Введите корректный email."
+  },
+  "footerCta": {
+    "title": "Готовы строить вместе?",
+    "subtitle": "Расскажите о продукте — ответим в рабочие дни.",
+    "cta": "Связаться"
+  },
+  "article": {
+    "backToBlog": "Назад в блог",
+    "unpublished": "Эта статья недоступна.",
+    "readingTime": "{minutes} мин чтения",
+    "endTitle": "Хотите продукт с такой же внимательностью?",
+    "endSubtitle": "Расскажите о продукте — ответим в рабочие дни.",
+    "endCta": "Начать проект"
   }
 }

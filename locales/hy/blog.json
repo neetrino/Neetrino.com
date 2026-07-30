@@ -1,11 +1,79 @@
 {
   "meta": {
-    "pageTitle": "Բլոգ",
-    "description": "Neetrino բլոգը կառուցման փուլում է։"
+    "pageTitle": "Բլոգ | Neetrino",
+    "description": "Neetrino թիմի նյութեր product-ի, engineering-ի և թվային աճի մասին։"
   },
   "srOnlyTitle": "Neetrino բլոգ",
-  "comingSoon": {
-    "line1": "Կառուցման",
-    "line2": "փուլում"
+  "hero": {
+    "eyebrow": "Neetrino Journal",
+    "title": "Գաղափարներ, որոնք աշխատում են",
+    "subtitle": "Գործնական նյութեր product-ի, engineering-ի և կայուն թվային փորձառությունների մասին։"
+  },
+  "categories": {
+    "all": "Բոլորը",
+    "insights": "Insights",
+    "product": "Product",
+    "engineering": "Engineering",
+    "design": "Design",
+    "company": "Company"
+  },
+  "contentTypes": {
+    "all": "Բոլոր տեսակները",
+    "article": "Հոդված",
+    "guide": "Ուղեցույց",
+    "news": "Նորություն"
+  },
+  "toolbar": {
+    "searchLabel": "Փնտրել հոդվածներ",
+    "searchPlaceholder": "Փնտրել վերնագրով կամ թեմայով",
+    "categoryLabel": "Կատեգորիա",
+    "contentTypeLabel": "Տեսակ",
+    "sortLabel": "Տեսակավորում",
+    "sortNewest": "Նորագույն",
+    "sortOldest": "Հինագույն",
+    "sortTitle": "Վերնագիր Ա–Ֆ"
+  },
+  "featured": {
+    "eyebrow": "Ընտրված",
+    "readMore": "Կարդալ հոդվածը"
+  },
+  "grid": {
+    "title": "Բոլոր հոդվածները",
+    "empty": "Ձեր ֆիլտրերին համապատասխան հոդված չկա։",
+    "emptyReset": "Մաքրել ֆիլտրերը"
+  },
+  "card": {
+    "readMore": "Կարդալ ավելին"
+  },
+  "pagination": {
+    "loadMore": "Բեռնել ավելին",
+    "showing": "Ցուցադրված է {visible}՝ {total}-ից"
+  },
+  "popular": {
+    "title": "Հանրաճանաչ",
+    "subtitle": "Թիմի վերջին նյութերը։"
+  },
+  "newsletter": {
+    "eyebrow": "Մնացեք տեղեկացված",
+    "title": "Ստացեք նոր հոդվածները ձեր փոստում",
+    "subtitle": "Երբեմն նյութեր product-ի և engineering-ի մասին — առանց spam-ի։",
+    "emailLabel": "Էլ․ փոստ",
+    "emailPlaceholder": "you@company.com",
+    "submit": "Բաժանորդագրվել",
+    "success": "Շնորհակալություն — շուտով կկապվենք։",
+    "invalidEmail": "Մուտքագրեք վավեր էլ․ փոստ։"
+  },
+  "footerCta": {
+    "title": "Պատրա՞ստ եք կառուցել մեզ հետ",
+    "subtitle": "Պատմեք ձեր product-ի մասին — կպատասխանենք աշխատանքային օրերին։",
+    "cta": "Կապ մեզ հետ"
+  },
+  "article": {
+    "backToBlog": "Վերադառնալ բլոգ",
+    "unpublished": "Այս հոդվածը հասանելի չէ։",
+    "readingTime": "{minutes} րոպե կարդալու",
+    "endTitle": "Ցանկանու՞մ եք նույն խնամքով կառուցված product",
+    "endSubtitle": "Պատմեք ձեր գաղափարի մասին — կպատասխանենք աշխատանքային օրերին։",
+    "endCta": "Սկսել նախագիծ"
   }
 }
