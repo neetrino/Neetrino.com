@@ -8,7 +8,8 @@ export const metadata: Metadata = {
   description: portfolioMessages.meta.description,
 };
 
-export const revalidate = 300;
+/** Long ISR window: DB only on visit when cache is stale (see docs/database-audit). Must be a literal for Next.js. */
+export const revalidate = 86_400;
 
 export default async function Portfolio(): Promise<React.JSX.Element> {
   const portfolioData = await getPublicPortfolioData();
