@@ -1,0 +1,85 @@
+{
+  "at": "2026-07-30T07:52:03.968Z",
+  "table": [
+    {
+      "relname": "blog_posts",
+      "seq_scan": "820",
+      "idx_scan": "21",
+      "n_live_tup": "0",
+      "last_seq_scan": "2026-07-24 13:11:27.978822+00",
+      "last_idx_scan": "2026-06-26 09:51:32.877165+00"
+    },
+    {
+      "relname": "portfolio_assets",
+      "seq_scan": "7242",
+      "idx_scan": "40",
+      "n_live_tup": "12",
+      "last_seq_scan": "2026-07-30 07:34:18.476329+00",
+      "last_idx_scan": "2026-06-26 10:12:22.522539+00"
+    },
+    {
+      "relname": "payment_products",
+      "seq_scan": "562",
+      "idx_scan": "562",
+      "n_live_tup": "2",
+      "last_seq_scan": "2026-07-24 13:11:28.320009+00",
+      "last_idx_scan": "2026-07-24 13:11:27.978822+00"
+    },
+    {
+      "relname": "users",
+      "seq_scan": "4",
+      "idx_scan": "3",
+      "n_live_tup": "0",
+      "last_seq_scan": "2026-07-20 10:17:07.241133+00",
+      "last_idx_scan": "2026-06-26 08:49:09.115758+00"
+    },
+    {
+      "relname": "partners",
+      "seq_scan": "188",
+      "idx_scan": "1170",
+      "n_live_tup": "5",
+      "last_seq_scan": "2026-07-24 13:11:27.978822+00",
+      "last_idx_scan": "2026-07-30 07:34:18.476329+00"
+    },
+    {
+      "relname": "payment_attempts",
+      "seq_scan": "175",
+      "idx_scan": "18",
+      "n_live_tup": "4",
+      "last_seq_scan": "2026-07-24 13:11:26.975066+00",
+      "last_idx_scan": "2026-07-03 09:47:54.825485+00"
+    },
+    {
+      "relname": "blog_post_translations",
+      "seq_scan": "17",
+      "idx_scan": "25",
+      "n_live_tup": "0",
+      "last_seq_scan": "2026-07-20 09:38:14.071134+00",
+      "last_idx_scan": "2026-06-29 15:16:20.087395+00"
+    },
+    {
+      "relname": "contact_messages",
+      "seq_scan": "113",
+      "idx_scan": "2",
+      "n_live_tup": "2",
+      "last_seq_scan": "2026-07-20 10:17:07.241133+00",
+      "last_idx_scan": "2026-06-26 10:24:46.200384+00"
+    }
+  ],
+  "identity": [
+    {
+      "postmaster_start": "2026-07-30 07:52:03.752303+00",
+      "now": "2026-07-30 07:52:04.662306+00",
+      "uptime": "00:00:00.910003"
+    }
+  ],
+  "db": [
+    {
+      "xact_commit": "70666",
+      "xact_rollback": "110",
+      "tup_fetched": "3224511",
+      "tup_returned": "18929939",
+      "stats_reset": null
+    }
+  ]
+}

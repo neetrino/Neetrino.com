@@ -3,7 +3,8 @@ import { getPublicPartnerLogos } from '@/lib/public-partner-logos';
 import { getPublicPortfolioData } from '@/lib/public-portfolio-assets';
 import { staticAsset } from '@/lib/static-asset';
 
-export const revalidate = 300;
+/** Long ISR window: DB only on visit when cache is stale (see docs/database-audit). Must be a literal for Next.js. */
+export const revalidate = 86_400;
 
 const HOME_HERO_PRELOAD_HREFS = [
   staticAsset('/figma-home/philipp-hubert-dvvjh-ucdb30-unsplash1.webp'),
