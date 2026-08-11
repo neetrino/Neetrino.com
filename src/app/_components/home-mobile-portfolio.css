@@ -2,7 +2,8 @@
 
 .home-mobile-portfolio {
   --home-mobile-portfolio-card-width: min(78vw, 300px);
-  --home-mobile-portfolio-card-height: min(58vw, 228px);
+  /* Match portfolio page media ratio (631×364) so banners are not cropped. */
+  --home-mobile-portfolio-card-aspect: 631 / 364;
   --home-mobile-portfolio-gap: 14px;
   --home-mobile-portfolio-side-pad: max(
     24px,
@@ -73,11 +74,13 @@
   position: relative;
   flex: 0 0 var(--home-mobile-portfolio-card-width);
   width: var(--home-mobile-portfolio-card-width);
-  height: var(--home-mobile-portfolio-card-height);
+  height: auto;
+  aspect-ratio: var(--home-mobile-portfolio-card-aspect);
   overflow: hidden;
-  border-radius: 22px;
-  background: #1c1c1c;
-  box-shadow: 0 18px 40px rgb(0 0 0 / 0.35);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.18);
   scroll-snap-align: center;
   scroll-snap-stop: always;
   transform: scale(0.9) translateZ(0);
@@ -91,9 +94,7 @@
 .home-mobile-portfolio-card.is-active {
   transform: scale(1) translateZ(0);
   opacity: 1;
-  box-shadow:
-    0 22px 48px rgb(0 0 0 / 0.45),
-    0 0 0 1px rgb(255 255 255 / 0.08);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.28);
 }
 
 .home-mobile-portfolio-image {
