@@ -1,9 +1,17 @@
 import type { Prisma } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
+
 import { getArcaOrderStatus, isSuccessfulArcaPayment } from '@/lib/payments/arca/client';
 import { getArcaConfig } from '@/lib/payments/arca/config';
+import {
+  claimPaymentPaidTransition,
+  markPaymentAttemptFailed,
+} from '@/lib/payments/finalize-payment-attempt';
+import { createDisplayOrderNumber } from '@/lib/payments/order-number';
+import { runOrderPaidSideEffects } from '@/lib/payments/order-paid-side-effects';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
+import { dispatchOrderPaidNotification } from '@/lib/telegram';
 
 type PaymentResult = 'paid' | 'failed';
 
@@ -60,17 +68,43 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     const status = await getArcaOrderStatus(arcaOrderId);
     const isPaid = isSuccessfulArcaPayment(status);
-    await prisma.paymentAttempt.update({
-      where: { id: paymentAttempt.id },
-      data: {
-        failureMessage: isPaid ? null : 'Arca payment was not deposited.',
-        paidAt: isPaid ? new Date() : null,
-        providerResponse: toJsonValue(status.rawResponse),
-        status: isPaid ? 'PAID' : 'FAILED',
-      },
+    const providerResponse = toJsonValue(status.rawResponse);
+
+    if (!isPaid) {
+      await markPaymentAttemptFailed({
+        attemptId: paymentAttempt.id,
+        failureMessage: 'Arca payment was not deposited.',
+        providerResponse,
+      });
+      return redirectToProduct(paymentAttempt.product.secretSlug, 'failed');
+    }
+
+    const paidAt = new Date();
+    const transitionedToPaid = await claimPaymentPaidTransition({
+      attemptId: paymentAttempt.id,
+      paidAt,
+      providerResponse,
     });
 
-    return redirectToProduct(paymentAttempt.product.secretSlug, isPaid ? 'paid' : 'failed');
+    await runOrderPaidSideEffects(transitionedToPaid, async () => {
+      await dispatchOrderPaidNotification({
+        orderId: paymentAttempt.id,
+        orderNumber: createDisplayOrderNumber(paymentAttempt),
+        amountAmd: paymentAttempt.amountAmd,
+        currency: paymentAttempt.currency,
+        provider: paymentAttempt.provider,
+        paidAt,
+        items: [
+          {
+            name: paymentAttempt.product.name,
+            quantity: 1,
+            unitAmountAmd: paymentAttempt.amountAmd,
+          },
+        ],
+      });
+    });
+
+    return redirectToProduct(paymentAttempt.product.secretSlug, 'paid');
   } catch (error) {
     logger.error('Failed to handle Arca callback.', { error });
 

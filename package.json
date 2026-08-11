@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/lib/telegram/telegram-service.test.ts src/lib/telegram/order-paid.test.ts src/lib/payments/finalize-payment-attempt.test.ts",
     "admin:hash-password": "node scripts/create-admin-password-hash.mjs",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
@@ -43,6 +44,7 @@
     "playwright": "^1.58.2",
     "prisma": "^6.19.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.12",
     "typescript": "^5"
   }
 }

@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, type KeyboardEvent } from 'react';
+import { useSearchParams } from 'next/navigation';
+
 import type { AdminPaymentOrder } from './admin-order';
 import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
 import { OrderSheet } from './order-sheet';
@@ -23,7 +25,15 @@ function formatOrderListDate(value: string, locale: string): string {
 
 export function OrderList({ orders }: OrderListProps): React.JSX.Element {
   const { copy, locale } = useAdminI18n();
-  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(() => {
+    const orderIdFromQuery = searchParams.get('orderId')?.trim();
+    if (!orderIdFromQuery) {
+      return null;
+    }
+
+    return orders.some((order) => order.id === orderIdFromQuery) ? orderIdFromQuery : null;
+  });
   const selectedOrder = orders.find((order) => order.id === selectedOrderId) ?? null;
 
   function handleRowKeyDown(orderId: string, event: KeyboardEvent<HTMLElement>): void {

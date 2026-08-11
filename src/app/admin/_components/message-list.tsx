@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, type KeyboardEvent } from 'react';
+import { useSearchParams } from 'next/navigation';
 import type { AdminContactMessage } from './admin-contact-message';
 import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
 import { MessageSheet } from './message-sheet';
@@ -22,7 +23,17 @@ function formatMessageListDate(value: string, locale: string): string {
 
 export function MessageList({ messages }: MessageListProps): React.JSX.Element {
   const { copy, locale } = useAdminI18n();
-  const [selectedMessageId, setSelectedMessageId] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const [selectedMessageId, setSelectedMessageId] = useState<string | null>(() => {
+    const messageIdFromQuery = searchParams.get('messageId')?.trim();
+    if (!messageIdFromQuery) {
+      return null;
+    }
+
+    return messages.some((message) => message.id === messageIdFromQuery)
+      ? messageIdFromQuery
+      : null;
+  });
   const selectedMessage = messages.find((message) => message.id === selectedMessageId) ?? null;
 
   function handleRowKeyDown(messageId: string, event: KeyboardEvent<HTMLElement>): void {
