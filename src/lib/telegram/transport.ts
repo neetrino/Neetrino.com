@@ -86,15 +86,23 @@ export async function fanOutTelegramNotification(
   const config = getConfig();
   const summaryBase = emptySummary(context.subjectId);
 
+  logger.warn(`Telegram ${context.event} config resolved`, {
+    [context.subjectKey]: context.subjectId,
+    enabled: config.enabled,
+    hasToken: Boolean(config.botToken),
+    recipientCount: config.chatIds.length,
+    hasAdminAppUrl: Boolean(config.adminAppUrl),
+  });
+
   if (!config.enabled) {
-    logger.info(`Telegram ${context.event} notification skipped: notifications disabled`, {
+    logger.warn(`Telegram ${context.event} notification skipped: notifications disabled`, {
       [context.subjectKey]: context.subjectId,
     });
     return summaryBase;
   }
 
   if (!config.botToken) {
-    logger.warn(`Telegram ${context.event} notification skipped: bot token missing`, {
+    logger.error(`Telegram ${context.event} notification skipped: bot token missing`, {
       [context.subjectKey]: context.subjectId,
     });
     return summaryBase;
@@ -102,7 +110,7 @@ export async function fanOutTelegramNotification(
 
   const recipients = getRecipients(config);
   if (recipients.length === 0) {
-    logger.warn(`Telegram ${context.event} notification skipped: no recipients configured`, {
+    logger.error(`Telegram ${context.event} notification skipped: no recipients configured`, {
       [context.subjectKey]: context.subjectId,
     });
     return summaryBase;
