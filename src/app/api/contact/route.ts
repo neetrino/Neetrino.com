@@ -9,6 +9,7 @@ import {
 } from '@/app/_components/quote-wizard-options';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
+import { dispatchMessageCreatedNotification } from '@/lib/telegram';
 
 /** Matches WAF guidance for contact/lead forms: 10 requests / 10 min / IP. */
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
@@ -128,7 +129,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   }
 
   try {
-    await prisma.contactMessage.create({
+    const created = await prisma.contactMessage.create({
       data: {
         name: payload.name,
         phone: payload.phone,
@@ -139,6 +140,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         email: '',
         message: '',
       },
+    });
+
+    await dispatchMessageCreatedNotification({
+      id: created.id,
+      name: created.name,
+      phone: created.phone,
+      email: created.email,
+      message: created.message,
+      projectType: created.projectType,
+      projectGoal: created.projectGoal,
+      budget: created.budget,
+      timeline: created.timeline,
+      createdAt: created.createdAt,
+      source: 'Website',
     });
 
     return NextResponse.json({ ok: true }, { status: 201 });

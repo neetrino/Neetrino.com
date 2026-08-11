@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { AdminPageHeader } from '../_components/admin-page-header';
 import type { AdminContactMessage } from '../_components/admin-contact-message';
 import { MessageList } from '../_components/message-list';
@@ -43,7 +45,9 @@ export default async function AdminMessagesPage(): Promise<React.JSX.Element> {
   return (
     <>
       <AdminPageHeader sectionKey="messages" />
-      <MessageList messages={messages} />
+      <Suspense fallback={<div className="admin-empty">Loading messages…</div>}>
+        <MessageList messages={messages} />
+      </Suspense>
     </>
   );
 }

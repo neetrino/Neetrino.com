@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import type { Prisma } from '@prisma/client';
+
 import { AdminPageHeader } from '../_components/admin-page-header';
 import {
   readOrderStatus,
@@ -6,20 +8,12 @@ import {
 } from '../_components/admin-order';
 import { OrderList } from '../_components/order-list';
 import { logger } from '@/lib/logger';
+import { createDisplayOrderNumber } from '@/lib/payments/order-number';
 import { prisma } from '@/lib/prisma';
-
-const ORDER_NUMBER_PREFIX = 'NTR';
-const ORDER_NUMBER_SUFFIX_LENGTH = 6;
 
 type PaymentAttemptWithProduct = Prisma.PaymentAttemptGetPayload<{
   include: { product: true };
 }>;
-
-function createDisplayOrderNumber(attempt: PaymentAttemptWithProduct): string {
-  const suffix = attempt.id.slice(-ORDER_NUMBER_SUFFIX_LENGTH).toUpperCase();
-
-  return `${ORDER_NUMBER_PREFIX}-${attempt.createdAt.getTime()}-${suffix}`;
-}
 
 function serializeOrder(attempt: PaymentAttemptWithProduct): AdminPaymentOrder {
   return {
@@ -60,7 +54,9 @@ export default async function AdminOrdersPage(): Promise<React.JSX.Element> {
   return (
     <>
       <AdminPageHeader sectionKey="orders" />
-      <OrderList orders={orders} />
+      <Suspense fallback={<div className="admin-empty">Loading orders…</div>}>
+        <OrderList orders={orders} />
+      </Suspense>
     </>
   );
 }
