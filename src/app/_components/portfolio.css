@@ -478,7 +478,7 @@
     width: 100%;
     height: auto;
     min-height: 100vh;
-    padding: 132px 16px 72px;
+    padding: 132px 16px 112px;
     overflow: visible;
   }
 
@@ -487,6 +487,25 @@
     z-index: 1;
     background-color: transparent;
     background-image: none;
+  }
+
+  /* Soft bridge into the footer — avoids a hard navy→black seam. */
+  .portfolio-body::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    height: 140px;
+    pointer-events: none;
+    content: '';
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(18 42 72 / 0.28) 42%,
+      rgb(18 42 72 / 0.78) 78%,
+      var(--portfolio-base-bg, #122a48) 100%
+    );
   }
 
   .portfolio-intro .portfolio-title-wrap {
@@ -623,6 +642,47 @@
   .portfolio-card-action-arrow {
     width: 16px;
     height: 16px;
+  }
+
+  /*
+   * Portfolio → footer seam (mobile):
+   * shared footer veil uses --home-bg (#151515); override to navy so the
+   * canvas color dissolves into the footer instead of cutting as a hard line.
+   */
+  #portfolio-top.home-page .home-footer {
+    margin-top: -88px;
+    padding-top: 120px;
+  }
+
+  #portfolio-top.home-page .home-footer::before {
+    height: 180px;
+    background: linear-gradient(
+      to bottom,
+      var(--portfolio-base-bg, #122a48) 0%,
+      rgb(18 42 72 / 0.82) 22%,
+      rgb(18 42 72 / 0.42) 52%,
+      rgb(12 20 34 / 0.12) 78%,
+      transparent 100%
+    );
+  }
+
+  #portfolio-top.home-page .home-footer-bg {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(0 0 0 / 0.18) 14%,
+      rgb(0 0 0 / 0.62) 32%,
+      #000 52%,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(0 0 0 / 0.18) 14%,
+      rgb(0 0 0 / 0.62) 32%,
+      #000 52%,
+      #000 100%
+    );
   }
 }
 
