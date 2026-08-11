@@ -7,11 +7,20 @@ export function parseTelegramChatIds(raw: string | undefined): string[] {
     return [];
   }
 
+  let normalized = raw.trim();
+  if (
+    (normalized.startsWith('"') && normalized.endsWith('"')) ||
+    (normalized.startsWith("'") && normalized.endsWith("'"))
+  ) {
+    normalized = normalized.slice(1, -1).trim();
+  }
+
   const uniqueIds: string[] = [];
   const seen = new Set<string>();
 
-  for (const part of raw.split(',')) {
-    const chatId = part.trim();
+  for (const part of normalized.split(',')) {
+    const chatId = part.trim().replace(/^['"]+|['"]+$/g, '').trim();
+
     if (!chatId || seen.has(chatId)) {
       continue;
     }
