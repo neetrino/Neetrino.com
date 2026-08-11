@@ -586,51 +586,22 @@
   .portfolio-card {
     border: 1px solid rgb(255 255 255 / 0.12);
     border-radius: 16px;
-    background: #1a1a1a;
+    background: #fff;
+    box-shadow: 0 24px 70px rgb(0 0 0 / 0.18);
   }
 
   .portfolio-card-media {
     width: 100%;
     height: auto;
-    aspect-ratio: auto;
-    min-height: 220px;
-    padding: 0 14px 32px;
-    background: #fff;
-  }
-
-  .portfolio-card-image {
-    object-fit: contain;
-    object-position: center 8%;
-  }
-
-  .portfolio-card--toon .portfolio-card-media,
-  .portfolio-card--degusto .portfolio-card-media,
-  .portfolio-card--digital-implant .portfolio-card-media,
-  .portfolio-card--ncie .portfolio-card-media,
-  .portfolio-card--zeppelin .portfolio-card-media {
-    padding: 0 2px 34px;
-  }
-
-  .portfolio-card--toon .portfolio-card-image,
-  .portfolio-card--degusto .portfolio-card-image,
-  .portfolio-card--digital-implant .portfolio-card-image,
-  .portfolio-card--ncie .portfolio-card-image,
-  .portfolio-card--zeppelin .portfolio-card-image {
-    transform: scale(1.16);
-    transform-origin: center 8%;
-  }
-
-  .portfolio-card--anra .portfolio-card-media,
-  .portfolio-card--dvbs .portfolio-card-media {
     aspect-ratio: 631 / 364;
     min-height: 0;
     padding: 0;
     background: #fff;
   }
 
-  .portfolio-card--anra .portfolio-card-image--anra-mockup,
-  .portfolio-card--dvbs .portfolio-card-image {
+  .portfolio-card-image {
     object-fit: cover;
+    object-position: center;
     transform: none;
   }
 

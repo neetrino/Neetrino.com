@@ -1535,7 +1535,10 @@ html:lang(ru) body {
   position: relative;
   flex: 0 0 auto;
   overflow: hidden;
-  background: transparent;
+  border: 0;
+  background: #fff;
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.18);
+  contain: layout paint style;
 }
 
 .home-project-image {

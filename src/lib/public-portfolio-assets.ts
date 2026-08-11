@@ -2,6 +2,8 @@ import type { ProjectCard } from '@/app/_components/home-data';
 import { portfolioBottomRow, portfolioTopRow } from '@/app/_components/home-data';
 import {
   PORTFOLIO_ANRA_MOCKUP_SRC,
+  PORTFOLIO_CARD_MEDIA_HEIGHT,
+  PORTFOLIO_CARD_MEDIA_WIDTH,
   PORTFOLIO_DVBS_BANNER_SRC,
 } from '@/app/_components/portfolio-constants';
 import {
@@ -13,8 +15,12 @@ import {
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 
-/** Uniform home marquee card size (matches the former Lilits Flowers slot). */
-const HOME_PORTFOLIO_CARD_TEMPLATE = { width: 600, height: 390, radius: 55  } as const;
+/** Uniform home marquee card size — same media ratio as portfolio page cards. */
+const HOME_PORTFOLIO_CARD_TEMPLATE = {
+  width: PORTFOLIO_CARD_MEDIA_WIDTH,
+  height: PORTFOLIO_CARD_MEDIA_HEIGHT,
+  radius: 16,
+} as const;
 
 type PublicPortfolioAsset = {
   id: string;
@@ -30,10 +36,24 @@ export type PublicPortfolioData = {
   portfolioProjects: PortfolioProject[];
 };
 
+function resolveHomeProjectImage(asset: PublicPortfolioAsset): string {
+  const variant = resolvePortfolioVariant(asset.title, asset.alt);
+
+  if (variant === 'dvbs') {
+    return PORTFOLIO_DVBS_BANNER_SRC;
+  }
+
+  if (variant === 'anra') {
+    return PORTFOLIO_ANRA_MOCKUP_SRC;
+  }
+
+  return asset.url;
+}
+
 function toProjectCard(asset: PublicPortfolioAsset): ProjectCard {
   return {
     title: asset.alt || asset.title,
-    image: asset.url,
+    image: resolveHomeProjectImage(asset),
     width: HOME_PORTFOLIO_CARD_TEMPLATE.width,
     height: HOME_PORTFOLIO_CARD_TEMPLATE.height,
     radius: HOME_PORTFOLIO_CARD_TEMPLATE.radius,
@@ -60,21 +80,12 @@ function getStaticPortfolioData(): PublicPortfolioData {
 
 function toPortfolioProject(asset: PublicPortfolioAsset): PortfolioProject {
   const variant = resolvePortfolioVariant(asset.title, asset.alt);
-  let image = asset.url;
-
-  if (variant === 'dvbs') {
-    image = PORTFOLIO_DVBS_BANNER_SRC;
-  }
-
-  if (variant === 'anra') {
-    image = PORTFOLIO_ANRA_MOCKUP_SRC;
-  }
 
   return {
     id: asset.id,
     title: asset.title,
     alt: asset.alt,
-    image,
+    image: resolveHomeProjectImage(asset),
     href: resolvePortfolioProjectHref(asset.title, asset.alt, asset.projectUrl),
     variant,
   };
