@@ -87,11 +87,16 @@ model Partner {
 }
 
 model ContactMessage {
-  id        String   @id @default(cuid())
-  name      String
-  email     String
-  message   String
-  createdAt DateTime @default(now()) @map("created_at")
+  id          String   @id @default(cuid())
+  name        String
+  email       String   @default("")
+  phone       String   @default("")
+  message     String   @default("")
+  projectType String   @default("") @map("project_type")
+  projectGoal String   @default("") @map("project_goal")
+  budget      String   @default("")
+  timeline    String   @default("")
+  createdAt   DateTime @default(now()) @map("created_at")
 
   @@map("contact_messages")
 }

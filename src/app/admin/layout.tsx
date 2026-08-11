@@ -6,6 +6,7 @@ import { AdminToastProvider } from './_components/admin-toast';
 import './admin.css';
 import './admin-drawer.css';
 import './admin-forms.css';
+import './admin-messages.css';
 import './admin-orders.css';
 import './admin-products.css';
 
