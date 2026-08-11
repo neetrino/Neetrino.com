@@ -144,6 +144,22 @@ html {
   scroll-padding-top: var(--home-header-clearance);
 }
 
+/* Hide scrollbars site-wide; scrolling still works via wheel/trackpad/touch. */
+html,
+body,
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 /*
  * Locale typography
  * Armenian: Noto Sans Armenian (variable) with semi-condensed wdth so glyph
@@ -796,6 +812,38 @@ html:lang(ru) body {
 .home-header-more-menu a {
   padding: calc(10px * var(--home-ui-scale)) calc(12px * var(--home-ui-scale));
   border-radius: calc(12px * var(--home-ui-scale));
+}
+
+.home-header-actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: calc(10px * var(--home-ui-scale));
+}
+
+.home-header-quote {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(40px * var(--home-ui-scale));
+  padding-inline: calc(18px * var(--home-ui-scale));
+  border: 0;
+  border-radius: var(--home-radius-lg);
+  background: var(--home-purple);
+  color: #fff;
+  font: inherit;
+  font-size: calc(15px * var(--home-ui-scale) * var(--locale-font-scale));
+  font-weight: 800;
+  line-height: calc(15.6px * var(--home-ui-scale) * var(--locale-font-scale));
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 180ms ease, opacity 180ms ease;
+}
+
+.home-header-quote:hover,
+.home-header-quote:focus-visible {
+  background: #3a32e0;
+  opacity: 1;
 }
 
 .home-header-language-wrap {

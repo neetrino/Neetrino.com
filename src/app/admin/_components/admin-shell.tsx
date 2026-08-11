@@ -12,6 +12,7 @@ const ADMIN_NAV_ITEMS = [
   { href: '/admin/blog', labelKey: 'blog', icon: 'doc' },
   { href: '/admin/portfolio', labelKey: 'portfolio', icon: 'grid' },
   { href: '/admin/partners', labelKey: 'partners', icon: 'users' },
+  { href: '/admin/messages', labelKey: 'messages', icon: 'message' },
   { href: '/admin/products', labelKey: 'products', icon: 'box' },
   { href: '/admin/orders', labelKey: 'orders', icon: 'cart' },
 ] as const;

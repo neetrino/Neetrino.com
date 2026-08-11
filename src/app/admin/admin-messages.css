@@ -1,0 +1,130 @@
+.admin-message-list {
+  overflow: hidden;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  background: var(--admin-card);
+  box-shadow: var(--admin-shadow-soft);
+}
+
+.admin-message-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-top: 1px solid var(--admin-border);
+  background: transparent;
+  cursor: pointer;
+  padding: 18px 22px;
+  transition: background var(--admin-transition);
+}
+
+.admin-message-row:first-child {
+  border-top: 0;
+}
+
+.admin-message-row:hover {
+  background: rgb(255 117 0 / 0.03);
+}
+
+.admin-message-row:focus-visible {
+  outline: 2px solid var(--admin-accent);
+  outline-offset: -2px;
+}
+
+.admin-message-content {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.admin-message-title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.admin-message-title h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.admin-message-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgb(71 61 255 / 0.12);
+  color: #473dff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.admin-message-meta {
+  margin: 0;
+  color: var(--admin-muted);
+  font-size: 0.92rem;
+}
+
+.admin-message-chevron {
+  color: var(--admin-muted);
+  font-size: 1.1rem;
+}
+
+.admin-message-sheet-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+}
+
+.admin-message-sheet-meta div {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.4);
+}
+
+.admin-message-sheet-meta-wide {
+  grid-column: 1 / -1;
+}
+
+.admin-message-sheet-meta dt {
+  color: var(--admin-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-message-sheet-meta dd {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.admin-message-sheet-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+@media (max-width: 767px) {
+  .admin-message-row {
+    padding: 16px;
+  }
+
+  .admin-message-sheet-meta {
+    grid-template-columns: 1fr;
+  }
+}

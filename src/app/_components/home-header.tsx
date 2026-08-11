@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import type { NavItem } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
+import { QuoteModal } from './quote-modal';
 
 /** Served from /public — avoids CDN breakage on mobile networks. */
 const HEADER_LOGO_SRC = '/figma-home/neetrino-logo.webp';
@@ -57,7 +58,10 @@ export function HomeHeader(): React.JSX.Element {
   const currentHash = useCurrentHash(pathname);
   const languageMenuRef = useRef<HTMLDivElement>(null);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const isMoreActive = moreNavItems.some((item) => isHeaderLinkActive(item, pathname, currentHash));
+
+  const closeQuoteModal = useCallback((): void => setIsQuoteOpen(false), []);
 
   // Links inside the collapsed "More" dropdown are hidden, so Next.js never
   // auto-prefetches them. Warm them on open/hover to keep navigation client-side.
@@ -92,105 +96,124 @@ export function HomeHeader(): React.JSX.Element {
   }, [isLanguageOpen]);
 
   return (
-    <header className="home-header">
-      <div className="home-header-inner">
-        <Link href="/" className="home-header-logo" aria-label={homeCopy.navigation.logoHomeAriaLabel}>
-          <Image
-            src={HEADER_LOGO_SRC}
-            alt={homeCopy.navigation.logoAlt}
-            width={HEADER_LOGO_WIDTH}
-            height={HEADER_LOGO_HEIGHT}
-            priority
-            unoptimized
-            sizes="96px"
-            className="home-header-logo-img"
-          />
-        </Link>
-        <nav className="home-header-nav" aria-label={homeCopy.navigation.mainAriaLabel}>
-          {navItems.map((item) => (
-            <HeaderNavLink
-              key={item.id}
-              item={item}
-              isActive={isHeaderLinkActive(item, pathname, currentHash)}
+    <>
+      <header className="home-header">
+        <div className="home-header-inner">
+          <Link href="/" className="home-header-logo" aria-label={homeCopy.navigation.logoHomeAriaLabel}>
+            <Image
+              src={HEADER_LOGO_SRC}
+              alt={homeCopy.navigation.logoAlt}
+              width={HEADER_LOGO_WIDTH}
+              height={HEADER_LOGO_HEIGHT}
+              priority
+              unoptimized
+              sizes="96px"
+              className="home-header-logo-img"
             />
-          ))}
-          <details
-            className={isMoreActive ? 'home-header-more home-header-more--active' : 'home-header-more'}
-            onToggle={(event) => {
-              if (event.currentTarget.open) {
-                prefetchMoreItems();
-              }
-            }}
-          >
-            <summary onMouseEnter={prefetchMoreItems}>{homeCopy.navigation.moreLabel}</summary>
-            <div className="home-header-more-menu">
-              {moreNavItems.map((item) => (
-                <HeaderNavLink
-                  key={item.id}
-                  item={item}
-                  isActive={isHeaderLinkActive(item, pathname, currentHash)}
-                />
-              ))}
-            </div>
-          </details>
-        </nav>
-        <div ref={languageMenuRef} className="home-header-language-wrap">
-          <button
-            type="button"
-            className="home-header-language"
-            aria-expanded={isLanguageOpen}
-            aria-haspopup="menu"
-            aria-label={homeCopy.navigation.changeLanguageAriaLabel}
-            onClick={() => setIsLanguageOpen((isOpen) => !isOpen)}
-          >
-            <span className="home-header-language-icon" aria-hidden="true">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
+          </Link>
+          <nav className="home-header-nav" aria-label={homeCopy.navigation.mainAriaLabel}>
+            {navItems.map((item) => (
+              <HeaderNavLink
+                key={item.id}
+                item={item}
+                isActive={isHeaderLinkActive(item, pathname, currentHash)}
+              />
+            ))}
+            <details
+              className={isMoreActive ? 'home-header-more home-header-more--active' : 'home-header-more'}
+              onToggle={(event) => {
+                if (event.currentTarget.open) {
+                  prefetchMoreItems();
+                }
+              }}
+            >
+              <summary onMouseEnter={prefetchMoreItems}>{homeCopy.navigation.moreLabel}</summary>
+              <div className="home-header-more-menu">
+                {moreNavItems.map((item) => (
+                  <HeaderNavLink
+                    key={item.id}
+                    item={item}
+                    isActive={isHeaderLinkActive(item, pathname, currentHash)}
+                  />
+                ))}
+              </div>
+            </details>
+          </nav>
+          <div className="home-header-actions">
+            <button
+              type="button"
+              className="home-header-quote"
+              aria-haspopup="dialog"
+              aria-expanded={isQuoteOpen}
+              onClick={() => {
+                setIsLanguageOpen(false);
+                setIsQuoteOpen(true);
+              }}
+            >
+              {homeCopy.navigation.quoteLabel}
+            </button>
+
+            <div ref={languageMenuRef} className="home-header-language-wrap">
+              <button
+                type="button"
+                className="home-header-language"
+                aria-expanded={isLanguageOpen}
+                aria-haspopup="menu"
+                aria-label={homeCopy.navigation.changeLanguageAriaLabel}
+                onClick={() => setIsLanguageOpen((isOpen) => !isOpen)}
               >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                <path d="M2 12h20" />
-              </svg>
-            </span>
-            {activeLanguage.codeLabel}
-          </button>
-
-          {isLanguageOpen ? (
-            <div className="home-header-language-menu" role="menu">
-              {languageOptions.map((language) => {
-                const isActive = language.locale === locale;
-
-                return (
-                  <button
-                    key={language.locale}
-                    type="button"
-                    className={
-                      isActive
-                        ? 'home-header-language-option home-header-language-option--active'
-                        : 'home-header-language-option'
-                    }
-                    role="menuitemradio"
-                    aria-checked={isActive}
-                    onClick={() => {
-                      setLocale(language.locale);
-                      setIsLanguageOpen(false);
-                    }}
+                <span className="home-header-language-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
                   >
-                    <span className="home-header-language-option-code">{language.codeLabel}</span>
-                    <span className="home-header-language-option-name">{language.nativeLabel}</span>
-                  </button>
-                );
-              })}
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                    <path d="M2 12h20" />
+                  </svg>
+                </span>
+                {activeLanguage.codeLabel}
+              </button>
+
+              {isLanguageOpen ? (
+                <div className="home-header-language-menu" role="menu">
+                  {languageOptions.map((language) => {
+                    const isActive = language.locale === locale;
+
+                    return (
+                      <button
+                        key={language.locale}
+                        type="button"
+                        className={
+                          isActive
+                            ? 'home-header-language-option home-header-language-option--active'
+                            : 'home-header-language-option'
+                        }
+                        role="menuitemradio"
+                        aria-checked={isActive}
+                        onClick={() => {
+                          setLocale(language.locale);
+                          setIsLanguageOpen(false);
+                        }}
+                      >
+                        <span className="home-header-language-option-code">{language.codeLabel}</span>
+                        <span className="home-header-language-option-name">{language.nativeLabel}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : null}
             </div>
-          ) : null}
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      <QuoteModal isOpen={isQuoteOpen} onClose={closeQuoteModal} />
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
@@ -10,14 +10,33 @@ function createPrismaClient(): PrismaClient {
   });
 }
 
+function generatedClientHasContactQuoteFields(): boolean {
+  const model = Prisma.dmmf.datamodel.models.find((entry) => entry.name === 'ContactMessage');
+  if (!model) {
+    return false;
+  }
+
+  const fieldNames = new Set(model.fields.map((field) => field.name));
+  return (
+    fieldNames.has('phone') &&
+    fieldNames.has('projectType') &&
+    fieldNames.has('projectGoal') &&
+    fieldNames.has('budget') &&
+    fieldNames.has('timeline')
+  );
+}
+
 /**
  * In dev, Next can keep a cached PrismaClient across HMR. After schema changes
- * (e.g. new Partner model), recreate the client so delegates stay in sync.
+ * (e.g. new Partner model / ContactMessage quote fields), recreate the client
+ * so delegates stay in sync with the generated Prisma Client.
  */
 function getPrismaClient(): PrismaClient {
   const existing = globalForPrisma.prisma;
+  const isCompatible =
+    generatedClientHasContactQuoteFields() && typeof existing?.partner?.findMany === 'function';
 
-  if (existing && typeof existing.partner?.findMany === 'function') {
+  if (existing && isCompatible) {
     return existing;
   }
 
