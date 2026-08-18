@@ -131,17 +131,8 @@
   aspect-ratio: 16 / 10;
 }
 
-.blog-article-card-image,
-.blog-article-card-placeholder {
+.blog-article-card-image {
   object-fit: cover;
-}
-
-.blog-article-card-placeholder {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(135deg, rgb(56 176 255 / 0.28), transparent 55%),
-    rgb(8 28 52 / 0.9);
 }
 
 .blog-article-card-meta {
@@ -215,6 +206,9 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.blog-article-card-media + .blog-article-card-body {
   padding-top: 18px;
 }
 

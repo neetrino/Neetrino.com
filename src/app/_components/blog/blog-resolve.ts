@@ -1,5 +1,5 @@
 import { DEFAULT_HOME_LOCALE, type HomeLocale } from '../home-messages';
-import type { BlogArticleListItem, BlogArticleTranslation } from './blog-types';
+import { RELATED_ARTICLE_COUNT, type BlogArticleListItem, type BlogArticleTranslation } from './blog-types';
 
 export type ResolvedBlogArticle = {
   id: string;
@@ -63,6 +63,20 @@ export function resolveBlogArticles(
     const resolved = resolveBlogArticle(item, locale);
     return resolved ? [resolved] : [];
   });
+}
+
+/** Picks same-category posts first, then fills with the latest remaining articles. */
+export function pickRelatedArticles(
+  articles: BlogArticleListItem[],
+  currentId: string,
+  categoryId: BlogArticleListItem['categoryId'],
+  limit = RELATED_ARTICLE_COUNT,
+): BlogArticleListItem[] {
+  const others = articles.filter((item) => item.id !== currentId);
+  const sameCategory = others.filter((item) => item.categoryId === categoryId);
+  const rest = others.filter((item) => item.categoryId !== categoryId);
+
+  return [...sameCategory, ...rest].slice(0, limit);
 }
 
 /** Formats an ISO date for blog UI surfaces. */

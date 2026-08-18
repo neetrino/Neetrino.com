@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/lib/telegram/telegram-service.test.ts src/lib/telegram/order-paid.test.ts src/lib/telegram/read-env.test.ts src/lib/payments/finalize-payment-attempt.test.ts src/lib/api-auth.test.ts src/lib/blog-post-input.test.ts",
+    "test": "tsx --test src/lib/telegram/telegram-service.test.ts src/lib/telegram/order-paid.test.ts src/lib/telegram/read-env.test.ts src/lib/payments/finalize-payment-attempt.test.ts src/lib/api-auth.test.ts src/lib/blog-post-input.test.ts src/lib/parse-blog-content.test.ts src/app/_components/blog/blog-resolve.test.ts",
     "admin:hash-password": "node scripts/create-admin-password-hash.mjs",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
