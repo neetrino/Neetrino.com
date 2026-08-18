@@ -42,6 +42,7 @@ export type BlogArticleListItem = {
 };
 
 export const BLOG_PAGE_SIZE = 6;
+export const RELATED_ARTICLE_COUNT = 3;
 
 export const DEFAULT_BLOG_CATEGORY: BlogArticleCategoryId = 'insights';
 export const DEFAULT_BLOG_CONTENT_TYPE: BlogArticleContentTypeId = 'article';

@@ -74,6 +74,8 @@
     "readingTime": "{minutes} min read",
     "endTitle": "Want something built this carefully?",
     "endSubtitle": "Tell us about your product — we reply on business days.",
-    "endCta": "Start a project"
+    "endCta": "Start a project",
+    "relatedTitle": "Keep reading",
+    "relatedSubtitle": "More from the journal"
   }
 }

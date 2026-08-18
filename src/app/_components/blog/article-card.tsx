@@ -17,8 +17,8 @@ export function ArticleCard({ article }: ArticleCardProps): React.JSX.Element {
 
   return (
     <article className="blog-article-card">
-      <Link href={href} className="blog-article-card-media">
-        {article.coverImageUrl ? (
+      {article.coverImageUrl ? (
+        <Link href={href} className="blog-article-card-media">
           <Image
             src={article.coverImageUrl}
             alt={article.imageAlt}
@@ -27,10 +27,8 @@ export function ArticleCard({ article }: ArticleCardProps): React.JSX.Element {
             className="blog-article-card-image"
             unoptimized={isRemoteImageUrl(article.coverImageUrl)}
           />
-        ) : (
-          <span className="blog-article-card-placeholder" aria-hidden />
-        )}
-      </Link>
+        </Link>
+      ) : null}
       <div className="blog-article-card-body">
         <div className="blog-article-card-meta">
           <span>{blogCopy.categories[article.categoryId]}</span>

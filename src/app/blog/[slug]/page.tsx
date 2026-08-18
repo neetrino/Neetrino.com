@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BlogArticlePage } from '../../_components/blog-article-page';
-import { serializeBlogArticleItem } from '../../_components/blog/blog-serialize';
+import { pickRelatedArticles } from '../../_components/blog/blog-resolve';
+import { serializeBlogArticleItem, serializeBlogListItems } from '../../_components/blog/blog-serialize';
 import { blogMessages } from '../../_components/blog-messages';
-import { getPublishedBlogPostBundleBySlug } from '@/lib/public-blog-posts';
+import {
+  getPublishedBlogPostBundleBySlug,
+  getPublishedBlogPostBundles,
+} from '@/lib/public-blog-posts';
 
 type BlogPostRouteProps = {
   params: Promise<{ slug: string }>;
@@ -35,11 +39,25 @@ export default async function BlogPostRoute({
   params,
 }: BlogPostRouteProps): Promise<React.JSX.Element> {
   const { slug } = await params;
-  const bundle = await getPublishedBlogPostBundleBySlug(slug);
+  const [bundle, bundles] = await Promise.all([
+    getPublishedBlogPostBundleBySlug(slug),
+    getPublishedBlogPostBundles(),
+  ]);
 
   if (!bundle) {
     notFound();
   }
 
-  return <BlogArticlePage article={serializeBlogArticleItem(bundle)} />;
+  const article = serializeBlogArticleItem(bundle);
+
+  return (
+    <BlogArticlePage
+      article={article}
+      relatedArticles={pickRelatedArticles(
+        serializeBlogListItems(bundles),
+        article.id,
+        article.categoryId,
+      )}
+    />
+  );
 }
