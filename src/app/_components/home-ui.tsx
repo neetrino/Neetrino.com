@@ -16,6 +16,19 @@ type ActionButtonProps = {
   label: string;
 };
 
+type ExploreLinkProps = {
+  href: string;
+  label: string;
+};
+
+type ExploreActionProps = {
+  label: string;
+  onClick: () => void;
+  ariaExpanded?: boolean;
+};
+
+type ExploreButtonProps = ExploreLinkProps | ExploreActionProps;
+
 const serviceToneClasses = {
   light: 'home-service-card-light',
   orange: 'home-service-card-orange',
@@ -58,14 +71,37 @@ export function ContinueButton({ href, label }: ActionButtonProps): React.JSX.El
   );
 }
 
-export function ExploreButton({ href, label }: ActionButtonProps): React.JSX.Element {
+function ExploreButtonContent({ label }: { label: string }): React.JSX.Element {
+  return (
+    <>
+      <span className="home-btn-explore-label">{label}</span>
+      <Image src={staticAsset("/figma-home/safearea1.svg")} alt="" width={20} height={20} aria-hidden />
+    </>
+  );
+}
+
+export function ExploreButton(props: ExploreButtonProps): React.JSX.Element {
+  const control =
+    'onClick' in props ? (
+      <button
+        type="button"
+        className="home-btn home-btn-explore"
+        aria-haspopup="dialog"
+        aria-expanded={props.ariaExpanded}
+        onClick={props.onClick}
+      >
+        <ExploreButtonContent label={props.label} />
+      </button>
+    ) : (
+      <Link href={props.href} className="home-btn home-btn-explore">
+        <ExploreButtonContent label={props.label} />
+      </Link>
+    );
+
   return (
     <span className="home-btn-explore-wrap">
       <span className="home-btn-explore-flare" aria-hidden />
-      <Link href={href} className="home-btn home-btn-explore">
-        <span className="home-btn-explore-label">{label}</span>
-        <Image src={staticAsset("/figma-home/safearea1.svg")} alt="" width={20} height={20} aria-hidden />
-      </Link>
+      {control}
     </span>
   );
 }

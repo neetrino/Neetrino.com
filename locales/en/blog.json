@@ -45,10 +45,6 @@
   "card": {
     "readMore": "Read more"
   },
-  "pagination": {
-    "loadMore": "Load more",
-    "showing": "Showing {visible} of {total}"
-  },
   "popular": {
     "title": "Popular reads",
     "subtitle": "Most recent pieces from the team."

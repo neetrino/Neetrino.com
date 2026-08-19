@@ -1,11 +1,13 @@
 'use client';
 
+import { useCallback, useState } from 'react';
 import Link from 'next/link';
 import { CdnImage as Image } from '@/lib/cdn-image';
 import { isRemoteImageUrl } from '@/lib/image-url';
 import { ExploreButton } from './home-ui';
 import { useHomeI18n } from './home-i18n-provider';
 import { NeetrinoPageShell } from './neetrino-page-shell';
+import { QuoteModal } from './quote-modal';
 import {
   groupBlogContentSections,
   parseBlogContent,
@@ -186,17 +188,27 @@ function BlogArticleEnd({
   cta: string;
   backLabel: string;
 }): React.JSX.Element {
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const closeQuoteModal = useCallback((): void => setIsQuoteOpen(false), []);
+
   return (
-    <footer className="blog-article-end">
-      <div className="blog-article-end-copy">
-        <h2 className="blog-article-end-title">{title}</h2>
-        <p className="blog-article-end-subtitle">{subtitle}</p>
-      </div>
-      <div className="blog-article-end-actions">
-        <ExploreButton href="/contact" label={cta} />
-        <BlogArticleBackLink label={backLabel} />
-      </div>
-    </footer>
+    <>
+      <footer className="blog-article-end">
+        <div className="blog-article-end-copy">
+          <h2 className="blog-article-end-title">{title}</h2>
+          <p className="blog-article-end-subtitle">{subtitle}</p>
+        </div>
+        <div className="blog-article-end-actions">
+          <ExploreButton
+            label={cta}
+            ariaExpanded={isQuoteOpen}
+            onClick={() => setIsQuoteOpen(true)}
+          />
+          <BlogArticleBackLink label={backLabel} />
+        </div>
+      </footer>
+      <QuoteModal isOpen={isQuoteOpen} onClose={closeQuoteModal} />
+    </>
   );
 }
 

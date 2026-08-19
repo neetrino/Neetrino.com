@@ -422,6 +422,12 @@ html:lang(ru) body {
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
+button.home-btn {
+  cursor: pointer;
+  appearance: none;
+  font-family: inherit;
+}
+
 .home-btn-continue {
   overflow: hidden;
   isolation: isolate;
