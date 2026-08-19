@@ -41,7 +41,7 @@ export type BlogArticleListItem = {
   translations: Partial<Record<string, BlogArticleTranslation>>;
 };
 
-export const BLOG_PAGE_SIZE = 6;
+export { BLOG_PAGE_SIZE } from '@/lib/blog-list-query';
 export const RELATED_ARTICLE_COUNT = 3;
 
 export const DEFAULT_BLOG_CATEGORY: BlogArticleCategoryId = 'insights';

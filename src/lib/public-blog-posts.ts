@@ -45,31 +45,48 @@ const PUBLISHED_BLOG_INCLUDE = {
   },
 } as const;
 
+const PUBLISHED_BLOG_LIST_INCLUDE = {
+  translations: {
+    select: {
+      locale: true,
+      title: true,
+      slug: true,
+      excerpt: true,
+      imageAlt: true,
+    },
+  },
+} as const;
+
+type PublishedTranslationRow = {
+  locale: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content?: string;
+  imageAlt: string | null;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
+};
+
+export type PublishedBlogPostPage = {
+  items: PublicBlogPostBundle[];
+  total: number;
+};
+
 function getPublishedBlogOrder() {
   return [{ publishedAt: 'desc' as const }, { createdAt: 'desc' as const }];
 }
 
-function mapTranslations(
-  translations: Array<{
-    locale: string;
-    title: string;
-    slug: string;
-    excerpt: string;
-    content: string;
-    imageAlt: string | null;
-    seoTitle: string | null;
-    seoDescription: string | null;
-  }>,
-): BlogPostTranslations {
+function mapTranslations(translations: PublishedTranslationRow[]): BlogPostTranslations {
   return translations.reduce<BlogPostTranslations>((acc, translation) => {
     acc[translation.locale as BlogLocale] = {
       title: translation.title,
       slug: translation.slug,
       excerpt: translation.excerpt,
-      content: translation.content,
+      content: translation.content ?? '',
       imageAlt: translation.imageAlt,
-      seoTitle: translation.seoTitle,
-      seoDescription: translation.seoDescription,
+      seoTitle: translation.seoTitle ?? null,
+      seoDescription: translation.seoDescription ?? null,
     };
     return acc;
   }, {});
@@ -80,16 +97,7 @@ function mapBundle(post: {
   coverImageUrl: string | null;
   publishedAt: Date | null;
   createdAt: Date;
-  translations: Array<{
-    locale: string;
-    title: string;
-    slug: string;
-    excerpt: string;
-    content: string;
-    imageAlt: string | null;
-    seoTitle: string | null;
-    seoDescription: string | null;
-  }>;
+  translations: PublishedTranslationRow[];
 }): PublicBlogPostBundle {
   return {
     id: post.id,
@@ -98,6 +106,29 @@ function mapBundle(post: {
     createdAt: post.createdAt,
     translations: mapTranslations(post.translations),
   };
+}
+
+export async function getPublishedBlogPostPage(
+  offset: number,
+  limit: number,
+): Promise<PublishedBlogPostPage> {
+  try {
+    const [posts, total] = await Promise.all([
+      prisma.blogPost.findMany({
+        where: { status: BLOG_PUBLISHED_STATUS },
+        orderBy: getPublishedBlogOrder(),
+        skip: offset,
+        take: limit,
+        include: PUBLISHED_BLOG_LIST_INCLUDE,
+      }),
+      prisma.blogPost.count({ where: { status: BLOG_PUBLISHED_STATUS } }),
+    ]);
+
+    return { items: posts.map(mapBundle), total };
+  } catch (error) {
+    logger.error('Failed to load published blog page.', { error, offset, limit });
+    throw error;
+  }
 }
 
 export async function getPublishedBlogPostBundles(): Promise<PublicBlogPostBundle[]> {

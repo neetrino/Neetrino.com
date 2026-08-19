@@ -45,10 +45,6 @@
   "card": {
     "readMore": "Читать далее"
   },
-  "pagination": {
-    "loadMore": "Показать ещё",
-    "showing": "Показано {visible} из {total}"
-  },
   "popular": {
     "title": "Популярное",
     "subtitle": "Свежие материалы команды."

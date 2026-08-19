@@ -6,31 +6,30 @@ import { ArticlesGrid } from './blog/articles-grid';
 import { BlogCategories } from './blog/blog-categories';
 import { BlogFooterCTA } from './blog/blog-footer-cta';
 import { BlogHero } from './blog/blog-hero';
-import { BlogLoadMore } from './blog/blog-load-more';
 import type { BlogArticleListItem } from './blog/blog-types';
 import { useBlogListing } from './blog/use-blog-listing';
 import './blog.css';
 
 type BlogPageBodyProps = {
   articles: BlogArticleListItem[];
+  total: number;
 };
 
-function BlogPageBody({ articles }: BlogPageBodyProps): React.JSX.Element {
+function BlogPageBody({ articles, total }: BlogPageBodyProps): React.JSX.Element {
   const { locale } = useHomeI18n();
-  const listing = useBlogListing(articles, locale);
+  const { filters, setCategoryId, resetFilters, visible, hasMore, sentinelRef } = useBlogListing(
+    articles,
+    total,
+    locale,
+  );
 
   return (
     <div className="blog-page">
       <div className="blog-page-inner">
         <BlogHero />
-        <BlogCategories activeId={listing.filters.categoryId} onChange={listing.setCategoryId} />
-        <ArticlesGrid articles={listing.visible} onResetFilters={listing.resetFilters} />
-        <BlogLoadMore
-          visible={listing.visible.length}
-          total={listing.filtered.length}
-          hasMore={listing.hasMore}
-          onLoadMore={listing.loadMore}
-        />
+        <BlogCategories activeId={filters.categoryId} onChange={setCategoryId} />
+        <ArticlesGrid articles={visible} onResetFilters={resetFilters} />
+        {hasMore ? <div ref={sentinelRef} className="blog-load-sentinel" aria-hidden /> : null}
         <BlogFooterCTA />
       </div>
     </div>
@@ -39,14 +38,15 @@ function BlogPageBody({ articles }: BlogPageBodyProps): React.JSX.Element {
 
 type BlogPageProps = {
   articles: BlogArticleListItem[];
+  total: number;
 };
 
-export function BlogPage({ articles }: BlogPageProps): React.JSX.Element {
+export function BlogPage({ articles, total }: BlogPageProps): React.JSX.Element {
   const { blogCopy } = useHomeI18n();
 
   return (
     <NeetrinoPageShell mainId="blog-top" srOnlyTitle={blogCopy.srOnlyTitle}>
-      <BlogPageBody articles={articles} />
+      <BlogPageBody articles={articles} total={total} />
     </NeetrinoPageShell>
   );
 }
