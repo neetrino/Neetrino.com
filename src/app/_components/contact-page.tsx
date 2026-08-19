@@ -9,7 +9,7 @@ import './contact-office.css';
 
 type ContactMethodIcon = 'email' | 'phone';
 
-type SocialIconKey = 'facebook' | 'instagram' | 'linkedin' | 'telegram' | 'whatsapp' | 'viber';
+type SocialIconKey = 'facebook' | 'instagram' | 'linkedin' | 'telegram' | 'whatsapp';
 
 const SOCIAL_HREFS: Partial<Record<SocialIconKey, string>> = {
   facebook: 'https://www.facebook.com/Neetrino.it.company/',
@@ -26,7 +26,6 @@ const SOCIAL_ICON_PATHS: Record<SocialIconKey, string> = {
   telegram:
     'M21.5 3.2 2.7 11.05c-.95.4-.9 1.75.1 2.05l4.85 1.5 1.85 5.7c.3.95 1.5 1.15 2.15.35l2.55-3.05 4.7 3.45c.85.6 2 .15 2.2-.95L22.9 4.7c.25-1.15-.85-2.05-1.4-1.5ZM9.55 14.35l.2 3.55.05.1.95-1.2 7.45-8.15c.25-.3-.05-.45-.35-.25L8.2 13.6l1.35.75Z',
   whatsapp: 'M12 3.3a8.4 8.4 0 0 1 7.1 12.9l1.1 4-4.1-1.1A8.4 8.4 0 1 1 12 3.3Zm-3.2 4.5c-.2 0-.6.1-.9.5s-1.2 1.2-1.2 2.9 1.3 3.4 1.5 3.6c.2.3 2.5 3.9 6.1 5.3 3 .1 3.6-2 3.7-2.2s.1-1.4-.2-1.5l-2.4-1.2c-.3-.1-.6-.2-.8.2l-1.1 1.3c-.2.3-.4.3-.8.1-.4-.2-1.5-.6-2.9-1.8-1.1-1-1.8-2.1-2-2.5s0-.6.2-.8l.6-.7c.2-.2.2-.4.3-.6.1-.2 0-.5 0-.7L9.8 8c-.2-.5-.5-.5-.7-.5h-.3Z',
-  viber: 'M8.7 3.8h6.6a4.9 4.9 0 0 1 4.9 4.9v4.1a4.9 4.9 0 0 1-4.9 4.9h-2.6L9 20.4v-2.7h-.3a4.9 4.9 0 0 1-4.9-4.9V8.7a4.9 4.9 0 0 1 4.9-4.9Zm-.4 4.1c-.3.1-.6.7-.6 1 .3 3.6 2.6 6 6.2 6.4.4 0 .9-.3 1-.7l.4-1.2c.1-.3 0-.6-.3-.8l-1.6-.9c-.3-.2-.6-.1-.8.2l-.5.7c-1-.5-1.8-1.3-2.2-2.3l.7-.5c.3-.2.4-.5.2-.8L9.9 7.5c-.2-.3-.5-.4-.8-.3l-.8.7Z',
 };
 
 const SOCIAL_ICON_KEYS: readonly SocialIconKey[] = [
@@ -35,7 +34,6 @@ const SOCIAL_ICON_KEYS: readonly SocialIconKey[] = [
   'linkedin',
   'telegram',
   'whatsapp',
-  'viber',
 ];
 
 function ContactGlyph({ icon }: { icon: ContactMethodIcon }): React.JSX.Element {
@@ -61,17 +59,6 @@ function SocialIcon({ icon }: { icon: SocialIconKey }): React.JSX.Element {
       <svg viewBox="0 0 24 24" className="contact-social-icon-outline" aria-hidden>
         <path d="M12 3.5a8.4 8.4 0 0 1 7.1 12.9l1 3.8-3.9-1A8.4 8.4 0 1 1 12 3.5Z" />
         <path d="M8.9 8.2c-.4.1-1.1.9-1.1 1.6 0 2.9 3.1 6.3 6.6 6.3.7 0 1.4-.7 1.5-1.1l-2-1.1-.9 1c-1.3-.5-2.7-1.9-3.2-3.2l1-.9-1.1-2c-.3-.5-.5-.6-.8-.6Z" />
-      </svg>
-    );
-  }
-
-  if (icon === 'viber') {
-    return (
-      <svg viewBox="0 0 24 24" className="contact-social-icon-outline" aria-hidden>
-        <path d="M8.5 4.2h7a4.5 4.5 0 0 1 4.5 4.5v3.8a4.5 4.5 0 0 1-4.5 4.5H13l-3.8 2.7V17h-.7A4.5 4.5 0 0 1 4 12.5V8.7a4.5 4.5 0 0 1 4.5-4.5Z" />
-        <path d="M8.6 8.1c-.3.1-.8.6-.8 1.1.2 3.2 2.5 5.5 5.7 5.7.5 0 1-.5 1.1-.8l-1.6-1-.8.8c-1.1-.4-2-1.3-2.4-2.4l.8-.8-1-1.6c-.2-.4-.6-.6-1-.5Z" />
-        <path d="M13.5 7.7c1.4.3 2.2 1.1 2.5 2.5" />
-        <path d="M13.3 5.9c2.4.4 4 2 4.4 4.4" />
       </svg>
     );
   }
