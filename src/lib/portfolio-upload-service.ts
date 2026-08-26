@@ -132,6 +132,10 @@ function resolvePortfolioUploadContentType(file: File): string {
     return 'video/webm';
   }
 
+  if (/\.mov$/i.test(file.name)) {
+    return 'video/quicktime';
+  }
+
   if (/\.gif$/i.test(file.name)) {
     return 'image/gif';
   }

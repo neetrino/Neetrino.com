@@ -84,7 +84,7 @@
   },
   "portfolio": {
     "title": "Portfolio",
-    "description": "Upload images, GIFs, or videos (MP4/WebM). Reorder cards and toggle visibility. Slots update automatically. Images and GIFs: max 50 MB. Videos: max 200 MB.",
+    "description": "Upload images, GIFs, or videos (MP4/WebM/MOV). Reorder cards and toggle visibility. Slots update automatically. Images and GIFs: max 50 MB. Videos: max 200 MB.",
     "upload": "Upload image / video",
     "uploading": "Uploading...",
     "uploadSubmit": "Upload",
