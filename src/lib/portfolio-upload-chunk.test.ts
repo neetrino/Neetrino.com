@@ -6,6 +6,7 @@ import {
   getExpectedPortfolioChunkBytes,
   getPortfolioChunkCount,
   getPortfolioPartKey,
+  parsePortfolioUploadSession,
 } from './portfolio-upload-chunk';
 
 test('portfolio chunking stays under the Vercel payload limit', () => {
@@ -17,4 +18,16 @@ test('portfolio chunking stays under the Vercel payload limit', () => {
     getPortfolioPartKey('portfolio/2026/08/11111111-1111-1111-1111-111111111111.webm', 1),
     'portfolio/2026/08/11111111-1111-1111-1111-111111111111.webm.part.1',
   );
+});
+
+test('upload session JSON does not require chunkSize', () => {
+  const parsed = parsePortfolioUploadSession({
+    key: 'portfolio/2026/08/11111111-1111-1111-1111-111111111111.webm',
+    token: 'signed-token',
+    contentType: 'video/webm',
+  });
+
+  assert.equal(parsed?.chunkSize, PORTFOLIO_UPLOAD_CHUNK_BYTES);
+  assert.equal(parsed?.key.endsWith('.webm'), true);
+  assert.equal(parsePortfolioUploadSession({ token: 'x' }), null);
 });
