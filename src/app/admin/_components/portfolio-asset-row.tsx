@@ -1,15 +1,14 @@
 'use client';
 
-import { CdnImage as Image } from '@/lib/cdn-image';
 import type { PortfolioDeleteState } from '../_actions/portfolio-actions';
 import type { AdminPortfolioAsset } from './admin-portfolio-asset';
 import { PORTFOLIO_DRAG_TOP_TRANSITION } from './portfolio-asset-list-drag';
 import { PortfolioDeleteButton } from './portfolio-delete-button';
 import { PortfolioStatusToggle } from './portfolio-status-toggle';
 import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
+import { AdminPortfolioThumb } from './portfolio-asset-sheet-media';
 import { formatPortfolioSlotMeta } from '@/lib/portfolio-slots';
 import { getPortfolioVisibilityLabel } from '@/lib/portfolio-asset-status';
-import { isRemoteImageUrl } from '@/lib/image-url';
 
 const ROW_INTERACTIVE_SELECTOR =
   '.admin-portfolio-actions, .admin-portfolio-drag-handle, a, button, input, label, form';
@@ -107,15 +106,7 @@ export function PortfolioRow({
         <span className="admin-portfolio-drag-grip" aria-hidden />
       </span>
       <div className="admin-portfolio-thumb-wrap">
-        <Image
-          src={asset.url}
-          alt={asset.alt}
-          width={72}
-          height={72}
-          sizes="72px"
-          unoptimized={isRemoteImageUrl(asset.url)}
-          className="admin-portfolio-thumb"
-        />
+        <AdminPortfolioThumb src={asset.url} alt={asset.alt} contentType={asset.contentType} />
       </div>
       <div className="admin-portfolio-copy">
         <h2>{asset.title}</h2>

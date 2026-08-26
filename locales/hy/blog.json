@@ -45,10 +45,6 @@
   "card": {
     "readMore": "Կարդալ ավելին"
   },
-  "pagination": {
-    "loadMore": "Բեռնել ավելին",
-    "showing": "Ցուցադրված է {visible}՝ {total}-ից"
-  },
   "popular": {
     "title": "Հանրաճանաչ",
     "subtitle": "Թիմի վերջին նյութերը։"

@@ -15,6 +15,7 @@ import {
 } from './portfolio-constants';
 import type { PortfolioProject } from './portfolio-data';
 import { portfolioMessages } from './portfolio-messages';
+import { PortfolioMedia } from './portfolio-media';
 import { isRemoteImageUrl } from '@/lib/image-url';
 import './portfolio.css';
 import './services.css';
@@ -114,9 +115,10 @@ function PortfolioCard({
             </div>
           </>
         ) : (
-          <Image
+          <PortfolioMedia
             src={project.image}
             alt={project.alt}
+            contentType={project.contentType}
             fill
             sizes="(max-width: 767px) 100vw, (max-width: 1440px) 44vw, 631px"
             quality={HOME_PORTFOLIO_IMAGE_QUALITY}
@@ -124,7 +126,6 @@ function PortfolioCard({
             loading={isAboveFold ? 'eager' : 'lazy'}
             fetchPriority={isAboveFold ? 'high' : 'low'}
             decoding="async"
-            unoptimized={isRemoteImageUrl(project.image)}
             className="portfolio-card-image"
           />
         )}

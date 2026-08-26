@@ -3,9 +3,8 @@
 import { useEffect, useRef, useState, useTransition, type FormEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { getPortfolioSlotId } from '@/lib/portfolio-slots';
-import { updatePortfolioAsset, type PortfolioDeleteState } from '../_actions/portfolio-actions';
+import { type PortfolioDeleteState } from '../_actions/portfolio-actions';
 import {
-  serializeAdminPortfolioAsset,
   type AdminPortfolioAsset,
 } from './admin-portfolio-asset';
 import { formatAdminMessage, useAdminI18n } from './admin-i18n-provider';
@@ -18,6 +17,10 @@ import {
 import { PortfolioAssetSheetMedia } from './portfolio-asset-sheet-media';
 import { PortfolioDeleteButton } from './portfolio-delete-button';
 import { PortfolioDeleteIconButton } from './portfolio-delete-icon-button';
+import { updatePortfolioAssetViaApi } from './portfolio-upload-client';
+import {
+  validateSelectedPortfolioFile,
+} from './portfolio-upload-validation';
 import { useAdminToast } from './admin-toast';
 
 type PortfolioAssetSheetProps = {
@@ -42,6 +45,7 @@ export function PortfolioAssetSheet({
   const [formAssetId, setFormAssetId] = useState(asset.id);
   const [values, setValues] = useState<PortfolioSheetFormValues>(() => createPortfolioSheetFormValues(asset));
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewContentType, setPreviewContentType] = useState<string | null>(null);
   const [selectedFileName, setSelectedFileName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isPending, startTransition] = useTransition();
@@ -51,6 +55,7 @@ export function PortfolioAssetSheet({
     setFormAssetId(asset.id);
     setValues(createPortfolioSheetFormValues(asset));
     setPreviewUrl(null);
+    setPreviewContentType(null);
     setSelectedFileName('');
     setErrorMessage('');
   }
@@ -94,6 +99,7 @@ export function PortfolioAssetSheet({
     }
 
     setPreviewUrl(null);
+    setPreviewContentType(null);
     setSelectedFileName('');
 
     if (fileInputRef.current) {
@@ -110,12 +116,14 @@ export function PortfolioAssetSheet({
 
     if (!file) {
       setPreviewUrl(null);
+      setPreviewContentType(null);
       setSelectedFileName('');
       return;
     }
 
     setSelectedFileName(file.name);
     setPreviewUrl(URL.createObjectURL(file));
+    setPreviewContentType(file.type);
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
@@ -124,18 +132,30 @@ export function PortfolioAssetSheet({
 
     const formData = new FormData(event.currentTarget);
     formData.set('assetId', asset.id);
+    const file = formData.get('image');
+    const validationError = file instanceof File && file.size > 0 ? validateSelectedPortfolioFile(file) : null;
+
+    if (validationError) {
+      setErrorMessage(validationError);
+      return;
+    }
 
     startTransition(async () => {
-      try {
-        const updated = await updatePortfolioAsset(formData);
-        const nextAsset = serializeAdminPortfolioAsset(updated);
-        onUpdated(nextAsset);
-        setValues(createPortfolioSheetFormValues(nextAsset));
-        clearImageSelection();
-        showSuccessToast(copy.portfolio.updateSuccess);
-      } catch (error) {
-        setErrorMessage(error instanceof Error ? error.message : copy.portfolio.updateError);
+      const result = await updatePortfolioAssetViaApi(
+        asset.id,
+        formData,
+        copy.portfolio.updateError,
+      );
+
+      if (result.status === 'error') {
+        setErrorMessage(result.message);
+        return;
       }
+
+      onUpdated(result.asset);
+      setValues(createPortfolioSheetFormValues(result.asset));
+      clearImageSelection();
+      showSuccessToast(copy.portfolio.updateSuccess);
     });
   }
 
@@ -173,8 +193,10 @@ export function PortfolioAssetSheet({
           onSubmit={handleSubmit}
         >
           <PortfolioAssetSheetMedia
-            currentImageUrl={asset.url}
+            currentMediaUrl={asset.url}
+            currentContentType={asset.contentType}
             previewUrl={previewUrl}
+            previewContentType={previewContentType}
             alt={values.alt || asset.alt}
             selectedFileName={selectedFileName}
             isPending={isPending}
@@ -186,7 +208,7 @@ export function PortfolioAssetSheet({
                 <button
                   type="button"
                   className="admin-portfolio-sheet-delete-x"
-                  aria-label={copy.portfolio.clearImageSelection}
+                  aria-label={copy.portfolio.clearMediaSelection}
                   disabled={isPending}
                   onClick={clearImageSelection}
                 >

@@ -1,13 +1,13 @@
 'use client';
 
 import { CdnImage as Image } from '@/lib/cdn-image';
-import { isRemoteImageUrl } from '@/lib/image-url';
 import { staticAsset } from '@/lib/static-asset';
 import { useEffect, useState } from 'react';
 
 import { HOME_PORTFOLIO_IMAGE_QUALITY } from './home-constants';
 import type { ProjectCard } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
+import { PortfolioMedia } from './portfolio-media';
 import { ExploreButton, SectionHeading } from './home-ui';
 import './home-mobile-portfolio.css';
 
@@ -114,14 +114,14 @@ export function HomeMobilePortfolio({ projects }: HomeMobilePortfolioProps): Rea
               aria-label={project.title}
               aria-current={isActive ? 'true' : undefined}
             >
-              <Image
+              <PortfolioMedia
                 src={project.image}
                 alt={project.title}
+                contentType={project.contentType}
                 fill
                 sizes="(max-width: 767px) 78vw, 320px"
                 quality={HOME_PORTFOLIO_IMAGE_QUALITY}
                 loading={index === 0 ? 'eager' : 'lazy'}
-                unoptimized={isRemoteImageUrl(project.image)}
                 className="home-mobile-portfolio-image"
               />
             </article>
