@@ -1,24 +1,31 @@
 import 'server-only';
 
-import { randomUUID } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
 import type { PortfolioAsset } from '@prisma/client';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 import {
-  getPortfolioContentTypeFromFileName,
-  getPortfolioMediaExtension,
   getPortfolioMediaSizeLimitMessage,
   isPortfolioGifFile,
   isPortfolioUploadTransportLimitError,
   isPortfolioVideoFile,
+  resolvePortfolioUploadContentType,
   validatePortfolioMediaFile,
 } from '@/lib/portfolio-media';
+import { createPortfolioObjectKey } from '@/lib/portfolio-object-key';
+import { finalizePortfolioDirectUpload } from '@/lib/portfolio-direct-upload';
 import { R2ConfigurationError, deleteR2Object, uploadR2ImageAsWebp, uploadR2Object } from '@/lib/r2/storage';
 
-const PORTFOLIO_UPLOAD_PREFIX = 'portfolio';
 const PORTFOLIO_ASSET_TYPES = ['IMAGE', 'ANIMATION_IMAGE'] as const;
 const PORTFOLIO_REVALIDATE_PATHS = ['/admin/portfolio', '/portfolio', '/'] as const;
+
+type UploadedPortfolioMedia = {
+  key: string;
+  url: string;
+  contentType: string;
+  sizeBytes: number;
+  fileName: string;
+};
 
 function readOptionalText(formData: FormData, fieldName: string): string | undefined {
   const value = formData.get(fieldName);
@@ -88,78 +95,81 @@ function readPortfolioAssetId(formData: FormData): string {
   return value;
 }
 
-function validateMediaFile(file: File): File {
+function readMediaFile(formData: FormData, required: boolean): File | null {
+  const file = formData.get('image');
+
+  if (!(file instanceof File) || file.size === 0) {
+    if (required) {
+      throw new Error('Portfolio media is required.');
+    }
+
+    return null;
+  }
+
   validatePortfolioMediaFile(file);
   return file;
 }
 
-function readMediaFile(formData: FormData): File {
-  const file = formData.get('image');
+function readDirectUploadRef(formData: FormData): { key: string; token: string } | null {
+  const key = formData.get('objectKey');
+  const token = formData.get('uploadToken');
 
-  if (!(file instanceof File) || file.size === 0) {
-    throw new Error('Portfolio media is required.');
-  }
-
-  return validateMediaFile(file);
-}
-
-function readOptionalMediaFile(formData: FormData): File | null {
-  const file = formData.get('image');
-
-  if (!(file instanceof File) || file.size === 0) {
+  if (typeof key !== 'string' || key.length === 0 || typeof token !== 'string' || token.length === 0) {
     return null;
   }
 
-  return validateMediaFile(file);
-}
-
-function createObjectKey(contentType: string): string {
-  const now = new Date();
-  const year = now.getUTCFullYear();
-  const month = String(now.getUTCMonth() + 1).padStart(2, '0');
-  const extension = getPortfolioMediaExtension(contentType);
-
-  return `${PORTFOLIO_UPLOAD_PREFIX}/${year}/${month}/${randomUUID()}.${extension}`;
-}
-
-function resolvePortfolioUploadContentType(file: File): string {
-  const fromFileName = getPortfolioContentTypeFromFileName(file.name);
-
-  if (fromFileName) {
-    return fromFileName;
-  }
-
-  if (file.type) {
-    return file.type;
-  }
-
-  return 'application/octet-stream';
+  return { key, token };
 }
 
 async function uploadPortfolioMediaFile(
   file: File,
   body: Buffer,
-): Promise<{ key: string; url: string; contentType: string; sizeBytes: number }> {
-  const contentType = resolvePortfolioUploadContentType(file);
+): Promise<Omit<UploadedPortfolioMedia, 'fileName'>> {
+  const contentType = resolvePortfolioUploadContentType(file.name, file.type);
 
   if (isPortfolioVideoFile(file) || isPortfolioGifFile(file)) {
     return uploadR2Object({
-      key: createObjectKey(contentType),
+      key: createPortfolioObjectKey(contentType),
       body,
       contentType,
     });
   }
 
   return uploadR2ImageAsWebp({
-    key: createObjectKey('image/webp'),
+    key: createPortfolioObjectKey('image/webp'),
     body,
   });
 }
 
-function createTitleFromFile(file: File): string {
-  const filename = file.name.replace(/\.[^/.]+$/, '');
+async function resolveUploadedMedia(
+  formData: FormData,
+  required: boolean,
+): Promise<UploadedPortfolioMedia | null> {
+  const direct = readDirectUploadRef(formData);
 
-  return filename
+  if (direct) {
+    const uploaded = await finalizePortfolioDirectUpload(direct);
+
+    return {
+      ...uploaded,
+      fileName: readOptionalText(formData, 'fileName') ?? uploaded.key,
+    };
+  }
+
+  const file = readMediaFile(formData, required);
+
+  if (!file) {
+    return null;
+  }
+
+  const uploaded = await uploadPortfolioMediaFile(file, Buffer.from(await file.arrayBuffer()));
+
+  return { ...uploaded, fileName: file.name };
+}
+
+function createTitleFromFileName(fileName: string): string {
+  return fileName
+    .replace(/\.[^/.]+$/, '')
     .split(/[-_\s]+/)
     .filter(Boolean)
     .map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
@@ -193,11 +203,14 @@ export function getPortfolioUploadErrorMessage(error: unknown): string {
 }
 
 export async function createPortfolioAssetFromFormData(formData: FormData): Promise<void> {
-  const media = readMediaFile(formData);
-  const title = readOptionalText(formData, 'title') ?? createTitleFromFile(media);
+  const uploaded = await resolveUploadedMedia(formData, true);
+
+  if (!uploaded) {
+    throw new Error('Portfolio media is required.');
+  }
+
+  const title = readOptionalText(formData, 'title') ?? createTitleFromFileName(uploaded.fileName);
   const alt = readOptionalText(formData, 'alt') ?? `${title} portfolio image`;
-  const body = Buffer.from(await media.arrayBuffer());
-  const uploaded = await uploadPortfolioMediaFile(media, body);
 
   await prisma.portfolioAsset.create({
     data: {
@@ -219,30 +232,16 @@ export async function createPortfolioAssetFromFormData(formData: FormData): Prom
 
 export async function updatePortfolioAssetFromFormData(formData: FormData): Promise<PortfolioAsset> {
   const assetId = readPortfolioAssetId(formData);
-  const title = readRequiredText(formData, 'title', 'Title');
-  const alt = readRequiredText(formData, 'alt', 'Alt text');
-  const assetType = readAssetType(formData);
-  const status = readPortfolioStatus(formData);
-  const projectUrl = readOptionalProjectUrl(formData);
-  const media = readOptionalMediaFile(formData);
-
+  const uploaded = await resolveUploadedMedia(formData, false);
   const existing = await prisma.portfolioAsset.findUnique({ where: { id: assetId } });
 
   if (!existing) {
     throw new Error('Portfolio asset was not found.');
   }
 
-  let mediaData: {
-    key?: string;
-    url?: string;
-    contentType?: string;
-    sizeBytes?: number;
-  } = {};
+  let mediaData: Partial<Pick<PortfolioAsset, 'key' | 'url' | 'contentType' | 'sizeBytes'>> = {};
 
-  if (media) {
-    const body = Buffer.from(await media.arrayBuffer());
-    const uploaded = await uploadPortfolioMediaFile(media, body);
-
+  if (uploaded) {
     try {
       await deleteR2Object({ key: existing.key });
     } catch (error) {
@@ -264,11 +263,11 @@ export async function updatePortfolioAssetFromFormData(formData: FormData): Prom
   const updated = await prisma.portfolioAsset.update({
     where: { id: assetId },
     data: {
-      title,
-      alt,
-      assetType,
-      status,
-      projectUrl,
+      title: readRequiredText(formData, 'title', 'Title'),
+      alt: readRequiredText(formData, 'alt', 'Alt text'),
+      assetType: readAssetType(formData),
+      status: readPortfolioStatus(formData),
+      projectUrl: readOptionalProjectUrl(formData),
       ...mediaData,
     },
   });

@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/lib/telegram/telegram-service.test.ts src/lib/telegram/order-paid.test.ts src/lib/telegram/read-env.test.ts src/lib/payments/finalize-payment-attempt.test.ts src/lib/api-auth.test.ts src/lib/blog-post-input.test.ts src/lib/parse-blog-content.test.ts src/lib/blog-list-query.test.ts src/app/_components/blog/blog-resolve.test.ts src/app/_components/blog/blog-list-api.test.ts",
+    "test": "tsx --test src/lib/telegram/telegram-service.test.ts src/lib/telegram/order-paid.test.ts src/lib/telegram/read-env.test.ts src/lib/payments/finalize-payment-attempt.test.ts src/lib/api-auth.test.ts src/lib/blog-post-input.test.ts src/lib/parse-blog-content.test.ts src/lib/blog-list-query.test.ts src/lib/portfolio-media.test.ts src/lib/portfolio-upload-token.test.ts src/lib/portfolio-complete-payload.test.ts src/app/_components/blog/blog-resolve.test.ts src/app/_components/blog/blog-list-api.test.ts",
     "admin:hash-password": "node scripts/create-admin-password-hash.mjs",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
@@ -22,7 +22,8 @@
     "convert:webp": "node scripts/convert-to-webp.mjs"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1075.0",
+    "@aws-sdk/client-s3": "^3.1117.0",
+    "@aws-sdk/s3-request-presigner": "^3.1117.0",
     "@prisma/client": "^6.19.0",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.98",

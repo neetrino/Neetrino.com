@@ -1,11 +1,27 @@
-import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
-
+import {
+  DeleteObjectCommand,
+  GetObjectCommand,
+  HeadObjectCommand,
+  PutBucketCorsCommand,
+  PutObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { logger } from '@/lib/logger';
 import {
   convertImageBufferToWebp,
   replaceKeyExtensionWithWebp,
 } from '@/lib/images/convert-to-webp';
 
 const R2_ENDPOINT_HOST_SUFFIX = '.r2.cloudflarestorage.com';
+const PRESIGNED_PUT_EXPIRES_SECONDS = 30 * 60;
+const R2_OBJECT_CACHE_CONTROL = 'public, max-age=31536000, immutable';
+const PRESIGNED_UNHOISTABLE_HEADERS = new Set([
+  'x-amz-checksum-crc32',
+  'x-amz-checksum-crc32c',
+  'x-amz-sdk-checksum-algorithm',
+  'x-amz-checksum-algorithm',
+]);
 
 type R2Config = {
   accountId: string;
@@ -31,6 +47,13 @@ type UploadR2ObjectResult = {
 type DeleteR2ObjectInput = {
   key: string;
 };
+
+type HeadR2ObjectResult = {
+  contentType: string | undefined;
+  sizeBytes: number;
+};
+
+let browserUploadCorsReady = false;
 
 export class R2ConfigurationError extends Error {
   constructor(name: string) {
@@ -67,7 +90,41 @@ function createR2Client(config: R2Config): S3Client {
       accessKeyId: config.accessKeyId,
       secretAccessKey: config.secretAccessKey,
     },
+    requestChecksumCalculation: 'WHEN_REQUIRED',
+    responseChecksumValidation: 'WHEN_REQUIRED',
   });
+}
+
+export function getR2PublicObjectUrl(key: string): string {
+  return `${getR2Config().publicUrl}/${key}`;
+}
+
+async function ensureR2BrowserUploadCors(client: S3Client, config: R2Config): Promise<void> {
+  if (browserUploadCorsReady) {
+    return;
+  }
+
+  try {
+    await client.send(
+      new PutBucketCorsCommand({
+        Bucket: config.bucketName,
+        CORSConfiguration: {
+          CORSRules: [
+            {
+              AllowedOrigins: ['*'],
+              AllowedMethods: ['GET', 'PUT', 'HEAD'],
+              AllowedHeaders: ['*'],
+              ExposeHeaders: ['ETag', 'Location'],
+              MaxAgeSeconds: 86400,
+            },
+          ],
+        },
+      }),
+    );
+    browserUploadCorsReady = true;
+  } catch (error) {
+    logger.error('Failed to apply Cloudflare R2 CORS for browser uploads.', { error });
+  }
 }
 
 export async function uploadR2Object(input: UploadR2ObjectInput): Promise<UploadR2ObjectResult> {
@@ -80,7 +137,7 @@ export async function uploadR2Object(input: UploadR2ObjectInput): Promise<Upload
       Key: input.key,
       Body: input.body,
       ContentType: input.contentType,
-      CacheControl: 'public, max-age=31536000, immutable',
+      CacheControl: R2_OBJECT_CACHE_CONTROL,
     }),
   );
 
@@ -120,4 +177,68 @@ export async function deleteR2Object(input: DeleteR2ObjectInput): Promise<void> 
       Key: input.key,
     }),
   );
+}
+
+export async function createR2PresignedPutUrl(input: {
+  key: string;
+  contentType: string;
+}): Promise<{ uploadUrl: string; publicUrl: string }> {
+  const config = getR2Config();
+  const client = createR2Client(config);
+  await ensureR2BrowserUploadCors(client, config);
+
+  const uploadUrl = await getSignedUrl(
+    client,
+    new PutObjectCommand({
+      Bucket: config.bucketName,
+      Key: input.key,
+      ContentType: input.contentType,
+    }),
+    {
+      expiresIn: PRESIGNED_PUT_EXPIRES_SECONDS,
+      unhoistableHeaders: PRESIGNED_UNHOISTABLE_HEADERS,
+    },
+  );
+
+  return {
+    uploadUrl,
+    publicUrl: `${config.publicUrl}/${input.key}`,
+  };
+}
+
+export async function headR2Object(key: string): Promise<HeadR2ObjectResult> {
+  const config = getR2Config();
+  const client = createR2Client(config);
+  const result = await client.send(
+    new HeadObjectCommand({
+      Bucket: config.bucketName,
+      Key: key,
+    }),
+  );
+
+  if (typeof result.ContentLength !== 'number') {
+    throw new Error('Uploaded object is missing a size.');
+  }
+
+  return {
+    contentType: result.ContentType,
+    sizeBytes: result.ContentLength,
+  };
+}
+
+export async function getR2ObjectBuffer(key: string): Promise<Buffer> {
+  const config = getR2Config();
+  const client = createR2Client(config);
+  const result = await client.send(
+    new GetObjectCommand({
+      Bucket: config.bucketName,
+      Key: key,
+    }),
+  );
+
+  if (!result.Body) {
+    throw new Error('Uploaded object body is empty.');
+  }
+
+  return Buffer.from(await result.Body.transformToByteArray());
 }

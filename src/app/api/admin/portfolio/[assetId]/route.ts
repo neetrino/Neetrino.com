@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { serializeAdminPortfolioAsset } from '@/app/admin/_components/admin-portfolio-asset';
 import { assertAdminApiRequest } from '@/lib/admin-api-auth';
 import { logger } from '@/lib/logger';
+import { readPortfolioApiFormData } from '@/lib/portfolio-request-body';
 import {
   getPortfolioUploadErrorMessage,
   updatePortfolioAssetFromFormData,
@@ -25,9 +26,9 @@ export async function PATCH(request: NextRequest, context: PortfolioAssetRouteCo
   let formData: FormData;
 
   try {
-    formData = await request.formData();
+    formData = await readPortfolioApiFormData(request);
   } catch (error) {
-    logger.error('Failed to parse portfolio update form data.', { error, assetId });
+    logger.error('Failed to parse portfolio update request body.', { error, assetId });
 
     return NextResponse.json({ error: getPortfolioUploadErrorMessage(error) }, { status: 400 });
   }
