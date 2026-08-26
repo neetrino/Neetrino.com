@@ -1,10 +1,8 @@
 import type { ProjectCard } from '@/app/_components/home-data';
 import { portfolioBottomRow, portfolioTopRow } from '@/app/_components/home-data';
 import {
-  PORTFOLIO_ANRA_MOCKUP_SRC,
   PORTFOLIO_CARD_MEDIA_HEIGHT,
   PORTFOLIO_CARD_MEDIA_WIDTH,
-  PORTFOLIO_DVBS_BANNER_SRC,
 } from '@/app/_components/portfolio-constants';
 import {
   portfolioProjects as staticPortfolioProjects,
@@ -14,6 +12,7 @@ import {
 } from '@/app/_components/portfolio-data';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
+import { resolvePublicPortfolioMedia } from '@/lib/public-portfolio-media';
 
 /** Uniform home marquee card size — same media ratio as portfolio page cards. */
 const HOME_PORTFOLIO_CARD_TEMPLATE = {
@@ -37,22 +36,8 @@ export type PublicPortfolioData = {
   portfolioProjects: PortfolioProject[];
 };
 
-function resolveHomeProjectMedia(asset: PublicPortfolioAsset): { image: string; contentType?: string } {
-  const variant = resolvePortfolioVariant(asset.title, asset.alt);
-
-  if (variant === 'dvbs') {
-    return { image: PORTFOLIO_DVBS_BANNER_SRC };
-  }
-
-  if (variant === 'anra') {
-    return { image: PORTFOLIO_ANRA_MOCKUP_SRC };
-  }
-
-  return { image: asset.url, contentType: asset.contentType };
-}
-
 function toProjectCard(asset: PublicPortfolioAsset): ProjectCard {
-  const media = resolveHomeProjectMedia(asset);
+  const media = resolvePublicPortfolioMedia(asset);
 
   return {
     title: asset.alt || asset.title,
@@ -84,7 +69,7 @@ function getStaticPortfolioData(): PublicPortfolioData {
 
 function toPortfolioProject(asset: PublicPortfolioAsset): PortfolioProject {
   const variant = resolvePortfolioVariant(asset.title, asset.alt);
-  const media = resolveHomeProjectMedia(asset);
+  const media = resolvePublicPortfolioMedia(asset);
 
   return {
     id: asset.id,
