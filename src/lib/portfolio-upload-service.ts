@@ -6,8 +6,11 @@ import type { PortfolioAsset } from '@prisma/client';
 import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 import {
+  getPortfolioContentTypeFromFileName,
   getPortfolioMediaExtension,
+  getPortfolioMediaSizeLimitMessage,
   isPortfolioGifFile,
+  isPortfolioUploadTransportLimitError,
   isPortfolioVideoFile,
   validatePortfolioMediaFile,
 } from '@/lib/portfolio-media';
@@ -120,27 +123,17 @@ function createObjectKey(contentType: string): string {
 }
 
 function resolvePortfolioUploadContentType(file: File): string {
+  const fromFileName = getPortfolioContentTypeFromFileName(file.name);
+
+  if (fromFileName) {
+    return fromFileName;
+  }
+
   if (file.type) {
     return file.type;
   }
 
-  if (/\.mp4$/i.test(file.name)) {
-    return 'video/mp4';
-  }
-
-  if (/\.webm$/i.test(file.name)) {
-    return 'video/webm';
-  }
-
-  if (/\.mov$/i.test(file.name)) {
-    return 'video/quicktime';
-  }
-
-  if (/\.gif$/i.test(file.name)) {
-    return 'image/gif';
-  }
-
-  return file.type;
+  return 'application/octet-stream';
 }
 
 async function uploadPortfolioMediaFile(
@@ -190,6 +183,10 @@ async function getNextPortfolioSortOrder(): Promise<number> {
 export function getPortfolioUploadErrorMessage(error: unknown): string {
   if (error instanceof R2ConfigurationError) {
     return 'Cloudflare R2 is not configured. Add the R2_* values to .env.local.';
+  }
+
+  if (isPortfolioUploadTransportLimitError(error)) {
+    return getPortfolioMediaSizeLimitMessage();
   }
 
   return error instanceof Error ? error.message : 'Portfolio media upload failed.';

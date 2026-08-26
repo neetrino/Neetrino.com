@@ -1,25 +1,20 @@
 import {
   getPortfolioMediaSizeLimitMessage,
   getPortfolioMediaValidationError,
+  isPortfolioUploadTransportLimitError,
   isPortfolioVideoFile,
 } from '@/lib/portfolio-media';
 
 export function resolvePortfolioUploadErrorMessage(error: unknown, fallbackMessage: string): string {
-  if (!(error instanceof Error)) {
-    return fallbackMessage;
-  }
-
-  const normalizedMessage = error.message.toLowerCase();
-
-  if (
-    normalizedMessage.includes('unexpected end of form') ||
-    normalizedMessage.includes('body exceeded') ||
-    normalizedMessage.includes('413')
-  ) {
+  if (isPortfolioUploadTransportLimitError(error)) {
     return getPortfolioMediaSizeLimitMessage();
   }
 
-  return error.message || fallbackMessage;
+  if (error instanceof Error && error.message) {
+    return error.message;
+  }
+
+  return fallbackMessage;
 }
 
 export function validateSelectedPortfolioFile(file: File | undefined): string | null {

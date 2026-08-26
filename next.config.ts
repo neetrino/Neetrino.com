@@ -23,7 +23,9 @@ const nextConfig: NextConfig = {
       process.env.NEXT_PUBLIC_R2_PUBLIC_URL ?? process.env.R2_PUBLIC_URL ?? '',
   },
   // Portfolio uploads: images/GIF up to 50 MB, videos up to 200 MB (+ multipart overhead).
+  // proxyClientMaxBodySize is required in Next.js 16 whenever proxy.ts exists; the default is 10 MB.
   experimental: {
+    proxyClientMaxBodySize: '210mb',
     serverActions: {
       bodySizeLimit: '210mb',
     },

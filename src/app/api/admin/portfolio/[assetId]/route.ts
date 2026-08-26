@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { serializeAdminPortfolioAsset } from '@/app/admin/_components/admin-portfolio-asset';
 import { assertAdminApiRequest } from '@/lib/admin-api-auth';
 import { logger } from '@/lib/logger';
 import {
@@ -28,7 +29,7 @@ export async function PATCH(request: NextRequest, context: PortfolioAssetRouteCo
   } catch (error) {
     logger.error('Failed to parse portfolio update form data.', { error, assetId });
 
-    return NextResponse.json({ error: 'Invalid upload payload.' }, { status: 400 });
+    return NextResponse.json({ error: getPortfolioUploadErrorMessage(error) }, { status: 400 });
   }
 
   formData.set('assetId', assetId);
@@ -36,7 +37,10 @@ export async function PATCH(request: NextRequest, context: PortfolioAssetRouteCo
   try {
     const updated = await updatePortfolioAssetFromFormData(formData);
 
-    return NextResponse.json({ status: 'success', data: updated });
+    return NextResponse.json({
+      status: 'success',
+      data: serializeAdminPortfolioAsset(updated),
+    });
   } catch (error) {
     logger.error('Failed to update portfolio asset via API route.', { error, assetId });
 

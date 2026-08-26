@@ -15,12 +15,6 @@ export const SUPPORTED_PORTFOLIO_IMAGE_TYPES = [
 
 export const SUPPORTED_PORTFOLIO_GIF_TYPES = ['image/gif'] as const;
 
-export const SUPPORTED_PORTFOLIO_VIDEO_TYPES = [
-  'video/mp4',
-  'video/webm',
-  'video/quicktime',
-] as const;
-
 export const MAX_PORTFOLIO_IMAGE_BYTES = 50 * 1024 * 1024;
 export const MAX_PORTFOLIO_VIDEO_BYTES = 200 * 1024 * 1024;
 
@@ -31,6 +25,14 @@ const CONTENT_TYPE_EXTENSIONS: Record<string, string> = {
   'video/mp4': 'mp4',
   'video/webm': 'webm',
   'video/quicktime': 'mov',
+  'video/x-quicktime': 'mov',
+  'video/mov': 'mov',
+};
+
+const VIDEO_FILENAME_CONTENT_TYPES: Record<string, string> = {
+  mp4: 'video/mp4',
+  webm: 'video/webm',
+  mov: 'video/quicktime',
 };
 
 function formatPortfolioLimitMegabytes(bytes: number): number {
@@ -44,16 +46,47 @@ export function getPortfolioMediaSizeLimitMessage(): string {
   return `Upload is too large. Images and GIFs: max ${imageLimitMb} MB. Videos: max ${videoLimitMb} MB.`;
 }
 
+export function isPortfolioUploadTransportLimitError(error: unknown): boolean {
+  if (!(error instanceof Error)) {
+    return false;
+  }
+
+  const normalizedMessage = error.message.toLowerCase();
+
+  return (
+    normalizedMessage.includes('unexpected end of form') ||
+    normalizedMessage.includes('body exceeded') ||
+    normalizedMessage.includes('413')
+  );
+}
+
 export function isPortfolioVideoContentType(contentType: string): boolean {
   return contentType.startsWith('video/');
 }
 
 export function isPortfolioVideoFile(file: File): boolean {
-  if (SUPPORTED_PORTFOLIO_VIDEO_TYPES.includes(file.type as (typeof SUPPORTED_PORTFOLIO_VIDEO_TYPES)[number])) {
+  if (file.type.startsWith('video/')) {
     return true;
   }
 
   return /\.(mp4|webm|mov)$/i.test(file.name);
+}
+
+/** Canonical MIME type for a known portfolio video/GIF filename, or undefined. */
+export function getPortfolioContentTypeFromFileName(fileName: string): string | undefined {
+  const extensionMatch = fileName.toLowerCase().match(/\.([a-z0-9]+)$/);
+
+  if (!extensionMatch) {
+    return undefined;
+  }
+
+  const extension = extensionMatch[1];
+
+  if (extension === 'gif') {
+    return 'image/gif';
+  }
+
+  return VIDEO_FILENAME_CONTENT_TYPES[extension];
 }
 
 export function isPortfolioGifFile(file: File): boolean {
@@ -115,5 +148,5 @@ export function getPortfolioMediaValidationError(file: File): string | null {
 
 /** Maps a stored portfolio MIME type to its R2 object extension. */
 export function getPortfolioMediaExtension(contentType: string): string {
-  return CONTENT_TYPE_EXTENSIONS[contentType] ?? 'webp';
+  return CONTENT_TYPE_EXTENSIONS[contentType] ?? (contentType.startsWith('video/') ? 'mp4' : 'webp');
 }
