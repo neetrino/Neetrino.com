@@ -12,6 +12,7 @@ import {
   convertImageBufferToWebp,
   replaceKeyExtensionWithWebp,
 } from '@/lib/images/convert-to-webp';
+import { R2_BROWSER_UPLOAD_CORS_RULES } from '@/lib/r2/browser-upload-cors';
 
 const R2_ENDPOINT_HOST_SUFFIX = '.r2.cloudflarestorage.com';
 const PRESIGNED_PUT_EXPIRES_SECONDS = 30 * 60;
@@ -109,15 +110,7 @@ async function ensureR2BrowserUploadCors(client: S3Client, config: R2Config): Pr
       new PutBucketCorsCommand({
         Bucket: config.bucketName,
         CORSConfiguration: {
-          CORSRules: [
-            {
-              AllowedOrigins: ['*'],
-              AllowedMethods: ['GET', 'PUT', 'HEAD'],
-              AllowedHeaders: ['*'],
-              ExposeHeaders: ['ETag', 'Location'],
-              MaxAgeSeconds: 86400,
-            },
-          ],
+          CORSRules: R2_BROWSER_UPLOAD_CORS_RULES,
         },
       }),
     );

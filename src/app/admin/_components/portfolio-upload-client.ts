@@ -109,13 +109,21 @@ async function requestDirectUploadSession(file: File, fallbackMessage: string): 
 }
 
 async function putFileToStorage(session: DirectUploadSession, file: File): Promise<void> {
-  const response = await fetch(session.uploadUrl, {
-    method: 'PUT',
-    mode: 'cors',
-    credentials: 'omit',
-    body: file,
-    headers: { 'Content-Type': session.contentType },
-  });
+  let response: Response;
+
+  try {
+    response = await fetch(session.uploadUrl, {
+      method: 'PUT',
+      mode: 'cors',
+      credentials: 'omit',
+      body: file,
+      headers: { 'Content-Type': session.contentType },
+    });
+  } catch {
+    throw new Error(
+      'Cloudflare R2 blocked the browser upload (CORS). Add a PUT CORS policy for https://www.neetrino.com on the R2 bucket, then retry.',
+    );
+  }
 
   if (!response.ok) {
     throw new Error(`Storage upload failed with status ${response.status}`);
