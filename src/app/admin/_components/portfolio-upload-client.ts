@@ -1,5 +1,4 @@
-import type { PortfolioAsset } from '@prisma/client';
-import { serializeAdminPortfolioAsset, type AdminPortfolioAsset } from './admin-portfolio-asset';
+import { parseAdminPortfolioAsset, type AdminPortfolioAsset } from './admin-portfolio-asset';
 import { resolvePortfolioUploadErrorMessage } from './portfolio-upload-validation';
 
 type PortfolioUploadResult =
@@ -21,7 +20,7 @@ async function readApiErrorMessage(response: Response, fallbackMessage: string):
       typeof payload.error === 'string' &&
       payload.error.length > 0
     ) {
-      return payload.error;
+      return resolvePortfolioUploadErrorMessage(new Error(payload.error), fallbackMessage);
     }
   } catch {
     // Fall back to generic message when the API body is not JSON.
@@ -91,9 +90,15 @@ export async function updatePortfolioAssetViaApi(
       return { status: 'error', message: fallbackMessage };
     }
 
+    const asset = parseAdminPortfolioAsset(payload.data);
+
+    if (!asset) {
+      return { status: 'error', message: fallbackMessage };
+    }
+
     return {
       status: 'success',
-      asset: serializeAdminPortfolioAsset(payload.data as PortfolioAsset),
+      asset,
     };
   } catch (error) {
     return {

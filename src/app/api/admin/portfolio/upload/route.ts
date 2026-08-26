@@ -22,7 +22,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   } catch (error) {
     logger.error('Failed to parse portfolio upload form data.', { error });
 
-    return NextResponse.json({ error: 'Invalid upload payload.' }, { status: 400 });
+    return NextResponse.json({ error: getPortfolioUploadErrorMessage(error) }, { status: 400 });
   }
 
   try {
