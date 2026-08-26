@@ -1,8 +1,14 @@
 import { resolvePortfolioUploadContentType } from '@/lib/portfolio-media';
 import { createPortfolioCompletePayload } from '@/lib/portfolio-complete-payload';
 import {
+  PORTFOLIO_CHUNK_INDEX_HEADER,
+  PORTFOLIO_CHUNK_KEY_HEADER,
+  PORTFOLIO_CHUNK_TOKEN_HEADER,
   PORTFOLIO_UPLOAD_CHUNK_BYTES,
+  getExpectedPortfolioChunkBytes,
   getPortfolioChunkCount,
+  parsePortfolioUploadSession,
+  type PortfolioUploadSession,
 } from '@/lib/portfolio-upload-chunk';
 import { parseAdminPortfolioAsset, type AdminPortfolioAsset } from './admin-portfolio-asset';
 import { resolvePortfolioUploadErrorMessage } from './portfolio-upload-validation';
@@ -15,18 +21,13 @@ type PortfolioUpdateResult =
   | { status: 'success'; asset: AdminPortfolioAsset }
   | { status: 'error'; message: string };
 
-type DirectUploadSession = {
-  key: string;
-  token: string;
-  contentType: string;
-  chunkSize: number;
-};
-
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
 }
 
 async function readApiErrorMessage(response: Response, fallbackMessage: string): Promise<string> {
+  const statusError = new Error(`Request failed with status ${response.status}`);
+
   try {
     const payload: unknown = await response.json();
 
@@ -38,13 +39,10 @@ async function readApiErrorMessage(response: Response, fallbackMessage: string):
       return resolvePortfolioUploadErrorMessage(new Error(payload.error), fallbackMessage);
     }
   } catch {
-    // Fall back to generic message when the API body is not JSON.
+    // Fall back to the HTTP status when the API body is not JSON.
   }
 
-  return resolvePortfolioUploadErrorMessage(
-    new Error(`Request failed with status ${response.status}`),
-    fallbackMessage,
-  );
+  return resolvePortfolioUploadErrorMessage(statusError, fallbackMessage);
 }
 
 function parseUpdatedAssetPayload(payload: unknown): AdminPortfolioAsset | null {
@@ -53,28 +51,6 @@ function parseUpdatedAssetPayload(payload: unknown): AdminPortfolioAsset | null 
   }
 
   return parseAdminPortfolioAsset(payload.data);
-}
-
-function parseDirectUploadSession(payload: unknown): DirectUploadSession | null {
-  if (!isRecord(payload)) {
-    return null;
-  }
-
-  if (
-    typeof payload.key !== 'string' ||
-    typeof payload.token !== 'string' ||
-    typeof payload.contentType !== 'string' ||
-    typeof payload.chunkSize !== 'number'
-  ) {
-    return null;
-  }
-
-  return {
-    key: payload.key,
-    token: payload.token,
-    contentType: payload.contentType,
-    chunkSize: payload.chunkSize,
-  };
 }
 
 function readSelectedMediaFile(formData: FormData): File | null {
@@ -87,7 +63,10 @@ function readSelectedMediaFile(formData: FormData): File | null {
   return file;
 }
 
-async function requestDirectUploadSession(file: File, fallbackMessage: string): Promise<DirectUploadSession> {
+async function requestDirectUploadSession(
+  file: File,
+  fallbackMessage: string,
+): Promise<PortfolioUploadSession> {
   const response = await fetch('/api/admin/portfolio/upload-url', {
     method: 'POST',
     credentials: 'include',
@@ -103,31 +82,37 @@ async function requestDirectUploadSession(file: File, fallbackMessage: string): 
     throw new Error(await readApiErrorMessage(response, fallbackMessage));
   }
 
-  const session = parseDirectUploadSession(await response.json());
+  const session = parsePortfolioUploadSession(await response.json());
 
   if (!session) {
-    throw new Error(fallbackMessage);
+    throw new Error('Upload session was invalid. Refresh the page and try again.');
   }
 
   return session;
 }
 
+function toArrayBuffer(bytes: Uint8Array): ArrayBuffer {
+  const copy = new ArrayBuffer(bytes.byteLength);
+  new Uint8Array(copy).set(bytes);
+  return copy;
+}
+
 async function postPortfolioChunk(
-  session: DirectUploadSession,
+  session: PortfolioUploadSession,
   chunkIndex: number,
-  chunk: Blob,
+  chunk: Uint8Array,
   fallbackMessage: string,
 ): Promise<void> {
-  const formData = new FormData();
-  formData.set('objectKey', session.key);
-  formData.set('uploadToken', session.token);
-  formData.set('chunkIndex', String(chunkIndex));
-  formData.set('chunk', chunk, `chunk-${chunkIndex}`);
-
   const response = await fetch('/api/admin/portfolio/upload-chunk', {
     method: 'POST',
     credentials: 'include',
-    body: formData,
+    headers: {
+      'Content-Type': 'application/octet-stream',
+      [PORTFOLIO_CHUNK_KEY_HEADER]: session.key,
+      [PORTFOLIO_CHUNK_TOKEN_HEADER]: session.token,
+      [PORTFOLIO_CHUNK_INDEX_HEADER]: String(chunkIndex),
+    },
+    body: toArrayBuffer(chunk),
   });
 
   if (!response.ok) {
@@ -135,21 +120,34 @@ async function postPortfolioChunk(
   }
 }
 
+async function readFileBytes(file: File): Promise<Uint8Array> {
+  const bytes = new Uint8Array(await file.arrayBuffer());
+
+  if (bytes.byteLength !== file.size) {
+    throw new Error('Could not read the selected file. Try choosing it again.');
+  }
+
+  return bytes;
+}
+
 async function uploadSelectedFile(
   file: File,
   fallbackMessage: string,
-): Promise<DirectUploadSession> {
+): Promise<PortfolioUploadSession> {
   const session = await requestDirectUploadSession(file, fallbackMessage);
-  const chunkCount = getPortfolioChunkCount(file.size);
+  const bytes = await readFileBytes(file);
+  const chunkCount = getPortfolioChunkCount(bytes.byteLength);
 
   for (let chunkIndex = 0; chunkIndex < chunkCount; chunkIndex += 1) {
     const start = chunkIndex * PORTFOLIO_UPLOAD_CHUNK_BYTES;
-    await postPortfolioChunk(
-      session,
-      chunkIndex,
-      file.slice(start, start + PORTFOLIO_UPLOAD_CHUNK_BYTES),
-      fallbackMessage,
-    );
+    const chunk = bytes.slice(start, start + PORTFOLIO_UPLOAD_CHUNK_BYTES);
+    const expected = getExpectedPortfolioChunkBytes(bytes.byteLength, chunkIndex);
+
+    if (chunk.byteLength !== expected) {
+      throw new Error('Portfolio upload chunk size is invalid.');
+    }
+
+    await postPortfolioChunk(session, chunkIndex, chunk, fallbackMessage);
   }
 
   return session;
