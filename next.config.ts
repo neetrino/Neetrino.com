@@ -22,8 +22,8 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_R2_PUBLIC_URL:
       process.env.NEXT_PUBLIC_R2_PUBLIC_URL ?? process.env.R2_PUBLIC_URL ?? '',
   },
-  // Partner/blog uploads stay small. Portfolio files go directly to R2, so they
-  // must not pass through this Next.js proxy / Server Action body limit.
+  // Portfolio media is uploaded in 3MB chunks through the admin API so it
+  // stays under Vercel's function payload limit without browser→R2 CORS.
   // proxyClientMaxBodySize is required in Next.js 16 whenever proxy.ts exists; the default is 10 MB.
   experimental: {
     proxyClientMaxBodySize: '15mb',
