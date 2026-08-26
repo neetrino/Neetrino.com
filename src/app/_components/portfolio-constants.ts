@@ -34,11 +34,5 @@ export const PORTFOLIO_TITLE_HEIGHT = 117;
 export const PORTFOLIO_TITLE_FONT_SIZE = 90;
 export const PORTFOLIO_TITLE_COLOR = '#fffcfc';
 
-/** Figma `Smartphone-Presentation-Mockup 1` (node 1:1326) — ANRA card background. */
-export const PORTFOLIO_ANRA_MOCKUP_SRC = staticAsset('/portfolio/anra-smartphone-mockup.webp');
-
-/** Figma `IMG_8277 1` (node 1:1327) — ANRA phone screen overlay. */
-export const PORTFOLIO_ANRA_SCREEN_SRC = staticAsset('/portfolio/anra-phone-screen.webp');
-
 /** Figma `BORBOR banner 1` (node 1:1316) — Borbor / DVBS card. */
 export const PORTFOLIO_DVBS_BANNER_SRC = staticAsset('/portfolio/borbor-banner.webp');

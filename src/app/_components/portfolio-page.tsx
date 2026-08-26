@@ -8,7 +8,6 @@ import { useHomeI18n } from './home-i18n-provider';
 import { NeetrinoPageShell } from './neetrino-page-shell';
 import { PortfolioBakedBackground } from './portfolio-baked-background';
 import {
-  PORTFOLIO_ANRA_SCREEN_SRC,
   PORTFOLIO_INITIAL_VISIBLE,
   PORTFOLIO_LCP_CARD_COUNT,
   PORTFOLIO_LOAD_MORE_COUNT,
@@ -16,7 +15,6 @@ import {
 import type { PortfolioProject } from './portfolio-data';
 import { portfolioMessages } from './portfolio-messages';
 import { PortfolioMedia } from './portfolio-media';
-import { isRemoteImageUrl } from '@/lib/image-url';
 import './portfolio.css';
 import './services.css';
 
@@ -85,50 +83,19 @@ function PortfolioCard({
   return (
     <article className={`portfolio-card portfolio-card--${project.variant ?? 'default'}`} aria-label={project.title}>
       <div className="portfolio-card-media">
-        {project.variant === 'anra' ? (
-          <>
-            <Image
-              src={project.image}
-              alt={project.alt}
-              fill
-              sizes="(max-width: 767px) 100vw, (max-width: 1440px) 44vw, 631px"
-              quality={HOME_PORTFOLIO_IMAGE_QUALITY}
-              priority={isAboveFold}
-              loading={isAboveFold ? 'eager' : 'lazy'}
-              fetchPriority={isAboveFold ? 'high' : 'low'}
-              decoding="async"
-              unoptimized={isRemoteImageUrl(project.image)}
-              className="portfolio-card-image portfolio-card-image--anra-mockup"
-            />
-            <div className="portfolio-card-screen portfolio-card-screen--anra">
-              <Image
-                src={PORTFOLIO_ANRA_SCREEN_SRC}
-                alt=""
-                fill
-                sizes="(max-width: 767px) 21vw, 133px"
-                quality={HOME_PORTFOLIO_IMAGE_QUALITY}
-                loading="lazy"
-                fetchPriority="low"
-                decoding="async"
-                className="portfolio-card-screen-image"
-              />
-            </div>
-          </>
-        ) : (
-          <PortfolioMedia
-            src={project.image}
-            alt={project.alt}
-            contentType={project.contentType}
-            fill
-            sizes="(max-width: 767px) 100vw, (max-width: 1440px) 44vw, 631px"
-            quality={HOME_PORTFOLIO_IMAGE_QUALITY}
-            priority={isAboveFold}
-            loading={isAboveFold ? 'eager' : 'lazy'}
-            fetchPriority={isAboveFold ? 'high' : 'low'}
-            decoding="async"
-            className="portfolio-card-image"
-          />
-        )}
+        <PortfolioMedia
+          src={project.image}
+          alt={project.alt}
+          contentType={project.contentType}
+          fill
+          sizes="(max-width: 767px) 100vw, (max-width: 1440px) 44vw, 631px"
+          quality={HOME_PORTFOLIO_IMAGE_QUALITY}
+          priority={isAboveFold}
+          loading={isAboveFold ? 'eager' : 'lazy'}
+          fetchPriority={isAboveFold ? 'high' : 'low'}
+          decoding="async"
+          className="portfolio-card-image"
+        />
         {project.variant === 'zeppelin' ? (
           <>
             <Image
