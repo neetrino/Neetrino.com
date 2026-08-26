@@ -16,12 +16,16 @@ export const SUPPORTED_PORTFOLIO_IMAGE_TYPES = [
 export const SUPPORTED_PORTFOLIO_GIF_TYPES = ['image/gif'] as const;
 
 export const MAX_PORTFOLIO_IMAGE_BYTES = 50 * 1024 * 1024;
-export const MAX_PORTFOLIO_VIDEO_BYTES = 200 * 1024 * 1024;
+export const MAX_PORTFOLIO_VIDEO_BYTES = 300 * 1024 * 1024;
 
 export type PortfolioMediaKind = 'image' | 'video';
 
 const CONTENT_TYPE_EXTENSIONS: Record<string, string> = {
+  'image/avif': 'avif',
   'image/gif': 'gif',
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/webp': 'webp',
   'video/mp4': 'mp4',
   'video/webm': 'webm',
   'video/quicktime': 'mov',
@@ -56,6 +60,9 @@ export function isPortfolioUploadTransportLimitError(error: unknown): boolean {
   return (
     normalizedMessage.includes('unexpected end of form') ||
     normalizedMessage.includes('body exceeded') ||
+    normalizedMessage.includes('function_payload_too_large') ||
+    normalizedMessage.includes('payload too large') ||
+    normalizedMessage.includes('content too large') ||
     normalizedMessage.includes('413')
   );
 }
@@ -90,7 +97,51 @@ export function getPortfolioContentTypeFromFileName(fileName: string): string | 
 }
 
 export function isPortfolioGifFile(file: File): boolean {
-  return file.type === 'image/gif';
+  return file.type === 'image/gif' || file.name.toLowerCase().endsWith('.gif');
+}
+
+/** Canonical MIME type for a portfolio upload, preferring the filename when the browser omits type. */
+export function resolvePortfolioUploadContentType(fileName: string, contentType: string): string {
+  return getPortfolioContentTypeFromFileName(fileName) ?? (contentType || 'application/octet-stream');
+}
+
+export type PortfolioMediaDescriptor = {
+  fileName: string;
+  contentType: string;
+  sizeBytes: number;
+};
+
+export function validatePortfolioMediaDescriptor(input: PortfolioMediaDescriptor): PortfolioMediaKind {
+  const contentType = resolvePortfolioUploadContentType(input.fileName, input.contentType);
+  const isVideo =
+    isPortfolioVideoContentType(contentType) || /\.(mp4|webm|mov)$/i.test(input.fileName);
+
+  if (isVideo) {
+    if (input.sizeBytes > MAX_PORTFOLIO_VIDEO_BYTES) {
+      throw new Error(
+        `Portfolio video must be smaller than ${formatPortfolioLimitMegabytes(MAX_PORTFOLIO_VIDEO_BYTES)}MB.`,
+      );
+    }
+
+    return 'video';
+  }
+
+  const isRasterImage = SUPPORTED_PORTFOLIO_IMAGE_TYPES.includes(
+    contentType as (typeof SUPPORTED_PORTFOLIO_IMAGE_TYPES)[number],
+  );
+  const isGif = contentType === 'image/gif' || input.fileName.toLowerCase().endsWith('.gif');
+
+  if (!isRasterImage && !isGif) {
+    throw new Error('Portfolio media must be AVIF, GIF, JPEG, PNG, WebP, MP4, WebM, or MOV.');
+  }
+
+  if (input.sizeBytes > MAX_PORTFOLIO_IMAGE_BYTES) {
+    throw new Error(
+      `Portfolio image must be smaller than ${formatPortfolioLimitMegabytes(MAX_PORTFOLIO_IMAGE_BYTES)}MB.`,
+    );
+  }
+
+  return 'image';
 }
 
 export function resolvePortfolioMediaKind(
@@ -109,32 +160,11 @@ export function resolvePortfolioMediaKind(
 }
 
 export function validatePortfolioMediaFile(file: File): PortfolioMediaKind {
-  if (isPortfolioVideoFile(file)) {
-    if (file.size > MAX_PORTFOLIO_VIDEO_BYTES) {
-      throw new Error(
-        `Portfolio video must be smaller than ${formatPortfolioLimitMegabytes(MAX_PORTFOLIO_VIDEO_BYTES)}MB.`,
-      );
-    }
-
-    return 'video';
-  }
-
-  const isRasterImage = SUPPORTED_PORTFOLIO_IMAGE_TYPES.includes(
-    file.type as (typeof SUPPORTED_PORTFOLIO_IMAGE_TYPES)[number],
-  );
-  const isGif = isPortfolioGifFile(file);
-
-  if (!isRasterImage && !isGif) {
-    throw new Error('Portfolio media must be AVIF, GIF, JPEG, PNG, WebP, MP4, WebM, or MOV.');
-  }
-
-  if (file.size > MAX_PORTFOLIO_IMAGE_BYTES) {
-    throw new Error(
-      `Portfolio image must be smaller than ${formatPortfolioLimitMegabytes(MAX_PORTFOLIO_IMAGE_BYTES)}MB.`,
-    );
-  }
-
-  return 'image';
+  return validatePortfolioMediaDescriptor({
+    fileName: file.name,
+    contentType: file.type,
+    sizeBytes: file.size,
+  });
 }
 
 export function getPortfolioMediaValidationError(file: File): string | null {

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { assertAdminApiRequest } from '@/lib/admin-api-auth';
 import { logger } from '@/lib/logger';
+import { readPortfolioApiFormData } from '@/lib/portfolio-request-body';
 import {
   createPortfolioAssetFromFormData,
   getPortfolioUploadErrorMessage,
@@ -18,9 +19,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   let formData: FormData;
 
   try {
-    formData = await request.formData();
+    formData = await readPortfolioApiFormData(request);
   } catch (error) {
-    logger.error('Failed to parse portfolio upload form data.', { error });
+    logger.error('Failed to parse portfolio upload request body.', { error });
 
     return NextResponse.json({ error: getPortfolioUploadErrorMessage(error) }, { status: 400 });
   }

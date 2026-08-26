@@ -10,6 +10,10 @@ export function resolvePortfolioUploadErrorMessage(error: unknown, fallbackMessa
     return getPortfolioMediaSizeLimitMessage();
   }
 
+  if (error instanceof TypeError) {
+    return 'Direct upload to storage failed. Check the connection and try again.';
+  }
+
   if (error instanceof Error && error.message) {
     return error.message;
   }
