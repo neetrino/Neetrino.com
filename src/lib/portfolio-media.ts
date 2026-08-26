@@ -1,7 +1,7 @@
 export const PORTFOLIO_IMAGE_ACCEPT =
   'image/avif,image/gif,image/jpeg,image/png,image/webp' as const;
 
-export const PORTFOLIO_VIDEO_ACCEPT = 'video/mp4,video/webm' as const;
+export const PORTFOLIO_VIDEO_ACCEPT = 'video/mp4,video/webm,video/quicktime,.mov' as const;
 
 export const PORTFOLIO_MEDIA_ACCEPT =
   `${PORTFOLIO_IMAGE_ACCEPT},${PORTFOLIO_VIDEO_ACCEPT}` as const;
@@ -15,7 +15,11 @@ export const SUPPORTED_PORTFOLIO_IMAGE_TYPES = [
 
 export const SUPPORTED_PORTFOLIO_GIF_TYPES = ['image/gif'] as const;
 
-export const SUPPORTED_PORTFOLIO_VIDEO_TYPES = ['video/mp4', 'video/webm'] as const;
+export const SUPPORTED_PORTFOLIO_VIDEO_TYPES = [
+  'video/mp4',
+  'video/webm',
+  'video/quicktime',
+] as const;
 
 export const MAX_PORTFOLIO_IMAGE_BYTES = 50 * 1024 * 1024;
 export const MAX_PORTFOLIO_VIDEO_BYTES = 200 * 1024 * 1024;
@@ -26,6 +30,7 @@ const CONTENT_TYPE_EXTENSIONS: Record<string, string> = {
   'image/gif': 'gif',
   'video/mp4': 'mp4',
   'video/webm': 'webm',
+  'video/quicktime': 'mov',
 };
 
 function formatPortfolioLimitMegabytes(bytes: number): number {
@@ -48,7 +53,7 @@ export function isPortfolioVideoFile(file: File): boolean {
     return true;
   }
 
-  return /\.(mp4|webm)$/i.test(file.name);
+  return /\.(mp4|webm|mov)$/i.test(file.name);
 }
 
 export function isPortfolioGifFile(file: File): boolean {
@@ -87,7 +92,7 @@ export function validatePortfolioMediaFile(file: File): PortfolioMediaKind {
   const isGif = isPortfolioGifFile(file);
 
   if (!isRasterImage && !isGif) {
-    throw new Error('Portfolio media must be AVIF, GIF, JPEG, PNG, WebP, MP4, or WebM.');
+    throw new Error('Portfolio media must be AVIF, GIF, JPEG, PNG, WebP, MP4, WebM, or MOV.');
   }
 
   if (file.size > MAX_PORTFOLIO_IMAGE_BYTES) {
