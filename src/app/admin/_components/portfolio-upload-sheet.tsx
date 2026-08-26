@@ -3,7 +3,15 @@
 import { useEffect, useState, useTransition, type FormEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
-import { uploadPortfolioImage } from '../_actions/portfolio-actions';
+import {
+  AdminPortfolioMediaPreview,
+  isPreviewVideoFile,
+  PORTFOLIO_MEDIA_ACCEPT,
+} from './portfolio-asset-sheet-media';
+import { uploadPortfolioAssetViaApi } from './portfolio-upload-client';
+import {
+  validateSelectedPortfolioFile,
+} from './portfolio-upload-validation';
 import { useAdminI18n } from './admin-i18n-provider';
 import { useAdminToast } from './admin-toast';
 
@@ -34,6 +42,7 @@ export function PortfolioUploadSheet({ onClose }: PortfolioUploadSheetProps): Re
   const [mounted, setMounted] = useState(false);
   const [values, setValues] = useState<UploadFormValues>(EMPTY_UPLOAD_VALUES);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewContentType, setPreviewContentType] = useState<string | null>(null);
   const [fileName, setFileName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isPending, startTransition] = useTransition();
@@ -80,24 +89,33 @@ export function PortfolioUploadSheet({ onClose }: PortfolioUploadSheetProps): Re
 
     if (!file) {
       setPreviewUrl(null);
+      setPreviewContentType(null);
       setFileName('');
       return;
     }
 
     setFileName(file.name);
     setPreviewUrl(URL.createObjectURL(file));
+    setPreviewContentType(file.type);
 
-    if (!values.title.trim()) {
-      const nameWithoutExtension = file.name.replace(/\.[^/.]+$/, '');
-      setValues((current) => ({
-        ...current,
-        title: nameWithoutExtension
+    setValues((current) => {
+      const nextValues = { ...current };
+
+      if (isPreviewVideoFile(file)) {
+        nextValues.assetType = 'ANIMATION_IMAGE';
+      }
+
+      if (!current.title.trim()) {
+        const nameWithoutExtension = file.name.replace(/\.[^/.]+$/, '');
+        nextValues.title = nameWithoutExtension
           .split(/[-_\s]+/)
           .filter(Boolean)
           .map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
-          .join(' '),
-      }));
-    }
+          .join(' ');
+      }
+
+      return nextValues;
+    });
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
@@ -106,9 +124,17 @@ export function PortfolioUploadSheet({ onClose }: PortfolioUploadSheetProps): Re
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const file = formData.get('image');
+    const validationError =
+      file instanceof File ? validateSelectedPortfolioFile(file) : 'Portfolio media is required.';
+
+    if (validationError) {
+      setErrorMessage(validationError);
+      return;
+    }
 
     startTransition(async () => {
-      const result = await uploadPortfolioImage({ status: 'idle', message: '' }, formData);
+      const result = await uploadPortfolioAssetViaApi(formData, copy.portfolio.uploadFailed);
 
       if (result.status === 'error') {
         setErrorMessage(result.message);
@@ -151,11 +177,11 @@ export function PortfolioUploadSheet({ onClose }: PortfolioUploadSheetProps): Re
 
         <form id="admin-portfolio-upload-form" className="admin-form admin-portfolio-sheet-form" onSubmit={handleSubmit}>
           <label className="admin-field admin-portfolio-sheet-field-wide">
-            <span>{copy.portfolio.uploadImageLabel}</span>
+            <span>{copy.portfolio.uploadMediaLabel}</span>
             <input
               name="image"
               type="file"
-              accept="image/avif,image/jpeg,image/png,image/webp"
+              accept={PORTFOLIO_MEDIA_ACCEPT}
               required
               disabled={isPending}
               onChange={handleFileChange}
@@ -165,8 +191,11 @@ export function PortfolioUploadSheet({ onClose }: PortfolioUploadSheetProps): Re
 
           {previewUrl ? (
             <div className="admin-portfolio-sheet-preview">
-              {/* eslint-disable-next-line @next/next/no-img-element -- local blob preview before upload */}
-              <img src={previewUrl} alt="" className="admin-portfolio-sheet-image" />
+              <AdminPortfolioMediaPreview
+                src={previewUrl}
+                alt=""
+                contentType={previewContentType ?? undefined}
+              />
             </div>
           ) : null}
 

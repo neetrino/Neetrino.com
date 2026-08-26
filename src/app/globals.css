@@ -1599,6 +1599,14 @@ button.home-btn {
   object-fit: cover;
 }
 
+.home-project-image:is(video),
+.home-mobile-portfolio-image:is(video) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .home-project-image-borbor {
   object-position: center;
   transform: scale(1.05);

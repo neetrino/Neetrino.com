@@ -17,6 +17,7 @@ export type PortfolioProject = {
   title: string;
   alt: string;
   image: string;
+  contentType?: string;
   /** Slack / live project URL from admin; falls back to known variant sites. */
   href: string | null;
   variant?: PortfolioProjectVariant;

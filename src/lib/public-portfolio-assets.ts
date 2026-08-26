@@ -27,6 +27,7 @@ type PublicPortfolioAsset = {
   title: string;
   alt: string;
   url: string;
+  contentType: string;
   projectUrl: string | null;
 };
 
@@ -36,24 +37,27 @@ export type PublicPortfolioData = {
   portfolioProjects: PortfolioProject[];
 };
 
-function resolveHomeProjectImage(asset: PublicPortfolioAsset): string {
+function resolveHomeProjectMedia(asset: PublicPortfolioAsset): { image: string; contentType?: string } {
   const variant = resolvePortfolioVariant(asset.title, asset.alt);
 
   if (variant === 'dvbs') {
-    return PORTFOLIO_DVBS_BANNER_SRC;
+    return { image: PORTFOLIO_DVBS_BANNER_SRC };
   }
 
   if (variant === 'anra') {
-    return PORTFOLIO_ANRA_MOCKUP_SRC;
+    return { image: PORTFOLIO_ANRA_MOCKUP_SRC };
   }
 
-  return asset.url;
+  return { image: asset.url, contentType: asset.contentType };
 }
 
 function toProjectCard(asset: PublicPortfolioAsset): ProjectCard {
+  const media = resolveHomeProjectMedia(asset);
+
   return {
     title: asset.alt || asset.title,
-    image: resolveHomeProjectImage(asset),
+    image: media.image,
+    contentType: media.contentType,
     width: HOME_PORTFOLIO_CARD_TEMPLATE.width,
     height: HOME_PORTFOLIO_CARD_TEMPLATE.height,
     radius: HOME_PORTFOLIO_CARD_TEMPLATE.radius,
@@ -80,12 +84,14 @@ function getStaticPortfolioData(): PublicPortfolioData {
 
 function toPortfolioProject(asset: PublicPortfolioAsset): PortfolioProject {
   const variant = resolvePortfolioVariant(asset.title, asset.alt);
+  const media = resolveHomeProjectMedia(asset);
 
   return {
     id: asset.id,
     title: asset.title,
     alt: asset.alt,
-    image: resolveHomeProjectImage(asset),
+    image: media.image,
+    contentType: media.contentType,
     href: resolvePortfolioProjectHref(asset.title, asset.alt, asset.projectUrl),
     variant,
   };
@@ -118,6 +124,7 @@ export async function getPublicPortfolioData(): Promise<PublicPortfolioData> {
         alt: true,
         title: true,
         url: true,
+        contentType: true,
         projectUrl: true,
       },
     });

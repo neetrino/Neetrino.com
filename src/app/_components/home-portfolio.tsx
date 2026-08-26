@@ -6,8 +6,8 @@ import { HOME_IMAGE_QUALITY } from './home-constants';
 import type { ProjectCard } from './home-data';
 import { useHomeI18n } from './home-i18n-provider';
 import { HomePortfolioCarousel } from './home-portfolio-carousel';
+import { PortfolioMedia } from './portfolio-media';
 import { ExploreButton, HomeContainer, SectionHeading } from './home-ui';
-import { isRemoteImageUrl } from '@/lib/image-url';
 
 type PortfolioCardProps = ProjectCard;
 
@@ -24,6 +24,7 @@ type HomePortfolioProps = {
 function PortfolioCard({
   title,
   image,
+  contentType,
   imageClassName,
   width,
   height,
@@ -34,18 +35,19 @@ function PortfolioCard({
     height: `calc(${height}px * var(--home-ui-scale))`,
     borderRadius: `calc(${radius}px * var(--home-ui-scale))`,
   };
+  const mediaClassName = imageClassName ? `home-project-image ${imageClassName}` : 'home-project-image';
 
   return (
     <article className="home-project-card" style={cardStyle}>
-      <Image
+      <PortfolioMedia
         src={image}
         alt={title}
+        contentType={contentType}
         fill
         sizes={`${width}px`}
         quality={HOME_IMAGE_QUALITY}
         loading="lazy"
-        unoptimized={isRemoteImageUrl(image)}
-        className={imageClassName ? `home-project-image ${imageClassName}` : 'home-project-image'}
+        className={mediaClassName}
       />
     </article>
   );

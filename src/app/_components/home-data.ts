@@ -11,6 +11,7 @@ export type ServiceCard = {
 export type ProjectCard = {
   title: string;
   image: string;
+  contentType?: string;
   imageClassName?: string;
   width: number;
   height: number;

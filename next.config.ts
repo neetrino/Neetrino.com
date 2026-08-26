@@ -22,10 +22,10 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_R2_PUBLIC_URL:
       process.env.NEXT_PUBLIC_R2_PUBLIC_URL ?? process.env.R2_PUBLIC_URL ?? '',
   },
-  // Portfolio uploads allow up to 10MB; leave headroom for multipart form fields.
+  // Portfolio uploads: images/GIF up to 50 MB, videos up to 200 MB (+ multipart overhead).
   experimental: {
     serverActions: {
-      bodySizeLimit: '12mb',
+      bodySizeLimit: '210mb',
     },
   },
   async headers() {
