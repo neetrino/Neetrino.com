@@ -7,21 +7,27 @@ import {
   validatePortfolioMediaDescriptor,
 } from '@/lib/portfolio-media';
 import { createPortfolioObjectKey, isPortfolioObjectKey } from '@/lib/portfolio-object-key';
+import {
+  PORTFOLIO_UPLOAD_CHUNK_BYTES,
+  getExpectedPortfolioChunkBytes,
+  getPortfolioChunkCount,
+  getPortfolioPartKey,
+} from '@/lib/portfolio-upload-chunk';
 import { createPortfolioUploadToken, verifyPortfolioUploadToken } from '@/lib/portfolio-upload-token';
 import {
-  createR2PresignedPutUrl,
   deleteR2Object,
   getR2ObjectBuffer,
   getR2PublicObjectUrl,
   headR2Object,
   uploadR2ImageAsWebp,
+  uploadR2Object,
 } from '@/lib/r2/storage';
 
 export type PortfolioDirectUploadSession = {
-  uploadUrl: string;
   key: string;
   token: string;
   contentType: string;
+  chunkSize: number;
 };
 
 export type PortfolioDirectUploadResult = {
@@ -40,12 +46,11 @@ export async function createPortfolioDirectUploadSession(input: {
 
   const contentType = resolvePortfolioUploadContentType(input.fileName, input.contentType);
   const key = createPortfolioObjectKey(contentType);
-  const { uploadUrl } = await createR2PresignedPutUrl({ key, contentType });
 
   return {
-    uploadUrl,
     key,
     contentType,
+    chunkSize: PORTFOLIO_UPLOAD_CHUNK_BYTES,
     token: createPortfolioUploadToken({
       key,
       fileName: input.fileName,
@@ -81,18 +86,78 @@ async function convertDirectUploadToWebp(key: string): Promise<PortfolioDirectUp
   return uploaded;
 }
 
+function readVerifiedUploadClaims(key: string, token: string) {
+  if (!isPortfolioObjectKey(key)) {
+    throw new Error('Portfolio object key is invalid.');
+  }
+
+  const claims = verifyPortfolioUploadToken(token);
+
+  if (claims.key !== key) {
+    throw new Error('Portfolio upload token does not match the object key.');
+  }
+
+  return claims;
+}
+
+async function assemblePortfolioChunks(
+  key: string,
+  chunkCount: number,
+  contentType: string,
+): Promise<void> {
+  const parts: Buffer[] = [];
+
+  for (let index = 0; index < chunkCount; index += 1) {
+    parts.push(await getR2ObjectBuffer(getPortfolioPartKey(key, index)));
+  }
+
+  await uploadR2Object({
+    key,
+    body: Buffer.concat(parts),
+    contentType,
+  });
+
+  for (let index = 0; index < chunkCount; index += 1) {
+    try {
+      await deleteR2Object({ key: getPortfolioPartKey(key, index) });
+    } catch (error) {
+      logger.error('Failed to delete portfolio upload chunk.', { error, key, index });
+    }
+  }
+}
+
+export async function storePortfolioUploadChunk(input: {
+  key: string;
+  token: string;
+  chunkIndex: number;
+  body: Buffer;
+}): Promise<void> {
+  const claims = readVerifiedUploadClaims(input.key, input.token);
+  const expectedBytes = getExpectedPortfolioChunkBytes(claims.sizeBytes, input.chunkIndex);
+
+  if (input.body.byteLength !== expectedBytes) {
+    throw new Error('Portfolio upload chunk size is invalid.');
+  }
+
+  const chunkCount = getPortfolioChunkCount(claims.sizeBytes);
+  const objectKey = chunkCount === 1 ? claims.key : getPortfolioPartKey(claims.key, input.chunkIndex);
+
+  await uploadR2Object({
+    key: objectKey,
+    body: input.body,
+    contentType: chunkCount === 1 ? claims.contentType : 'application/octet-stream',
+  });
+}
+
 export async function finalizePortfolioDirectUpload(input: {
   key: string;
   token: string;
 }): Promise<PortfolioDirectUploadResult> {
-  if (!isPortfolioObjectKey(input.key)) {
-    throw new Error('Portfolio object key is invalid.');
-  }
+  const claims = readVerifiedUploadClaims(input.key, input.token);
+  const chunkCount = getPortfolioChunkCount(claims.sizeBytes);
 
-  const claims = verifyPortfolioUploadToken(input.token);
-
-  if (claims.key !== input.key) {
-    throw new Error('Portfolio upload token does not match the object key.');
+  if (chunkCount > 1) {
+    await assemblePortfolioChunks(claims.key, chunkCount, claims.contentType);
   }
 
   const head = await headR2Object(input.key);

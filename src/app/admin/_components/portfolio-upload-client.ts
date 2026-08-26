@@ -1,5 +1,9 @@
 import { resolvePortfolioUploadContentType } from '@/lib/portfolio-media';
 import { createPortfolioCompletePayload } from '@/lib/portfolio-complete-payload';
+import {
+  PORTFOLIO_UPLOAD_CHUNK_BYTES,
+  getPortfolioChunkCount,
+} from '@/lib/portfolio-upload-chunk';
 import { parseAdminPortfolioAsset, type AdminPortfolioAsset } from './admin-portfolio-asset';
 import { resolvePortfolioUploadErrorMessage } from './portfolio-upload-validation';
 
@@ -12,10 +16,10 @@ type PortfolioUpdateResult =
   | { status: 'error'; message: string };
 
 type DirectUploadSession = {
-  uploadUrl: string;
   key: string;
   token: string;
   contentType: string;
+  chunkSize: number;
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -57,19 +61,19 @@ function parseDirectUploadSession(payload: unknown): DirectUploadSession | null 
   }
 
   if (
-    typeof payload.uploadUrl !== 'string' ||
     typeof payload.key !== 'string' ||
     typeof payload.token !== 'string' ||
-    typeof payload.contentType !== 'string'
+    typeof payload.contentType !== 'string' ||
+    typeof payload.chunkSize !== 'number'
   ) {
     return null;
   }
 
   return {
-    uploadUrl: payload.uploadUrl,
     key: payload.key,
     token: payload.token,
     contentType: payload.contentType,
+    chunkSize: payload.chunkSize,
   };
 }
 
@@ -108,25 +112,26 @@ async function requestDirectUploadSession(file: File, fallbackMessage: string): 
   return session;
 }
 
-async function putFileToStorage(session: DirectUploadSession, file: File): Promise<void> {
-  let response: Response;
+async function postPortfolioChunk(
+  session: DirectUploadSession,
+  chunkIndex: number,
+  chunk: Blob,
+  fallbackMessage: string,
+): Promise<void> {
+  const formData = new FormData();
+  formData.set('objectKey', session.key);
+  formData.set('uploadToken', session.token);
+  formData.set('chunkIndex', String(chunkIndex));
+  formData.set('chunk', chunk, `chunk-${chunkIndex}`);
 
-  try {
-    response = await fetch(session.uploadUrl, {
-      method: 'PUT',
-      mode: 'cors',
-      credentials: 'omit',
-      body: file,
-      headers: { 'Content-Type': session.contentType },
-    });
-  } catch {
-    throw new Error(
-      'Cloudflare R2 blocked the browser upload (CORS). Add a PUT CORS policy for https://www.neetrino.com on the R2 bucket, then retry.',
-    );
-  }
+  const response = await fetch('/api/admin/portfolio/upload-chunk', {
+    method: 'POST',
+    credentials: 'include',
+    body: formData,
+  });
 
   if (!response.ok) {
-    throw new Error(`Storage upload failed with status ${response.status}`);
+    throw new Error(await readApiErrorMessage(response, fallbackMessage));
   }
 }
 
@@ -135,7 +140,18 @@ async function uploadSelectedFile(
   fallbackMessage: string,
 ): Promise<DirectUploadSession> {
   const session = await requestDirectUploadSession(file, fallbackMessage);
-  await putFileToStorage(session, file);
+  const chunkCount = getPortfolioChunkCount(file.size);
+
+  for (let chunkIndex = 0; chunkIndex < chunkCount; chunkIndex += 1) {
+    const start = chunkIndex * PORTFOLIO_UPLOAD_CHUNK_BYTES;
+    await postPortfolioChunk(
+      session,
+      chunkIndex,
+      file.slice(start, start + PORTFOLIO_UPLOAD_CHUNK_BYTES),
+      fallbackMessage,
+    );
+  }
+
   return session;
 }
 
