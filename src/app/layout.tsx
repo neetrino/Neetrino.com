@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
 import { AppProviders } from './_components/app-providers';
+import { GoogleAnalytics } from './_components/google-analytics';
 import { HOME_DESIGN_WIDTH, HOME_DESKTOP_MIN_WIDTH } from './_components/home-constants';
 import { siteFontVariablesClassName } from '@/lib/fonts/site-fonts';
 import './globals.css';
@@ -45,6 +46,7 @@ export default function RootLayout({
           {LOCALE_LANG_BOOT_SCRIPT}
         </Script>
         <AppProviders>{children}</AppProviders>
+        <GoogleAnalytics />
         <Analytics />
       </body>
     </html>
